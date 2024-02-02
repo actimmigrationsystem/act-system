@@ -1,11 +1,18 @@
 import React from 'react';
 import { FaLinkedin, FaWhatsapp, FaInstagram } from 'react-icons/fa';
 import { IoMdMail } from 'react-icons/io';
+import styled from 'styled-components';
 
+const SloganText = styled.div`
+  font-size: 1rem;
+  color: #fff;
+  margin-bottom: -30px;
+`;
 export default function SocialNav() {
   return (
-    <div className="bg-gray-700 p-4">
-      <div className="flex items-center justify-center space-x-4">
+    <div className="bg-gray-700 p-2">
+      <SloganText>Your Immigration status is important to us</SloganText>
+      <div className="flex items-center justify-end space-x-4 ml-auto">
         <a href="/" className="text-white hover:text-gray-300" aria-label="Website">
           <FaLinkedin className="h-6 w-6" />
         </a>
@@ -18,7 +25,14 @@ export default function SocialNav() {
         <a href="/" className="text-white hover:text-gray-300" aria-label="Phone">
           <FaInstagram className="h-6 w-6" />
         </a>
+        <a
+          href="/contact"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2"
+        >
+          Get In Touch
+        </a>
       </div>
     </div>
+
   );
 }
