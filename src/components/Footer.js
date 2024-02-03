@@ -14,7 +14,6 @@ const FooterSlogan = styled.div`
 
 const CustomFooter = () => (
   <div className="flex flex-col min-h-screen">
-    <div className="flex-grow">Content Layout</div>
     <footer style={{ backgroundColor: '#0e5a97' }} className="bg-white">
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
@@ -63,7 +62,7 @@ const CustomFooter = () => (
             </div>
           </div>
         </div>
-        <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+        <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-200 lg:my-8" />
         <div className="sm:flex sm:items-center sm:justify-between">
           <span className="text-sm text-gray-500 sm:text-center dark:text-gray-200">
             © 2024
