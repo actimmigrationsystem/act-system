@@ -14,12 +14,12 @@ const FooterSlogan = styled.div`
 
 const CustomFooter = () => (
   <div className="flex flex-col min-h-screen">
-    <footer style={{ backgroundColor: '#0e5a97' }} className="bg-white">
+    <footer style={{ backgroundColor: '#2393cb' }} className="bg-white">
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
 
-            <Logo />
+            <Logo color="#fff" />
             <FooterSlogan className="text-white">
               Consultants striving on affecting change in peoples lives everyday.
               We offer immigration services
