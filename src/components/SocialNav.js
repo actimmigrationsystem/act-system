@@ -11,7 +11,7 @@ const SloganText = styled.div`
 export default function SocialNav() {
   return (
     <div className="bg-gray-700 p-2">
-      <SloganText>Your Immigration status is important to us</SloganText>
+      <SloganText className="hidden sm:block md:block lg:block xl:block">Your Immigration status is important to us</SloganText>
       <div className="flex items-center justify-end space-x-4 ml-auto">
         <a href="/" className="text-white hover:text-gray-300" aria-label="Website">
           <FaLinkedin className="h-6 w-6" />
@@ -27,7 +27,9 @@ export default function SocialNav() {
         </a>
         <a
           href="/contact"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2"
+          style={{ backgroundColor: '#0e5a97' }}
+          className="hover:bg-blue-700 text-white font-bold py-2 px-2"
+
         >
           Get In Touch
         </a>
