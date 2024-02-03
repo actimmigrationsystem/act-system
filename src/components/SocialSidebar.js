@@ -3,8 +3,8 @@ import { Sidebar } from 'flowbite-react';
 
 const StyledSocialSidebar = styled.div`
   position: fixed;
-  top: 30%;
-  right: 0;
+  top: 35%;
+  right: -30px;
   transform: translateY(-50%);
   z-index: 999;
   background-color: transparent;
