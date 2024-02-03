@@ -27,7 +27,9 @@ export default function SocialNav() {
         </a>
         <a
           href="/contact"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2"
+          style={{ backgroundColor: '#0e5a97' }}
+          className="hover:bg-blue-700 text-white font-bold py-2 px-2"
+
         >
           Get In Touch
         </a>
