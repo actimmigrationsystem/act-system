@@ -1,11 +1,14 @@
 import React from 'react';
 import ServiceCard from './ServiceCard';
 import Container from './Container';
-import Img1 from '../assets/services/5.jpeg';
+import Img1 from '../assets/services/1.jpeg';
+import Img3 from '../assets/services/3.jpeg';
+import Img4 from '../assets/services/4.jpeg';
+import Img5 from '../assets/services/5.jpeg';
 
 const serviceData = [
   {
-    image: Img1,
+    image: Img5,
     title: 'Temporary and permanent residence visas, SCRA reviews and appeals',
     description: 'Temporary and permanent residence visas, SCRA reviews and appeals.',
   },
@@ -15,12 +18,12 @@ const serviceData = [
     description: 'An aggrieved applicant may submit representations in the form of an appeal or review  ',
   },
   {
-    image: Img1,
+    image: Img4,
     title: 'Types of temporary residence visas',
     description: 'A general work visa may be issued by the Director-General to a foreigner who complies with the prescribed requirements.',
   },
   {
-    image: Img1,
+    image: Img3,
     title: 'Permanent residence permit applications',
     description: 'The temporary residence visa must be renewed while the permanent residence application is still pending.',
   },
@@ -28,6 +31,7 @@ const serviceData = [
 
 const Home = () => (
   <Container>
+
     <h1>
       Consultants striving on affecting change in peoples lives every day.
       We offer immigration services
