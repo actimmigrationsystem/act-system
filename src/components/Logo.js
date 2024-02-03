@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import ACTLOGO from '../assets/logo.jpeg';
 
 const LogoContainer = styled.div`
@@ -21,17 +22,27 @@ const LogoTextContainer = styled.div`
 const CompanyName = styled.div`
   font-size: 20px;
   font-weight: bold;
-  color: white;
+  color: ${(props) => props.color};
 `;
 
-const Logo = () => (
+const Logo = ({ color, companyName }) => (
   <LogoContainer>
     <LogoImg src={ACTLOGO} alt="Company Logo" />
     <LogoTextContainer>
-      <CompanyName>ACT Immigration</CompanyName>
-      <CompanyName>& Labour Consultants</CompanyName>
+      <CompanyName color={color}>{companyName}</CompanyName>
+      <CompanyName color={color}>& Labour Consultants</CompanyName>
     </LogoTextContainer>
   </LogoContainer>
 );
+
+Logo.propTypes = {
+  color: PropTypes.string,
+  companyName: PropTypes.string, // Prop for the company name
+};
+
+Logo.defaultProps = {
+  color: '#2393cb',
+  companyName: 'ACT Immigration', // Default company name
+};
 
 export default Logo;
