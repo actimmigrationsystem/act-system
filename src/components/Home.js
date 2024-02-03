@@ -32,10 +32,10 @@ const serviceData = [
 const Home = () => (
   <Container>
 
-    <h1>
+    <p className="max-w-lg text-3xl font-semibold leading-loose text-gray-900 dark:text-white">
       Consultants striving on affecting change in peoples lives every day.
       We offer immigration services
-    </h1>
+    </p>
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-2">
       {serviceData.map((service) => (
         <ServiceCard
