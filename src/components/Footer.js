@@ -28,8 +28,8 @@ const CustomFooter = () => (
           </div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h2>
-              <ul className="text-gray-500 dark:text-gray-200 font-medium">
+              <h2 className="mb-6 text-sm font-semibold text-white uppercase dark:text-white">Resources</h2>
+              <ul className="text-gray-200 dark:text-gray-200 font-medium">
                 <li className="mb-4">
                   <a href="/" className="hover:underline">Services</a>
                 </li>
@@ -39,8 +39,8 @@ const CustomFooter = () => (
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Help</h2>
-              <ul className="text-gray-500 dark:text-gray-200 font-medium">
+              <h2 className="mb-6 text-sm font-semibold text-white uppercase dark:text-white">Help</h2>
+              <ul className="text-gray-200 dark:text-gray-200 font-medium">
                 <li className="mb-4">
                   <a href="https://github.com/themesberg/flowbite" className="hover:underline ">FAQs</a>
                 </li>
@@ -50,8 +50,8 @@ const CustomFooter = () => (
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Legal</h2>
-              <ul className="text-gray-500 dark:text-gray-200 font-medium">
+              <h2 className="mb-6 text-sm font-semibold text-white uppercase dark:text-white">Legal</h2>
+              <ul className="text-gray-200 dark:text-gray-200 font-medium">
                 <li className="mb-4">
                   <a href="/privacy-policy" className="hover:underline">Privacy Policy</a>
                 </li>
@@ -64,7 +64,7 @@ const CustomFooter = () => (
         </div>
         <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-200 lg:my-8" />
         <div className="sm:flex sm:items-center sm:justify-between">
-          <span className="text-sm text-gray-500 sm:text-center dark:text-gray-200">
+          <span className="text-sm text-white sm:text-center dark:text-gray-200">
             © 2024
             {' '}
             <a href="/" className="hover:underline">ACT IMMIGRATION AND LABOUR CONSULTANTS</a>
@@ -74,7 +74,7 @@ const CustomFooter = () => (
 
             <button
               type="button"
-              className="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5"
+              className="text-white hover:text-gray-900 dark:hover:text-white ms-5"
             >
               <a href="https://www.facebook.com/profile.php?id=100063622943110&ref=embed_page" target="_blank" rel="noopener noreferrer">
                 <FaLinkedin className="w-4 h-4 text-white" />
@@ -83,7 +83,7 @@ const CustomFooter = () => (
             </button>
             <button
               type="button"
-              className="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5"
+              className="text-white hover:text-gray-900 dark:hover:text-white ms-5"
             >
               <a href="https://www.facebook.com/profile.php?id=100063622943110&ref=embed_page" target="_blank" rel="noopener noreferrer">
                 <FaFacebook className="w-4 h-4 text-white" />
@@ -93,7 +93,7 @@ const CustomFooter = () => (
 
             <button
               type="button"
-              className="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5"
+              className="text-white hover:text-gray-900 dark:hover:text-white ms-5"
             >
               <a href="https://api.whatsapp.com/send?phone=27723876910" target="_blank" rel="noopener noreferrer">
                 <FaWhatsapp className="w-4 h-4 text-white" />
@@ -103,7 +103,7 @@ const CustomFooter = () => (
 
             <button
               type="button"
-              className="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5"
+              className="text-white hover:text-gray-900 dark:hover:text-white ms-5"
             >
               <a href="https://www.facebook.com/profile.php?id=100063622943110&ref=embed_page" target="_blank" rel="noopener noreferrer">
                 <FaTwitter className="w-4 h-4 text-white" />
@@ -113,7 +113,7 @@ const CustomFooter = () => (
 
             <button
               type="button"
-              className="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5"
+              className="text-white hover:text-gray-900 dark:hover:text-white ms-5"
             >
               <a href="https://www.facebook.com/profile.php?id=100063622943110&ref=embed_page" target="_blank" rel="noopener noreferrer">
                 <FaInstagram className="w-4 h-4 text-white" />
@@ -123,7 +123,7 @@ const CustomFooter = () => (
 
             <button
               type="button"
-              className="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5"
+              className="text-white hover:text-gray-900 dark:hover:text-white ms-5"
             >
               <a href="https://www.facebook.com/profile.php?id=100063622943110&ref=embed_page" target="_blank" rel="noopener noreferrer">
                 <IoMdMail className="w-4 h-4 text-white" />
