@@ -11,11 +11,15 @@ const carouselData = [
   },
   {
     imageSrc: Img2,
-    text: 'Temporary and permanent residence visas, SCRA reviews and appeals.',
+    text: 'Temporary and permanent residence visas',
   },
   {
     imageSrc: Img3,
-    text: 'Temporary and permanent residence visas, SCRA reviews and appeals.',
+    text: 'Appeals and reviews in terms of the immigration act',
+  },
+  {
+    imageSrc: Img3,
+    text: ' SCRA reviews and appeals.',
   },
 ];
 
@@ -30,9 +34,11 @@ const HomeCarousel = () => (
             className="h-full w-full object-cover"
           />
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-            <p className="max-w-lg text-4xl font-semibold leading-loose text-gray-200 dark:text-white">
-              {item.text}
-            </p>
+            <div className="bg-black bg-opacity-40 p-4 rounded-md">
+              <p className="max-w-lg text-4xl font-semibold leading-loose text-white">
+                {item.text}
+              </p>
+            </div>
           </div>
         </div>
       ))}

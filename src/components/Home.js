@@ -34,6 +34,7 @@ const Home = () => (
   <>
     <HomeCarousel />
     <Container>
+      <p className="text-3xl text-gray-900 dark:text-white pt-3 p-3">Services</p>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-2">
         {serviceData.map((service) => (
           <ServiceCard
