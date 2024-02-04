@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import { Carousel } from '@material-tailwind/react';
-import Img1 from '../assets/bannerimages/practice-1.jpg';
+import Img1 from '../assets/bannerimages/practice-1.jpeg';
 import Img2 from '../assets/bannerimages/practice-2.jpeg';
 import Img3 from '../assets/bannerimages/practice-3.jpeg';
 
