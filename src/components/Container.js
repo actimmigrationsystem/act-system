@@ -11,7 +11,7 @@ const ContainerLayout = styled.div`
   margin-top: 10px;
 `;
 const Container = ({ children }) => (
-  <ContainerLayout>{children}</ContainerLayout>
+  <ContainerLayout className="min-h-screen">{children}</ContainerLayout>
 );
 
 Container.propTypes = {

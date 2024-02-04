@@ -1,15 +1,17 @@
 import React from 'react';
+import SectionTitle from './SectionTitle';
 import ServiceCard from './ServiceCard';
 import Container from './Container';
-import Img1 from '../assets/services/1.jpeg';
-import Img3 from '../assets/services/3.jpeg';
-import Img4 from '../assets/services/4.jpeg';
-import Img5 from '../assets/services/5.jpeg';
+import Img1 from '../assets/services/1.jpg';
+import Img3 from '../assets/services/3.jpg';
+import Img4 from '../assets/services/4.jpg';
+import Img2 from '../assets/services/2.jpg';
 import HomeCarousel from './HomeCarousel';
+import AboutUs from './AboutUs';
 
 const serviceData = [
   {
-    image: Img5,
+    image: Img2,
     title: 'Temporary and permanent residence visas, SCRA reviews and appeals',
     description: 'Temporary and permanent residence visas, SCRA reviews and appeals.',
   },
@@ -34,7 +36,9 @@ const Home = () => (
   <>
     <HomeCarousel />
     <Container>
-      <p className="text-3xl text-gray-900 dark:text-white pt-3 p-3">Services</p>
+      <SectionTitle
+        title="Services"
+      />
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-2">
         {serviceData.map((service) => (
           <ServiceCard
@@ -45,6 +49,7 @@ const Home = () => (
           />
         ))}
       </div>
+      <AboutUs />
     </Container>
   </>
 );
