@@ -25,10 +25,29 @@ const carouselData = [
   },
   {
     imageSrc: Img3,
-    text: ' SCRA reviews and appeals.',
+    text: 'Applications for certification as Refugee indefinite to the standing Committee',
     buttonLabel: 'Learn More',
     buttonLink: '/learn-more',
   },
+  {
+    imageSrc: Img3,
+    text: 'Exclusions and Exemptions from Temporary Residence or Permanent Residence',
+    buttonLabel: 'Learn More',
+    buttonLink: '/learn-more',
+  },
+  {
+    imageSrc: Img3,
+    text: 'Exclusions and Exemptions from Temporary Residence or Permanent Residence',
+    buttonLabel: 'Learn More',
+    buttonLink: '/learn-more',
+  },
+  {
+    imageSrc: Img3,
+    text: 'Temporary Residence Visa Applications and Renewals',
+    buttonLabel: 'Learn More',
+    buttonLink: '/learn-more',
+  },
+
 ];
 
 const HomeCarousel = () => (
