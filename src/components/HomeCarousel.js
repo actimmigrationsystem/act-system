@@ -7,19 +7,27 @@ import Img3 from '../assets/bannerimages/practice-3.jpeg';
 const carouselData = [
   {
     imageSrc: Img1,
-    text: 'Consultants striving on affecting change in people\'s lives every day. We offer immigration services.',
+    text: 'Immigration Consultants striving on affecting change in people\'s lives every day.',
+    buttonLabel: 'Learn More',
+    buttonLink: '/learn-more',
   },
   {
     imageSrc: Img2,
     text: 'Temporary and permanent residence visas',
+    buttonLabel: 'Learn More',
+    buttonLink: '/learn-more',
   },
   {
     imageSrc: Img3,
     text: 'Appeals and reviews in terms of the immigration act',
+    buttonLabel: 'Learn More',
+    buttonLink: '/learn-more',
   },
   {
     imageSrc: Img3,
     text: ' SCRA reviews and appeals.',
+    buttonLabel: 'Learn More',
+    buttonLink: '/learn-more',
   },
 ];
 
@@ -38,6 +46,9 @@ const HomeCarousel = () => (
               <p className="max-w-lg text-4xl font-semibold leading-loose text-white">
                 {item.text}
               </p>
+              <button type="button" style={{ backgroundColor: '#0e5a97' }} className="mt-2 text-white px-6 py-2 rounded-full hover:bg-blue-700">
+                {item.buttonLabel}
+              </button>
             </div>
           </div>
         </div>

@@ -3,7 +3,7 @@ import { Sidebar } from 'flowbite-react';
 
 const StyledSocialSidebar = styled.div`
  position: fixed;
-  top: 34%;
+  top: 36%;
   right: 0;
   margin-right: -130px;
   transform: translateY(-50%);
@@ -11,6 +11,7 @@ const StyledSocialSidebar = styled.div`
   background-color: #fff;
   border-radius: 20px;
   opacity: 0.8;
+  height: auto;
 
 `;
 
