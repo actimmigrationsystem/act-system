@@ -15,7 +15,7 @@ function ArticleComponent({
           <p className="text-lg text-gray-600 mb-6">{lead}</p>
           <h2 className="text-2xl font-bold mb-2">{subheading}</h2>
           <p className="text-lg text-gray-700 mb-4">{paragraph}</p>
-          {subheading2 && <h2 className="text-2xl font-bold mb-2">{subheading2}</h2>}
+          {subheading2 && <h2 className="text-2xl font-bold mb-4">{subheading2}</h2>}
           {paragraph2 && <p className="text-lg text-gray-700 mb-4">{paragraph2}</p>}
         </div>
       </article>
