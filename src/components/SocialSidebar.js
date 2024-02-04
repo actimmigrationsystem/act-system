@@ -3,7 +3,7 @@ import { Sidebar } from 'flowbite-react';
 
 const StyledSocialSidebar = styled.div`
  position: fixed;
-  top: 34%;
+  top: 36%;
   right: 0;
   margin-right: -130px;
   transform: translateY(-50%);
@@ -11,6 +11,7 @@ const StyledSocialSidebar = styled.div`
   background-color: #fff;
   border-radius: 20px;
   opacity: 0.8;
+  height: auto;
 
 `;
 
@@ -21,35 +22,25 @@ cursor: pointer;
 `;
 
 const SocialSidebar = () => (
-  <div className="absolute-right">
-    <StyledSocialSidebar>
-      <Sidebar aria-label="Default sidebar">
-        <Sidebar.Items>
-          <Sidebar.ItemGroup>
-            <Sidebar.Item>
-              <StyledIcon>
-                <button
-                  type="button"
-                  className=""
-                  aria-label="Facebook"
-                >
+  <>
+    <div className="absolute-right">
+      <StyledSocialSidebar>
+        <Sidebar aria-label="Default sidebar">
+          <Sidebar.Items>
+            <Sidebar.ItemGroup>
+              <Sidebar.Item>
+                <StyledIcon>
                   <a href="https://www.facebook.com/profile.php?id=100063622943110&ref=embed_page" target="_blank" rel="noopener noreferrer" aria-label="Facebook Profile">
                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="60" height="60" viewBox="0 0 48 48">
                       <path fill="#3f51b5" d="M24 4A20 20 0 1 0 24 44A20 20 0 1 0 24 4Z" />
                       <path fill="#fff" d="M29.368,24H26v12h-5V24h-3v-4h3v-2.41c0.002-3.508,1.459-5.59,5.592-5.59H30v4h-2.287 C26.104,16,26,16.6,26,17.723V20h4L29.368,24z" />
                     </svg>
                   </a>
-                </button>
-              </StyledIcon>
-            </Sidebar.Item>
-            <Sidebar.Item>
-              <StyledIcon>
+                </StyledIcon>
+              </Sidebar.Item>
+              <Sidebar.Item>
+                <StyledIcon>
 
-                <button
-                  type="button"
-                  className=""
-                  aria-label="Facebook"
-                >
                   <a href="https://api.whatsapp.com/send?phone=27723876910" target="_blank" rel="noopener noreferrer" aria-label="Facebook Profile">
                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="60" height="60" viewBox="0 0 48 48">
                       <path fill="#fff" d="M4.868,43.303l2.694-9.835C5.9,30.59,5.026,27.324,5.027,23.979C5.032,13.514,13.548,5,24.014,5c5.079,0.002,9.845,1.979,13.43,5.566c3.584,3.588,5.558,8.356,5.556,13.428c-0.004,10.465-8.522,18.98-18.986,18.98c-0.001,0,0,0,0,0h-0.008c-3.177-0.001-6.3-0.798-9.073-2.311L4.868,43.303z" />
@@ -59,15 +50,15 @@ const SocialSidebar = () => (
                       <path fill="#fff" fillRule="evenodd" d="M19.268,16.045c-0.355-0.79-0.729-0.806-1.068-0.82c-0.277-0.012-0.593-0.011-0.909-0.011c-0.316,0-0.83,0.119-1.265,0.594c-0.435,0.475-1.661,1.622-1.661,3.956c0,2.334,1.7,4.59,1.937,4.906c0.237,0.316,3.282,5.259,8.104,7.161c4.007,1.58,4.823,1.266,5.693,1.187c0.87-0.079,2.807-1.147,3.202-2.255c0.395-1.108,0.395-2.057,0.277-2.255c-0.119-0.198-0.435-0.316-0.909-0.554s-2.807-1.385-3.242-1.543c-0.435-0.158-0.751-0.237-1.068,0.238c-0.316,0.474-1.225,1.543-1.502,1.859c-0.277,0.317-0.554,0.357-1.028,0.119c-0.474-0.238-2.002-0.738-3.815-2.354c-1.41-1.257-2.362-2.81-2.639-3.285c-0.277-0.474-0.03-0.731,0.208-0.968c0.213-0.213,0.474-0.554,0.712-0.831c0.237-0.277,0.316-0.475,0.474-0.791c0.158-0.317,0.079-0.594-0.04-0.831C20.612,19.329,19.69,16.983,19.268,16.045z" clipRule="evenodd" />
                     </svg>
                   </a>
-                </button>
 
-              </StyledIcon>
+                </StyledIcon>
 
-            </Sidebar.Item>
-          </Sidebar.ItemGroup>
-        </Sidebar.Items>
-      </Sidebar>
-    </StyledSocialSidebar>
-  </div>
+              </Sidebar.Item>
+            </Sidebar.ItemGroup>
+          </Sidebar.Items>
+        </Sidebar>
+      </StyledSocialSidebar>
+    </div>
+  </>
 );
 export default SocialSidebar;

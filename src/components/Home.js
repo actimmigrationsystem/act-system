@@ -5,6 +5,7 @@ import Img1 from '../assets/services/1.jpeg';
 import Img3 from '../assets/services/3.jpeg';
 import Img4 from '../assets/services/4.jpeg';
 import Img5 from '../assets/services/5.jpeg';
+import HomeCarousel from './HomeCarousel';
 
 const serviceData = [
   {
@@ -30,23 +31,22 @@ const serviceData = [
 ];
 
 const Home = () => (
-  <Container>
-
-    <p className="max-w-lg text-3xl font-semibold leading-loose text-gray-900 dark:text-white">
-      Consultants striving on affecting change in peoples lives every day.
-      We offer immigration services
-    </p>
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-2">
-      {serviceData.map((service) => (
-        <ServiceCard
-          key={service.title}
-          image={service.image}
-          title={service.title}
-          description={service.description}
-        />
-      ))}
-    </div>
-  </Container>
+  <>
+    <HomeCarousel />
+    <Container>
+      <p className="text-3xl text-gray-900 dark:text-white pt-3 p-3">Services</p>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-2">
+        {serviceData.map((service) => (
+          <ServiceCard
+            key={service.title}
+            image={service.image}
+            title={service.title}
+            description={service.description}
+          />
+        ))}
+      </div>
+    </Container>
+  </>
 );
 
 export default Home;
