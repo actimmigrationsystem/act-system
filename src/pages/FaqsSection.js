@@ -1,7 +1,12 @@
 import React from 'react';
+import SectionTitle from '../components/SectionTitle';
 
 export default function FAQsSection() {
   return (
-    <div>FAQsSection</div>
+    <div>
+      <SectionTitle
+        title="FAQs"
+      />
+    </div>
   );
 }
