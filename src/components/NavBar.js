@@ -50,7 +50,7 @@ const NavBar = () => (
                       duration={500}
                       className={classNames(
                         item.current ? 'bg-sky-700 text-white' : 'text-gray-700 hover:bg-sky-700 hover:text-white',
-                        'rounded-md px-3 py-2 text-sm font-medium',
+                        'rounded-md px-3 py-2 text-sm font-medium cursor-pointer',
                       )}
                     >
                       {item.name}
