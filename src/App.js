@@ -22,7 +22,7 @@ function App() {
         <Route path="/about" component={<AboutUs />} />
         <Route path="/documents" component={<Documents />} />
         <Route path="/faqs" component={<FAQs />} />
-        <Route path="/faqs" component={<ContactUs />} />
+        <Route path="/contactus" component={<ContactUs />} />
       </Routes>
       <CustomFooter />
     </div>
