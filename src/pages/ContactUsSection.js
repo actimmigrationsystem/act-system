@@ -14,7 +14,7 @@ import {
   TabPanel,
 } from '@material-tailwind/react';
 import { FaWhatsapp } from 'react-icons/fa';
-import { CiMail } from 'react-icons/ci';
+import { CiPhone } from 'react-icons/ci';
 import SectionTitle from '../components/SectionTitle';
 
 export default function ContactView() {
@@ -29,11 +29,11 @@ export default function ContactView() {
   };
 
   const handleWhatsAppClick = () => {
-    'https://wa.me/123456789?text=Hello%20from%20Material%20Tailwind%20PRO';
+    'https://api.whatsapp.com/send?phone=27723876910';
   };
 
-  const handleEmailClick = () => {
-    'mailto:example@email.com?subject=Query&body=Hello%20from%20Material%20Tailwind%20PRO';
+  const handlePhoneClick = () => {
+    window.location.href = 'tel:+27419220833';
   };
 
   return (
@@ -176,11 +176,11 @@ export default function ContactView() {
                         </Button>
                         <Button
                           size="lg"
-                          onClick={handleEmailClick}
+                          onClick={handlePhoneClick}
                           className="bg-blue-500 hover:bg-blue-600 text-white"
                         >
-                          <CiMail className="h-6 w-6 mr-2" />
-                          Email Us
+                          <CiPhone className="h-6 w-6 mr-2" />
+                          Call Office
                         </Button>
                       </div>
                     </TabPanel>
