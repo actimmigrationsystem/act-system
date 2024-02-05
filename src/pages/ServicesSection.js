@@ -1,6 +1,6 @@
 import React from 'react';
-import SectionTitle from './SectionTitle';
-import ServiceCard from './ServiceCard';
+import SectionTitle from '../components/SectionTitle';
+import ServiceCard from '../components/ServiceCard';
 import Img1 from '../assets/services/1.jpg';
 import Img3 from '../assets/services/3.jpg';
 import Img4 from '../assets/services/4.jpg';
@@ -28,22 +28,25 @@ const serviceData = [
     description: 'The temporary residence visa must be renewed while the permanent residence application is still pending.',
   },
 ];
-const ServicesSection = () => (
-  <>
-    <SectionTitle
-      title="Services"
-    />
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-2">
-      {serviceData.map((service) => (
-        <ServiceCard
-          key={service.title}
-          image={service.image}
-          title={service.title}
-          description={service.description}
-        />
-      ))}
+const ServicesSection = () => {
+  console.log('ServicesSection rendered');
+  return (
+    <div id="services">
+      <SectionTitle
+        title="Services"
+      />
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-2">
+        {serviceData.map((service) => (
+          <ServiceCard
+            key={service.title}
+            image={service.image}
+            title={service.title}
+            description={service.description}
+          />
+        ))}
+      </div>
     </div>
-  </>
-);
+  );
+};
 
 export default ServicesSection;

@@ -2,16 +2,16 @@ import React, { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { CgProfile } from 'react-icons/cg';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-scroll';
 import Logo from './Logo';
 
 const navigation = [
-  { name: 'Home', href: '/', current: true },
-  { name: 'Services', href: '/services', current: false },
-  { name: 'About Us', href: '/about-us', current: false },
-  { name: 'Documents', href: '/documents', current: false },
-  { name: 'FAQs', href: '/faqs', current: false },
-  { name: 'Contact Us', href: '/contact-us', current: false },
+  { name: 'Home', to: 'home-section', current: true },
+  { name: 'Services', to: 'service-section', current: false },
+  { name: 'About Us', to: 'about-section', current: false },
+  { name: 'Documents', to: 'document-section', current: false },
+  { name: 'FAQs', to: 'faq-section', current: false },
+  { name: 'Contact Us', to: 'contact-section', current: false },
 ];
 
 const classNames = (...classes) => classes.filter(Boolean).join(' ');
@@ -43,7 +43,11 @@ const NavBar = () => (
                   {navigation.map((item) => (
                     <Link
                       key={item.name}
-                      to={item.href}
+                      to={item.to}
+                      spy
+                      smooth
+                      offset={-70}
+                      duration={500}
                       className={classNames(
                         item.current ? 'bg-sky-700 text-white' : 'text-gray-700 hover:bg-sky-700 hover:text-white',
                         'rounded-md px-3 py-2 text-sm font-medium',
@@ -106,7 +110,10 @@ const NavBar = () => (
             {navigation.map((item) => (
               <Link
                 key={item.name}
-                to={item.href}
+                to={item.to}
+                spy
+                smooth
+                duration={500}
                 className={classNames(
                   item.current ? 'bg-gray-900 text-white' : 'text-gray-900 hover:bg-gray-700 hover:text-white',
                   'block rounded-md px-3 py-2 text-base font-medium',

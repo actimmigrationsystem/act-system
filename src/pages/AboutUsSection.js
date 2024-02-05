@@ -1,6 +1,6 @@
 import React from 'react';
-import SectionTitle from './SectionTitle';
-import ArticleComponent from './ArticleComponent';
+import SectionTitle from '../components/SectionTitle';
+import ArticleComponent from '../components/ArticleComponent';
 
 const AboutUs = () => (
   <div className="">
