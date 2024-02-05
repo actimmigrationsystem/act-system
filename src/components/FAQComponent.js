@@ -19,7 +19,10 @@ const Icon = ({ open }) => (
     <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
   </svg>
 );
-
+const CUSTOM_ANIMATION = {
+  mount: { scale: 1 },
+  unmount: { scale: 0.9 },
+};
 Icon.propTypes = {
   open: PropTypes.bool.isRequired,
 };
@@ -32,7 +35,7 @@ const FAQComponent = ({ faqs }) => {
   return (
     <div>
       {faqs.map((faq) => (
-        <Accordion key={faq.id} open={openIndex === faq.id} icon={<Icon open={openIndex === faq.id} />}>
+        <Accordion key={faq.id} open={openIndex === faq.id} icon={<Icon open={openIndex === faq.id} animate={CUSTOM_ANIMATION} />}>
           <AccordionHeader onClick={() => handleOpen(faq.id)}>{faq.question}</AccordionHeader>
           <AccordionBody>
             {faq.answer}
