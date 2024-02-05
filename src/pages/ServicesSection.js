@@ -1,13 +1,10 @@
 import React from 'react';
-import SectionTitle from './SectionTitle';
-import ServiceCard from './ServiceCard';
-import Container from './Container';
+import SectionTitle from '../components/SectionTitle';
+import ServiceCard from '../components/ServiceCard';
 import Img1 from '../assets/services/1.jpg';
 import Img3 from '../assets/services/3.jpg';
 import Img4 from '../assets/services/4.jpg';
 import Img2 from '../assets/services/2.jpg';
-import HomeCarousel from './HomeCarousel';
-import AboutUs from './AboutUs';
 
 const serviceData = [
   {
@@ -31,27 +28,22 @@ const serviceData = [
     description: 'The temporary residence visa must be renewed while the permanent residence application is still pending.',
   },
 ];
-
-const Home = () => (
-  <>
-    <HomeCarousel />
-    <Container>
-      <SectionTitle
-        title="Services"
-      />
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-2">
-        {serviceData.map((service) => (
-          <ServiceCard
-            key={service.title}
-            image={service.image}
-            title={service.title}
-            description={service.description}
-          />
-        ))}
-      </div>
-      <AboutUs />
-    </Container>
-  </>
+const ServicesSection = () => (
+  <div id="services">
+    <SectionTitle
+      title="Services"
+    />
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-2">
+      {serviceData.map((service) => (
+        <ServiceCard
+          key={service.title}
+          image={service.image}
+          title={service.title}
+          description={service.description}
+        />
+      ))}
+    </div>
+  </div>
 );
 
-export default Home;
+export default ServicesSection;

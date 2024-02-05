@@ -10,12 +10,12 @@ const ContainerLayout = styled.div`
   margin-left: 20px;
   margin-top: 10px;
 `;
-const Container = ({ children }) => (
+const ContentContainer = ({ children }) => (
   <ContainerLayout className="min-h-screen">{children}</ContainerLayout>
 );
 
-Container.propTypes = {
+ContentContainer.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default Container;
+export default ContentContainer;
