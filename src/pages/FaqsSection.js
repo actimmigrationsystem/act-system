@@ -1,12 +1,15 @@
 import React from 'react';
 import SectionTitle from '../components/SectionTitle';
+import FAQComponent from '../components/FAQComponent';
+import faqdata from '../data/faqdata';
 
-export default function FAQsSection() {
-  return (
-    <div>
-      <SectionTitle
-        title="FAQs"
-      />
-    </div>
-  );
-}
+const FAQsSection = () => (
+  <div>
+    <SectionTitle
+      title="FAQs"
+    />
+    <FAQComponent faqs={faqdata} />
+
+  </div>
+);
+export default FAQsSection;
