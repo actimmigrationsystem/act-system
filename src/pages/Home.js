@@ -1,6 +1,6 @@
 import React from 'react';
 import { Element } from 'react-scroll';
-import Container from '../components/ContentContainer';
+import ContentContainer from '../components/ContentContainer';
 import HomeCarousel from '../components/HomeCarousel';
 import ServicesSection from './ServicesSection';
 import ContactUsSection from './ContactUsSection';
@@ -13,7 +13,7 @@ const Home = () => (
     <Element name="home-section">
       <HomeCarousel />
     </Element>
-    <Container>
+    <ContentContainer>
       <Element name="service-section">
         <ServicesSection />
       </Element>
@@ -29,7 +29,7 @@ const Home = () => (
       <Element name="contact-section">
         <ContactUsSection />
       </Element>
-    </Container>
+    </ContentContainer>
   </div>
 );
 
