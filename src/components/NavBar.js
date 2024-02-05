@@ -1,22 +1,20 @@
-/* eslint-disable max-len */
-import { Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { CgProfile } from 'react-icons/cg';
+import { Link } from 'react-router-dom';
 import Logo from './Logo';
 
 const navigation = [
-  { name: 'Home', href: '#', current: true },
-  { name: 'Services', href: '#', current: false },
-  { name: 'About Us', href: '#', current: false },
-  { name: 'Documents', href: '#', current: false },
-  { name: 'FAQs', href: '#', current: false },
-  { name: 'Contact Us', href: '#', current: false },
+  { name: 'Home', href: '/', current: true },
+  { name: 'Services', href: '/services', current: false },
+  { name: 'About Us', href: '/about-us', current: false },
+  { name: 'Documents', href: '/documents', current: false },
+  { name: 'FAQs', href: '/faqs', current: false },
+  { name: 'Contact Us', href: '/contact-us', current: false },
 ];
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
-}
+const classNames = (...classes) => classes.filter(Boolean).join(' ');
 
 const NavBar = () => (
   <Disclosure as="nav" style={{ backgroundColor: '##b2bfce' }} className="shadow-md">
@@ -43,33 +41,21 @@ const NavBar = () => (
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
                   {navigation.map((item) => (
-                    <a
+                    <Link
                       key={item.name}
-                      href={item.href}
+                      to={item.href}
                       className={classNames(
                         item.current ? 'bg-sky-700 text-white' : 'text-gray-700 hover:bg-sky-700 hover:text-white',
                         'rounded-md px-3 py-2 text-sm font-medium',
                       )}
-                      aria-current={item.current ? 'page' : undefined}
                     >
                       {item.name}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>
             </div>
             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-              {/* <button
-                  type="button"
-                  // eslint-disable-next-line max-len, max-len
-                  className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="absolute -inset-1.5" />
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>*}
-
-                {/* Profile dropdown */}
               <Menu as="div" className="relative ml-3">
                 <div>
                   <Menu.Button className="relative flex rounded-full bg-gray-600 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-200">
@@ -90,22 +76,22 @@ const NavBar = () => (
                   <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <Menu.Item>
                       {({ active }) => (
-                        <a
-                          href="/"
+                        <Link
+                          to="/"
                           className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-900')}
                         >
                           Login
-                        </a>
+                        </Link>
                       )}
                     </Menu.Item>
                     <Menu.Item>
                       {({ active }) => (
-                        <a
-                          href="/"
+                        <Link
+                          to="/"
                           className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                         >
                           Help
-                        </a>
+                        </Link>
                       )}
                     </Menu.Item>
                   </Menu.Items>
@@ -118,18 +104,16 @@ const NavBar = () => (
         <Disclosure.Panel className="sm:hidden">
           <div className="flex flex-col items-start space-y-6">
             {navigation.map((item) => (
-              <Disclosure.Button
+              <Link
                 key={item.name}
-                as="a"
-                href={item.href}
+                to={item.href}
                 className={classNames(
                   item.current ? 'bg-gray-900 text-white' : 'text-gray-900 hover:bg-gray-700 hover:text-white',
                   'block rounded-md px-3 py-2 text-base font-medium',
                 )}
-                aria-current={item.current ? 'page' : undefined}
               >
                 {item.name}
-              </Disclosure.Button>
+              </Link>
             ))}
           </div>
         </Disclosure.Panel>
@@ -137,4 +121,5 @@ const NavBar = () => (
     )}
   </Disclosure>
 );
+
 export default NavBar;
