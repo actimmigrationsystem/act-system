@@ -1,28 +1,25 @@
 import React, { useState } from 'react';
-import { FloatingLabel } from 'flowbite-react';
 import {
+  Button, Typography, Select,
   MenuItem,
-  Select,
-  Typography,
 } from '@material-tailwind/react';
-import FormButton from './FormButton';
-import formSubmitEndpoint from '../api/data/formSubmitApi';
+import { FloatingLabel } from 'flowbite-react';
 
 const AppointmentForm = () => {
   const [name, setName] = useState('');
   const [phonenumber, setPhonenumber] = useState('');
   const [category, setCategory] = useState('');
-
-  const handleCaseTypeChange = (event) => {
-    setCategory(event.target.value);
+  const [contactEmail, setContactEmail] = useState('');
+  const handleSubmit = (event) => {
+    event.preventDefault();
   };
-
   return (
     <div>
       <form
-        action={formSubmitEndpoint}
+        action="https://formsubmit.co/rileymanda0@gmail.com"
         method="POST"
         className="mt-12 flex flex-col gap-4"
+        onSubmit={handleSubmit}
       >
         <div>
           <Typography
@@ -30,15 +27,16 @@ const AppointmentForm = () => {
             color="blue-gray"
             className="mb-2 font-medium"
           >
-            Fullname
+            Name
           </Typography>
           <FloatingLabel
             variant="filled"
             label="Fullname"
             type="text"
+            name="name"
             value={name}
             onChange={(event) => setName(event.target.value)}
-            className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+            className="!border-t-blue-gray-200 focus:!border-t-gray-900"
             labelProps={{
               className: 'before:content-none after:content-none',
             }}
@@ -50,15 +48,37 @@ const AppointmentForm = () => {
             color="blue-gray"
             className="mb-2 font-medium"
           >
-            Phonenumber
+            Phone number
           </Typography>
           <FloatingLabel
             variant="filled"
             label="Phone Number"
             type="tel"
+            name="phonenumber"
             value={phonenumber}
             onChange={(event) => setPhonenumber(event.target.value)}
-            className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+            className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+            labelProps={{
+              className: 'before:content-none after:content-none',
+            }}
+          />
+        </div>
+        <div>
+          <Typography
+            variant="small"
+            color="blue-gray"
+            className="mb-2 font-medium"
+          >
+            Contact Email
+          </Typography>
+          <FloatingLabel
+            variant="filled"
+            label="Your Email Address"
+            type="email"
+            name="email"
+            value={contactEmail}
+            onChange={(event) => setContactEmail(event.target.value)}
+            className="!border-t-blue-gray-200 focus:!border-t-gray-900"
             labelProps={{
               className: 'before:content-none after:content-none',
             }}
@@ -74,7 +94,10 @@ const AppointmentForm = () => {
           </Typography>
           <Select
             value={category}
-            onChange={handleCaseTypeChange}
+            onChange={(selectedOption) => {
+              console.log('Selected value:', selectedOption.value);
+              setCategory(selectedOption.value);
+            }}
             displayEmpty
             className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
           >
@@ -82,15 +105,12 @@ const AppointmentForm = () => {
               Select Service Type
             </MenuItem>
             <MenuItem value="appeals">Appeals</MenuItem>
-            <MenuItem value="commision of oaths">Commision of Oaths</MenuItem>
+            <MenuItem value="commision of oaths">Commission of Oaths</MenuItem>
             <MenuItem value="visaspermits">Visa & Permits</MenuItem>
             <MenuItem value="other">Other</MenuItem>
           </Select>
         </div>
-        <FormButton
-          size="lg"
-          btnlabel="Book Appointment"
-        />
+        <Button size="lg" type="submit">Submit Enquiry</Button>
       </form>
     </div>
   );
