@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Typography } from '@material-tailwind/react';
 import { FloatingLabel } from 'flowbite-react';
-import formUrl from '../api/data/formSubmitApi';
 
 const EnquiryForm = () => {
   const [name, setName] = useState('');
@@ -12,7 +11,7 @@ const EnquiryForm = () => {
   return (
     <div>
       <form
-        action={formUrl}
+        action="https://formsubmit.co/rileymanda0@gmail.com"
         method="POST"
         className="mt-12 flex flex-col gap-4"
       >
