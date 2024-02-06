@@ -1,7 +1,7 @@
 import React from 'react';
 import SectionTitle from '../components/SectionTitle';
 import FAQComponent from '../components/FAQComponent';
-import faqdata from '../data/faqdata';
+import faqdata from '../api/data/faqdata';
 
 const FAQsSection = () => (
   <div>
