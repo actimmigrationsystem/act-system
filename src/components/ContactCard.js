@@ -38,7 +38,7 @@ const ContactForm = () => {
       <div style={{ width: '400px' }}>
         <Card>
           <CardHeader
-            color="gray"
+            style={{ backgroundColor: '#0e5a97' }}
             floated={false}
             shadow={false}
             className="m-0 grid place-items-center px-4 py-8 text-center"

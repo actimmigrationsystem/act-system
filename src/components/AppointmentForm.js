@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import {
-  Button, Typography, Select,
+  Typography, Select,
   MenuItem,
 } from '@material-tailwind/react';
 import { FloatingLabel } from 'flowbite-react';
+import FormButton from './FormButton';
 
 const AppointmentForm = () => {
   const [name, setName] = useState('');
@@ -110,7 +111,14 @@ const AppointmentForm = () => {
             <MenuItem value="other">Other</MenuItem>
           </Select>
         </div>
-        <Button size="lg" type="submit">Submit Enquiry</Button>
+        <FormButton
+          btnlabel="Submit Enquiry"
+          size="lg"
+          color="#2393cb"
+          type="submit"
+        >
+          request Appointment
+        </FormButton>
       </form>
     </div>
   );
