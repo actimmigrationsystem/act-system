@@ -11,7 +11,7 @@ const AppointmentForm = () => {
   return (
     <div>
       <form
-        action="https://formsubmit.co/rileymanda0@gmail.com"
+        action="https://formsubmit.co/david@actimmigration.co.za"
         method="POST"
         className="mt-12 flex flex-col gap-4"
       >
