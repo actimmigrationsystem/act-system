@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Typography } from '@material-tailwind/react';
+import { Typography, Button } from '@material-tailwind/react';
 import { FloatingLabel } from 'flowbite-react';
-import FormButton from './FormButton';
 
 const EnquiryForm = () => {
   const [name, setName] = useState('');
@@ -100,14 +99,14 @@ const EnquiryForm = () => {
             }}
           />
         </div>
-        <FormButton
+        <Button
           btnlabel="Submit Enquiry"
           size="lg"
-          color="#2393cb"
           type="submit"
+          style={{ backgroundColor: '#0e5a97' }}
         >
           Submit Enquiry
-        </FormButton>
+        </Button>
       </form>
     </div>
   );

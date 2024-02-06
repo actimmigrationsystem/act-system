@@ -1,26 +1,19 @@
 import React, { useState } from 'react';
-import {
-  Typography, Select,
-  MenuItem,
-} from '@material-tailwind/react';
+import { Typography, Button } from '@material-tailwind/react';
 import { FloatingLabel } from 'flowbite-react';
-import FormButton from './FormButton';
 
 const AppointmentForm = () => {
   const [name, setName] = useState('');
   const [phonenumber, setPhonenumber] = useState('');
-  const [category, setCategory] = useState('');
+  const [query, setQuery] = useState('');
   const [contactEmail, setContactEmail] = useState('');
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  };
+
   return (
     <div>
       <form
         action="https://formsubmit.co/rileymanda0@gmail.com"
         method="POST"
         className="mt-12 flex flex-col gap-4"
-        onSubmit={handleSubmit}
       >
         <div>
           <Typography
@@ -70,6 +63,27 @@ const AppointmentForm = () => {
             color="blue-gray"
             className="mb-2 font-medium"
           >
+            Query
+          </Typography>
+          <FloatingLabel
+            variant="filled"
+            label="Your query....."
+            type="textarea"
+            name="query"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+            labelProps={{
+              className: 'before:content-none after:content-none',
+            }}
+          />
+        </div>
+        <div>
+          <Typography
+            variant="small"
+            color="blue-gray"
+            className="mb-2 font-medium"
+          >
             Contact Email
           </Typography>
           <FloatingLabel
@@ -85,40 +99,14 @@ const AppointmentForm = () => {
             }}
           />
         </div>
-        <div>
-          <Typography
-            variant="small"
-            color="blue-gray"
-            className="mb-2 font-medium"
-          >
-            Select Category For your appointment
-          </Typography>
-          <Select
-            value={category}
-            onChange={(selectedOption) => {
-              console.log('Selected value:', selectedOption.value);
-              setCategory(selectedOption.value);
-            }}
-            displayEmpty
-            className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-          >
-            <MenuItem value="" disabled>
-              Select Service Type
-            </MenuItem>
-            <MenuItem value="appeals">Appeals</MenuItem>
-            <MenuItem value="commision of oaths">Commission of Oaths</MenuItem>
-            <MenuItem value="visaspermits">Visa & Permits</MenuItem>
-            <MenuItem value="other">Other</MenuItem>
-          </Select>
-        </div>
-        <FormButton
+        <Button
           btnlabel="Submit Enquiry"
           size="lg"
-          color="#2393cb"
           type="submit"
+          style={{ backgroundColor: '#0e5a97' }}
         >
-          request Appointment
-        </FormButton>
+          Submit Enquiry
+        </Button>
       </form>
     </div>
   );
