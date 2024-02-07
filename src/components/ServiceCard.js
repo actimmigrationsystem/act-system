@@ -10,7 +10,7 @@ import {
 
 const ServiceCard = ({ image, title, description }) => (
   <div className="w-full flex flex-col sm:flex-row">
-    <Card className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-200 dark:border-gray-200 relative overflow-hidden">
+    <Card className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-200 dark:border-gray-200 relative overflow-hidden cursor-pointer overflow-y-auto">
       <CardBody className="p-2">
         <img className="rounded-t-lg" src={image} alt="" />
         <a href="/">
