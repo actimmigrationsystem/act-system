@@ -1,16 +1,22 @@
 import React from 'react';
 import SectionTitle from '../components/SectionTitle';
 import SectionContainer from '../components/SectionContainer';
-import PdfDislay from '../components/PdfDisplay';
+import PdfDisplay from '../components/PdfDisplay';
 
-export default function DocumentSection() {
-  return (
-    <SectionContainer height="90vh" marginTop="12px" marginBottom="30px">
-      <SectionTitle
-        title="Documents"
-        className="text-center text-white"
-      />
-      <PdfDislay />
-    </SectionContainer>
-  );
-}
+const DocumentSection = () => (
+  <SectionContainer
+    height="100vh"
+    marginTop="12px"
+    marginBottom="30px"
+    style={{
+      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+    }}
+  >
+    <SectionTitle
+      title="Documents"
+      className="text-center text-white"
+    />
+    <PdfDisplay />
+  </SectionContainer>
+);
+export default DocumentSection;
