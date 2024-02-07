@@ -52,7 +52,7 @@ const carouselData = [
 ];
 
 const HomeCarousel = () => (
-  <div>
+  <div className="w-full">
     <Carousel className="relative h-56 overflow-hidden rounded-lg md:h-96" autoplay>
       {carouselData.map((item) => (
         <div key={item.id} className="relative h-full w-full">

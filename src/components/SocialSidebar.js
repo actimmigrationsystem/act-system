@@ -5,20 +5,21 @@ const StyledSocialSidebar = styled.div`
  position: fixed;
   top: 36%;
   right: 0;
-  margin-right: -130px;
+  margin-right: -155px;
   transform: translateY(-50%);
   z-index: 999;
   background-color: #fff;
   border-radius: 20px;
   opacity: 0.8;
   height: auto;
+  align-items: center;
 
 `;
 
 const StyledIcon = styled.div`
-align-items: center;
 justify-content: center;
 cursor: pointer;
+opacity: 1;
 `;
 
 const SocialSidebar = () => (

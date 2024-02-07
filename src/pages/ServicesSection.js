@@ -5,6 +5,8 @@ import Img1 from '../assets/services/1.jpg';
 import Img3 from '../assets/services/3.jpg';
 import Img4 from '../assets/services/4.jpg';
 import Img2 from '../assets/services/2.jpg';
+import ContentContainer from '../components/ContentContainer';
+import SectionContainer from '../components/SectionContainer';
 
 const serviceData = [
   {
@@ -28,21 +30,24 @@ const serviceData = [
     description: 'The temporary residence visa must be renewed while the permanent residence application is still pending.',
   },
 ];
+
 const ServicesSection = () => (
-  <div id="services">
-    <SectionTitle
-      title="Services"
-    />
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-2">
-      {serviceData.map((service) => (
-        <ServiceCard
-          key={service.title}
-          image={service.image}
-          title={service.title}
-          description={service.description}
-        />
-      ))}
-    </div>
+  <div>
+    <SectionContainer height="90vh" marginTop="-12px" marginBottom="12px">
+      <SectionTitle title="Services" />
+      <ContentContainer>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+          {serviceData.map((service) => (
+            <ServiceCard
+              key={service.title}
+              image={service.image}
+              title={service.title}
+              description={service.description}
+            />
+          ))}
+        </div>
+      </ContentContainer>
+    </SectionContainer>
   </div>
 );
 

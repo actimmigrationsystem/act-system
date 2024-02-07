@@ -8,10 +8,11 @@ const ContainerLayout = styled.div`
   flex-direction: column;
   margin-right: 20px;
   margin-left: 20px;
-  margin-top: 10px;
 `;
 const ContentContainer = ({ children }) => (
-  <ContainerLayout className="min-h-screen">{children}</ContainerLayout>
+  <ContainerLayout className="min-h-screen">
+    {children}
+  </ContainerLayout>
 );
 
 ContentContainer.propTypes = {
