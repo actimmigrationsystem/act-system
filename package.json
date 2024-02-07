@@ -24,7 +24,7 @@
     "react-icons": "^5.0.1",
     "react-pdf": "^7.7.0",
     "react-router-dom": "^6.22.0",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^3.0.1",
     "react-scroll": "^1.9.0",
     "styled-components": "^6.1.8",
     "swiper": "^11.0.5",
@@ -68,9 +68,9 @@
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "stylelint": "^13.13.1",
-    "stylelint-config-standard": "^21.0.0",
-    "stylelint-csstree-validator": "^1.9.0",
-    "stylelint-scss": "^3.21.0"
+    "stylelint": "^16.2.1",
+    "stylelint-config-standard": "^36.0.0",
+    "stylelint-csstree-validator": "^3.0.0",
+    "stylelint-scss": "^6.1.0"
   }
 }
