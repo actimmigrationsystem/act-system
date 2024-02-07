@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import { Carousel } from '@material-tailwind/react';
+import { Link } from 'react-scroll';
 import Img1 from '../assets/bannerimages/practice-1.jpeg';
 import Img2 from '../assets/bannerimages/practice-2.jpeg';
 import Img3 from '../assets/bannerimages/practice-3.jpeg';
@@ -9,43 +10,43 @@ const carouselData = [
     imageSrc: Img1,
     text: 'Immigration Consultants striving on affecting change in people\'s lives every day.',
     buttonLabel: 'Learn More',
-    buttonLink: '/learn-more',
+    target: 'service-section',
   },
   {
     imageSrc: Img2,
     text: 'Temporary and permanent residence visas',
     buttonLabel: 'Learn More',
-    buttonLink: '/learn-more',
+    target: 'service-section',
   },
   {
     imageSrc: Img3,
     text: 'Appeals and reviews in terms of the immigration act',
     buttonLabel: 'Learn More',
-    buttonLink: '/learn-more',
+    target: 'service-section',
   },
   {
     imageSrc: Img3,
     text: 'Applications for certification as Refugee indefinite to the standing Committee',
     buttonLabel: 'Learn More',
-    buttonLink: '/learn-more',
+    target: 'service-section',
   },
   {
     imageSrc: Img3,
     text: 'Exclusions and Exemptions from Temporary Residence or Permanent Residence',
     buttonLabel: 'Learn More',
-    buttonLink: '/learn-more',
+    target: 'service-section',
   },
   {
     imageSrc: Img3,
     text: 'Exclusions and Exemptions from Temporary Residence or Permanent Residence',
     buttonLabel: 'Learn More',
-    buttonLink: '/learn-more',
+    target: 'service-section',
   },
   {
     imageSrc: Img3,
     text: 'Temporary Residence Visa Applications and Renewals',
     buttonLabel: 'Learn More',
-    buttonLink: '/learn-more',
+    target: 'service-section',
   },
 
 ];
@@ -65,9 +66,16 @@ const HomeCarousel = () => (
               <p className="max-w-lg text-4xl font-semibold leading-loose text-white">
                 {item.text}
               </p>
-              <button type="button" style={{ backgroundColor: '#0e5a97' }} className="mt-2 text-white px-6 py-2 rounded-full hover:bg-blue-700">
+              <Link
+                to={item.target}
+                spy
+                smooth
+                duration={500}
+                style={{ backgroundColor: '#0e5a97' }}
+                className="mt-2 text-white px-6 py-2 rounded-full hover:bg-blue-700 cursor-pointer"
+              >
                 {item.buttonLabel}
-              </button>
+              </Link>
             </div>
           </div>
         </div>
