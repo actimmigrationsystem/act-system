@@ -5,6 +5,7 @@ import {
   Accordion,
   AccordionHeader,
   AccordionBody,
+  Typography,
 } from '@material-tailwind/react';
 
 const Icon = ({ open }) => (
@@ -33,13 +34,19 @@ const FAQComponent = ({ faqs }) => {
   const handleOpen = (index) => setOpenIndex(openIndex === index ? null : index);
 
   return (
-    <div>
+
+    <div className="w-full mx-auto px-20">
       {faqs.map((faq) => (
         <Accordion key={faq.id} open={openIndex === faq.id} icon={<Icon open={openIndex === faq.id} animate={CUSTOM_ANIMATION} />}>
           <AccordionHeader onClick={() => handleOpen(faq.id)}>{faq.question}</AccordionHeader>
-          <AccordionBody>
-            {faq.answer}
-          </AccordionBody>
+          <p className="mb-2 text-gray-500 dark:text-gray-400">
+            <AccordionBody>
+              <Typography className="mb-2 text-xl mt-6 font-bold tracking-tight text-gray-500 dark:text-white text-center">
+                {faq.answer}
+              </Typography>
+
+            </AccordionBody>
+          </p>
         </Accordion>
       ))}
     </div>
