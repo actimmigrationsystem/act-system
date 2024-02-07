@@ -5,7 +5,7 @@ import PdfDisplay from '../components/PdfDisplay';
 
 const DocumentSection = () => (
   <SectionContainer
-    height="100vh"
+    height="90vh"
     marginTop="12px"
     marginBottom="30px"
     style={{
