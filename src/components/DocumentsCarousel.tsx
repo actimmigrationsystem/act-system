@@ -23,12 +23,16 @@ const carouselData = [
       pdfSrc: "/documents/medical-report.pdf",
       text: "Medical Report",
     },
+  ],
+  [
     {
       pdfSrc: "/documents/medical-report.pdf",
       text: "Medical Report",
     },
-  ],
-  [
+    {
+      pdfSrc: "/documents/medical-report.pdf",
+      text: "Medical Report",
+    },
     {
       pdfSrc: "/documents/medical-report.pdf",
       text: "Medical Report",
