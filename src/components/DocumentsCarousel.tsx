@@ -1,7 +1,5 @@
 import styled from "styled-components";
-import {
-  Card
-} from "@material-tailwind/react";
+import { Card, Typography } from "@material-tailwind/react";
 import { Carousel } from "react-responsive-carousel";
 import { Document, Page, pdfjs } from "react-pdf";
 import { PDFDocumentProxy } from "pdfjs-dist/types/src/display/api";
@@ -26,16 +24,20 @@ const carouselData = [
   ],
   [
     {
-      pdfSrc: "/documents/medical-report.pdf",
-      text: "Medical Report",
+      pdfSrc: "/documents/immigration-regulations.pdf",
+      text: "Immigration Regulations",
     },
     {
-      pdfSrc: "/documents/medical-report.pdf",
-      text: "Medical Report",
+      pdfSrc: "/documents/application-for-trp.pdf",
+      text: "TRP Application",
     },
     {
-      pdfSrc: "/documents/medical-report.pdf",
-      text: "Medical Report",
+      pdfSrc: "/documents/application-for-renewal-of-permit.pdf",
+      text: "Renewal of Permit",
+    },
+    {
+      pdfSrc: "/documents/application-for-permanent-residence-permit.pdf",
+      text: "Permanent Residence Permit",
     },
   ],
 ];
@@ -134,7 +136,13 @@ const DocumentsCarousel = () => {
                       </Card>
                       <TextOverlay>
                         <div>
-                          <p>{item.text}</p>
+                          <Typography
+                            variant="h4"
+                            placeholder="typography"
+                            className="mb-2 mt-2 font-bold tracking-tight text-white dark:text-white text-center"
+                          >
+                            {item.text}
+                          </Typography>
                         </div>
                       </TextOverlay>
                     </DocumentWrapper>
