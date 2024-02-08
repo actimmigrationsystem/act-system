@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import {
   FaLinkedin, FaWhatsapp, FaInstagram, FaFacebook, FaTwitter,

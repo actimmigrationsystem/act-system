@@ -1,4 +1,3 @@
-import React from 'react';
 import { Element } from 'react-scroll';
 import HomeCarousel from '../components/HomeCarousel';
 import ServicesSection from './ServicesSection';
