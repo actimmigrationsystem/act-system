@@ -5,15 +5,12 @@ import SectionContainer from '../components/SectionContainer';
 
 export default function DocumentSection() {
   return (
-    <SectionContainer height="90vh" marginTop="12px" marginBottom="30px">
-      <SectionTitle
-        title="Documents"
-        className="text-center text-white"
-      />
-      <div style={{ backgroundColor: '#E1E1E1' }}>
+    <SectionContainer height="70vh" marginTop="15px" marginBottom="40px">
+      <SectionTitle title="Documents" className="text-center text-white" />
+      <div className="bg-gray-700 p-2">
         <div className="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
           <ContentContainer>
-           <DocumentsCarousel />
+            <DocumentsCarousel />
           </ContentContainer>
         </div>
       </div>

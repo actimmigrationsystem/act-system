@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import {
+  Card
+} from "@material-tailwind/react";
 import { Carousel } from "react-responsive-carousel";
 import { Document, Page, pdfjs } from "react-pdf";
 import { PDFDocumentProxy } from "pdfjs-dist/types/src/display/api";
@@ -12,19 +15,30 @@ const carouselData = [
       pdfSrc: "/documents/medical-report.pdf",
       text: "Medical Report",
     },
+    {
+      pdfSrc: "/documents/medical-report.pdf",
+      text: "Medical Report",
+    },
+    {
+      pdfSrc: "/documents/medical-report.pdf",
+      text: "Medical Report",
+    },
+    {
+      pdfSrc: "/documents/medical-report.pdf",
+      text: "Medical Report",
+    },
   ],
   [
     {
       pdfSrc: "/documents/medical-report.pdf",
       text: "Medical Report",
     },
-
   ],
 ];
 
 const DocumentContainer = styled.div`
   width: 100%;
-  height: 60vh;
+  height: 50vh;
   margin: 0 10px;
   overflow: auto;
   margin-top: 10px;
@@ -37,16 +51,17 @@ const DocumentWrapper = styled.div`
 `;
 
 const CarouselContainer = styled.div`
-  width: 30%;
-  height: 30%;
-  margin-bottom: 30px;
+  width: 90%;
+  height: 70%;
+  margin-bottom: 10px;
+  margin-top: -50px;
 `;
 
 const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   margin: 10px 0;
   padding: 10px;
   height: 100%;
@@ -73,6 +88,22 @@ const TextOverlay = styled.div`
     }
   }
 `;
+const StyledCard = styled.div`
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+  padding: 6px;
+  width: 100%;
+  height: 100%;
+  margin: 0 10px;
+  overflow: auto;
+  margin-top: 10px;
+`;
+
+const SectionContainer = styled.div`
+  width: 100%;
+  margin: 0 auto;
+`;
 
 const DocumentsCarousel = () => {
   const onDocumentLoadSuccess = ({ numPages }: PDFDocumentProxy) => {
@@ -83,25 +114,31 @@ const DocumentsCarousel = () => {
     <CarouselContainer>
       <Carousel autoPlay infiniteLoop>
         {carouselData.map((items, id) => (
-          <Container key={id}>
-            {items.map((item, id) => (
-              <DocumentContainer key={id}>
-                <DocumentWrapper>
-                  <Document
-                    file={item.pdfSrc}
-                    onLoadSuccess={onDocumentLoadSuccess}
-                  >
-                    <Page pageNumber={1} />
-                  </Document>
-                  <TextOverlay>
-                    <div>
-                      <p>{item.text}</p>
-                    </div>
-                  </TextOverlay>
-                </DocumentWrapper>
-              </DocumentContainer>
-            ))}
-          </Container>
+          <SectionContainer key={id}>
+            <Container>
+              {items.map((item, id) => (
+                <StyledCard key={id}>
+                  <DocumentContainer>
+                    <DocumentWrapper>
+                      <Card placeholder="Card">
+                        <Document
+                          file={item.pdfSrc}
+                          onLoadSuccess={onDocumentLoadSuccess}
+                        >
+                          <Page pageNumber={1} />
+                        </Document>
+                      </Card>
+                      <TextOverlay>
+                        <div>
+                          <p>{item.text}</p>
+                        </div>
+                      </TextOverlay>
+                    </DocumentWrapper>
+                  </DocumentContainer>
+                </StyledCard>
+              ))}
+            </Container>
+          </SectionContainer>
         ))}
       </Carousel>
     </CarouselContainer>

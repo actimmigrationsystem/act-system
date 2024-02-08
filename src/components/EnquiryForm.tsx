@@ -17,7 +17,7 @@ const EnquiryForm = () => {
       >
         <div>
           <Typography
-          placeholder={"Typography"}
+            placeholder={"Typography"}
             variant="small"
             color="blue-gray"
             className="mb-2 font-medium"
@@ -36,7 +36,7 @@ const EnquiryForm = () => {
         </div>
         <div>
           <Typography
-          placeholder={"Typography"}
+            placeholder={"Typography"}
             variant="small"
             color="blue-gray"
             className="mb-2 font-medium"
@@ -55,7 +55,7 @@ const EnquiryForm = () => {
         </div>
         <div>
           <Typography
-          placeholder={"Typography"}
+            placeholder={"Typography"}
             variant="small"
             color="blue-gray"
             className="mb-2 font-medium"
@@ -74,7 +74,7 @@ const EnquiryForm = () => {
         </div>
         <div>
           <Typography
-          placeholder={"Typography"}
+            placeholder={"Typography"}
             variant="small"
             color="blue-gray"
             className="mb-2 font-medium"
@@ -92,10 +92,11 @@ const EnquiryForm = () => {
           />
         </div>
         <Button
-        placeholder={"Button"}
+          placeholder="Button"
           size="lg"
           type="submit"
-          style={{ backgroundColor: '#0e5a97' }}
+          style={{ backgroundColor: "#0e5a97" }}
+          className="w-full h-full bg-blue-500 hover:bg-blue-600 text-white"
         >
           Submit Enquiry
         </Button>

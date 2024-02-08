@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-scroll";
 import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Img1 from "../assets/bannerimages/practice-1.jpeg";
 import Img2 from "../assets/bannerimages/practice-2.jpeg";
 import Img3 from "../assets/bannerimages/practice-3.jpeg";
