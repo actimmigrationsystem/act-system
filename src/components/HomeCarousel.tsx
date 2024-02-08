@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-scroll";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import Img1 from "../assets/bannerimages/practice-1.jpeg";
@@ -53,13 +54,15 @@ const HomeCarousel = () => {
                   <p className="max-w-lg text-4xl font-semibold leading-loose text-white">
                     {item.text}
                   </p>
-                  <a
-                    href={`#${item.target}`}
+                  <Link
+                    to={item.target}
+                    smooth={true}
+                    duration={500}
                     className="mt-2 text-white px-6 py-2 rounded-full hover:bg-blue-700 cursor-pointer"
                     style={{ backgroundColor: "#0e5a97" }}
                   >
                     {item.buttonLabel}
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
