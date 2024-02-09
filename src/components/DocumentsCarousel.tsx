@@ -43,6 +43,29 @@ const carouselData = [
   ],
 ];
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0;
+  padding: 10px;
+  height: 100%;
+  width: 100%;
+`;
+
+const StyledCard = styled.div`
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+  padding: 6px;
+  width: 100%;
+  height: 100%;
+  margin: 0 10px;
+  overflow: auto;
+  margin-top: 10px;
+`;
+
 const DocumentContainer = styled.div`
   width: 100%;
   height: 50vh;
@@ -58,22 +81,12 @@ const DocumentWrapper = styled.div`
 `;
 
 const CarouselContainer = styled.div`
-  width: 90%;
+  width: 50%;
   height: 70%;
   margin-bottom: 10px;
   margin-top: -50px;
 `;
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  margin: 10px 0;
-  padding: 10px;
-  height: 100%;
-  width: 100%;
-`;
 const TextOverlay = styled.div`
   position: absolute;
   top: 50%;
@@ -94,17 +107,6 @@ const TextOverlay = styled.div`
       color: white;
     }
   }
-`;
-const StyledCard = styled.div`
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
-  border-radius: 5px;
-  padding: 6px;
-  width: 100%;
-  height: 100%;
-  margin: 0 10px;
-  overflow: auto;
-  margin-top: 10px;
 `;
 
 const SectionContainer = styled.div`
