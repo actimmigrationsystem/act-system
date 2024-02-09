@@ -1,5 +1,6 @@
+import { useState, useRef } from "react";
 import styled from "styled-components";
-import { Card, Typography } from "@material-tailwind/react";
+import { Card, Typography, Button } from "@material-tailwind/react";
 import { Carousel } from "react-responsive-carousel";
 import { Document, Page, pdfjs } from "react-pdf";
 import { PDFDocumentProxy } from "pdfjs-dist/types/src/display/api";
@@ -112,43 +113,101 @@ const SectionContainer = styled.div`
 `;
 
 const DocumentsCarousel = () => {
-  const onDocumentLoadSuccess = ({ numPages }: PDFDocumentProxy) => {
-    console.log(`Successfully loaded document with ${numPages} pages.`);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [numPages, setNumPages] = useState<Array<number>>(
+    Array(carouselData.flat().length).fill(0)
+  );
+  const [pageNumber, setPageNumber] = useState<Array<number>>(
+    Array(carouselData.flat().length).fill(1)
+  );
+
+  const onDocumentLoadSuccess =
+    (index: number) =>
+    ({ numPages }: PDFDocumentProxy) => {
+      setNumPages((prevNumPages) => {
+        const newNumPages = [...prevNumPages];
+        newNumPages[index] = numPages;
+        return newNumPages;
+      });
+      setPageNumber((prevPageNumber) => {
+        const newPageNumber = [...prevPageNumber];
+        newPageNumber[index] = 1;
+        return newPageNumber;
+      });
+    };
+
+  const changePage = (index: number, offset: number) => {
+    setPageNumber((prevPageNumber) => {
+      const newPageNumber = [...prevPageNumber];
+      newPageNumber[index] += offset;
+      return newPageNumber;
+    });
+  };
+
+  const previousPage = (index: number) => {
+    changePage(index, -1);
+  };
+
+  const nextPage = (index: number) => {
+    changePage(index, 1);
   };
 
   return (
     <CarouselContainer>
-      <Carousel autoPlay infiniteLoop>
-        {carouselData.map((items, id) => (
-          <SectionContainer key={id}>
+      <Carousel>
+        {carouselData.flat().map((item, index) => (
+          <SectionContainer key={index}>
             <Container>
-              {items.map((item, id) => (
-                <StyledCard key={id}>
-                  <DocumentContainer>
-                    <DocumentWrapper>
-                      <Card placeholder="Card">
-                        <Document
-                          file={item.pdfSrc}
-                          onLoadSuccess={onDocumentLoadSuccess}
+              <StyledCard key={index}>
+                <DocumentContainer ref={containerRef}>
+                  <DocumentWrapper>
+                    <Card placeholder="Card">
+                      <Document
+                        file={item.pdfSrc}
+                        onLoadSuccess={onDocumentLoadSuccess(index)}
+                      >
+                        <Page
+                          pageNumber={pageNumber[index]}
+                          width={
+                            containerRef.current
+                              ? containerRef.current.clientWidth
+                              : 0
+                          }
+                        />
+                      </Document>
+                    </Card>
+                    <TextOverlay>
+                      <div>
+                        <Typography
+                          variant="h4"
+                          placeholder="typography"
+                          className="mb-2 mt-2 font-bold tracking-tight text-white dark:text-white text-center"
                         >
-                          <Page pageNumber={1} />
-                        </Document>
-                      </Card>
-                      <TextOverlay>
-                        <div>
-                          <Typography
-                            variant="h4"
-                            placeholder="typography"
-                            className="mb-2 mt-2 font-bold tracking-tight text-white dark:text-white text-center"
-                          >
-                            {item.text}
-                          </Typography>
-                        </div>
-                      </TextOverlay>
-                    </DocumentWrapper>
-                  </DocumentContainer>
-                </StyledCard>
-              ))}
+                          {item.text}
+                        </Typography>
+                      </div>
+                    </TextOverlay>
+                  </DocumentWrapper>
+                </DocumentContainer>
+                <div>
+                  <Button
+                    type="button"
+                    placeholder={"button"}
+                    disabled={pageNumber[index] <= 1}
+                    onClick={() => previousPage(index)}
+                  >
+                    Previous page
+                  </Button>
+                  <Button
+                    type="button"
+                    placeholder={"button"}
+                    disabled={pageNumber[index] >= numPages[index]}
+                    onClick={() => nextPage(index)}
+                  >
+                    Next page
+                  </Button>
+                </div>
+              </StyledCard>
             </Container>
           </SectionContainer>
         ))}
