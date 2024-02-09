@@ -152,6 +152,10 @@ const DocumentsCarousel = () => {
     changePage(index, 1);
   };
 
+   const downloadPdf = (pdfSrc: string) => {
+     window.open(pdfSrc, "_blank");
+   };
+
   return (
     <CarouselContainer>
       <Carousel>
@@ -205,6 +209,13 @@ const DocumentsCarousel = () => {
                     onClick={() => nextPage(index)}
                   >
                     Next page
+                  </Button>
+                  <Button
+                    type="button"
+                    placeholder={"button"}
+                    onClick={() => downloadPdf(item.pdfSrc)}
+                  >
+                    Download
                   </Button>
                 </div>
               </StyledCard>
