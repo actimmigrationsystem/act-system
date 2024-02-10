@@ -51,7 +51,7 @@ const HomeCarousel = () => {
               />
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
                 <div className="bg-black bg-opacity-40 p-4 rounded-md">
-                  <p className="max-w-lg text-4xl font-semibold leading-loose text-white">
+                  <p className="max-w-lg text-l lg:text-4xl md:text-4xl sm:text-l font-semibold leading-loose text-white">
                     {item.text}
                   </p>
                   <Link
