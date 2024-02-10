@@ -1,4 +1,4 @@
-import React, { useState, Dispatch, SetStateAction } from "react";
+import { useState, Dispatch, SetStateAction } from "react";
 import StepWizard from "react-step-wizard";
 import { Typography, Button } from "@material-tailwind/react";
 import { FloatingLabel } from "flowbite-react";
@@ -24,6 +24,8 @@ const EnquiryForm = () => {
         <Step2
           contactEmail={contactEmail}
           setContactEmail={setContactEmail}
+          enquiry={enquiry}
+          setEnquiry={setEnquiry}
           nextStep={nextStep}
         />
         <Step3 enquiry={enquiry} setEnquiry={setEnquiry} nextStep={nextStep} />
@@ -86,16 +88,20 @@ const Step1 = ({
   </div>
 );
 
+
 const Step2 = ({
   contactEmail,
   setContactEmail,
-  nextStep,
+  enquiry,
+  setEnquiry,
 }: {
   contactEmail: string;
   setContactEmail: Dispatch<SetStateAction<string>>;
+  enquiry: string;
+  setEnquiry: Dispatch<SetStateAction<string>>;
   nextStep: () => void;
 }) => (
-  <div>
+  <>
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -113,10 +119,32 @@ const Step2 = ({
       onChange={(event) => setContactEmail(event.target.value)}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     />
-    <Button type="button" placeholder="" onClick={nextStep}>
-      Next
-    </Button>
-  </div>
+      <Typography
+        placeholder={"Typography"}
+        variant="small"
+        color="blue-gray"
+        className="mb-2 font-medium"
+      >
+        Enquiry
+      </Typography>
+      <FloatingLabel
+        variant="filled"
+        label="Your Enquiry"
+        type="text"
+        name="enquiry"
+        value={enquiry}
+        onChange={(event) => setEnquiry(event.target.value)}
+        className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+      />
+      <Button
+        placeholder={"Button"}
+        size="lg"
+        type="submit"
+        style={{ backgroundColor: "#0e5a97" }}
+      >
+        Submit Enquiry
+      </Button>
+    </>
 );
 
 const Step3 = ({

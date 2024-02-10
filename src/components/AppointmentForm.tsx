@@ -14,6 +14,7 @@ const AppointmentForm = () => {
   const [nationality, setNationality] = useState("");
   const [serviceType, setServiceType] = useState("");
 
+  const nextStep = () => {};
   return (
     <div>
       <form
