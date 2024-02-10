@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { Link } from "react-scroll";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -27,49 +26,37 @@ const carouselData = [
   },
 ];
 
-const CarouselContainer = styled.div`
-  width: 100%;
-  height: 60vh;
-  margin-bottom: 50px;
-`;
-
 const HomeCarousel = () => {
   return (
-    <CarouselContainer>
-      <div style={{ height: "60vh" }}>
-        <Carousel autoPlay infiniteLoop>
-          {carouselData.map((item, id) => (
-            <div
-              key={id}
-              className="relative w-full"
-              style={{ height: "60vh" }}
-            >
-              <img
-                src={item.imageSrc}
-                alt={item.text}
-                className="w-full object-cover"
-              />
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-                <div className="bg-black bg-opacity-40 p-4 rounded-md">
-                  <p className="max-w-lg text-l lg:text-4xl md:text-4xl sm:text-l font-semibold leading-loose text-white">
-                    {item.text}
-                  </p>
-                  <Link
-                    to={item.target}
-                    smooth={true}
-                    duration={500}
-                    className="mt-2 text-white px-6 py-2 rounded-full hover:bg-blue-700 cursor-pointer"
-                    style={{ backgroundColor: "#0e5a97" }}
-                  >
-                    {item.buttonLabel}
-                  </Link>
-                </div>
+    <div className="w-full h-[50vh] sm:h-[65vh] mb-3">
+      <Carousel autoPlay infiniteLoop>
+        {carouselData.map((item, id) => (
+          <div key={id} className="relative w-full h-[45vh] sm:h-[60vh]">
+            <img
+              src={item.imageSrc}
+              alt={item.text}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+              <div className="bg-black bg-opacity-40 p-4 rounded-md">
+                <p className="max-w-lg text-l lg:text-4xl md:text-4xl sm:text-l font-semibold leading-loose text-white">
+                  {item.text}
+                </p>
+                <Link
+                  to={item.target}
+                  smooth={true}
+                  duration={500}
+                  className="mt-2 text-white px-6 py-2 rounded-full hover:bg-blue-700 cursor-pointer"
+                  style={{ backgroundColor: "#0e5a97" }}
+                >
+                  {item.buttonLabel}
+                </Link>
               </div>
             </div>
-          ))}
-        </Carousel>
-      </div>
-    </CarouselContainer>
+          </div>
+        ))}
+      </Carousel>
+    </div>
   );
 };
 
