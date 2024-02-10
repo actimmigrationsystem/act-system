@@ -39,7 +39,6 @@ interface FAQComponentProps {
 
 const FAQComponent = ({ faqs }: FAQComponentProps) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-
   const handleOpen = (index: number) =>
     setOpenIndex(openIndex === index ? null : index);
 
