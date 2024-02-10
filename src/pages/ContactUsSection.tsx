@@ -5,7 +5,10 @@ import ContentContainer from '../components/ContentContainer';
 import SectionContainer from '../components/SectionContainer';
 
 const ContactUsSection = () => (
-  <div style={{ backgroundColor: "#2393CB00" }}>
+  <div
+    style={{ backgroundColor: "#2393CB00" }}
+    className="flex flex-col justify-center items-center h-full"
+  >
     <SectionContainer height="30vh" marginTop="30px" marginBottom="6px">
       <SectionTitle title="Contact Us" className="text-center text-white" />
       <div className="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:px-8">

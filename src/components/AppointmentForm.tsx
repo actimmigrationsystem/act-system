@@ -268,7 +268,7 @@ const Step3 = ({
         }}
         className="!border-t-blue-gray-200 focus:!border-t-gray-900"
       >
-        <MenuItem placeholder="" value="Select Option" disabled>
+        <MenuItem placeholder="" value="Select Option">
           Yes
         </MenuItem>
         <MenuItem placeholder="No" value="no">
