@@ -82,7 +82,7 @@ const Step1 = ({
       onChange={(event) => setPhonenumber(event.target.value)}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     />
-    <Button type="button" placeholder="" onClick={nextStep}>
+    <Button style={{ backgroundColor: "#0e5a97"}} type="button" placeholder="" onClick={nextStep}>
       Next
     </Button>
   </div>
@@ -119,32 +119,32 @@ const Step2 = ({
       onChange={(event) => setContactEmail(event.target.value)}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     />
-      <Typography
-        placeholder={"Typography"}
-        variant="small"
-        color="blue-gray"
-        className="mb-2 font-medium"
-      >
-        Enquiry
-      </Typography>
-      <FloatingLabel
-        variant="filled"
-        label="Your Enquiry"
-        type="text"
-        name="enquiry"
-        value={enquiry}
-        onChange={(event) => setEnquiry(event.target.value)}
-        className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-      />
-      <Button
-        placeholder={"Button"}
-        size="lg"
-        type="submit"
-        style={{ backgroundColor: "#0e5a97" }}
-      >
-        Submit Enquiry
-      </Button>
-    </>
+    <Typography
+      placeholder={"Typography"}
+      variant="small"
+      color="blue-gray"
+      className="mb-2 font-medium"
+    >
+      Enquiry
+    </Typography>
+    <FloatingLabel
+      variant="filled"
+      label="Your Enquiry"
+      type="text"
+      name="enquiry"
+      value={enquiry}
+      onChange={(event) => setEnquiry(event.target.value)}
+      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+    />
+    <Button
+      size="lg"
+      style={{ backgroundColor: "#0e5a97", width: "100%" }}
+      type="submit"
+      placeholder=""
+    >
+      Submit Enquiry
+    </Button>
+  </>
 );
 
 const Step3 = ({

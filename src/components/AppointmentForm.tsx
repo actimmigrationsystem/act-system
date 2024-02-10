@@ -1,10 +1,9 @@
-import React, { useState, Dispatch, SetStateAction } from "react";
+import { useState, Dispatch, SetStateAction } from "react";
 import StepWizard from "react-step-wizard";
 import {
   Typography,
   Button,
   Select,
-  Menu,
   MenuItem,
 } from "@material-tailwind/react";
 import { FloatingLabel } from "flowbite-react";
@@ -53,6 +52,7 @@ const AppointmentForm = () => {
           setNationality={setNationality}
           serviceType={serviceType}
           setServiceType={setServiceType}
+          nextStep={nextStep}
         />
         <Step5
           category={category}
@@ -113,7 +113,12 @@ const Step1 = ({
       onChange={(event) => setPhonenumber(event.target.value)}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     />
-    <Button type="button" placeholder="" onClick={nextStep}>
+    <Button
+      style={{ backgroundColor: "#0e5a97" }}
+      type="button"
+      placeholder=""
+      onClick={nextStep}
+    >
       Next
     </Button>
   </div>
@@ -186,7 +191,12 @@ const Step2 = ({
         </MenuItem>
       </Select>
     </div>
-    <Button type="button" placeholder="" onClick={nextStep}>
+    <Button
+      style={{ backgroundColor: "#0e5a97" }}
+      type="button"
+      placeholder=""
+      onClick={nextStep}
+    >
       Next
     </Button>
   </div>
@@ -207,37 +217,37 @@ const Step3 = ({
 }) => (
   <div>
     <div>
-    <Typography
-      placeholder={"Typography"}
-      variant="small"
-      color="blue-gray"
-      className="mb-2 font-medium"
-    >
-      What is your current immigration status?
-    </Typography>
-    <Select
-      placeholder={"Select"}
-      value={immigrationStatus}
-      onChange={(value) => {
-        if (value) {
-          setImmigrationStatus(value);
-        }
-      }}
-      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-    >
-      <MenuItem placeholder="" value="" disabled>
-        No Status
-      </MenuItem>
-      <MenuItem placeholder="service1" value="service1">
-        Work Visa
-      </MenuItem>
-      <MenuItem placeholder="service2" value="service2">
-        Permanent Resident
-      </MenuItem>
-      <MenuItem placeholder="service3" value="service3">
-        Asylum
-      </MenuItem>
-    </Select>
+      <Typography
+        placeholder={"Typography"}
+        variant="small"
+        color="blue-gray"
+        className="mb-2 font-medium"
+      >
+        What is your current immigration status?
+      </Typography>
+      <Select
+        placeholder={"Select"}
+        value={immigrationStatus}
+        onChange={(value) => {
+          if (value) {
+            setImmigrationStatus(value);
+          }
+        }}
+        className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+      >
+        <MenuItem placeholder="" value="" disabled>
+          No Status
+        </MenuItem>
+        <MenuItem placeholder="service1" value="service1">
+          Work Visa
+        </MenuItem>
+        <MenuItem placeholder="service2" value="service2">
+          Permanent Resident
+        </MenuItem>
+        <MenuItem placeholder="service3" value="service3">
+          Asylum
+        </MenuItem>
+      </Select>
     </div>
     <div>
       <Typography
@@ -258,7 +268,7 @@ const Step3 = ({
         }}
         className="!border-t-blue-gray-200 focus:!border-t-gray-900"
       >
-        <MenuItem placeholder="" value="yes" disabled>
+        <MenuItem placeholder="" value="Select Option" disabled>
           Yes
         </MenuItem>
         <MenuItem placeholder="No" value="no">
@@ -266,7 +276,12 @@ const Step3 = ({
         </MenuItem>
       </Select>
     </div>
-    <Button type="button" placeholder="" onClick={nextStep}>
+    <Button
+      style={{ backgroundColor: "#0e5a97" }}
+      type="button"
+      placeholder=""
+      onClick={nextStep}
+    >
       Next
     </Button>
   </div>
@@ -277,11 +292,13 @@ const Step4 = ({
   setNationality,
   serviceType,
   setServiceType,
+  nextStep,
 }: {
   nationality: string;
   setNationality: Dispatch<SetStateAction<string>>;
   serviceType: string;
   setServiceType: Dispatch<SetStateAction<string>>;
+  nextStep: () => void;
 }) => (
   <div>
     <div>
@@ -347,8 +364,13 @@ const Step4 = ({
         </MenuItem>
       </Select>
     </div>
-    <Button type="submit" placeholder="">
-      Submit
+    <Button
+      style={{ backgroundColor: "#0e5a97" }}
+      type="button"
+      placeholder=""
+      onClick={nextStep}
+    >
+      Next
     </Button>
   </div>
 );
@@ -417,10 +439,18 @@ const Step5 = ({
       >
         Select Date
       </Typography>
-     <DateComponent appointmentDate={appointmentDate} setAppointmentDate={setAppointmentDate} />
+      <DateComponent
+        appointmentDate={appointmentDate}
+        setAppointmentDate={setAppointmentDate}
+      />
     </div>
-    <Button type="submit" placeholder="">
-      Submit
+    <Button
+      placeholder={"Button"}
+      size="lg"
+      type="submit"
+      style={{ backgroundColor: "#0e5a97" }}
+    >
+      Book Appointment
     </Button>
   </div>
 );

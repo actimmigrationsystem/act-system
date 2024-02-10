@@ -6,7 +6,7 @@ import SectionContainer from '../components/SectionContainer';
 
 const ContactUsSection = () => (
   <div style={{ backgroundColor: "#2393CB00" }}>
-    <SectionContainer height="90vh" marginTop="90px" marginBottom="20px">
+    <SectionContainer height="30vh" marginTop="30px" marginBottom="6px">
       <SectionTitle title="Contact Us" className="text-center text-white" />
       <div className="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <ContentContainer>

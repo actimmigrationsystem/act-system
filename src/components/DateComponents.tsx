@@ -11,9 +11,7 @@ const DateComponent = ({
   <div>
     <Datepicker
       value={appointmentDate}
-      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-        setAppointmentDate(event.target.value)
-      }
+      onChange={(event: React.ChangeEvent<HTMLInputElement>) => setAppointmentDate(event.target.value)}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     />
   </div>
