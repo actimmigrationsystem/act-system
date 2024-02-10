@@ -1,5 +1,3 @@
-import SectionTitle from "../components/SectionTitle";
-import ContentContainer from "../components/ContentContainer";
 import SectionContainer from "../components/SectionContainer";
 
 export default function StartNowSection() {
