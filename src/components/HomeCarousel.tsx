@@ -28,7 +28,7 @@ const carouselData = [
 
 const HomeCarousel = () => {
   return (
-    <div className="w-full h-[50vh] sm:h-[65vh] mb-8">
+    <div className="w-full h-[50vh] sm:h-[65vh] mb-12">
       <Carousel autoPlay infiniteLoop>
         {carouselData.map((item, id) => (
           <div key={id} className="relative w-full h-[45vh] sm:h-[60vh]">
