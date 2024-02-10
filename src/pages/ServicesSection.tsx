@@ -35,11 +35,11 @@ const serviceData = [
 ];
 
 const ServicesSection = () => (
-<div>
+  <div>
     <SectionContainer height="90vh" marginTop="-12px" marginBottom="12px">
       <SectionTitle title="Services" />
       <ContentContainer>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
           {serviceData.map((service) => (
             <ServiceCard
               key={service.title}
