@@ -4,10 +4,8 @@ import ContentContainer from '../components/ContentContainer';
 import SectionContainer from '../components/SectionContainer';
 
 const AboutUs = () => (
-  <SectionContainer height="60vh" marginTop="12px" marginBottom="12px">
-    <SectionTitle
-      title="About Us"
-    />
+  <SectionContainer marginTop="auto" marginBottom="30px" height="80vh">
+    <SectionTitle title="About Us" />
     <ContentContainer>
       <ArticleComponent
         heading="Who we are"

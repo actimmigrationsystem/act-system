@@ -34,7 +34,7 @@ const ContactForm = () => {
 
   return (
     <div className="w-full">
-      <Card className="max-w-md overflow-y-auto" placeholder="">
+      <Card className="overflow-y-auto h-[450px]" placeholder="">
         <CardHeader
           style={{ backgroundColor: "#0e5a97" }}
           floated={false}
