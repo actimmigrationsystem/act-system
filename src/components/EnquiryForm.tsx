@@ -1,6 +1,7 @@
 import { useState, Dispatch, SetStateAction } from "react";
 import StepWizard from "react-step-wizard";
 import { Typography, Button, Select, MenuItem } from "@material-tailwind/react";
+import { RiMailSendLine } from "react-icons/ri";
 import { FloatingLabel } from "flowbite-react";
 import DocumentUpload from "./DocumentUpload";
 
@@ -23,6 +24,90 @@ const EnquiryForm = () => {
 
 
 
+ const [formValues, setFormValues] = useState({
+         name: '',
+    _subject: 'Enquiry',
+    email: '',
+    message: '',
+    contactEmail: '',
+    gender: '',
+    dob: '',
+    maritalStatus: '',
+    residentialAddress: '',
+    entryDate: '',
+    passportNumber: '',
+    referenceNumber: '',
+    serviceType: '',
+    elaborate: '',
+    documentUpload: '',
+    immigrationStatus: ''
+    });
+    const [formSubmitted, setFormSubmitted] = useState(false);
+
+const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormValues({ ...formValues, [e.target.name]: e.target.value });
+};
+    const handleRefreshClick = () => {
+        // refresh the page
+        setFormSubmitted(false);
+        window.location.reload();
+    };
+    const ThankYouMessage = () => (
+        <div>
+        <div style={{ backgroundColor: '#ffa000', color: 'white', padding: '10px', marginBottom: '10px' }}>
+        Thank you for your message! I will respond shortly.
+        </div>
+            <br />
+            <Button placeholder="Refresh Page" className="sendagain" onClick={handleRefreshClick}>
+                <RiMailSendLine style={{ marginRight: '8px' }} />
+                Send Another Enquiry
+            </Button>
+        </div>
+
+    );
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        const form = document.createElement('form');
+        form.action = 'https://formsubmit.co/rileymanda0@gmail.com';
+        form.method = 'POST';
+        form.target = '_blank';
+
+        // form data
+        Object.entries(formValues).forEach(([name, value]) => {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = name;
+            input.value = value;
+            form.appendChild(input);
+        });
+
+        document.body.appendChild(form);
+        form.submit();
+
+        // Clear the form
+        setFormValues({
+          name: '',
+    _subject: 'Enquiry',
+    email: '',
+    message: '',
+    contactEmail: '',
+    gender: '',
+    dob: '',
+    maritalStatus: '',
+    residentialAddress: '',
+    entryDate: '',
+    passportNumber: '',
+    referenceNumber: '',
+    serviceType: '',
+    elaborate: '',
+    documentUpload: '',
+    immigrationStatus: ''
+
+        });
+        setFormSubmitted(true);
+    };
+
+
 
 
 
@@ -38,6 +123,9 @@ const EnquiryForm = () => {
           setSurname={setSurname}
           phonenumber={phonenumber}
           setPhonenumber={setPhonenumber}
+          formValues={formValues}
+          setFormValues={setFormValues}
+          handleChange={handleChange}
           nextStep={nextStep}
         />
         <Step2
@@ -47,6 +135,9 @@ const EnquiryForm = () => {
           setGender={setGender}
           dob={dob}
           setDOB={setDOB}
+          formValues={formValues}
+          setFormValues={setFormValues}
+          handleChange={handleChange}
           nextStep={nextStep}
         />
         <Step3
@@ -56,6 +147,9 @@ const EnquiryForm = () => {
           setResidentialAddress={setResidentialAddress}
           immigrationStatus={immigrationStatus}
           setImmigrationStatus={setImmigrationStatus}
+          formValues={formValues}
+          setFormValues={setFormValues}
+          handleChange={handleChange}
           nextStep={nextStep}
         />
         <Step4
@@ -65,6 +159,9 @@ const EnquiryForm = () => {
           setPassportNumber={setPassportNumber}
           referenceNumber={referenceNumber}
           setReferenceNumber={setReferenceNumber}
+          formValues={formValues}
+          setFormValues={setFormValues}
+          handleChange={handleChange}
           nextStep={nextStep}
         />
         <Step5
@@ -74,8 +171,13 @@ const EnquiryForm = () => {
           setElaborate={setElaborate}
           documentUpload={documentUpload}
           setDocumentUpload={setDocumentUpload}
+          formValues={formValues}
+          setFormValues={setFormValues}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
         />
       </StepWizard>
+      {formSubmitted && <ThankYouMessage />}
     </div>
   );
 };
@@ -87,6 +189,9 @@ const Step1 = ({
   setSurname,
   phonenumber,
   setPhonenumber,
+  formValues,
+  setFormValues,
+  handleChange,
   nextStep,
 }: {
   name: string;
@@ -95,6 +200,9 @@ const Step1 = ({
   setSurname: Dispatch<SetStateAction<string>>;
   phonenumber: string;
   setPhonenumber: Dispatch<SetStateAction<string>>;
+  formValues: any;
+  setFormValues: any;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   nextStep: () => void;
 }) => (
   <div>
@@ -168,7 +276,9 @@ const Step2 = ({
   setGender,
   dob,
   setDOB,
-
+  formValues,
+  setFormValues,
+  handleChange,
   nextStep,
 }: {
   contactEmail: string;
@@ -177,6 +287,9 @@ const Step2 = ({
   setGender: Dispatch<SetStateAction<string>>;
   dob: string;
   setDOB: Dispatch<SetStateAction<string>>;
+  formValues: any;
+  setFormValues: any;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   nextStep: () => void;
 }) => (
   <div>
@@ -263,6 +376,9 @@ const Step3 = ({
   setResidentialAddress,
   immigrationStatus,
   setImmigrationStatus,
+  formValues,
+  setFormValues,
+  handleChange,
   nextStep,
 }: {
   immigrationStatus: string;
@@ -271,6 +387,9 @@ const Step3 = ({
   setMaritalStatus: Dispatch<SetStateAction<string>>;
   residentialAddress: string;
   setResidentialAddress: Dispatch<SetStateAction<string>>;
+  formValues: any;
+  setFormValues: any;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   nextStep: () => void;
 }) => (
   <div>
@@ -377,6 +496,9 @@ const Step4 = ({
   setPassportNumber,
   referenceNumber,
   setReferenceNumber,
+  formValues,
+  setFormValues,
+  handleChange,
   nextStep,
 }: {
   entryDate: string;
@@ -385,13 +507,11 @@ const Step4 = ({
   setPassportNumber: Dispatch<SetStateAction<string>>;
   referenceNumber: string;
   setReferenceNumber: Dispatch<SetStateAction<string>>;
+ formValues: any;
+  setFormValues: any;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   nextStep: () => void;
 }) => (
-  <form
-    action="https://formsubmit.co/david@actimmigration.co.za"
-    method="POST"
-    className="mt-12 flex flex-col gap-4"
-  >
     <div>
       <Typography
         placeholder={"Typography"}
@@ -454,7 +574,6 @@ const Step4 = ({
         Next
       </Button>
     </div>
-  </form>
 );
 
 const Step5 = ({
@@ -464,6 +583,9 @@ const Step5 = ({
   setElaborate,
   documentUpload,
   setDocumentUpload,
+  formValues,
+  setFormValues,
+  handleSubmit,
 }: {
   serviceType: string;
   setServiceType: Dispatch<SetStateAction<string>>;
@@ -471,6 +593,10 @@ const Step5 = ({
   setElaborate: Dispatch<SetStateAction<string>>;
   documentUpload: string;
   setDocumentUpload: Dispatch<SetStateAction<string>>;
+   formValues: any;
+  setFormValues: any;
+  handleSubmit: (e: React.FormEvent) => void;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => (
   <form
     action="https://formsubmit.co/david@actimmigration.co.za"
@@ -600,11 +726,31 @@ const Step5 = ({
         size="lg"
         type="submit"
         style={{ backgroundColor: "#0e5a97" }}
+        onClick={handleSubmit}
       >
         Submit Enquiry
       </Button>
     </div>
   </form>
 );
+const ThankYouMessage = () => (
+  <div>
+    <div
+      style={{
+        backgroundColor: "#B05656",
+        color: "white",
+        padding: "10px",
+        marginBottom: "10px",
+      }}
+    >
+      Thank you for your message! We will respond shortly.
+    </div>
+    <br />
+    <Button placeholder="Refresh Page" className="sendagain">
+      <RiMailSendLine style={{ marginRight: "8px" }} />
+      Send Another Enquiry
+    </Button>
 
+  </div>
+  );
 export default EnquiryForm;
