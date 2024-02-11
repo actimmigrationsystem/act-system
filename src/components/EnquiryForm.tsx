@@ -1,7 +1,8 @@
 import { useState, Dispatch, SetStateAction } from "react";
 import StepWizard from "react-step-wizard";
-import { Typography, Button } from "@material-tailwind/react";
+import { Typography, Button, Select, MenuItem } from "@material-tailwind/react";
 import { FloatingLabel } from "flowbite-react";
+import DocumentUpload from "./DocumentUpload";
 
 const EnquiryForm = () => {
   const [name, setName] = useState("");
@@ -18,6 +19,10 @@ const EnquiryForm = () => {
   const [serviceType, setServiceType] = useState("");
   const [elaborate, setElaborate] = useState("");
   const [documentUpload, setDocumentUpload] = useState("");
+  const [immigrationStatus, setImmigrationStatus] = useState("");
+
+
+
 
 
 
@@ -49,17 +54,19 @@ const EnquiryForm = () => {
           nextStep={nextStep}
         />
         <Step3
+          immigrationStatus={immigrationStatus}
+          setImmigrationStatus={setImmigrationStatus}
           entryDate={entryDate}
           setEntryDate={setEntryDate}
           passportNumber={passportNumber}
           setPassportNumber={setPassportNumber}
           referenceNumber={referenceNumber}
           setReferenceNumber={setReferenceNumber}
-          serviceType={serviceType}
-          setServiceType={setServiceType}
           nextStep={nextStep}
         />
         <Step4
+          serviceType={serviceType}
+          setServiceType={setServiceType}
           elaborate={elaborate}
           setElaborate={setElaborate}
           documentUpload={documentUpload}
@@ -204,15 +211,29 @@ const Step2 = ({
     >
       Gender
     </Typography>
-    <FloatingLabel
-      variant="filled"
-      label="Gender"
-      type="text"
-      name="gender"
+    <Select
+      placeholder={"Select"}
       value={gender}
-      onChange={(event) => setGender(event.target.value)}
+      onChange={(value) => {
+        if (value) {
+          setGender(value);
+        }
+      }}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-    />
+    >
+      <MenuItem placeholder="" value="" disabled>
+        Select Gender
+      </MenuItem>
+      <MenuItem placeholder="service1" value="service1">
+        Male
+      </MenuItem>
+      <MenuItem placeholder="service1" value="service1">
+        Female
+      </MenuItem>
+      <MenuItem placeholder="service1" value="service1">
+        Other
+      </MenuItem>
+    </Select>
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -238,15 +259,32 @@ const Step2 = ({
     >
       Marital Status
     </Typography>
-    <FloatingLabel
-      variant="filled"
-      label="Marital Status"
-      type="text"
-      name="enquiry"
+    <Select
+      placeholder={"Select"}
       value={maritalStatus}
-      onChange={(event) => setMaritalStatus(event.target.value)}
+      onChange={(value) => {
+        if (value) {
+          setMaritalStatus(value);
+        }
+      }}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-    />
+    >
+      <MenuItem placeholder="" value="single">
+        Single
+      </MenuItem>
+      <MenuItem placeholder="service1" value="married">
+        Married
+      </MenuItem>
+      <MenuItem placeholder="service1" value="divorced">
+        Divorced
+      </MenuItem>
+      <MenuItem placeholder="service1" value="separated">
+        Seperated
+      </MenuItem>
+      <MenuItem placeholder="service1" value="widow">
+        Widow
+      </MenuItem>
+    </Select>
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -276,27 +314,61 @@ const Step2 = ({
 );
 
 const Step3 = ({
+  immigrationStatus,
+  setImmigrationStatus,
   entryDate,
   setEntryDate,
   passportNumber,
   setPassportNumber,
   referenceNumber,
   setReferenceNumber,
-  serviceType,
-  setServiceType,
   nextStep,
 }: {
+  immigrationStatus: string;
+  setImmigrationStatus: Dispatch<SetStateAction<string>>;
   entryDate: string;
   setEntryDate: Dispatch<SetStateAction<string>>;
   passportNumber: string;
   setPassportNumber: Dispatch<SetStateAction<string>>;
   referenceNumber: string;
   setReferenceNumber: Dispatch<SetStateAction<string>>;
-  serviceType: string;
-  setServiceType: Dispatch<SetStateAction<string>>;
   nextStep: () => void;
 }) => (
   <div>
+    <Typography
+      placeholder={"Typography"}
+      variant="small"
+      color="blue-gray"
+      className="mb-2 font-medium"
+    >
+      What is your current immigration status?
+    </Typography>
+    <Select
+      placeholder={"Select"}
+      value={immigrationStatus}
+      onChange={(value) => {
+        if (value) {
+          setImmigrationStatus(value);
+        }
+      }}
+      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+    >
+      <MenuItem placeholder="" value="" disabled>
+        Asylum Seeker
+      </MenuItem>
+      <MenuItem placeholder="service1" value="service1">
+        Recognized Refugee
+      </MenuItem>
+      <MenuItem placeholder="service2" value="service2">
+        Permanent Resident
+      </MenuItem>
+      <MenuItem placeholder="service3" value="service3">
+        Temporary Resident
+      </MenuItem>
+      <MenuItem placeholder="service3" value="service3">
+        SA Citizen
+      </MenuItem>
+    </Select>
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -341,30 +413,14 @@ const Step3 = ({
     </Typography>
     <FloatingLabel
       variant="filled"
-      label="Marital Status"
+      label="Refernce Number"
       type="text"
       name="enquiry"
       value={referenceNumber}
       onChange={(event) => setReferenceNumber(event.target.value)}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     />
-    <Typography
-      placeholder={"Typography"}
-      variant="small"
-      color="blue-gray"
-      className="mb-2 font-medium"
-    >
-      What service do you require?
-    </Typography>
-    <FloatingLabel
-      variant="filled"
-      label="Service Type"
-      type="text"
-      name="serviceType"
-      value={serviceType}
-      onChange={(event) => setServiceType(event.target.value)}
-      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-    />
+
     <Button
       style={{ backgroundColor: "#0e5a97" }}
       type="button"
@@ -377,11 +433,15 @@ const Step3 = ({
 );
 
 const Step4 = ({
+  serviceType,
+  setServiceType,
   elaborate,
   setElaborate,
   documentUpload,
   setDocumentUpload,
 }: {
+  serviceType: string;
+  setServiceType: Dispatch<SetStateAction<string>>;
   elaborate: string;
   setElaborate: Dispatch<SetStateAction<string>>;
   documentUpload: string;
@@ -394,6 +454,85 @@ const Step4 = ({
     className="mt-12 flex flex-col gap-4"
   >
     <div>
+      <Typography
+        placeholder={"Typography"}
+        variant="small"
+        color="blue-gray"
+        className="mb-2 font-medium"
+      >
+        What service do you require?
+      </Typography>
+      <Select
+        placeholder={"Select"}
+        value={serviceType}
+        onChange={(value) => {
+          if (value) {
+            setServiceType(value);
+          }
+        }}
+        className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+      >
+        <MenuItem placeholder="" value="" disabled>
+          Asylum seeker appeal/review
+        </MenuItem>
+        <MenuItem placeholder="service1" value="service1">
+          Asylum seeker visa extension
+        </MenuItem>
+        <MenuItem placeholder="service2" value="service2">
+          Critical skills visa application
+        </MenuItem>
+        <MenuItem placeholder="service3" value="service3">
+          Letter of good cause application (FORM 20)
+        </MenuItem>
+        <MenuItem placeholder="service3" value="service3">
+          Naturalisation application
+        </MenuItem>
+        <MenuItem placeholder="service3" value="service3">
+          Permanent residence appeal
+        </MenuItem>
+        <MenuItem placeholder="service3" value="service3">
+          Permanent residence application
+        </MenuItem>
+        <MenuItem placeholder="service3" value="service3">
+          Prohibition appeal
+        </MenuItem>
+        <MenuItem placeholder="service3" value="service3">
+          PRP Exemptions
+        </MenuItem>
+        <MenuItem placeholder="service3" value="service3">
+          PRP Waiver
+        </MenuItem>
+        <MenuItem placeholder="service3" value="service3">
+          Refugee permit extension
+        </MenuItem>
+        <MenuItem placeholder="service3" value="service3">
+          Standing Committee application
+        </MenuItem>
+        <MenuItem placeholder="service3" value="service3">
+          Standing Committee rejection (NB: PROVIDE REJECTION LETTER)
+        </MenuItem>
+        <MenuItem placeholder="service3" value="service3">
+          Study visa application
+        </MenuItem>
+        <MenuItem placeholder="service3" value="service3">
+          Study visa rejection
+        </MenuItem>
+        <MenuItem placeholder="service3" value="service3">
+          Temporary residence renewal
+        </MenuItem>
+        <MenuItem placeholder="service3" value="service3">
+          TRV Exemptions
+        </MenuItem>
+        <MenuItem placeholder="service3" value="service3">
+          TRV Waiver
+        </MenuItem>
+        <MenuItem placeholder="service3" value="service3">
+          ZEP Migration
+        </MenuItem>
+        <MenuItem placeholder="service3" value="service3">
+          ZEP Waiver
+        </MenuItem>
+      </Select>
       <Typography
         placeholder={"Typography"}
         variant="small"
@@ -430,6 +569,7 @@ const Step4 = ({
         onChange={(event) => setDocumentUpload(event.target.value)}
         className="!border-t-blue-gray-200 focus:!border-t-gray-900"
       />
+      <DocumentUpload />
       <Button
         placeholder={"Button"}
         size="lg"
