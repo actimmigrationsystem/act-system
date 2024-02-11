@@ -1,4 +1,4 @@
-import { useState, Dispatch, SetStateAction } from "react";
+import { useState, Dispatch, SetStateAction, ChangeEvent } from "react";
 import StepWizard from "react-step-wizard";
 import { Typography, Button, Select, MenuItem } from "@material-tailwind/react";
 import { RiMailSendLine } from "react-icons/ri";
@@ -125,6 +125,7 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           setPhonenumber={setPhonenumber}
           formValues={formValues}
           setFormValues={setFormValues}
+          onChange = {handleChange}
           handleChange={handleChange}
           nextStep={nextStep}
         />
@@ -138,8 +139,8 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           formValues={formValues}
           setFormValues={setFormValues}
           handleChange={handleChange}
-          nextStep={nextStep}
-        />
+          onChange={handleChange}
+          nextStep={nextStep}      />
         <Step3
           maritalStatus={maritalStatus}
           setMaritalStatus={setMaritalStatus}
@@ -191,7 +192,7 @@ const Step1 = ({
   setPhonenumber,
   formValues,
   setFormValues,
-  handleChange,
+  onChange,
   nextStep,
 }: {
   name: string;
@@ -202,6 +203,7 @@ const Step1 = ({
   setPhonenumber: Dispatch<SetStateAction<string>>;
   formValues: any;
   setFormValues: any;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   nextStep: () => void;
 }) => (
@@ -279,6 +281,7 @@ const Step2 = ({
   formValues,
   setFormValues,
   handleChange,
+  onChange,
   nextStep,
 }: {
   contactEmail: string;
@@ -289,8 +292,10 @@ const Step2 = ({
   setDOB: Dispatch<SetStateAction<string>>;
   formValues: any;
   setFormValues: any;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   nextStep: () => void;
+
 }) => (
   <div>
     <Typography
@@ -598,11 +603,6 @@ const Step5 = ({
   handleSubmit: (e: React.FormEvent) => void;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => (
-  <form
-    action="https://formsubmit.co/david@actimmigration.co.za"
-    method="POST"
-    className="mt-12 flex flex-col gap-4"
-  >
     <div>
 
       <Typography
@@ -731,7 +731,6 @@ const Step5 = ({
         Submit Enquiry
       </Button>
     </div>
-  </form>
 );
 const ThankYouMessage = () => (
   <div>
