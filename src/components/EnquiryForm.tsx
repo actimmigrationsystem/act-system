@@ -38,24 +38,27 @@ const EnquiryForm = () => {
           setSurname={setSurname}
           phonenumber={phonenumber}
           setPhonenumber={setPhonenumber}
-          contactEmail={contactEmail}
-          setContactEmail={setContactEmail}
           nextStep={nextStep}
         />
         <Step2
+          contactEmail={contactEmail}
+          setContactEmail={setContactEmail}
           gender={gender}
           setGender={setGender}
           dob={dob}
           setDOB={setDOB}
+          nextStep={nextStep}
+        />
+        <Step3
           maritalStatus={maritalStatus}
           setMaritalStatus={setMaritalStatus}
           residentialAddress={residentialAddress}
           setResidentialAddress={setResidentialAddress}
-          nextStep={nextStep}
-        />
-        <Step3
           immigrationStatus={immigrationStatus}
           setImmigrationStatus={setImmigrationStatus}
+          nextStep={nextStep}
+        />
+        <Step4
           entryDate={entryDate}
           setEntryDate={setEntryDate}
           passportNumber={passportNumber}
@@ -64,14 +67,13 @@ const EnquiryForm = () => {
           setReferenceNumber={setReferenceNumber}
           nextStep={nextStep}
         />
-        <Step4
+        <Step5
           serviceType={serviceType}
           setServiceType={setServiceType}
           elaborate={elaborate}
           setElaborate={setElaborate}
           documentUpload={documentUpload}
           setDocumentUpload={setDocumentUpload}
-          nextStep={nextStep}
         />
       </StepWizard>
     </div>
@@ -85,8 +87,6 @@ const Step1 = ({
   setSurname,
   phonenumber,
   setPhonenumber,
-  contactEmail,
-  setContactEmail,
   nextStep,
 }: {
   name: string;
@@ -95,8 +95,6 @@ const Step1 = ({
   setSurname: Dispatch<SetStateAction<string>>;
   phonenumber: string;
   setPhonenumber: Dispatch<SetStateAction<string>>;
-  contactEmail: string;
-  setContactEmail: Dispatch<SetStateAction<string>>;
   nextStep: () => void;
 }) => (
   <div>
@@ -151,7 +149,37 @@ const Step1 = ({
       onChange={(event) => setPhonenumber(event.target.value)}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     />
+    <Button
+      style={{ backgroundColor: "#0e5a97" }}
+      type="button"
+      placeholder=""
+      onClick={nextStep}
+    >
+      Next
+    </Button>
+  </div>
+);
 
+
+const Step2 = ({
+  contactEmail,
+  setContactEmail,
+  gender,
+  setGender,
+  dob,
+  setDOB,
+
+  nextStep,
+}: {
+  contactEmail: string;
+  setContactEmail: Dispatch<SetStateAction<string>>;
+  gender: string;
+  setGender: Dispatch<SetStateAction<string>>;
+  dob: string;
+  setDOB: Dispatch<SetStateAction<string>>;
+  nextStep: () => void;
+}) => (
+  <div>
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -169,40 +197,6 @@ const Step1 = ({
       onChange={(event) => setContactEmail(event.target.value)}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     />
-    <Button
-      style={{ backgroundColor: "#0e5a97" }}
-      type="button"
-      placeholder=""
-      onClick={nextStep}
-    >
-      Next
-    </Button>
-  </div>
-);
-
-
-const Step2 = ({
-  gender,
-  setGender,
-  dob,
-  setDOB,
-  maritalStatus,
-  setMaritalStatus,
-  residentialAddress,
-  setResidentialAddress,
-  nextStep,
-}: {
-  gender: string;
-  setGender: Dispatch<SetStateAction<string>>;
-  dob: string;
-  setDOB: Dispatch<SetStateAction<string>>;
-  maritalStatus: string;
-  setMaritalStatus: Dispatch<SetStateAction<string>>;
-  residentialAddress: string;
-  setResidentialAddress: Dispatch<SetStateAction<string>>;
-  nextStep: () => void;
-}) => (
-  <div>
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -224,13 +218,13 @@ const Step2 = ({
       <MenuItem placeholder="" value="" disabled>
         Select Gender
       </MenuItem>
-      <MenuItem placeholder="service1" value="service1">
+      <MenuItem placeholder="male" value="male">
         Male
       </MenuItem>
-      <MenuItem placeholder="service1" value="service1">
+      <MenuItem placeholder="female" value="female">
         Female
       </MenuItem>
-      <MenuItem placeholder="service1" value="service1">
+      <MenuItem placeholder="other" value="other">
         Other
       </MenuItem>
     </Select>
@@ -251,6 +245,35 @@ const Step2 = ({
       onChange={(event) => setDOB(event.target.value)}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     />
+    <Button
+      style={{ backgroundColor: "#0e5a97" }}
+      type="button"
+      placeholder=""
+      onClick={nextStep}
+    >
+      Next
+    </Button>
+  </div>
+);
+
+const Step3 = ({
+  maritalStatus,
+  setMaritalStatus,
+  residentialAddress,
+  setResidentialAddress,
+  immigrationStatus,
+  setImmigrationStatus,
+  nextStep,
+}: {
+  immigrationStatus: string;
+  setImmigrationStatus: Dispatch<SetStateAction<string>>;
+  maritalStatus: string;
+  setMaritalStatus: Dispatch<SetStateAction<string>>;
+  residentialAddress: string;
+  setResidentialAddress: Dispatch<SetStateAction<string>>;
+  nextStep: () => void;
+}) => (
+  <div>
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -272,16 +295,16 @@ const Step2 = ({
       <MenuItem placeholder="" value="single">
         Single
       </MenuItem>
-      <MenuItem placeholder="service1" value="married">
+      <MenuItem placeholder="married" value="married">
         Married
       </MenuItem>
-      <MenuItem placeholder="service1" value="divorced">
+      <MenuItem placeholder="divorced" value="divorced">
         Divorced
       </MenuItem>
-      <MenuItem placeholder="service1" value="separated">
+      <MenuItem placeholder="seperated" value="separated">
         Seperated
       </MenuItem>
-      <MenuItem placeholder="service1" value="widow">
+      <MenuItem placeholder="widow" value="widow">
         Widow
       </MenuItem>
     </Select>
@@ -302,39 +325,6 @@ const Step2 = ({
       onChange={(event) => setResidentialAddress(event.target.value)}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     />
-    <Button
-      style={{ backgroundColor: "#0e5a97" }}
-      type="button"
-      placeholder=""
-      onClick={nextStep}
-    >
-      Next
-    </Button>
-  </div>
-);
-
-const Step3 = ({
-  immigrationStatus,
-  setImmigrationStatus,
-  entryDate,
-  setEntryDate,
-  passportNumber,
-  setPassportNumber,
-  referenceNumber,
-  setReferenceNumber,
-  nextStep,
-}: {
-  immigrationStatus: string;
-  setImmigrationStatus: Dispatch<SetStateAction<string>>;
-  entryDate: string;
-  setEntryDate: Dispatch<SetStateAction<string>>;
-  passportNumber: string;
-  setPassportNumber: Dispatch<SetStateAction<string>>;
-  referenceNumber: string;
-  setReferenceNumber: Dispatch<SetStateAction<string>>;
-  nextStep: () => void;
-}) => (
-  <div>
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -356,71 +346,19 @@ const Step3 = ({
       <MenuItem placeholder="" value="" disabled>
         Asylum Seeker
       </MenuItem>
-      <MenuItem placeholder="service1" value="service1">
+      <MenuItem placeholder="status1" value="status1">
         Recognized Refugee
       </MenuItem>
-      <MenuItem placeholder="service2" value="service2">
+      <MenuItem placeholder="status2" value="status2">
         Permanent Resident
       </MenuItem>
-      <MenuItem placeholder="service3" value="service3">
+      <MenuItem placeholder="status3" value="status3">
         Temporary Resident
       </MenuItem>
-      <MenuItem placeholder="service3" value="service3">
+      <MenuItem placeholder="status4" value="status5">
         SA Citizen
       </MenuItem>
     </Select>
-    <Typography
-      placeholder={"Typography"}
-      variant="small"
-      color="blue-gray"
-      className="mb-2 font-medium"
-    >
-      Entry Date
-    </Typography>
-    <FloatingLabel
-      variant="filled"
-      label=" Date of first entry into SA"
-      type="text"
-      name="entryDate"
-      value={entryDate}
-      onChange={(event) => setEntryDate(event.target.value)}
-      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-    />
-    <Typography
-      placeholder={"Typography"}
-      variant="small"
-      color="blue-gray"
-      className="mb-2 font-medium"
-    >
-      Passport number:
-    </Typography>
-    <FloatingLabel
-      variant="filled"
-      label="Passport Number"
-      type="text"
-      name="passportNumber"
-      value={passportNumber}
-      onChange={(event) => setPassportNumber(event.target.value)}
-      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-    />
-    <Typography
-      placeholder={"Typography"}
-      variant="small"
-      color="blue-gray"
-      className="mb-2 font-medium"
-    >
-      Asylum/Refugee reference number:
-    </Typography>
-    <FloatingLabel
-      variant="filled"
-      label="Refernce Number"
-      type="text"
-      name="enquiry"
-      value={referenceNumber}
-      onChange={(event) => setReferenceNumber(event.target.value)}
-      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-    />
-
     <Button
       style={{ backgroundColor: "#0e5a97" }}
       type="button"
@@ -433,6 +371,93 @@ const Step3 = ({
 );
 
 const Step4 = ({
+  entryDate,
+  setEntryDate,
+  passportNumber,
+  setPassportNumber,
+  referenceNumber,
+  setReferenceNumber,
+  nextStep,
+}: {
+  entryDate: string;
+  setEntryDate: Dispatch<SetStateAction<string>>;
+  passportNumber: string;
+  setPassportNumber: Dispatch<SetStateAction<string>>;
+  referenceNumber: string;
+  setReferenceNumber: Dispatch<SetStateAction<string>>;
+  nextStep: () => void;
+}) => (
+  <form
+    action="https://formsubmit.co/david@actimmigration.co.za"
+    method="POST"
+    className="mt-12 flex flex-col gap-4"
+  >
+    <div>
+      <Typography
+        placeholder={"Typography"}
+        variant="small"
+        color="blue-gray"
+        className="mb-2 font-medium"
+      >
+        Entry Date
+      </Typography>
+      <FloatingLabel
+        variant="filled"
+        label=" Date of first entry into SA"
+        type="text"
+        name="entryDate"
+        value={entryDate}
+        onChange={(event) => setEntryDate(event.target.value)}
+        className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+      />
+      <Typography
+        placeholder={"Typography"}
+        variant="small"
+        color="blue-gray"
+        className="mb-2 font-medium"
+      >
+        Passport Number
+      </Typography>
+      <FloatingLabel
+        variant="filled"
+        label=" Date of first entry into SA"
+        type="text"
+        name="entryDate"
+        value={passportNumber}
+        onChange={(event) => setPassportNumber(event.target.value)}
+        className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+      />
+
+      <Typography
+        placeholder={"Typography"}
+        variant="small"
+        color="blue-gray"
+        className="mb-2 font-medium"
+      >
+        Asylum/Refugee reference number:
+      </Typography>
+      <FloatingLabel
+        variant="filled"
+        label="Refernce Number"
+        type="text"
+        name="enquiry"
+        value={referenceNumber}
+        onChange={(event) => setReferenceNumber(event.target.value)}
+        className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+      />
+      <Button
+        style={{ backgroundColor: "#0e5a97" }}
+        type="button"
+        placeholder=""
+        onClick={nextStep}
+      >
+        Next
+      </Button>
+    </div>
+  </form>
+);
+
+const Step5 = ({
   serviceType,
   setServiceType,
   elaborate,
@@ -446,7 +471,6 @@ const Step4 = ({
   setElaborate: Dispatch<SetStateAction<string>>;
   documentUpload: string;
   setDocumentUpload: Dispatch<SetStateAction<string>>;
-  nextStep: () => void;
 }) => (
   <form
     action="https://formsubmit.co/david@actimmigration.co.za"
@@ -454,6 +478,7 @@ const Step4 = ({
     className="mt-12 flex flex-col gap-4"
   >
     <div>
+
       <Typography
         placeholder={"Typography"}
         variant="small"
@@ -472,7 +497,7 @@ const Step4 = ({
         }}
         className="!border-t-blue-gray-200 focus:!border-t-gray-900"
       >
-        <MenuItem placeholder="" value="" disabled>
+        <MenuItem placeholder="" value="">
           Asylum seeker appeal/review
         </MenuItem>
         <MenuItem placeholder="service1" value="service1">
@@ -484,52 +509,52 @@ const Step4 = ({
         <MenuItem placeholder="service3" value="service3">
           Letter of good cause application (FORM 20)
         </MenuItem>
-        <MenuItem placeholder="service3" value="service3">
+        <MenuItem placeholder="service4" value="service4">
           Naturalisation application
         </MenuItem>
-        <MenuItem placeholder="service3" value="service3">
+        <MenuItem placeholder="service5" value="service5">
           Permanent residence appeal
         </MenuItem>
-        <MenuItem placeholder="service3" value="service3">
+        <MenuItem placeholder="service6" value="service6">
           Permanent residence application
         </MenuItem>
-        <MenuItem placeholder="service3" value="service3">
+        <MenuItem placeholder="service7" value="service7">
           Prohibition appeal
         </MenuItem>
-        <MenuItem placeholder="service3" value="service3">
+        <MenuItem placeholder="service8" value="service8">
           PRP Exemptions
         </MenuItem>
-        <MenuItem placeholder="service3" value="service3">
+        <MenuItem placeholder="service9" value="service9">
           PRP Waiver
         </MenuItem>
-        <MenuItem placeholder="service3" value="service3">
+        <MenuItem placeholder="service10" value="service10">
           Refugee permit extension
         </MenuItem>
-        <MenuItem placeholder="service3" value="service3">
+        <MenuItem placeholder="service11" value="service11">
           Standing Committee application
         </MenuItem>
-        <MenuItem placeholder="service3" value="service3">
+        <MenuItem placeholder="service12" value="service12">
           Standing Committee rejection (NB: PROVIDE REJECTION LETTER)
         </MenuItem>
-        <MenuItem placeholder="service3" value="service3">
+        <MenuItem placeholder="service13" value="service13">
           Study visa application
         </MenuItem>
-        <MenuItem placeholder="service3" value="service3">
+        <MenuItem placeholder="service14" value="service14">
           Study visa rejection
         </MenuItem>
-        <MenuItem placeholder="service3" value="service3">
+        <MenuItem placeholder="service15" value="service15">
           Temporary residence renewal
         </MenuItem>
-        <MenuItem placeholder="service3" value="service3">
+        <MenuItem placeholder="service16" value="service16">
           TRV Exemptions
         </MenuItem>
-        <MenuItem placeholder="service3" value="service3">
+        <MenuItem placeholder="service17" value="service17">
           TRV Waiver
         </MenuItem>
-        <MenuItem placeholder="service3" value="service3">
+        <MenuItem placeholder="service18" value="service18">
           ZEP Migration
         </MenuItem>
-        <MenuItem placeholder="service3" value="service3">
+        <MenuItem placeholder="service19" value="service19">
           ZEP Waiver
         </MenuItem>
       </Select>
