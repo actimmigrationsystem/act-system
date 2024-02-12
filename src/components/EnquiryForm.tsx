@@ -512,7 +512,7 @@ const Step4 = ({
 );
 
 const Step5 = ({
-    formValues,
+  formValues,
   handleChange,
   handleSubmit,
   handleGenderChange,
@@ -523,129 +523,109 @@ const Step5 = ({
   handleGenderChange: (value: string | undefined) => void;
   nextStep: () => void;
 }) => (
-    <div>
-
-      <Typography
-        placeholder={"Typography"}
-        variant="small"
-        color="blue-gray"
-        className="mb-2 font-medium"
-      >
-        What service do you require?
-      </Typography>
-<Select
-  placeholder={"Select"}
-  value={formValues.dob}
-  onChange={handleGenderChange}
-  className="!border-t-blue-gray-200 focus:!border-t-gray-900"
->
-        <MenuItem placeholder="" value="">
-          Asylum seeker appeal/review
-        </MenuItem>
-        <MenuItem placeholder="service1" value="service1">
-          Asylum seeker visa extension
-        </MenuItem>
-        <MenuItem placeholder="service2" value="service2">
-          Critical skills visa application
-        </MenuItem>
-        <MenuItem placeholder="service3" value="service3">
-          Letter of good cause application (FORM 20)
-        </MenuItem>
-        <MenuItem placeholder="service4" value="service4">
-          Naturalisation application
-        </MenuItem>
-        <MenuItem placeholder="service5" value="service5">
-          Permanent residence appeal
-        </MenuItem>
-        <MenuItem placeholder="service6" value="service6">
-          Permanent residence application
-        </MenuItem>
-        <MenuItem placeholder="service7" value="service7">
-          Prohibition appeal
-        </MenuItem>
-        <MenuItem placeholder="service8" value="service8">
-          PRP Exemptions
-        </MenuItem>
-        <MenuItem placeholder="service9" value="service9">
-          PRP Waiver
-        </MenuItem>
-        <MenuItem placeholder="service10" value="service10">
-          Refugee permit extension
-        </MenuItem>
-        <MenuItem placeholder="service11" value="service11">
-          Standing Committee application
-        </MenuItem>
-        <MenuItem placeholder="service12" value="service12">
-          Standing Committee rejection (NB: PROVIDE REJECTION LETTER)
-        </MenuItem>
-        <MenuItem placeholder="service13" value="service13">
-          Study visa application
-        </MenuItem>
-        <MenuItem placeholder="service14" value="service14">
-          Study visa rejection
-        </MenuItem>
-        <MenuItem placeholder="service15" value="service15">
-          Temporary residence renewal
-        </MenuItem>
-        <MenuItem placeholder="service16" value="service16">
-          TRV Exemptions
-        </MenuItem>
-        <MenuItem placeholder="service17" value="service17">
-          TRV Waiver
-        </MenuItem>
-        <MenuItem placeholder="service18" value="service18">
-          ZEP Migration
-        </MenuItem>
-        <MenuItem placeholder="service19" value="service19">
-          ZEP Waiver
-        </MenuItem>
-      </Select>
-      <Typography
-        placeholder={"Typography"}
-        variant="small"
-        color="blue-gray"
-        className="mb-2 font-medium"
-      >
-        Please elaborate on the service(s) that you need:
-      </Typography>
-      <FloatingLabel
-        variant="filled"
-        label="Elaborate"
-        type="text"
-        name="elaborate"
-        value={formValues.elaborate}
+  <div>
+    <Typography
+      placeholder={"Typography"}
+      variant="small"
+      color="blue-gray"
+      className="mb-2 font-medium"
+    >
+      What service do you require?
+    </Typography>
+    <Select
+      placeholder={"Select"}
+      value={formValues.dob}
+      onChange={handleGenderChange}
+      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+    >
+      <MenuItem placeholder="" value="">
+        Asylum seeker appeal/review
+      </MenuItem>
+      <MenuItem placeholder="service1" value="service1">
+        Asylum seeker visa extension
+      </MenuItem>
+      <MenuItem placeholder="service2" value="service2">
+        Critical skills visa application
+      </MenuItem>
+      <MenuItem placeholder="service3" value="service3">
+        Letter of good cause application (FORM 20)
+      </MenuItem>
+      <MenuItem placeholder="service4" value="service4">
+        Naturalisation application
+      </MenuItem>
+      <MenuItem placeholder="service5" value="service5">
+        Permanent residence appeal
+      </MenuItem>
+      <MenuItem placeholder="service6" value="service6">
+        Permanent residence application
+      </MenuItem>
+      <MenuItem placeholder="service7" value="service7">
+        Prohibition appeal
+      </MenuItem>
+      <MenuItem placeholder="service8" value="service8">
+        PRP Exemptions
+      </MenuItem>
+      <MenuItem placeholder="service9" value="service9">
+        PRP Waiver
+      </MenuItem>
+      <MenuItem placeholder="service10" value="service10">
+        Refugee permit extension
+      </MenuItem>
+      <MenuItem placeholder="service11" value="service11">
+        Standing Committee application
+      </MenuItem>
+      <MenuItem placeholder="service12" value="service12">
+        Standing Committee rejection (NB: PROVIDE REJECTION LETTER)
+      </MenuItem>
+      <MenuItem placeholder="service13" value="service13">
+        Study visa application
+      </MenuItem>
+      <MenuItem placeholder="service14" value="service14">
+        Study visa rejection
+      </MenuItem>
+      <MenuItem placeholder="service15" value="service15">
+        Temporary residence renewal
+      </MenuItem>
+      <MenuItem placeholder="service16" value="service16">
+        TRV Exemptions
+      </MenuItem>
+      <MenuItem placeholder="service17" value="service17">
+        TRV Waiver
+      </MenuItem>
+      <MenuItem placeholder="service18" value="service18">
+        ZEP Migration
+      </MenuItem>
+      <MenuItem placeholder="service19" value="service19">
+        ZEP Waiver
+      </MenuItem>
+    </Select>
+    <Typography
+      placeholder={"Typography"}
+      variant="small"
+      color="blue-gray"
+      className="mb-2 font-medium"
+    >
+      Please elaborate on the service(s) that you need:
+    </Typography>
+    <FloatingLabel
+      variant="filled"
+      label="Elaborate"
+      type="text"
+      name="elaborate"
+      value={formValues.elaborate}
       onChange={handleChange}
-        className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-      />
-      <Typography
-        placeholder={"Typography"}
-        variant="small"
-        color="blue-gray"
-        className="mb-2 font-medium"
-      >
-        Please upload your documents for further assistance: (E.g. Passport,
-        Asylum/Refugee status, Visa(s), Rejection letter(s), Marriage
-        certificate, etc.)
-      </Typography>
-      <FloatingLabel
-        variant="filled"
-        label="Elaborate"
-        type="text"
-        name="elaborate"
-        value={formValues.documentUpload}
-      onChange={handleChange}
-        className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-      />
-      <DocumentUpload />
-      <Button
-        placeholder={"Button"}
-        size="lg"
-        type="submit"
-        style={{ backgroundColor: "#0e5a97" }}
-        onClick={handleSubmit}
-      >
-        Submit Enquiry
-      </Button>
-    </div>
+      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+    />
+    <DocumentUpload />
+    <Button
+      placeholder={"Button"}
+      size="lg"
+      type="submit"
+      style={{ backgroundColor: "#0e5a97" }}
+      onClick={handleSubmit}
+    >
+      Submit Enquiry
+    </Button>
+  </div>
 );
 export default EnquiryForm;
