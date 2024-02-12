@@ -439,7 +439,7 @@ const Step3 = ({
 );
 
 const Step4 = ({
-    formValues,
+  formValues,
   handleChange,
   nextStep,
 }: {
@@ -447,68 +447,68 @@ const Step4 = ({
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   nextStep: () => void;
 }) => (
-    <div>
-      <Typography
-        placeholder={"Typography"}
-        variant="small"
-        color="blue-gray"
-        className="mb-2 font-medium"
-      >
-        Entry Date
-      </Typography>
-      <FloatingLabel
-        variant="filled"
-        label=" Date of first entry into SA"
-        type="text"
-        name="entryDate"
-        value={formValues.entryDate}
-        onChange={handleChange}
-        className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-      />
-      <Typography
-        placeholder={"Typography"}
-        variant="small"
-        color="blue-gray"
-        className="mb-2 font-medium"
-      >
-        Passport Number
-      </Typography>
-      <FloatingLabel
-        variant="filled"
-        label=" Date of first entry into SA"
-        type="text"
-        name="entryDate"
-        value={formValues.passportNumber}
+  <div>
+    <Typography
+      placeholder={"Typography"}
+      variant="small"
+      color="blue-gray"
+      className="mb-2 font-medium"
+    >
+      Entry Date
+    </Typography>
+    <FloatingLabel
+      variant="filled"
+      label=" Date of first entry into SA"
+      type="text"
+      name="entryDate"
+      value={formValues.entryDate}
       onChange={handleChange}
-        className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-      />
+      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+    />
+    <Typography
+      placeholder={"Typography"}
+      variant="small"
+      color="blue-gray"
+      className="mb-2 font-medium"
+    >
+      Passport Number
+    </Typography>
+    <FloatingLabel
+      variant="filled"
+      label="Passport Number"
+      type="text"
+      name="passportNumber"
+      value={formValues.passportNumber}
+      onChange={handleChange}
+      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+    />
 
-      <Typography
-        placeholder={"Typography"}
-        variant="small"
-        color="blue-gray"
-        className="mb-2 font-medium"
-      >
-        Asylum/Refugee reference number:
-      </Typography>
-      <FloatingLabel
-        variant="filled"
-        label="Refernce Number"
-        type="text"
-        name="enquiry"
-        value={formValues.referenceNumber}
+    <Typography
+      placeholder={"Typography"}
+      variant="small"
+      color="blue-gray"
+      className="mb-2 font-medium"
+    >
+      Asylum/Refugee reference number:
+    </Typography>
+    <FloatingLabel
+      variant="filled"
+      label="Refernce Number"
+      type="text"
+      name="enquiry"
+      value={formValues.referenceNumber}
       onChange={handleChange}
-        className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-      />
-      <Button
-        style={{ backgroundColor: "#0e5a97" }}
-        type="button"
-        placeholder=""
-        onClick={nextStep}
-      >
-        Next
-      </Button>
-    </div>
+      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+    />
+    <Button
+      style={{ backgroundColor: "#0e5a97" }}
+      type="button"
+      placeholder=""
+      onClick={nextStep}
+    >
+      Next
+    </Button>
+  </div>
 );
 
 const Step5 = ({
