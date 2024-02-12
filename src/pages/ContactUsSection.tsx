@@ -5,7 +5,8 @@ import ContentContainer from "../components/ContentContainer";
 import SectionContainer from "../components/SectionContainer";
 
 const ContactUsSection = () => (
-  <SectionContainer marginTop="auto" marginBottom="-20px" height="80vh">
+  <>
+  <SectionContainer margintop="auto" marginbottom="-20px" height="80vh">
     <SectionTitle title="Contact Us" className="text-center text-white" />
     <div className="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
       <ContentContainer>
@@ -20,6 +21,8 @@ const ContactUsSection = () => (
       </ContentContainer>
     </div>
   </SectionContainer>
+  </>
+
 );
 
 export default ContactUsSection;

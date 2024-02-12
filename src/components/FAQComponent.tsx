@@ -57,16 +57,16 @@ const FAQComponent = ({ faqs }: FAQComponentProps) => {
           >
             {faq.question}
           </AccordionHeader>
-          <p className="mb-2 text-gray-500 dark:text-gray-400">
-            <AccordionBody>
-              <Typography
-                placeholder="Accordion"
-                className="mb-2 text-xl mt-6 font-bold tracking-tight text-gray-500 dark:text-white text-center"
-              >
+
+          <AccordionBody>
+            <Typography
+              placeholder="Accordion"
+              className="mb-2 text-xl mt-6 font-bold tracking-tight text-gray-500 dark:text-white text-center"
+            >
+                {" "}
                 {faq.answer}
-              </Typography>
-            </AccordionBody>
-          </p>
+            </Typography>
+          </AccordionBody>
         </Accordion>
       ))}
     </div>
