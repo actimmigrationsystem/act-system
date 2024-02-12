@@ -387,7 +387,7 @@ const Step5 = ({
   appointmentDate: string;
   setAppointmentDate: Dispatch<SetStateAction<string>>;
 }) => (
-  <div>
+  <>
     <div>
       <Typography
         placeholder={"Typography"}
@@ -444,7 +444,7 @@ const Step5 = ({
         setAppointmentDate={setAppointmentDate}
       />
     </div>
-    <Button
+      <Button
       placeholder={"Button"}
       size="lg"
       type="submit"
@@ -452,7 +452,7 @@ const Step5 = ({
     >
       Book Appointment
     </Button>
-  </div>
+   </>
 );
 
 export default AppointmentForm;
