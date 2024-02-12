@@ -67,7 +67,7 @@ const ThankYouMessage = () => (
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         const form = document.createElement('form');
-        form.action = 'https://formsubmit.co/rileymanda0@gmail.com';
+        form.action = "https://formsubmit.co/enquiries@actimmigration.co.za";
         form.method = 'POST';
         form.target = '_blank';
 
