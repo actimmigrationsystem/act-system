@@ -3,14 +3,14 @@ import styled from "styled-components";
 
 interface StyledSectionContainerProps {
   height: string;
-  marginTop: string;
-  marginBottom: string;
+  margintop: string;
+  marginbottom: string;
 }
 
 const StyledSectionContainer = styled.div<StyledSectionContainerProps>`
   height: ${(props) => props.height};
-  margin-top: ${(props) => props.marginTop};
-  margin-bottom: ${(props) => props.marginBottom};
+  margin-top: ${(props) => props.margintop};
+  margin-bottom: ${(props) => props.marginbottom};
 `;
 
 interface SectionContainerProps extends StyledSectionContainerProps {
@@ -20,13 +20,13 @@ interface SectionContainerProps extends StyledSectionContainerProps {
 const SectionContainer: React.FC<SectionContainerProps> = ({
   children,
   height,
-  marginTop = "0",
-  marginBottom,
+  margintop = "0",
+  marginbottom,
 }) => (
   <StyledSectionContainer
     height={height}
-    marginTop={marginTop}
-    marginBottom={marginBottom}
+    margintop={margintop}
+    marginbottom={marginbottom}
   >
     {children}
   </StyledSectionContainer>

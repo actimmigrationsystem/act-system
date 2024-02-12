@@ -1,178 +1,170 @@
-import { useState,} from "react";
+import { useState } from "react";
 import StepWizard from "react-step-wizard";
-import { Typography, Button, Select, MenuItem } from "@material-tailwind/react";
+import { Typography, Button } from "@material-tailwind/react";
 import { RiMailSendLine } from "react-icons/ri";
-import { FloatingLabel } from "flowbite-react";
+import { FloatingLabel, Select } from "flowbite-react";
 import DocumentUpload from "./DocumentUpload";
 
 const EnquiryForm = () => {
-  // const [name, setName] = useState("");
-  // const [surname, setSurname] = useState("");
-  // const [phonenumber, setPhonenumber] = useState("");
-  // const [contactEmail, setContactEmail] = useState("");
-  // const [gender, setGender] = useState("");
-  // const [dob, setDOB] = useState("");
-  // const [maritalStatus, setMaritalStatus] = useState("");
-  // const [residentialAddress, setResidentialAddress] = useState("");
-  // const [entryDate, setEntryDate] = useState("");
-  // const [passportNumber, setPassportNumber] = useState("");
-  // const [referenceNumber, setReferenceNumber] = useState("");
-  // const [serviceType, setServiceType] = useState("");
-  // const [elaborate, setElaborate] = useState("");
-  // const [documentUpload, setDocumentUpload] = useState("");
-  // const [immigrationStatus, setImmigrationStatus] = useState("");
+  const [formValues, setFormValues] = useState({
+    name: "",
+    _subject: "Enquiry",
+    email: "",
+    gender: "",
+    dob: "",
+    maritalStatus: "",
+    residentialAddress: "",
+    entryDate: "",
+    passportNumber: "",
+    referenceNumber: "",
+    serviceType: "",
+    elaborate: "",
+    documentUpload: "",
+    immigrationStatus: "",
+  });
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
-
-
- const [formValues, setFormValues] = useState({
-     name: '',
-    _subject: 'Enquiry',
-    email: '',
-    message: '',
-    contactEmail: '',
-    gender: '',
-    dob: '',
-    maritalStatus: '',
-    residentialAddress: '',
-    entryDate: '',
-    passportNumber: '',
-    referenceNumber: '',
-    serviceType: '',
-    elaborate: '',
-    documentUpload: '',
-    immigrationStatus: ''
-    });
-    const [formSubmitted, setFormSubmitted] = useState(false);
-
-const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
-};
-    const handleRefreshClick = () => {
-        // refresh the page
-        setFormSubmitted(false);
-        window.location.reload();
-    };
-const ThankYouMessage = () => (
+  };
+  const handleRefreshClick = () => {
+    // refresh the page
+    setFormSubmitted(false);
+    window.location.reload();
+  };
+  const ThankYouMessage = () => (
     <div>
-        <div style={{ backgroundColor: '#EB6F6F', color: 'white', padding: '10px', marginBottom: '10px' }}>
-            Thank you for your message! We will respond shortly.
-        </div>
-        <br />
-        <Button placeholder="Refresh Page" className="sendagain" onClick={handleRefreshClick}>
-            <RiMailSendLine className="w-4 h-4 me-2" style={{ marginRight: '12px' }} />
-            Send Another Enquiry
-        </Button>
+      <div
+        style={{
+          backgroundColor: "#EB6F6F",
+          color: "white",
+          padding: "10px",
+          marginBottom: "10px",
+        }}
+      >
+        Thank you for your message! We will respond shortly.
+      </div>
+      <br />
+      <Button
+        placeholder="Refresh Page"
+        className="sendagain"
+        onClick={handleRefreshClick}
+      >
+        <RiMailSendLine
+          className="w-4 h-4 me-2"
+          style={{ marginRight: "12px" }}
+        />
+        Send Another Enquiry
+      </Button>
     </div>
-);
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        const form = document.createElement('form');
-        form.action = "https://formsubmit.co/enquiries@actimmigration.co.za";
-        form.method = 'POST';
-        form.target = '_blank';
+  );
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Form Values:", formValues);
+    const form = document.createElement("form");
+    form.action = "https://formsubmit.co/enquiries@actimmigration.co.za";
+    form.method = "POST";
+    form.target = "_blank";
 
-        // form data
-        Object.entries(formValues).forEach(([name, value]) => {
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = name;
-            input.value = value;
-            form.appendChild(input);
-        });
+    // form data
+    Object.entries(formValues).forEach(([name, value]) => {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = name;
+      input.value = value;
+      form.appendChild(input);
+    });
 
-        document.body.appendChild(form);
-        form.submit();
+    document.body.appendChild(form);
+    form.submit();
 
-        // Clear the form
-        setFormValues({
-          name: '',
-    _subject: 'Enquiry',
-    email: '',
-    message: '',
-    contactEmail: '',
-    gender: '',
-    dob: '',
-    maritalStatus: '',
-    residentialAddress: '',
-    entryDate: '',
-    passportNumber: '',
-    referenceNumber: '',
-    serviceType: '',
-    elaborate: '',
-    documentUpload: '',
-    immigrationStatus: ''
+    // Clear the form
+    setFormValues({
+      name: "",
+      _subject: "Enquiry",
+      email: "",
+      gender: "",
+      dob: "",
+      maritalStatus: "",
+      residentialAddress: "",
+      entryDate: "",
+      passportNumber: "",
+      referenceNumber: "",
+      serviceType: "",
+      elaborate: "",
+      documentUpload: "",
+      immigrationStatus: "",
+    });
+    setFormSubmitted(true);
+  };
 
-        });
-        setFormSubmitted(true);
-    };
+  const handleGenderChange = (value: string | undefined) => {
+    if (value) {
+      setFormValues((prevState) => ({ ...prevState, gender: value }));
+    }
+  };
 
+  const handleMaritalStatusChange = (value: string | undefined) => {
+    if (value) {
+      setFormValues((prevState) => ({ ...prevState, maritalStatus: value }));
+    }
+  };
 
-// const handleSelectChange = (value: string | undefined) => {
-//   if (value) {
-//     setFormValues(prevState => ({ ...prevState, gender: value }));
-//   }
-// };
+  const handleImmigrationStatusChange = (value: string | undefined) => {
+    if (value) {
+      setFormValues((prevState) => ({
+        ...prevState,
+        immigrationStatus: value,
+      }));
+    }
+  };
 
-const handleGenderChange = (value: string | undefined) => {
-  if (value) {
-    setFormValues(prevState => ({ ...prevState, gender: value }));
-  }
-};
-// const handleResidentialChange = (value: string | undefined) => {
-//   if (value) {
-//     setFormValues(prevState => ({ ...prevState, gender: value }));
-//   }
-// };
-
-const handleMaritalStatusChange = (value: string | undefined) => {
-  if (value) {
-    setFormValues(prevState => ({ ...prevState, gender: value }));
-  }
-};
-
-const handleImmigrationStatusChange = (value: string | undefined) => {
-  if (value) {
-    setFormValues(prevState => ({ ...prevState, gender: value }));
-  }
-};
-
+  const handleServiceChange = (value: string | undefined) => {
+    if (value) {
+      setFormValues((prevState) => ({ ...prevState, serviceType: value }));
+    }
+  };
 
   const nextStep = () => {};
 
   return (
     <div>
-      <StepWizard>
-        <Step1
-          formValues={formValues}
-          handleChange={handleChange}
-          nextStep={nextStep}
-        />
-        <Step2
-          formValues={formValues}
-          handleChange={handleChange}
-          nextStep={nextStep}
-        />
-        <Step3
-          formValues={formValues}
-          handleChange={handleChange}
-          handleImmigrationStatusChange={handleImmigrationStatusChange}
-          handleMaritalStatusChange={handleMaritalStatusChange}
-          nextStep={nextStep}
-        />
-        <Step4
-          formValues={formValues}
-          handleChange={handleChange}
-          nextStep={nextStep}
-        />
-        <Step5
-          formValues={formValues}
-          handleChange={handleChange}
-          handleGenderChange={handleGenderChange}
-          handleSubmit={handleSubmit}
-          nextStep={nextStep}
-        />
-      </StepWizard>
-      {formSubmitted && <ThankYouMessage />}
+      {formSubmitted ? (
+        <ThankYouMessage />
+      ) : (
+        <StepWizard>
+          <Step1
+            formValues={formValues}
+            handleChange={handleChange}
+            nextStep={nextStep}
+          />
+          <Step2
+            formValues={formValues}
+            handleChange={handleChange}
+            handleGenderChange={handleGenderChange}
+            nextStep={nextStep}
+          />
+          <Step3
+            formValues={formValues}
+            handleChange={handleChange}
+            handleImmigrationStatusChange={handleImmigrationStatusChange}
+            handleMaritalStatusChange={handleMaritalStatusChange}
+            nextStep={nextStep}
+          />
+          <Step4
+            formValues={formValues}
+            handleChange={handleChange}
+            nextStep={nextStep}
+          />
+          <Step5
+            formValues={formValues}
+            handleChange={handleChange}
+            handleServiceChange={handleServiceChange}
+            handleSubmit={handleSubmit}
+            nextStep={nextStep}
+          />
+        </StepWizard>
+      )}
     </div>
   );
 };
@@ -252,10 +244,12 @@ const Step1 = ({
 const Step2 = ({
   formValues,
   handleChange,
+  handleGenderChange,
   nextStep,
 }: {
   formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleGenderChange: (value: string | undefined) => void;
   nextStep: () => void;
 }) => (
   <div>
@@ -272,7 +266,7 @@ const Step2 = ({
       label="Your Email Address"
       type="email"
       name="email"
-     value={formValues.email}
+      value={formValues.email}
       onChange={handleChange}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     />
@@ -282,26 +276,22 @@ const Step2 = ({
       color="blue-gray"
       className="mb-2 font-medium"
     >
-      Gender
+      What is your gender
     </Typography>
-    <Select
-      placeholder={"Select"}
-  value={formValues.gender}
-      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-    >
-      <MenuItem placeholder="" value="" disabled>
-        Select Gender
-      </MenuItem>
-      <MenuItem placeholder="male" name="male" value="male">
-        Male
-      </MenuItem>
-      <MenuItem placeholder="female" name="female" value="female">
-        Female
-      </MenuItem>
-      <MenuItem placeholder="other" name="other" value="other">
-        Other
-      </MenuItem>
-    </Select>
+    <div className="max-w-full">
+      <Select
+        id="gender"
+        onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
+          handleGenderChange(event.target.value)
+        }
+        value={formValues.gender}
+      >
+        <option>Female</option>
+        <option>Male</option>
+        <option>Other</option>
+      </Select>
+    </div>
+
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -352,28 +342,23 @@ const Step3 = ({
     >
       Marital Status
     </Typography>
-    <Select
-      placeholder={"Select"}
-      value={formValues.dob}
-      onChange={handleMaritalStatusChange}
-      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-    >
-      <MenuItem placeholder="" name="single" value="single">
-        Single
-      </MenuItem>
-      <MenuItem placeholder="married" name="single" value="married">
-        Married
-      </MenuItem>
-      <MenuItem placeholder="divorced" name="divorced" value="divorced">
-        Divorced
-      </MenuItem>
-      <MenuItem placeholder="seperated" name="seperated" value="separated">
-        Seperated
-      </MenuItem>
-      <MenuItem placeholder="widow" name="widow" value="widow">
-        Widow
-      </MenuItem>
-    </Select>
+    <div className="max-w-full">
+      <Select
+        id="maritalStatus"
+        name="maritalStatus"
+        onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
+          handleMaritalStatusChange(event.target.value)
+        }
+        value={formValues.maritalStatus}
+      >
+        <option>Single</option>
+        <option>Married</option>
+        <option>Divorced</option>
+        <option>Widow</option>
+        <option>Separated</option>
+      </Select>
+    </div>
+
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -399,33 +384,23 @@ const Step3 = ({
     >
       What is your current immigration status?
     </Typography>
-    <Select
-      placeholder={"Select"}
-      value={formValues.immigrationStatus}
-      onChange={handleImmigrationStatusChange}
-      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-    >
-      <MenuItem
-        placeholder=""
-        value="Asylum Seeker"
-        name="Asylum Seeker"
-        disabled
+
+    <div className="max-w-full">
+      <Select
+        id="immigrationStatus"
+        name="immigrationStatus"
+        onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
+          handleImmigrationStatusChange(event.target.value)
+        }
+        value={formValues.immigrationStatus}
       >
-        Asylum Seeker
-      </MenuItem>
-      <MenuItem placeholder="status1" value="status1" name="Recognized Refugee">
-        Recognized Refugee
-      </MenuItem>
-      <MenuItem placeholder="status2" value="status2" name="Permanent Resident">
-        Permanent Resident
-      </MenuItem>
-      <MenuItem placeholder="status3" value="status3" name="Temporary Resident">
-        Temporary Resident
-      </MenuItem>
-      <MenuItem placeholder="status4" value="status5" name="SA Citizen">
-        SA Citizen
-      </MenuItem>
-    </Select>
+        <option>Recognized Refugee</option>
+        <option>Asylum Seeker</option>
+        <option> Permanent Resident</option>
+        <option> Temporary Resident</option>
+        <option> SA Citizen</option>
+      </Select>
+    </div>
     <Button
       style={{ backgroundColor: "#0e5a97" }}
       type="button"
@@ -453,11 +428,11 @@ const Step4 = ({
       color="blue-gray"
       className="mb-2 font-medium"
     >
-      Entry Date
+      Date of first entry into SA
     </Typography>
     <FloatingLabel
       variant="filled"
-      label=" Date of first entry into SA"
+      label=" Date of Entry"
       type="text"
       name="entryDate"
       value={formValues.entryDate}
@@ -494,7 +469,7 @@ const Step4 = ({
       variant="filled"
       label="Refernce Number"
       type="text"
-      name="enquiry"
+      name="referenceNumber"
       value={formValues.referenceNumber}
       onChange={handleChange}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
@@ -514,12 +489,12 @@ const Step5 = ({
   formValues,
   handleChange,
   handleSubmit,
-  handleGenderChange,
+  handleServiceChange,
 }: {
   formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent) => void;
-  handleGenderChange: (value: string | undefined) => void;
+  handleServiceChange: (value: string | undefined) => void;
   nextStep: () => void;
 }) => (
   <div>
@@ -531,73 +506,38 @@ const Step5 = ({
     >
       What service do you require?
     </Typography>
-    <Select
-      placeholder={"Select"}
-      value={formValues.dob}
-      onChange={handleGenderChange}
-      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-    >
-      <MenuItem placeholder="" value="">
-        Asylum seeker appeal/review
-      </MenuItem>
-      <MenuItem placeholder="service1" value="service1">
-        Asylum seeker visa extension
-      </MenuItem>
-      <MenuItem placeholder="service2" value="service2">
-        Critical skills visa application
-      </MenuItem>
-      <MenuItem placeholder="service3" value="service3">
-        Letter of good cause application (FORM 20)
-      </MenuItem>
-      <MenuItem placeholder="service4" value="service4">
-        Naturalisation application
-      </MenuItem>
-      <MenuItem placeholder="service5" value="service5">
-        Permanent residence appeal
-      </MenuItem>
-      <MenuItem placeholder="service6" value="service6">
-        Permanent residence application
-      </MenuItem>
-      <MenuItem placeholder="service7" value="service7">
-        Prohibition appeal
-      </MenuItem>
-      <MenuItem placeholder="service8" value="service8">
-        PRP Exemptions
-      </MenuItem>
-      <MenuItem placeholder="service9" value="service9">
-        PRP Waiver
-      </MenuItem>
-      <MenuItem placeholder="service10" value="service10">
-        Refugee permit extension
-      </MenuItem>
-      <MenuItem placeholder="service11" value="service11">
-        Standing Committee application
-      </MenuItem>
-      <MenuItem placeholder="service12" value="service12">
-        Standing Committee rejection (NB: PROVIDE REJECTION LETTER)
-      </MenuItem>
-      <MenuItem placeholder="service13" value="service13">
-        Study visa application
-      </MenuItem>
-      <MenuItem placeholder="service14" value="service14">
-        Study visa rejection
-      </MenuItem>
-      <MenuItem placeholder="service15" value="service15">
-        Temporary residence renewal
-      </MenuItem>
-      <MenuItem placeholder="service16" value="service16">
-        TRV Exemptions
-      </MenuItem>
-      <MenuItem placeholder="service17" value="service17">
-        TRV Waiver
-      </MenuItem>
-      <MenuItem placeholder="service18" value="service18">
-        ZEP Migration
-      </MenuItem>
-      <MenuItem placeholder="service19" value="service19">
-        ZEP Waiver
-      </MenuItem>
-    </Select>
+    <div className="max-w-full">
+      <Select
+        id="serviceType"
+        name="serviceType"
+        onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
+          handleServiceChange(event.target.value)
+        }
+        value={formValues.serviceType}
+      >
+        <option> Asylum seeker appeal/review</option>
+        <option> Asylum seeker visa extension</option>
+        <option> Asylum seeker visa extension</option>
+        <option> Critical skills visa application</option>
+        <option> Letter of good cause application (FORM 20)</option>
+        <option> Naturalisation application</option>
+        <option>Permanent residence appeal</option>
+        <option> Permanent residence application</option>
+        <option> Prohibition appeal</option>
+        <option> PRP Exemptions</option>
+        <option>PRP Waiver</option>
+        <option>Refugee permit extension</option>
+        <option>Standing Committee application</option>
+        <option>Study visa application</option>
+        <option>Study visa rejection</option>
+        <option> Temporary residence renewal</option>
+        <option>TRV Exemptions</option>
+        <option>TRV Waiver</option>
+        <option>ZEP Migration</option>
+        <option> ZEP Waiver</option>
+      </Select>
+    </div>
+
     <Typography
       placeholder={"Typography"}
       variant="small"

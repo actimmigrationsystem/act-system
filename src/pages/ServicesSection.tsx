@@ -34,8 +34,8 @@ const serviceData = [
   },
 ];
 const ServicesSection = () => (
-  <div>
-    <SectionContainer height="auto" marginTop="-20px" marginBottom="0px">
+  <>
+    <SectionContainer height="auto" margintop="-20px" marginbottom="0px">
       <SectionTitle title="Services" />
       <ContentContainer>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
@@ -50,7 +50,7 @@ const ServicesSection = () => (
         </div>
       </ContentContainer>
     </SectionContainer>
-  </div>
+  </>
 );
 
 export default ServicesSection;

@@ -3,11 +3,15 @@ import styled from "styled-components";
 import { Card, Typography, Button } from "@material-tailwind/react";
 import { Carousel } from "react-responsive-carousel";
 import { Document, Page, pdfjs } from "react-pdf";
+import "react-pdf/dist/Page/AnnotationLayer.css";
+import "react-pdf/dist/Page/TextLayer.css";
 import { PDFDocumentProxy } from "pdfjs-dist/types/src/display/api";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
-
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  "pdfjs-dist/build/pdf.worker.min.js",
+  import.meta.url
+).toString();
 const carouselData = [
   [
     {
@@ -159,73 +163,75 @@ const DocumentsCarousel = () => {
    };
 
   return (
-    <CarouselContainer>
-      <Carousel>
-        {carouselData.flat().map((item, index) => (
-          <SectionContainer key={index}>
-            <Container>
-              <StyledCard key={index}>
-                <DocumentContainer ref={containerRef}>
-                  <DocumentWrapper>
-                    <Card placeholder="Card">
-                      <Document
-                        file={item.pdfSrc}
-                        onLoadSuccess={onDocumentLoadSuccess(index)}
-                      >
-                        <Page
-                          pageNumber={pageNumber[index]}
-                          width={
-                            containerRef.current
-                              ? containerRef.current.clientWidth
-                              : 0
-                          }
-                        />
-                      </Document>
-                    </Card>
-                    <TextOverlay>
-                      <div>
-                        <Typography
-                          variant="h4"
-                          placeholder="typography"
-                          className="mb-2 mt-2 font-bold tracking-tight text-white dark:text-white text-center"
+    <>
+      <CarouselContainer>
+        <Carousel>
+          {carouselData.flat().map((item, index) => (
+            <SectionContainer key={index}>
+              <Container>
+                <StyledCard key={index}>
+                  <DocumentContainer ref={containerRef}>
+                    <DocumentWrapper>
+                      <Card placeholder="Card">
+                        <Document
+                          file={item.pdfSrc}
+                          onLoadSuccess={onDocumentLoadSuccess(index)}
                         >
-                          {item.text}
-                        </Typography>
-                      </div>
-                    </TextOverlay>
-                  </DocumentWrapper>
-                </DocumentContainer>
-                <div>
-                  <Button
-                    type="button"
-                    placeholder={"button"}
-                    disabled={pageNumber[index] <= 1}
-                    onClick={() => previousPage(index)}
-                  >
-                    Previous page
-                  </Button>
-                  <Button
-                    type="button"
-                    placeholder={"button"}
-                    disabled={pageNumber[index] >= numPages[index]}
-                    onClick={() => nextPage(index)}
-                  >
-                    Next page
-                  </Button>
-                  <Button
-                    type="button"
-                    placeholder={"button"}
-                    onClick={() => downloadPdf(item.pdfSrc)}
-                  >
-                    Download
-                  </Button>
-                </div>
-              </StyledCard>
-            </Container>
-          </SectionContainer>
-        ))}
-      </Carousel>
-    </CarouselContainer>
+                          <Page
+                            pageNumber={pageNumber[index]}
+                            width={
+                              containerRef.current
+                                ? containerRef.current.clientWidth
+                                : 0
+                            }
+                          />
+                        </Document>
+                      </Card>
+                      <TextOverlay>
+                        <div>
+                          <Typography
+                            variant="h4"
+                            placeholder="typography"
+                            className="mb-2 mt-2 font-bold tracking-tight text-white dark:text-white text-center"
+                          >
+                            {item.text}
+                          </Typography>
+                        </div>
+                      </TextOverlay>
+                    </DocumentWrapper>
+                  </DocumentContainer>
+                  <div>
+                    <Button
+                      type="button"
+                      placeholder={"button"}
+                      disabled={pageNumber[index] <= 1}
+                      onClick={() => previousPage(index)}
+                    >
+                      Previous page
+                    </Button>
+                    <Button
+                      type="button"
+                      placeholder={"button"}
+                      disabled={pageNumber[index] >= numPages[index]}
+                      onClick={() => nextPage(index)}
+                    >
+                      Next page
+                    </Button>
+                    <Button
+                      type="button"
+                      placeholder={"button"}
+                      onClick={() => downloadPdf(item.pdfSrc)}
+                    >
+                      Download
+                    </Button>
+                  </div>
+                </StyledCard>
+              </Container>
+            </SectionContainer>
+          ))}
+        </Carousel>
+      </CarouselContainer>
+    </>
   );
 };
 
