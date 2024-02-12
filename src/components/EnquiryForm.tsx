@@ -1,4 +1,4 @@
-import { useState, Dispatch, SetStateAction, ChangeEvent } from "react";
+import { useState,} from "react";
 import StepWizard from "react-step-wizard";
 import { Typography, Button, Select, MenuItem } from "@material-tailwind/react";
 import { RiMailSendLine } from "react-icons/ri";
@@ -6,26 +6,26 @@ import { FloatingLabel } from "flowbite-react";
 import DocumentUpload from "./DocumentUpload";
 
 const EnquiryForm = () => {
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [phonenumber, setPhonenumber] = useState("");
-  const [contactEmail, setContactEmail] = useState("");
-  const [gender, setGender] = useState("");
-  const [dob, setDOB] = useState("");
-  const [maritalStatus, setMaritalStatus] = useState("");
-  const [residentialAddress, setResidentialAddress] = useState("");
-  const [entryDate, setEntryDate] = useState("");
-  const [passportNumber, setPassportNumber] = useState("");
-  const [referenceNumber, setReferenceNumber] = useState("");
-  const [serviceType, setServiceType] = useState("");
-  const [elaborate, setElaborate] = useState("");
-  const [documentUpload, setDocumentUpload] = useState("");
-  const [immigrationStatus, setImmigrationStatus] = useState("");
+  // const [name, setName] = useState("");
+  // const [surname, setSurname] = useState("");
+  // const [phonenumber, setPhonenumber] = useState("");
+  // const [contactEmail, setContactEmail] = useState("");
+  // const [gender, setGender] = useState("");
+  // const [dob, setDOB] = useState("");
+  // const [maritalStatus, setMaritalStatus] = useState("");
+  // const [residentialAddress, setResidentialAddress] = useState("");
+  // const [entryDate, setEntryDate] = useState("");
+  // const [passportNumber, setPassportNumber] = useState("");
+  // const [referenceNumber, setReferenceNumber] = useState("");
+  // const [serviceType, setServiceType] = useState("");
+  // const [elaborate, setElaborate] = useState("");
+  // const [documentUpload, setDocumentUpload] = useState("");
+  // const [immigrationStatus, setImmigrationStatus] = useState("");
 
 
 
  const [formValues, setFormValues] = useState({
-         name: '',
+     name: '',
     _subject: 'Enquiry',
     email: '',
     message: '',
@@ -52,19 +52,18 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormSubmitted(false);
         window.location.reload();
     };
-    const ThankYouMessage = () => (
-        <div>
-        <div style={{ backgroundColor: '#ffa000', color: 'white', padding: '10px', marginBottom: '10px' }}>
-        Thank you for your message! I will respond shortly.
+const ThankYouMessage = () => (
+    <div>
+        <div style={{ backgroundColor: '#EB6F6F', color: 'white', padding: '10px', marginBottom: '10px' }}>
+            Thank you for your message! We will respond shortly.
         </div>
-            <br />
-            <Button placeholder="Refresh Page" className="sendagain" onClick={handleRefreshClick}>
-                <RiMailSendLine style={{ marginRight: '8px' }} />
-                Send Another Enquiry
-            </Button>
-        </div>
-
-    );
+        <br />
+        <Button placeholder="Refresh Page" className="sendagain" onClick={handleRefreshClick}>
+            <RiMailSendLine className="w-4 h-4 me-2" style={{ marginRight: '12px' }} />
+            Send Another Enquiry
+        </Button>
+    </div>
+);
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         const form = document.createElement('form');
@@ -108,7 +107,34 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     };
 
 
+// const handleSelectChange = (value: string | undefined) => {
+//   if (value) {
+//     setFormValues(prevState => ({ ...prevState, gender: value }));
+//   }
+// };
 
+const handleGenderChange = (value: string | undefined) => {
+  if (value) {
+    setFormValues(prevState => ({ ...prevState, gender: value }));
+  }
+};
+// const handleResidentialChange = (value: string | undefined) => {
+//   if (value) {
+//     setFormValues(prevState => ({ ...prevState, gender: value }));
+//   }
+// };
+
+const handleMaritalStatusChange = (value: string | undefined) => {
+  if (value) {
+    setFormValues(prevState => ({ ...prevState, gender: value }));
+  }
+};
+
+const handleImmigrationStatusChange = (value: string | undefined) => {
+  if (value) {
+    setFormValues(prevState => ({ ...prevState, gender: value }));
+  }
+};
 
 
   const nextStep = () => {};
@@ -117,65 +143,33 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     <div>
       <StepWizard>
         <Step1
-          name={name}
-          setName={setName}
-          surname={surname}
-          setSurname={setSurname}
-          phonenumber={phonenumber}
-          setPhonenumber={setPhonenumber}
           formValues={formValues}
-          setFormValues={setFormValues}
-          onChange = {handleChange}
           handleChange={handleChange}
           nextStep={nextStep}
         />
         <Step2
-          contactEmail={contactEmail}
-          setContactEmail={setContactEmail}
-          gender={gender}
-          setGender={setGender}
-          dob={dob}
-          setDOB={setDOB}
           formValues={formValues}
-          setFormValues={setFormValues}
-          handleChange={handleChange}
-          onChange={handleChange}
-          nextStep={nextStep}      />
-        <Step3
-          maritalStatus={maritalStatus}
-          setMaritalStatus={setMaritalStatus}
-          residentialAddress={residentialAddress}
-          setResidentialAddress={setResidentialAddress}
-          immigrationStatus={immigrationStatus}
-          setImmigrationStatus={setImmigrationStatus}
-          formValues={formValues}
-          setFormValues={setFormValues}
           handleChange={handleChange}
           nextStep={nextStep}
         />
-        <Step4
-          entryDate={entryDate}
-          setEntryDate={setEntryDate}
-          passportNumber={passportNumber}
-          setPassportNumber={setPassportNumber}
-          referenceNumber={referenceNumber}
-          setReferenceNumber={setReferenceNumber}
+        <Step3
           formValues={formValues}
-          setFormValues={setFormValues}
+          handleChange={handleChange}
+          handleImmigrationStatusChange={handleImmigrationStatusChange}
+          handleMaritalStatusChange={handleMaritalStatusChange}
+          nextStep={nextStep}
+        />
+        <Step4
+          formValues={formValues}
           handleChange={handleChange}
           nextStep={nextStep}
         />
         <Step5
-          serviceType={serviceType}
-          setServiceType={setServiceType}
-          elaborate={elaborate}
-          setElaborate={setElaborate}
-          documentUpload={documentUpload}
-          setDocumentUpload={setDocumentUpload}
           formValues={formValues}
-          setFormValues={setFormValues}
           handleChange={handleChange}
+          handleGenderChange={handleGenderChange}
           handleSubmit={handleSubmit}
+          nextStep={nextStep}
         />
       </StepWizard>
       {formSubmitted && <ThankYouMessage />}
@@ -184,26 +178,11 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 };
 
 const Step1 = ({
-  name,
-  setName,
-  surname,
-  setSurname,
-  phonenumber,
-  setPhonenumber,
   formValues,
-  setFormValues,
-  onChange,
+  handleChange,
   nextStep,
 }: {
-  name: string;
-  setName: Dispatch<SetStateAction<string>>;
-  surname: string;
-  setSurname: Dispatch<SetStateAction<string>>;
-  phonenumber: string;
-  setPhonenumber: Dispatch<SetStateAction<string>>;
   formValues: any;
-  setFormValues: any;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   nextStep: () => void;
 }) => (
@@ -221,8 +200,8 @@ const Step1 = ({
       label="Name"
       type="text"
       name="name"
-      value={name}
-      onChange={(event) => setName(event.target.value)}
+      value={formValues.name}
+      onChange={handleChange}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     />
     <Typography
@@ -237,9 +216,9 @@ const Step1 = ({
       variant="filled"
       label="Surname"
       type="text"
-      name="name"
-      value={surname}
-      onChange={(event) => setSurname(event.target.value)}
+      name="surname"
+      value={formValues.surname}
+      onChange={handleChange}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     />
     <Typography
@@ -255,8 +234,8 @@ const Step1 = ({
       label="Contact Number"
       type="tel"
       name="phonenumber"
-      value={phonenumber}
-      onChange={(event) => setPhonenumber(event.target.value)}
+      value={formValues.phonenumber}
+      onChange={handleChange}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     />
     <Button
@@ -272,30 +251,13 @@ const Step1 = ({
 
 
 const Step2 = ({
-  contactEmail,
-  setContactEmail,
-  gender,
-  setGender,
-  dob,
-  setDOB,
   formValues,
-  setFormValues,
   handleChange,
-  onChange,
   nextStep,
 }: {
-  contactEmail: string;
-  setContactEmail: Dispatch<SetStateAction<string>>;
-  gender: string;
-  setGender: Dispatch<SetStateAction<string>>;
-  dob: string;
-  setDOB: Dispatch<SetStateAction<string>>;
   formValues: any;
-  setFormValues: any;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   nextStep: () => void;
-
 }) => (
   <div>
     <Typography
@@ -311,8 +273,8 @@ const Step2 = ({
       label="Your Email Address"
       type="email"
       name="email"
-      value={contactEmail}
-      onChange={(event) => setContactEmail(event.target.value)}
+     value={formValues.email}
+      onChange={handleChange}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     />
     <Typography
@@ -325,24 +287,19 @@ const Step2 = ({
     </Typography>
     <Select
       placeholder={"Select"}
-      value={gender}
-      onChange={(value) => {
-        if (value) {
-          setGender(value);
-        }
-      }}
+  value={formValues.gender}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     >
       <MenuItem placeholder="" value="" disabled>
         Select Gender
       </MenuItem>
-      <MenuItem placeholder="male" value="male">
+      <MenuItem placeholder="male" name="male" value="male">
         Male
       </MenuItem>
-      <MenuItem placeholder="female" value="female">
+      <MenuItem placeholder="female" name="female" value="female">
         Female
       </MenuItem>
-      <MenuItem placeholder="other" value="other">
+      <MenuItem placeholder="other" name="other" value="other">
         Other
       </MenuItem>
     </Select>
@@ -358,9 +315,9 @@ const Step2 = ({
       variant="filled"
       label="Date Of Birth"
       type="text"
-      name="enquiry"
-      value={dob}
-      onChange={(event) => setDOB(event.target.value)}
+      name="dob"
+      value={formValues.dob}
+      onChange={handleChange}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     />
     <Button
@@ -375,26 +332,16 @@ const Step2 = ({
 );
 
 const Step3 = ({
-  maritalStatus,
-  setMaritalStatus,
-  residentialAddress,
-  setResidentialAddress,
-  immigrationStatus,
-  setImmigrationStatus,
   formValues,
-  setFormValues,
   handleChange,
+  handleMaritalStatusChange,
+  handleImmigrationStatusChange,
   nextStep,
 }: {
-  immigrationStatus: string;
-  setImmigrationStatus: Dispatch<SetStateAction<string>>;
-  maritalStatus: string;
-  setMaritalStatus: Dispatch<SetStateAction<string>>;
-  residentialAddress: string;
-  setResidentialAddress: Dispatch<SetStateAction<string>>;
   formValues: any;
-  setFormValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleMaritalStatusChange: (value: string | undefined) => void;
+  handleImmigrationStatusChange: (value: string | undefined) => void;
   nextStep: () => void;
 }) => (
   <div>
@@ -408,27 +355,23 @@ const Step3 = ({
     </Typography>
     <Select
       placeholder={"Select"}
-      value={maritalStatus}
-      onChange={(value) => {
-        if (value) {
-          setMaritalStatus(value);
-        }
-      }}
+      value={formValues.dob}
+      onChange={handleMaritalStatusChange}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     >
-      <MenuItem placeholder="" value="single">
+      <MenuItem placeholder="" name="single" value="single">
         Single
       </MenuItem>
-      <MenuItem placeholder="married" value="married">
+      <MenuItem placeholder="married" name="single" value="married">
         Married
       </MenuItem>
-      <MenuItem placeholder="divorced" value="divorced">
+      <MenuItem placeholder="divorced" name="divorced" value="divorced">
         Divorced
       </MenuItem>
-      <MenuItem placeholder="seperated" value="separated">
+      <MenuItem placeholder="seperated" name="seperated" value="separated">
         Seperated
       </MenuItem>
-      <MenuItem placeholder="widow" value="widow">
+      <MenuItem placeholder="widow" name="widow" value="widow">
         Widow
       </MenuItem>
     </Select>
@@ -445,8 +388,8 @@ const Step3 = ({
       label="Residential Address"
       type="text"
       name="residentialAddress"
-      value={residentialAddress}
-      onChange={(event) => setResidentialAddress(event.target.value)}
+      value={formValues.residentialAddress}
+      onChange={handleChange}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     />
     <Typography
@@ -459,27 +402,28 @@ const Step3 = ({
     </Typography>
     <Select
       placeholder={"Select"}
-      value={immigrationStatus}
-      onChange={(value) => {
-        if (value) {
-          setImmigrationStatus(value);
-        }
-      }}
+      value={formValues.immigrationStatus}
+      onChange={handleImmigrationStatusChange}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     >
-      <MenuItem placeholder="" value="" disabled>
+      <MenuItem
+        placeholder=""
+        value="Asylum Seeker"
+        name="Asylum Seeker"
+        disabled
+      >
         Asylum Seeker
       </MenuItem>
-      <MenuItem placeholder="status1" value="status1">
+      <MenuItem placeholder="status1" value="status1" name="Recognized Refugee">
         Recognized Refugee
       </MenuItem>
-      <MenuItem placeholder="status2" value="status2">
+      <MenuItem placeholder="status2" value="status2" name="Permanent Resident">
         Permanent Resident
       </MenuItem>
-      <MenuItem placeholder="status3" value="status3">
+      <MenuItem placeholder="status3" value="status3" name="Temporary Resident">
         Temporary Resident
       </MenuItem>
-      <MenuItem placeholder="status4" value="status5">
+      <MenuItem placeholder="status4" value="status5" name="SA Citizen">
         SA Citizen
       </MenuItem>
     </Select>
@@ -495,25 +439,11 @@ const Step3 = ({
 );
 
 const Step4 = ({
-  entryDate,
-  setEntryDate,
-  passportNumber,
-  setPassportNumber,
-  referenceNumber,
-  setReferenceNumber,
-  formValues,
-  setFormValues,
+    formValues,
   handleChange,
   nextStep,
 }: {
-  entryDate: string;
-  setEntryDate: Dispatch<SetStateAction<string>>;
-  passportNumber: string;
-  setPassportNumber: Dispatch<SetStateAction<string>>;
-  referenceNumber: string;
-  setReferenceNumber: Dispatch<SetStateAction<string>>;
- formValues: any;
-  setFormValues: any;
+  formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   nextStep: () => void;
 }) => (
@@ -531,8 +461,8 @@ const Step4 = ({
         label=" Date of first entry into SA"
         type="text"
         name="entryDate"
-        value={entryDate}
-        onChange={(event) => setEntryDate(event.target.value)}
+        value={formValues.entryDate}
+        onChange={handleChange}
         className="!border-t-blue-gray-200 focus:!border-t-gray-900"
       />
       <Typography
@@ -548,8 +478,8 @@ const Step4 = ({
         label=" Date of first entry into SA"
         type="text"
         name="entryDate"
-        value={passportNumber}
-        onChange={(event) => setPassportNumber(event.target.value)}
+        value={formValues.passportNumber}
+      onChange={handleChange}
         className="!border-t-blue-gray-200 focus:!border-t-gray-900"
       />
 
@@ -566,8 +496,8 @@ const Step4 = ({
         label="Refernce Number"
         type="text"
         name="enquiry"
-        value={referenceNumber}
-        onChange={(event) => setReferenceNumber(event.target.value)}
+        value={formValues.referenceNumber}
+      onChange={handleChange}
         className="!border-t-blue-gray-200 focus:!border-t-gray-900"
       />
       <Button
@@ -582,26 +512,16 @@ const Step4 = ({
 );
 
 const Step5 = ({
-  serviceType,
-  setServiceType,
-  elaborate,
-  setElaborate,
-  documentUpload,
-  setDocumentUpload,
-  formValues,
-  setFormValues,
+    formValues,
+  handleChange,
   handleSubmit,
+  handleGenderChange,
 }: {
-  serviceType: string;
-  setServiceType: Dispatch<SetStateAction<string>>;
-  elaborate: string;
-  setElaborate: Dispatch<SetStateAction<string>>;
-  documentUpload: string;
-  setDocumentUpload: Dispatch<SetStateAction<string>>;
-   formValues: any;
-  setFormValues: any;
-  handleSubmit: (e: React.FormEvent) => void;
+  formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSubmit: (e: React.FormEvent) => void;
+  handleGenderChange: (value: string | undefined) => void;
+  nextStep: () => void;
 }) => (
     <div>
 
@@ -613,16 +533,12 @@ const Step5 = ({
       >
         What service do you require?
       </Typography>
-      <Select
-        placeholder={"Select"}
-        value={serviceType}
-        onChange={(value) => {
-          if (value) {
-            setServiceType(value);
-          }
-        }}
-        className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-      >
+<Select
+  placeholder={"Select"}
+  value={formValues.dob}
+  onChange={handleGenderChange}
+  className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+>
         <MenuItem placeholder="" value="">
           Asylum seeker appeal/review
         </MenuItem>
@@ -697,8 +613,8 @@ const Step5 = ({
         label="Elaborate"
         type="text"
         name="elaborate"
-        value={elaborate}
-        onChange={(event) => setElaborate(event.target.value)}
+        value={formValues.elaborate}
+      onChange={handleChange}
         className="!border-t-blue-gray-200 focus:!border-t-gray-900"
       />
       <Typography
@@ -716,8 +632,8 @@ const Step5 = ({
         label="Elaborate"
         type="text"
         name="elaborate"
-        value={documentUpload}
-        onChange={(event) => setDocumentUpload(event.target.value)}
+        value={formValues.documentUpload}
+      onChange={handleChange}
         className="!border-t-blue-gray-200 focus:!border-t-gray-900"
       />
       <DocumentUpload />
@@ -732,24 +648,4 @@ const Step5 = ({
       </Button>
     </div>
 );
-const ThankYouMessage = () => (
-  <div>
-    <div
-      style={{
-        backgroundColor: "#B05656",
-        color: "white",
-        padding: "10px",
-        marginBottom: "10px",
-      }}
-    >
-      Thank you for your message! We will respond shortly.
-    </div>
-    <br />
-    <Button placeholder="Refresh Page" className="sendagain">
-      <RiMailSendLine style={{ marginRight: "8px" }} />
-      Send Another Enquiry
-    </Button>
-
-  </div>
-  );
 export default EnquiryForm;
