@@ -506,7 +506,6 @@ const Step5 = ({
     >
       What service do you require?
     </Typography>
-
     <div className="max-w-full">
       <Select
         id="serviceType"
@@ -521,33 +520,25 @@ const Step5 = ({
         <option> Asylum seeker visa extension</option>
         <option> Critical skills visa application</option>
         <option> Letter of good cause application (FORM 20)</option>
-
         <option> Naturalisation application</option>
-
         <option>Permanent residence appeal</option>
-
         <option> Permanent residence application</option>
-
         <option> Prohibition appeal</option>
-
         <option> PRP Exemptions</option>
         <option>PRP Waiver</option>
         <option>Refugee permit extension</option>
         <option>Standing Committee application</option>
         <option>Study visa application</option>
-
         <option>Study visa rejection</option>
         <option> Temporary residence renewal</option>
-
         <option>TRV Exemptions</option>
-
         <option>TRV Waiver</option>
-
         <option>ZEP Migration</option>
-
         <option> ZEP Waiver</option>
       </Select>
     </div>
+
+   
     <Typography
       placeholder={"Typography"}
       variant="small"

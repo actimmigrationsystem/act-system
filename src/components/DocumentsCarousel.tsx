@@ -3,11 +3,15 @@ import styled from "styled-components";
 import { Card, Typography, Button } from "@material-tailwind/react";
 import { Carousel } from "react-responsive-carousel";
 import { Document, Page, pdfjs } from "react-pdf";
+import "react-pdf/dist/Page/AnnotationLayer.css";
+import "react-pdf/dist/Page/TextLayer.css";
 import { PDFDocumentProxy } from "pdfjs-dist/types/src/display/api";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
-
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  "pdfjs-dist/build/pdf.worker.min.js",
+  import.meta.url
+).toString();
 const carouselData = [
   [
     {
