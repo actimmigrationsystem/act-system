@@ -106,23 +106,11 @@ const ThankYouMessage = () => (
         setFormSubmitted(true);
     };
 
-
-// const handleSelectChange = (value: string | undefined) => {
-//   if (value) {
-//     setFormValues(prevState => ({ ...prevState, gender: value }));
-//   }
-// };
-
 const handleGenderChange = (value: string | undefined) => {
   if (value) {
     setFormValues(prevState => ({ ...prevState, gender: value }));
   }
 };
-// const handleResidentialChange = (value: string | undefined) => {
-//   if (value) {
-//     setFormValues(prevState => ({ ...prevState, gender: value }));
-//   }
-// };
 
 const handleMaritalStatusChange = (value: string | undefined) => {
   if (value) {
