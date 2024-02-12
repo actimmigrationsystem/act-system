@@ -60,6 +60,7 @@ const EnquiryForm = () => {
   );
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("Form Values:", formValues);
     const form = document.createElement("form");
     form.action = "https://formsubmit.co/rileymanda0@gmail.com";
     form.method = "POST";

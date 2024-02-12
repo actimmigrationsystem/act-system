@@ -159,73 +159,75 @@ const DocumentsCarousel = () => {
    };
 
   return (
-    <CarouselContainer>
-      <Carousel>
-        {carouselData.flat().map((item, index) => (
-          <SectionContainer key={index}>
-            <Container>
-              <StyledCard key={index}>
-                <DocumentContainer ref={containerRef}>
-                  <DocumentWrapper>
-                    <Card placeholder="Card">
-                      <Document
-                        file={item.pdfSrc}
-                        onLoadSuccess={onDocumentLoadSuccess(index)}
-                      >
-                        <Page
-                          pageNumber={pageNumber[index]}
-                          width={
-                            containerRef.current
-                              ? containerRef.current.clientWidth
-                              : 0
-                          }
-                        />
-                      </Document>
-                    </Card>
-                    <TextOverlay>
-                      <div>
-                        <Typography
-                          variant="h4"
-                          placeholder="typography"
-                          className="mb-2 mt-2 font-bold tracking-tight text-white dark:text-white text-center"
+    <>
+      <CarouselContainer>
+        <Carousel>
+          {carouselData.flat().map((item, index) => (
+            <SectionContainer key={index}>
+              <Container>
+                <StyledCard key={index}>
+                  <DocumentContainer ref={containerRef}>
+                    <DocumentWrapper>
+                      <Card placeholder="Card">
+                        <Document
+                          file={item.pdfSrc}
+                          onLoadSuccess={onDocumentLoadSuccess(index)}
                         >
-                          {item.text}
-                        </Typography>
-                      </div>
-                    </TextOverlay>
-                  </DocumentWrapper>
-                </DocumentContainer>
-                <div>
-                  <Button
-                    type="button"
-                    placeholder={"button"}
-                    disabled={pageNumber[index] <= 1}
-                    onClick={() => previousPage(index)}
-                  >
-                    Previous page
-                  </Button>
-                  <Button
-                    type="button"
-                    placeholder={"button"}
-                    disabled={pageNumber[index] >= numPages[index]}
-                    onClick={() => nextPage(index)}
-                  >
-                    Next page
-                  </Button>
-                  <Button
-                    type="button"
-                    placeholder={"button"}
-                    onClick={() => downloadPdf(item.pdfSrc)}
-                  >
-                    Download
-                  </Button>
-                </div>
-              </StyledCard>
-            </Container>
-          </SectionContainer>
-        ))}
-      </Carousel>
-    </CarouselContainer>
+                          <Page
+                            pageNumber={pageNumber[index]}
+                            width={
+                              containerRef.current
+                                ? containerRef.current.clientWidth
+                                : 0
+                            }
+                          />
+                        </Document>
+                      </Card>
+                      <TextOverlay>
+                        <div>
+                          <Typography
+                            variant="h4"
+                            placeholder="typography"
+                            className="mb-2 mt-2 font-bold tracking-tight text-white dark:text-white text-center"
+                          >
+                            {item.text}
+                          </Typography>
+                        </div>
+                      </TextOverlay>
+                    </DocumentWrapper>
+                  </DocumentContainer>
+                  <div>
+                    <Button
+                      type="button"
+                      placeholder={"button"}
+                      disabled={pageNumber[index] <= 1}
+                      onClick={() => previousPage(index)}
+                    >
+                      Previous page
+                    </Button>
+                    <Button
+                      type="button"
+                      placeholder={"button"}
+                      disabled={pageNumber[index] >= numPages[index]}
+                      onClick={() => nextPage(index)}
+                    >
+                      Next page
+                    </Button>
+                    <Button
+                      type="button"
+                      placeholder={"button"}
+                      onClick={() => downloadPdf(item.pdfSrc)}
+                    >
+                      Download
+                    </Button>
+                  </div>
+                </StyledCard>
+              </Container>
+            </SectionContainer>
+          ))}
+        </Carousel>
+      </CarouselContainer>
+    </>
   );
 };
 
