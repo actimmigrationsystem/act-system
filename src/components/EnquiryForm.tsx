@@ -128,6 +128,9 @@ const EnquiryForm = () => {
 
   return (
     <div>
+        {formSubmitted ? (
+        <ThankYouMessage />
+      ) : (
       <StepWizard>
         <Step1
           formValues={formValues}
@@ -160,7 +163,7 @@ const EnquiryForm = () => {
           nextStep={nextStep}
         />
       </StepWizard>
-      {formSubmitted && <ThankYouMessage />}
+      )}
     </div>
   );
 };
@@ -272,12 +275,9 @@ const Step2 = ({
       color="blue-gray"
       className="mb-2 font-medium"
     >
-      Gender
+      What is your gender
     </Typography>
     <div className="max-w-full">
-      <div className="mb-2 block">
-        <Label htmlFor="gender" value="What is your gender" />
-      </div>
       <Select
         id="gender"
         onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
@@ -333,12 +333,18 @@ const Step3 = ({
   nextStep: () => void;
 }) => (
   <div>
+    <Typography
+      placeholder={"Typography"}
+      variant="small"
+      color="blue-gray"
+      className="mb-2 font-medium"
+    >
+      Marital Status
+    </Typography>
     <div className="max-w-full">
-      <div className="mb-2 block">
-        <Label htmlFor="maritalStatus" value="maritalStatus" />
-      </div>
       <Select
         id="maritalStatus"
+        name="maritalStatus"
         onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
           handleMaritalStatusChange(event.target.value)
         }
@@ -348,7 +354,7 @@ const Step3 = ({
         <option>Married</option>
         <option>Divorced</option>
         <option>Widow</option>
-        <option> Separated</option>
+        <option>Separated</option>
       </Select>
     </div>
 
@@ -379,11 +385,9 @@ const Step3 = ({
     </Typography>
 
     <div className="max-w-full">
-      <div className="mb-2 block">
-        <Label htmlFor="immigrationStatus" value="immigrationStatus" />
-      </div>
       <Select
         id="immigrationStatus"
+        name="immigrationStatus"
         onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
           handleImmigrationStatusChange(event.target.value)
         }
@@ -423,11 +427,11 @@ const Step4 = ({
       color="blue-gray"
       className="mb-2 font-medium"
     >
-      Entry Date
+      Date of first entry into SA
     </Typography>
     <FloatingLabel
       variant="filled"
-      label=" Date of first entry into SA"
+      label=" Date of Entry"
       type="text"
       name="entryDate"
       value={formValues.entryDate}
@@ -503,11 +507,9 @@ const Step5 = ({
     </Typography>
 
     <div className="max-w-full">
-      <div className="mb-2 block">
-        <Label htmlFor="serviceType" value="serviceType" />
-      </div>
       <Select
-        id="service"
+        id="serviceType"
+        name="serviceType"
         onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
           handleServiceChange(event.target.value)
         }
