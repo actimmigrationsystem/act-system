@@ -34,7 +34,7 @@ const ContactUsSection = () => {
         width="auto"
       >
         <SectionTitle title="Contact Us" className="text-center text-white" />
-        <div className="max-w-screen-xl mx-auto py-8 px-12 sm:px-12 lg:px-8 mb-4">
+        <div className="max-w-screen-xl mx-auto py-2 px-12 sm:px-12 lg:px-8 mb-4">
           <ContentContainer>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 md:space-y-0 space-y-6 w-full">
               <div className="md:-mt-6 sm:-mt-6">
