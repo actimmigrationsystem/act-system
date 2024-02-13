@@ -82,7 +82,7 @@ const ContactForm = () => {
                 <AppointmentForm />
               </TabPanel>
               <TabPanel value="contact" className="p-0">
-                <div className="flex flex-col items-center justify-center gap-6">
+                <div className="flex flex-col md:flex-row items-center justify-center md:justify-start gap-6">
                   <Tooltip content="Chat with us on WhatsApp">
                     <Button
                       size="lg"
@@ -97,7 +97,7 @@ const ContactForm = () => {
                     <Button
                       size="lg"
                       onClick={handlePhoneClick}
-                      className="w-full h-full bg-blue-500 hover:bg-blue-600 text-white"
+                      className="w-full h-full bg-blue-500 hover:bg-blue-600 text-white md:w-auto"
                       placeholder=""
                     >
                       <CiPhone className="h-6 w-6 mr-2" />
