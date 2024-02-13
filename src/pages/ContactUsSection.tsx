@@ -18,7 +18,7 @@ const StyledContactContainer = styled.div<StyledContactContainerProps>`
   margin-bottom: ${(props) => props.marginbottom};
   width: ${(props) => props.width};
 
-  @media only screen and (min-width: 775px) {
+  @media only screen and (min-width: 768px) {
     height: 40vh;
   }
 `;
@@ -29,7 +29,7 @@ const ContactUsSection = () => {
     <section className="w-full">
       <StyledContactContainer
         margintop="auto"
-        marginbottom="0"
+        marginbottom="-120px"
         height="auto"
         width="auto"
       >
