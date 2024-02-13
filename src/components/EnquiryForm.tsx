@@ -549,12 +549,14 @@ const Step5 = ({
     <FloatingLabel
       variant="filled"
       label="Elaborate"
-      type="text"
+      type="textarea"
+      aria-rowspan={4}
       name="elaborate"
       value={formValues.elaborate}
       onChange={handleChange}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     />
+
     <DocumentUpload />
     <Button
       placeholder={"Button"}
