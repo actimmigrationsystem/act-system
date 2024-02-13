@@ -33,8 +33,8 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="w-full">
-      <Card placeholder="card">
+    <>
+      <Card placeholder="card" className="md:shadow-none mt-6">
         <CardHeader
           style={{ backgroundColor: "#0e5a97" }}
           floated={false}
@@ -61,14 +61,14 @@ const ContactForm = () => {
                 onClick={() => handleTabChange("contact")}
                 placeholder=""
               >
-                Appointments
+                Appointment
               </Tab>
               <Tab
                 value="contact"
                 onClick={() => handleTabChange("contact")}
                 placeholder=""
               >
-                Contact Us
+                Contact
               </Tab>
             </TabsHeader>
             <TabsBody
@@ -109,7 +109,7 @@ const ContactForm = () => {
           </Tabs>
         </CardBody>
       </Card>
-    </div>
+    </>
   );
 };
 

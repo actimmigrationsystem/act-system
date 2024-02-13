@@ -89,6 +89,10 @@ const CarouselContainer = styled.div`
   height: 70%;
   margin-bottom: 10px;
   margin-top: -50px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const TextOverlay = styled.div`
