@@ -13,6 +13,8 @@ import {
 } from "@material-tailwind/react";
 import { FaWhatsapp } from "react-icons/fa";
 import { CiPhone } from "react-icons/ci";
+import { AiFillQuestionCircle, AiFillCalendar } from "react-icons/ai";
+import { IoCallOutline } from "react-icons/io5";
 import { Tooltip } from "flowbite-react";
 import EnquiryForm from "./EnquiryForm";
 import AppointmentForm from "./AppointmentForm";
@@ -54,21 +56,33 @@ const ContactForm = () => {
                 onClick={() => handleTabChange("enquiry")}
                 placeholder=""
               >
-                Enquiry
+                <span className="hidden md:block">Enquiry</span>
+                <AiFillQuestionCircle
+                  className="block md:hidden h-6 w-6"
+                  style={{ color: "#2393cb" }}
+                />
               </Tab>
               <Tab
                 value="appointments"
                 onClick={() => handleTabChange("contact")}
                 placeholder=""
               >
-                Appointment
+                <span className="hidden md:block">Appointment</span>
+                <AiFillCalendar
+                  className="block md:hidden h-6 w-6"
+                  style={{ color: "#2393cb" }}
+                />
               </Tab>
               <Tab
                 value="contact"
                 onClick={() => handleTabChange("contact")}
                 placeholder=""
               >
-                Contact
+                <span className="hidden md:block">Call</span>
+                <IoCallOutline
+                  className="block md:hidden h-6 w-6"
+                  style={{ color: "#2393cb" }}
+                />
               </Tab>
             </TabsHeader>
             <TabsBody
@@ -81,29 +95,31 @@ const ContactForm = () => {
               <TabPanel value="appointments" className="p-0">
                 <AppointmentForm />
               </TabPanel>
-              <TabPanel value="contact" className="p-0">
-                <div className="flex flex-col md:flex-row items-center justify-center md:justify-start gap-2 mt-4">
-                  <Tooltip content="Chat with us on WhatsApp">
-                    <Button
-                      size="lg"
-                      onClick={handleWhatsAppClick}
-                      className="bg-green-500 hover:bg-green-600 text-white"
-                      placeholder=""
-                    >
-                      <FaWhatsapp className="h-6 w-6 mr-2" />
-                    </Button>
-                  </Tooltip>
-                  <Tooltip content="Call Our Office">
-                    <Button
-                      size="lg"
-                      onClick={handlePhoneClick}
-                      className="w-full h-full bg-blue-500 hover:bg-blue-600 text-white md:w-auto"
-                      placeholder=""
-                    >
-                      <CiPhone className="h-6 w-6 mr-2" />
-                    </Button>
-                  </Tooltip>
-                </div>
+
+              <TabPanel
+                value="contact"
+                className="flex flex-row md:flex-row items-center justify-center md:justify-start gap-2 mt-8 overflow-none"
+              >
+                <Tooltip placement="bottom" content="Chat with us on WhatsApp">
+                  <Button
+                    size="lg"
+                    onClick={handleWhatsAppClick}
+                    className="bg-green-500 hover:bg-green-600 text-white"
+                    placeholder=""
+                  >
+                    <FaWhatsapp className="h-6 w-6 mr-2" />
+                  </Button>
+                </Tooltip>
+                <Tooltip placement="bottom" content="Call Our Office">
+                  <Button
+                    size="lg"
+                    onClick={handlePhoneClick}
+                    className="w-full h-full bg-blue-500 hover:bg-blue-600 text-white md:w-auto"
+                    placeholder=""
+                  >
+                    <CiPhone className="h-6 w-6 mr-2" />
+                  </Button>
+                </Tooltip>
               </TabPanel>
             </TabsBody>
           </Tabs>
