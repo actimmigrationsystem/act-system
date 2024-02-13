@@ -20,7 +20,7 @@ interface SectionContainerProps extends StyledSectionContainerProps {
 const SectionContainer: React.FC<SectionContainerProps> = ({
   children,
   height,
-  margintop = "0",
+  margintop,
   marginbottom,
 }) => (
   <StyledSectionContainer

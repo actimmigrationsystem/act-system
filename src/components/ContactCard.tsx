@@ -34,7 +34,7 @@ const ContactForm = () => {
 
   return (
     <div className="w-full">
-      <Card placeholder="">
+      <Card placeholder="card">
         <CardHeader
           style={{ backgroundColor: "#0e5a97" }}
           floated={false}
@@ -82,7 +82,7 @@ const ContactForm = () => {
                 <AppointmentForm />
               </TabPanel>
               <TabPanel value="contact" className="p-0">
-                <div className="flex flex-col md:flex-row items-center justify-center md:justify-start gap-6">
+                <div className="flex flex-col md:flex-row items-center justify-center md:justify-start gap-2 mt-4">
                   <Tooltip content="Chat with us on WhatsApp">
                     <Button
                       size="lg"
