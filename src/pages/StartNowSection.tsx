@@ -1,3 +1,4 @@
+import { Link } from "react-scroll";
 import SectionContainer from "../components/SectionContainer";
 
 export default function StartNowSection() {
@@ -13,12 +14,16 @@ export default function StartNowSection() {
               Our expert knowledge goes a long way in ensuring that our clients
               receive only the best.
             </p>
-            <button
+
+            <Link
+              to="contact-us"
+              smooth={true}
+              duration={500}
               style={{ backgroundColor: "#0D4E83" }}
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded self-center"
             >
               Contact Us
-            </button>
+            </Link>
           </div>
           <div
             className="flex-1"

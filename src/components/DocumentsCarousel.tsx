@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import styled from "styled-components";
 import { Card, Typography, Button } from "@material-tailwind/react";
 import { Carousel } from "react-responsive-carousel";
+import { FiArrowRight, FiArrowLeft } from "react-icons/fi";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
@@ -89,6 +90,10 @@ const CarouselContainer = styled.div`
   height: 70%;
   margin-bottom: 10px;
   margin-top: -50px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const TextOverlay = styled.div`
@@ -207,7 +212,7 @@ const DocumentsCarousel = () => {
                       disabled={pageNumber[index] <= 1}
                       onClick={() => previousPage(index)}
                     >
-                      Previous page
+                      <FiArrowLeft />
                     </Button>
                     <Button
                       type="button"
@@ -215,7 +220,7 @@ const DocumentsCarousel = () => {
                       disabled={pageNumber[index] >= numPages[index]}
                       onClick={() => nextPage(index)}
                     >
-                      Next page
+                      <FiArrowRight />
                     </Button>
                     <Button
                       type="button"

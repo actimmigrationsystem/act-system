@@ -2,7 +2,7 @@ import { useState } from "react";
 import StepWizard from "react-step-wizard";
 import { Typography, Button } from "@material-tailwind/react";
 import { RiMailSendLine } from "react-icons/ri";
-import { FloatingLabel, Label, Select } from "flowbite-react";
+import { FloatingLabel, Select } from "flowbite-react";
 import DocumentUpload from "./DocumentUpload";
 
 const EnquiryForm = () => {
@@ -538,7 +538,6 @@ const Step5 = ({
       </Select>
     </div>
 
-   
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -550,12 +549,14 @@ const Step5 = ({
     <FloatingLabel
       variant="filled"
       label="Elaborate"
-      type="text"
+      type="textarea"
+      aria-rowspan={4}
       name="elaborate"
       value={formValues.elaborate}
       onChange={handleChange}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     />
+
     <DocumentUpload />
     <Button
       placeholder={"Button"}

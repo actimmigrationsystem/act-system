@@ -5,7 +5,7 @@ import SectionContainer from '../components/SectionContainer';
 
 const AboutUs = () => (
   <>
-    <SectionContainer margintop="auto" marginbottom="30px" height="80vh">
+    <SectionContainer margintop="auto" marginbottom="10" height="auto">
       <SectionTitle title="About Us" />
       <ContentContainer>
         <ArticleComponent
