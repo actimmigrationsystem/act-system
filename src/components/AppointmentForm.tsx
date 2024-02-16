@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Listbox, Transition } from "@headlessui/react";
 import StepWizard from "react-step-wizard";
 import { Typography, Button } from "@material-tailwind/react";
 import { RiMailSendLine } from "react-icons/ri";
@@ -85,18 +84,6 @@ const AppointmentForm = () => {
       appointmentTime: "",
     });
     setFormSubmitted(true);
-  };
-
-  const handleGenderChange = (value: string | undefined) => {
-    if (value) {
-      setFormValues((prevState) => ({ ...prevState, gender: value }));
-    }
-  };
-
-  const handleMaritalStatusChange = (value: string | undefined) => {
-    if (value) {
-      setFormValues((prevState) => ({ ...prevState, maritalStatus: value }));
-    }
   };
 
   const handleAppointmentType = (value: string | undefined) => {
@@ -228,7 +215,6 @@ const Step1 = ({
 
 const Step2 = ({
   formValues,
-  handleChange,
   handleServiceChange,
   handleAppointmentType,
   nextStep,
@@ -278,8 +264,8 @@ const Step2 = ({
         <option>ZEP Migration</option>
         <option> ZEP Waiver</option>
       </Select>
-
-
+</div>
+<div>
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -316,11 +302,7 @@ const Step2 = ({
 );
 
 const Step3 = ({
-  formValues,
-  setFormValues,
-  handleChange,
   handleSubmit,
-  setAppointmentDate,
 }: {
   formValues: any;
   setFormValues: React.Dispatch<React.SetStateAction<any>>;
@@ -350,7 +332,7 @@ const Step3 = ({
 
     <TimePicker
       value={"8:00"}
-      onChange={function (value: string): void {
+      onChange={function (): void {
         throw new Error("Function not implemented.");
       }}
     />
