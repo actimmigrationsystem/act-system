@@ -9,7 +9,6 @@ const navigation = [
   { name: 'Home', to: 'home-section', current: true },
   { name: 'Services', to: 'service-section', current: false },
   { name: 'About Us', to: 'about-section', current: false },
-  { name: 'Documents', to: 'document-section', current: false },
   { name: 'FAQs', to: 'faq-section', current: false },
   { name: 'Contact Us', to: 'contact-section', current: false },
 ];
