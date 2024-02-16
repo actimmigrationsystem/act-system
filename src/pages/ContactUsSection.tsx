@@ -1,29 +1,8 @@
-import styled from "styled-components";
 import SectionTitle from "../components/SectionTitle";
 import ContactCard from "../components/ContactCard";
 import MapComponent from "../components/MapComponent";
 import ContentContainer from "../components/ContentContainer";
 import SectionContainer from "../components/SectionContainer";
-
-
-interface StyledContactContainerProps {
-  height: string;
-  margintop: string;
-  marginbottom: string;
-  width: string;
-}
-
-const StyledContactContainer = styled.div<StyledContactContainerProps>`
-  height: ${(props) => props.height};
-  margin-top: ${(props) => props.margintop};
-  margin-bottom: ${(props) => props.marginbottom};
-  width: ${(props) => props.width};
-
-  @media only screen and (min-width: 768px) {
-    height: 40vh;
-  }
-`;
-
 
 const ContactUsSection = () => {
   return (
