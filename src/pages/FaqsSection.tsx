@@ -5,7 +5,7 @@ import ContentContainer from '../components/ContentContainer';
 import SectionContainer from '../components/SectionContainer';
 
 const FAQsSection = () => (
-  <SectionContainer height="70vh" margintop="auto" marginbottom="2rem">
+  <SectionContainer height="80vh" margintop="auto" marginbottom="3rem">
     <SectionTitle title="FAQ" className="text-center text-white" />
     <div className="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:px-4">
       <ContentContainer>
