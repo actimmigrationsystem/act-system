@@ -35,7 +35,7 @@ const serviceData = [
 ];
 const ServicesSection = () => (
   <>
-    <SectionContainer height="auto" margintop="auto" marginbottom="2rem">
+    <SectionContainer height="auto" margintop="2rem" marginbottom="2rem">
       <SectionTitle title="Services" />
       <ContentContainer>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">

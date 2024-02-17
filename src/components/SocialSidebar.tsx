@@ -2,19 +2,22 @@ import styled from 'styled-components';
 import { Sidebar } from 'flowbite-react';
 
 const StyledSocialSidebar = styled.div`
-  display: flex;
-  position: fixed;
-  top: 37%;
-  left: auto;
-  right: 8%;
-  transform: translateY(-50%);
-  z-index: 999;
-  background-color: rgba(156, 163, 175, 0);
-  border-radius: 12px;
-  opacity: 0.7;
-  height: auto;
-  width: 10px;
-  align-items: center;
+  display: none;
+  @media (min-width: 640px) {
+    display: flex;
+    position: fixed;
+    top: 37%;
+    left: auto;
+    right: 8%;
+    transform: translateY(-50%);
+    z-index: 999;
+    background-color: rgba(156, 163, 175, 0);
+    border-radius: 12px;
+    opacity: 0.7;
+    height: auto;
+    width: 10px;
+    align-items: center;
+  }
 `;
 
 const StyledIcon = styled.div`

@@ -42,7 +42,8 @@ const NavBar = () => (
               <div className="flex flex-shrink-0 items-center">
                 <Logo color="#2393cb" />
               </div>
-              <div className="hidden sm:ml-6 sm:block">
+
+              <div className="hidden sm:ml-6 sm:block flex items-center justify-center">
                 <div className="flex space-x-4">
                   {navigation.map((item) => (
                     <Link

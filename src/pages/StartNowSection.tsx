@@ -4,7 +4,7 @@ import SectionContainer from "../components/SectionContainer";
 export default function StartNowSection() {
   return (
     <>
-      <SectionContainer margintop="auto" marginbottom="12px" height="70vh">
+      <SectionContainer margintop="auto" marginbottom="80px" height="60vh">
         <div className="flex h-full">
           <div
             className="flex-1 flex flex-col justify-center p-2"
