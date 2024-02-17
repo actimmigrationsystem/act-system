@@ -544,7 +544,7 @@ const Step5 = ({
       color="blue-gray"
       className="mb-2 font-medium"
     >
-      Please elaborate on the service(s) that you need:
+      Please explain in detail what you require:
     </Typography>
     <FloatingLabel
       variant="filled"
