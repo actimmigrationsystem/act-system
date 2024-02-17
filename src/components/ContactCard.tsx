@@ -42,19 +42,19 @@ const ContactForm = () => {
           floated={false}
           shadow={false}
           className="m-0 grid place-items-center px-4 py-8 text-center"
-          placeholder=""
+          placeholder="card header"
         >
           <Typography variant="h5" color="white" placeholder="">
             Contact US
           </Typography>
         </CardHeader>
-        <CardBody placeholder="">
+        <CardBody placeholder="card body">
           <Tabs value={activeTab} className="overflow-visible">
             <TabsHeader className="relative z-0 " placeholder="">
               <Tab
                 value="enquiry"
                 onClick={() => handleTabChange("enquiry")}
-                placeholder=""
+                placeholder="enquiry tab"
               >
                 <span className="hidden md:block">Enquiry</span>
                 <AiFillQuestionCircle
@@ -65,7 +65,7 @@ const ContactForm = () => {
               <Tab
                 value="appointments"
                 onClick={() => handleTabChange("contact")}
-                placeholder=""
+                placeholder="appointments tab"
               >
                 <span className="hidden md:block">Appointment</span>
                 <AiFillCalendar
@@ -76,7 +76,7 @@ const ContactForm = () => {
               <Tab
                 value="contact"
                 onClick={() => handleTabChange("contact")}
-                placeholder=""
+                placeholder="contact tab"
               >
                 <span className="hidden md:block">Call</span>
                 <IoCallOutline
@@ -86,7 +86,7 @@ const ContactForm = () => {
               </Tab>
             </TabsHeader>
             <TabsBody
-              placeholder=""
+              placeholder="tabs body"
               className="!overflow-x-hidden !overflow-y-visible"
             >
               <TabPanel value="enquiry" className="p-0">
@@ -105,7 +105,7 @@ const ContactForm = () => {
                     size="lg"
                     onClick={handleWhatsAppClick}
                     className="bg-green-500 hover:bg-green-600 text-white"
-                    placeholder=""
+                    placeholder="whatsapp button"
                   >
                     <FaWhatsapp className="h-6 w-6 mr-2" />
                   </Button>
@@ -115,7 +115,7 @@ const ContactForm = () => {
                     size="lg"
                     onClick={handlePhoneClick}
                     className="w-full h-full bg-blue-500 hover:bg-blue-600 text-white md:w-auto"
-                    placeholder=""
+                    placeholder="phone button"
                   >
                     <CiPhone className="h-6 w-6 mr-2" />
                   </Button>
