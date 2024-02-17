@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 import StepWizard from "react-step-wizard";
 import { Typography, Button } from "@material-tailwind/react";
 import { RiMailSendLine } from "react-icons/ri";
@@ -24,9 +24,18 @@ const EnquiryForm = () => {
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+const handleChangeTextarea = (e: ChangeEvent<HTMLTextAreaElement>) => {
+  const value = e.target.value;
+  if (value.length <= 500) {
+    setFormValues({ ...formValues, elaborate: value });
+  }
+};
+  const handleChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
+
   const handleRefreshClick = () => {
     // refresh the page
     setFormSubmitted(false);
@@ -160,6 +169,7 @@ const EnquiryForm = () => {
             formValues={formValues}
             handleChange={handleChange}
             handleServiceChange={handleServiceChange}
+            handleChangeTextarea={handleChangeTextarea}
             handleSubmit={handleSubmit}
             nextStep={nextStep}
           />
@@ -298,7 +308,7 @@ const Step2 = ({
       color="blue-gray"
       className="mb-2 font-medium"
     >
-      Date Of Birth
+      Date of Birth
     </Typography>
     <FloatingLabel
       variant="filled"
@@ -488,13 +498,17 @@ const Step4 = ({
 const Step5 = ({
   formValues,
   handleChange,
+  handleChangeTextarea,
   handleSubmit,
   handleServiceChange,
 }: {
   formValues: any;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChange: (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => void;
   handleSubmit: (e: React.FormEvent) => void;
   handleServiceChange: (value: string | undefined) => void;
+  handleChangeTextarea: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   nextStep: () => void;
 }) => (
   <div>
@@ -538,27 +552,31 @@ const Step5 = ({
       </Select>
     </div>
 
-    <Typography
-      placeholder={"Typography"}
-      variant="small"
-      color="blue-gray"
-      className="mb-2 font-medium"
-    >
-      Please explain in detail what you require:
-    </Typography>
-    <FloatingLabel
-      variant="filled"
-      label="Elaborate"
-      type="textarea"
-      aria-rowspan={4}
-      name="elaborate"
-      value={formValues.elaborate}
-      onChange={handleChange}
-      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-    />
+    <div>
+      <Typography
+        placeholder={"Typography"}
+        variant="small"
+        color="blue-gray"
+        className="mb-2 font-medium"
+      >
+        Please explain in detail what you require:
+      </Typography>
+
+      <textarea
+        className="border-t-blue-green-200 focus:border-t-gray-900 p-2 rounded w-full"
+        rows={4}
+        name="elaborate"
+        value={formValues.elaborate}
+        onChange={handleChangeTextarea}
+      />
+      <div className="text-gray-500 text-right">
+        {formValues.elaborate.length}/500
+      </div>
+    </div>
 
     <DocumentUpload />
     <Button
+      className="w-full mt-4"
       placeholder={"Button"}
       size="lg"
       type="submit"
