@@ -2,24 +2,24 @@ import styled from 'styled-components';
 import { Sidebar } from 'flowbite-react';
 
 const StyledSocialSidebar = styled.div`
- position: fixed;
-  top: 36%;
+  position: fixed;
+  top: 37%;
   right: 0;
   margin-right: -155px;
   transform: translateY(-50%);
   z-index: 999;
-  background-color: #fff;
-  border-radius: 20px;
-  opacity: 0.8;
+  background-color: #9ca3af;
+  border-radius: 6px;
+  opacity: 0.7;
   height: auto;
+  width: auto;
   align-items: center;
-
 `;
 
 const StyledIcon = styled.div`
-justify-content: center;
-cursor: pointer;
-opacity: 1;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 1;
 `;
 
 const SocialSidebar = () => (
