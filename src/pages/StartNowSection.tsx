@@ -16,11 +16,11 @@ export default function StartNowSection() {
             </p>
 
             <Link
-              to="contact-us"
+              to="contact-section"
               smooth={true}
               duration={500}
               style={{ backgroundColor: "#0D4E83" }}
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded self-center"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded self-center cursor-pointer"
             >
               Contact Us
             </Link>

@@ -44,7 +44,7 @@ const ContactForm = () => {
           className="m-0 grid place-items-center px-4 py-8 text-center"
           placeholder="card header"
         >
-          <Typography variant="h5" color="white" placeholder="">
+          <Typography variant="h5" color="white" placeholder="contact text">
             Contact US
           </Typography>
         </CardHeader>
