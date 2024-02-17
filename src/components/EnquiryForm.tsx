@@ -26,7 +26,7 @@ const EnquiryForm = () => {
 
 const handleChangeTextarea = (e: ChangeEvent<HTMLTextAreaElement>) => {
   const value = e.target.value;
-  if (value.length <= 500) {
+  if (value.length <= 1000) {
     setFormValues({ ...formValues, elaborate: value });
   }
 };
@@ -497,7 +497,6 @@ const Step4 = ({
 
 const Step5 = ({
   formValues,
-  handleChange,
   handleChangeTextarea,
   handleSubmit,
   handleServiceChange,
@@ -563,14 +562,14 @@ const Step5 = ({
       </Typography>
 
       <textarea
-        className="border-t-blue-green-200 focus:border-t-gray-900 p-2 rounded w-full"
+        className="border-t-blue-800 focus:border-t-blue-800 p-2 rounded w-full"
         rows={4}
         name="elaborate"
         value={formValues.elaborate}
         onChange={handleChangeTextarea}
       />
       <div className="text-gray-500 text-right">
-        {formValues.elaborate.length}/500
+        {formValues.elaborate.length}/1000
       </div>
     </div>
 
