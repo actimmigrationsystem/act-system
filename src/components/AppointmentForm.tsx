@@ -90,7 +90,7 @@ const AppointmentForm = () => {
     if (value) {
       setFormValues((prevState) => ({
         ...prevState,
-        immigrationStatus: value,
+        appointmentType: value,
       }));
     }
   };
