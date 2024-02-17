@@ -10,6 +10,7 @@ import TimePicker from "./TimePicker";
 const AppointmentForm = () => {
   const [formValues, setFormValues] = useState({
     name: "",
+    surname: "",
     _subject: "Appointment",
     email: "",
     serviceType: "",
@@ -76,6 +77,7 @@ const AppointmentForm = () => {
     // Clear the form
     setFormValues({
       name: "",
+      surname: "",
       _subject: "Appointment",
       email: "",
       serviceType: "",
@@ -155,7 +157,7 @@ const Step1 = ({
       color="blue-gray"
       className="mb-2 font-medium"
     >
-      Fullname
+      Name
     </Typography>
     <FloatingLabel
       variant="filled"
@@ -163,6 +165,23 @@ const Step1 = ({
       type="text"
       name="name"
       value={formValues.name}
+      onChange={handleChange}
+      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+    />
+    <Typography
+      placeholder={"Typography"}
+      variant="small"
+      color="blue-gray"
+      className="mb-2 font-medium"
+    >
+      Surname
+    </Typography>
+    <FloatingLabel
+      variant="filled"
+      label="Surname"
+      type="text"
+      name="surname"
+      value={formValues.surname}
       onChange={handleChange}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     />
@@ -184,7 +203,31 @@ const Step1 = ({
       onChange={handleChange}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     />
+    <Button
+      style={{ backgroundColor: "#0e5a97" }}
+      type="button"
+      placeholder=""
+      onClick={nextStep}
+    >
+      Next
+    </Button>
+  </div>
+);
 
+const Step2 = ({
+  formValues,
+  handleChange,
+  handleServiceChange,
+  handleAppointmentType,
+  nextStep,
+}: {
+  formValues: any;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleServiceChange: (value: string | undefined) => void;
+  handleAppointmentType: (value: string | undefined) => void;
+  nextStep: () => void;
+}) => (
+  <div>
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -202,30 +245,6 @@ const Step1 = ({
       onChange={handleChange}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     />
-    <Button
-      style={{ backgroundColor: "#0e5a97" }}
-      type="button"
-      placeholder=""
-      onClick={nextStep}
-    >
-      Next
-    </Button>
-  </div>
-);
-
-const Step2 = ({
-  formValues,
-  handleServiceChange,
-  handleAppointmentType,
-  nextStep,
-}: {
-  formValues: any;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleServiceChange: (value: string | undefined) => void;
-  handleAppointmentType: (value: string | undefined) => void;
-  nextStep: () => void;
-}) => (
-  <div>
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -264,40 +283,40 @@ const Step2 = ({
         <option>ZEP Migration</option>
         <option> ZEP Waiver</option>
       </Select>
-</div>
-<div>
-    <Typography
-      placeholder={"Typography"}
-      variant="small"
-      color="blue-gray"
-      className="mb-2 font-medium"
-    >
-      How would you like to receive this service?
-    </Typography>
-    <div className="max-w-full">
-      <Select
-        id="appointmentType"
-        name="appointmentType"
-        onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
-          handleAppointmentType(event.target.value)
-        }
-        value={formValues.appointmentType}
-      >
-        <option>Phone call</option>
-        <option>Email</option>
-        <option>Remote(zoom|skype)</option>
-        <option>In-Person(Office)</option>
-      </Select>
     </div>
-    <Button
-      style={{ backgroundColor: "#0e5a97" }}
-      type="button"
-      placeholder=""
-      onClick={nextStep}
-    >
-      Next
-    </Button>
-  </div>
+    <div>
+      <Typography
+        placeholder={"Typography"}
+        variant="small"
+        color="blue-gray"
+        className="mb-2 font-medium"
+      >
+        How would you like to receive this service?
+      </Typography>
+      <div className="max-w-full">
+        <Select
+          id="appointmentType"
+          name="appointmentType"
+          onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
+            handleAppointmentType(event.target.value)
+          }
+          value={formValues.appointmentType}
+        >
+          <option>Phone call</option>
+          <option>Email</option>
+          <option>Remote(zoom|skype)</option>
+          <option>In-Person(Office)</option>
+        </Select>
+      </div>
+      <Button
+        style={{ backgroundColor: "#0e5a97" }}
+        type="button"
+        placeholder=""
+        onClick={nextStep}
+      >
+        Next
+      </Button>
+    </div>
   </div>
 );
 
@@ -343,7 +362,7 @@ const Step3 = ({
       type="submit"
       style={{ backgroundColor: "#0e5a97" }}
       onClick={handleSubmit}
-      className="mt-8"
+      className="mt-8 w-full"
     >
       Book Appointment
     </Button>
