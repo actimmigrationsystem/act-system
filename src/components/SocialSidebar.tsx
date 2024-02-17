@@ -2,17 +2,18 @@ import styled from 'styled-components';
 import { Sidebar } from 'flowbite-react';
 
 const StyledSocialSidebar = styled.div`
+  display: flex;
   position: fixed;
   top: 37%;
-  right: 0;
-  margin-right: -155px;
+  left: auto;
+  right: 8%;
   transform: translateY(-50%);
   z-index: 999;
-  background-color: #9ca3af;
-  border-radius: 6px;
+  background-color: rgba(156, 163, 175, 0);
+  border-radius: 12px;
   opacity: 0.7;
   height: auto;
-  width: auto;
+  width: 10px;
   align-items: center;
 `;
 
