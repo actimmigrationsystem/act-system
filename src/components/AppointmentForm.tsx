@@ -106,7 +106,7 @@ const AppointmentForm = () => {
   const nextStep = () => {};
 
   return (
-    <div>
+    <div className="mt-8">
       {formSubmitted ? (
         <ThankYouMessage />
       ) : (
@@ -150,7 +150,7 @@ const Step1 = ({
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   nextStep: () => void;
 }) => (
-  <div>
+  <div className="mt-8">
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -227,7 +227,7 @@ const Step2 = ({
   handleAppointmentType: (value: string | undefined) => void;
   nextStep: () => void;
 }) => (
-  <div>
+  <div className="mt-8">
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -329,7 +329,7 @@ const Step3 = ({
   handleSubmit: (e: React.FormEvent) => void;
   setAppointmentDate: (value: string) => void;
 }) => (
-  <div>
+  <div className="mt-8">
     <Typography
       placeholder={"Typography"}
       variant="small"

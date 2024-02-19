@@ -35,7 +35,7 @@ const ContactForm = () => {
   };
 
   return (
-    <Card placeholder="card" className="md:shadow-none mt-6">
+    <Card placeholder="card" className="md:shadow-none">
       <CardHeader
         style={{ backgroundColor: "#0e5a97" }}
         floated={false}

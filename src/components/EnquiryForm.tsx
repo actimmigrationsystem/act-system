@@ -4,6 +4,7 @@ import { Typography, Button } from "@material-tailwind/react";
 import { RiMailSendLine } from "react-icons/ri";
 import { FloatingLabel, Select } from "flowbite-react";
 import DocumentUpload from "./DocumentUpload";
+import DatePickerComponent from "./DatePickerComponent";
 
 const EnquiryForm = () => {
   const [formValues, setFormValues] = useState({
@@ -35,6 +36,14 @@ const handleChangeTextarea = (e: ChangeEvent<HTMLTextAreaElement>) => {
   ) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
+
+
+const handleDateChange = (field: string, value: Date) => {
+  setFormValues((prevValues) => ({
+    ...prevValues,
+    [field]: value.toISOString(),
+  }));
+};
 
   const handleRefreshClick = () => {
     // refresh the page
@@ -134,6 +143,7 @@ const handleChangeTextarea = (e: ChangeEvent<HTMLTextAreaElement>) => {
     }
   };
 
+
   const nextStep = () => {};
 
   return (
@@ -151,6 +161,7 @@ const handleChangeTextarea = (e: ChangeEvent<HTMLTextAreaElement>) => {
             formValues={formValues}
             handleChange={handleChange}
             handleGenderChange={handleGenderChange}
+            handleDateChange={(date: Date) => handleDateChange("dob", date)}
             nextStep={nextStep}
           />
           <Step3
@@ -188,7 +199,7 @@ const Step1 = ({
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   nextStep: () => void;
 }) => (
-  <div>
+  <div className="mt-8">
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -255,14 +266,16 @@ const Step2 = ({
   formValues,
   handleChange,
   handleGenderChange,
+  handleDateChange,
   nextStep,
 }: {
   formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleGenderChange: (value: string | undefined) => void;
+  handleDateChange: (date: Date) => void;
   nextStep: () => void;
 }) => (
-  <div>
+<div className="mt-8">
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -301,24 +314,20 @@ const Step2 = ({
         <option>Other</option>
       </Select>
     </div>
-
-    <Typography
-      placeholder={"Typography"}
-      variant="small"
-      color="blue-gray"
-      className="mb-2 font-medium"
-    >
-      Date of Birth
-    </Typography>
-    <FloatingLabel
-      variant="filled"
-      label="Date Of Birth"
-      type="text"
-      name="dob"
-      value={formValues.dob}
-      onChange={handleChange}
-      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-    />
+    <div className="mt-8">
+      <Typography
+        placeholder={"Typography"}
+        variant="small"
+        color="blue-gray"
+        className="mb-2 font-medium"
+      >
+        Date of Birth
+      </Typography>
+      <DatePickerComponent
+        value={formValues.dob}
+        onChange={(date: Date) => handleDateChange(date)}
+      />
+    </div>
     <Button
       style={{ backgroundColor: "#0e5a97" }}
       type="button"
@@ -343,7 +352,7 @@ const Step3 = ({
   handleImmigrationStatusChange: (value: string | undefined) => void;
   nextStep: () => void;
 }) => (
-  <div>
+  <div className="mt-8">
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -431,7 +440,7 @@ const Step4 = ({
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   nextStep: () => void;
 }) => (
-  <div>
+  <div className="mt-8">
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -510,7 +519,7 @@ const Step5 = ({
   handleChangeTextarea: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   nextStep: () => void;
 }) => (
-  <div>
+  <div className="mt-8">
     <Typography
       placeholder={"Typography"}
       variant="small"
