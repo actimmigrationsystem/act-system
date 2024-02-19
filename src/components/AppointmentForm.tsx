@@ -23,14 +23,8 @@ const AppointmentForm = () => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
 
-// const handleDateChange = (field: string, value: Date) => {
-//   setFormValues((prevValues) => ({
-//     ...prevValues,
-//     [field]: value.toISOString(),
-//   }));
-// };
 
-const handleDateChange = (key: string, newDate: Date) => {
+const handleAppointmentDateChange = (key: string, newDate: Date) => {
   setFormValues((prevValues) => ({
     ...prevValues,
     [key]: newDate,
@@ -140,8 +134,8 @@ const handleDateChange = (key: string, newDate: Date) => {
             handleSubmit={handleSubmit}
             setFormValues={setFormValues}
             handleChange={handleChange}
-            handleDateChange={(date: Date) =>
-              handleDateChange("appointmentDate", date)
+            handleAppointmentDateChange={(date: Date) =>
+              handleAppointmentDateChange("appointmentDate", date)
             }
           />
         </StepWizard>
@@ -331,14 +325,14 @@ const Step2 = ({
 
 const Step3 = ({
   formValues,
-  handleDateChange,
+  handleAppointmentDateChange,
   handleSubmit,
 }: {
   formValues: any;
   setFormValues: React.Dispatch<React.SetStateAction<any>>;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent) => void;
-  handleDateChange: (date: Date) => void;
+  handleAppointmentDateChange: (date: Date) => void;
 }) => (
   <div className="mt-8">
     <div className="mt-8">
@@ -353,22 +347,21 @@ const Step3 = ({
 
       <AppointmentDatePicker
         value={formValues.appointmentDate}
-        onChange={(date: Date) => handleDateChange(date)}
+        onChange={(date: Date) => handleAppointmentDateChange(date)}
       />
     </div>
 
-      <Button
-        placeholder={"Button"}
-        size="lg"
-        type="submit"
-        style={{ backgroundColor: "#0e5a97" }}
-        onClick={handleSubmit}
-        className="mt-8 w-full"
-      >
-        Book Appointment
-      </Button>
-    </div>
-
+    <Button
+      placeholder={"Button"}
+      size="lg"
+      type="submit"
+      style={{ backgroundColor: "#0e5a97" }}
+      onClick={handleSubmit}
+      className="mt-8 w-full"
+    >
+      Book Appointment
+    </Button>
+  </div>
 );
 
 
