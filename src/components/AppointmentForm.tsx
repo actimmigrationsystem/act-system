@@ -3,8 +3,7 @@ import StepWizard from "react-step-wizard";
 import { Typography, Button } from "@material-tailwind/react";
 import { RiMailSendLine } from "react-icons/ri";
 import { FloatingLabel, Select } from "flowbite-react";
-import DateComponent from "./DateComponent";
-import TimePicker from "./TimePicker";
+import AppointmentDatePicker from "./AppointmentDatePicker";
 
 
 const AppointmentForm = () => {
@@ -23,6 +22,20 @@ const AppointmentForm = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
+
+// const handleDateChange = (field: string, value: Date) => {
+//   setFormValues((prevValues) => ({
+//     ...prevValues,
+//     [field]: value.toISOString(),
+//   }));
+// };
+
+const handleDateChange = (key: string, newDate: Date) => {
+  setFormValues((prevValues) => ({
+    ...prevValues,
+    [key]: newDate,
+  }));
+};
   const handleRefreshClick = () => {
     // refresh the page
     setFormSubmitted(false);
@@ -36,8 +49,7 @@ const AppointmentForm = () => {
           color: "white",
           padding: "10px",
           marginBottom: "10px",
-        }}
-      >
+        }}>
         Thank you for your message! We will respond shortly.
       </div>
       <br />
@@ -125,14 +137,11 @@ const AppointmentForm = () => {
           />
           <Step3
             formValues={formValues}
-            handleChange={handleChange}
             handleSubmit={handleSubmit}
             setFormValues={setFormValues}
-            setAppointmentDate={(value: string) =>
-              setFormValues((prevState: any) => ({
-                ...prevState,
-                appointmentDate: value,
-              }))
+            handleChange={handleChange}
+            handleDateChange={(date: Date) =>
+              handleDateChange("appointmentDate", date)
             }
           />
         </StepWizard>
@@ -321,52 +330,45 @@ const Step2 = ({
 );
 
 const Step3 = ({
+  formValues,
+  handleDateChange,
   handleSubmit,
 }: {
   formValues: any;
   setFormValues: React.Dispatch<React.SetStateAction<any>>;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent) => void;
-  setAppointmentDate: (value: string) => void;
+  handleDateChange: (date: Date) => void;
 }) => (
   <div className="mt-8">
-    <Typography
-      placeholder={"Typography"}
-      variant="small"
-      color="blue-gray"
-      className="mb-2 font-medium"
-    >
-      Select appointment date
-    </Typography>
-    <DateComponent />
+    <div className="mt-8">
+      <Typography
+        placeholder={"Typography"}
+        variant="small"
+        color="blue-gray"
+        className="mb-2 font-medium"
+      >
+        Select appointment date
+      </Typography>
 
-    <Typography
-      placeholder={"Typography"}
-      variant="small"
-      color="blue-gray"
-      className="mb-2 font-medium"
-    >
-      Select appointment time
-    </Typography>
+      <AppointmentDatePicker
+        value={formValues.appointmentDate}
+        onChange={(date: Date) => handleDateChange(date)}
+      />
+    </div>
 
-    <TimePicker
-      value={"8:00"}
-      onChange={function (): void {
-        throw new Error("Function not implemented.");
-      }}
-    />
+      <Button
+        placeholder={"Button"}
+        size="lg"
+        type="submit"
+        style={{ backgroundColor: "#0e5a97" }}
+        onClick={handleSubmit}
+        className="mt-8 w-full"
+      >
+        Book Appointment
+      </Button>
+    </div>
 
-    <Button
-      placeholder={"Button"}
-      size="lg"
-      type="submit"
-      style={{ backgroundColor: "#0e5a97" }}
-      onClick={handleSubmit}
-      className="mt-8 w-full"
-    >
-      Book Appointment
-    </Button>
-  </div>
 );
 
 
