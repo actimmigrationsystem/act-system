@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 import StepWizard from "react-step-wizard";
 import { Typography, Button } from "@material-tailwind/react";
 import { RiMailSendLine } from "react-icons/ri";
 import { FloatingLabel, Select } from "flowbite-react";
 import DocumentUpload from "./DocumentUpload";
+import DatePickerComponent from "./DatePickerComponent";
 
 const EnquiryForm = () => {
   const [formValues, setFormValues] = useState({
@@ -24,9 +25,26 @@ const EnquiryForm = () => {
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+const handleChangeTextarea = (e: ChangeEvent<HTMLTextAreaElement>) => {
+  const value = e.target.value;
+  if (value.length <= 1000) {
+    setFormValues({ ...formValues, elaborate: value });
+  }
+};
+  const handleChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
+
+
+const handleDateChange = (field: string, value: Date) => {
+  setFormValues((prevValues) => ({
+    ...prevValues,
+    [field]: value.toISOString(),
+  }));
+};
+
   const handleRefreshClick = () => {
     // refresh the page
     setFormSubmitted(false);
@@ -62,7 +80,7 @@ const EnquiryForm = () => {
     e.preventDefault();
     console.log("Form Values:", formValues);
     const form = document.createElement("form");
-    form.action = "https://formsubmit.co/rileymanda0@gmail.com";
+    form.action = "https://formsubmit.co/enquiries@actimmigration.co.za";
     form.method = "POST";
     form.target = "_blank";
 
@@ -125,45 +143,51 @@ const EnquiryForm = () => {
     }
   };
 
+
   const nextStep = () => {};
 
   return (
     <div>
-        {formSubmitted ? (
+      {formSubmitted ? (
         <ThankYouMessage />
       ) : (
-      <StepWizard>
-        <Step1
-          formValues={formValues}
-          handleChange={handleChange}
-          nextStep={nextStep}
-        />
-        <Step2
-          formValues={formValues}
-          handleChange={handleChange}
-          handleGenderChange={handleGenderChange}
-          nextStep={nextStep}
-        />
-        <Step3
-          formValues={formValues}
-          handleChange={handleChange}
-          handleImmigrationStatusChange={handleImmigrationStatusChange}
-          handleMaritalStatusChange={handleMaritalStatusChange}
-          nextStep={nextStep}
-        />
-        <Step4
-          formValues={formValues}
-          handleChange={handleChange}
-          nextStep={nextStep}
-        />
-        <Step5
-          formValues={formValues}
-          handleChange={handleChange}
-          handleServiceChange={handleServiceChange}
-          handleSubmit={handleSubmit}
-          nextStep={nextStep}
-        />
-      </StepWizard>
+        <StepWizard>
+          <Step1
+            formValues={formValues}
+            handleChange={handleChange}
+            nextStep={nextStep}
+          />
+          <Step2
+            formValues={formValues}
+            handleChange={handleChange}
+            handleGenderChange={handleGenderChange}
+            handleDateChange={(date: Date) => handleDateChange("dob", date)}
+            nextStep={nextStep}
+          />
+          <Step3
+            formValues={formValues}
+            handleChange={handleChange}
+            handleImmigrationStatusChange={handleImmigrationStatusChange}
+            handleMaritalStatusChange={handleMaritalStatusChange}
+            nextStep={nextStep}
+          />
+          <Step4
+            formValues={formValues}
+            handleDateChange={(date: Date) =>
+              handleDateChange("entryDate", date)
+            }
+            handleChange={handleChange}
+            nextStep={nextStep}
+          />
+          <Step5
+            formValues={formValues}
+            handleChange={handleChange}
+            handleServiceChange={handleServiceChange}
+            handleChangeTextarea={handleChangeTextarea}
+            handleSubmit={handleSubmit}
+            nextStep={nextStep}
+          />
+        </StepWizard>
       )}
     </div>
   );
@@ -178,7 +202,7 @@ const Step1 = ({
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   nextStep: () => void;
 }) => (
-  <div>
+  <div className="mt-8">
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -245,14 +269,16 @@ const Step2 = ({
   formValues,
   handleChange,
   handleGenderChange,
+  handleDateChange,
   nextStep,
 }: {
   formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleGenderChange: (value: string | undefined) => void;
+  handleDateChange: (date: Date) => void;
   nextStep: () => void;
 }) => (
-  <div>
+<div className="mt-8">
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -291,24 +317,20 @@ const Step2 = ({
         <option>Other</option>
       </Select>
     </div>
-
-    <Typography
-      placeholder={"Typography"}
-      variant="small"
-      color="blue-gray"
-      className="mb-2 font-medium"
-    >
-      Date Of Birth
-    </Typography>
-    <FloatingLabel
-      variant="filled"
-      label="Date Of Birth"
-      type="text"
-      name="dob"
-      value={formValues.dob}
-      onChange={handleChange}
-      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-    />
+    <div className="mt-8">
+      <Typography
+        placeholder={"Typography"}
+        variant="small"
+        color="blue-gray"
+        className="mb-2 font-medium"
+      >
+        Date of Birth
+      </Typography>
+      <DatePickerComponent
+        value={formValues.dob}
+        onChange={(date: Date) => handleDateChange(date)}
+      />
+    </div>
     <Button
       style={{ backgroundColor: "#0e5a97" }}
       type="button"
@@ -333,7 +355,7 @@ const Step3 = ({
   handleImmigrationStatusChange: (value: string | undefined) => void;
   nextStep: () => void;
 }) => (
-  <div>
+  <div className="mt-8">
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -415,13 +437,15 @@ const Step3 = ({
 const Step4 = ({
   formValues,
   handleChange,
+  handleDateChange,
   nextStep,
 }: {
   formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleDateChange: (date: Date) => void;
   nextStep: () => void;
 }) => (
-  <div>
+  <div className="mt-8">
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -430,14 +454,9 @@ const Step4 = ({
     >
       Date of first entry into SA
     </Typography>
-    <FloatingLabel
-      variant="filled"
-      label=" Date of Entry"
-      type="text"
-      name="entryDate"
+    <DatePickerComponent
       value={formValues.entryDate}
-      onChange={handleChange}
-      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+      onChange={(date: Date) => handleDateChange(date)}
     />
     <Typography
       placeholder={"Typography"}
@@ -487,17 +506,20 @@ const Step4 = ({
 
 const Step5 = ({
   formValues,
-  handleChange,
+  handleChangeTextarea,
   handleSubmit,
   handleServiceChange,
 }: {
   formValues: any;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChange: (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => void;
   handleSubmit: (e: React.FormEvent) => void;
   handleServiceChange: (value: string | undefined) => void;
+  handleChangeTextarea: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   nextStep: () => void;
 }) => (
-  <div>
+  <div className="mt-8">
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -538,27 +560,31 @@ const Step5 = ({
       </Select>
     </div>
 
-    <Typography
-      placeholder={"Typography"}
-      variant="small"
-      color="blue-gray"
-      className="mb-2 font-medium"
-    >
-      Please elaborate on the service(s) that you need:
-    </Typography>
-    <FloatingLabel
-      variant="filled"
-      label="Elaborate"
-      type="textarea"
-      aria-rowspan={4}
-      name="elaborate"
-      value={formValues.elaborate}
-      onChange={handleChange}
-      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-    />
+    <div>
+      <Typography
+        placeholder={"Typography"}
+        variant="small"
+        color="blue-gray"
+        className="mb-2 font-medium"
+      >
+        Please explain in detail what you require:
+      </Typography>
+
+      <textarea
+        className="border-t-blue-800 focus:border-t-blue-800 p-2 rounded w-full"
+        rows={4}
+        name="elaborate"
+        value={formValues.elaborate}
+        onChange={handleChangeTextarea}
+      />
+      <div className="text-gray-500 text-right">
+        {formValues.elaborate.length}/1000
+      </div>
+    </div>
 
     <DocumentUpload />
     <Button
+      className="w-full mt-4"
       placeholder={"Button"}
       size="lg"
       type="submit"

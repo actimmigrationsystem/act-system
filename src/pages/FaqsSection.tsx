@@ -5,15 +5,13 @@ import ContentContainer from '../components/ContentContainer';
 import SectionContainer from '../components/SectionContainer';
 
 const FAQsSection = () => (
-  <div style={{ backgroundColor: "#FEFEFE" }}>
-    <SectionContainer height="auto" margintop="12px" marginbottom="-40px">
-      <SectionTitle title="FAQ" className="text-center text-white" />
-      <div className="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:px-4">
-        <ContentContainer>
-          <FAQComponent faqs={faqData} />
-        </ContentContainer>
-      </div>
-    </SectionContainer>
-  </div>
+  <SectionContainer height="90vh" margintop="1rem" marginbottom="6rem">
+    <SectionTitle title="FAQ" className="text-center text-white" />
+    <div className="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:px-4">
+      <ContentContainer>
+        <FAQComponent faqs={faqData} />
+      </ContentContainer>
+    </div>
+  </SectionContainer>
 );
 export default FAQsSection;

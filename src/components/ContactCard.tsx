@@ -35,97 +35,95 @@ const ContactForm = () => {
   };
 
   return (
-    <>
-      <Card placeholder="card" className="md:shadow-none mt-6">
-        <CardHeader
-          style={{ backgroundColor: "#0e5a97" }}
-          floated={false}
-          shadow={false}
-          className="m-0 grid place-items-center px-4 py-8 text-center"
-          placeholder=""
-        >
-          <Typography variant="h5" color="white" placeholder="">
-            Contact US
-          </Typography>
-        </CardHeader>
-        <CardBody placeholder="">
-          <Tabs value={activeTab} className="overflow-visible">
-            <TabsHeader className="relative z-0 " placeholder="">
-              <Tab
-                value="enquiry"
-                onClick={() => handleTabChange("enquiry")}
-                placeholder=""
-              >
-                <span className="hidden md:block">Enquiry</span>
-                <AiFillQuestionCircle
-                  className="block md:hidden h-6 w-6"
-                  style={{ color: "#2393cb" }}
-                />
-              </Tab>
-              <Tab
-                value="appointments"
-                onClick={() => handleTabChange("contact")}
-                placeholder=""
-              >
-                <span className="hidden md:block">Appointment</span>
-                <AiFillCalendar
-                  className="block md:hidden h-6 w-6"
-                  style={{ color: "#2393cb" }}
-                />
-              </Tab>
-              <Tab
-                value="contact"
-                onClick={() => handleTabChange("contact")}
-                placeholder=""
-              >
-                <span className="hidden md:block">Call</span>
-                <IoCallOutline
-                  className="block md:hidden h-6 w-6"
-                  style={{ color: "#2393cb" }}
-                />
-              </Tab>
-            </TabsHeader>
-            <TabsBody
-              placeholder=""
-              className="!overflow-x-hidden !overflow-y-visible"
+    <Card placeholder="card" className="md:shadow-none">
+      <CardHeader
+        style={{ backgroundColor: "#0e5a97" }}
+        floated={false}
+        shadow={false}
+        className="m-0 grid place-items-center px-4 py-8 text-center"
+        placeholder="card header"
+      >
+        <Typography variant="h5" color="white" placeholder="contact text">
+          Contact US
+        </Typography>
+      </CardHeader>
+      <CardBody placeholder="card body">
+        <Tabs value={activeTab} className="overflow-visible">
+          <TabsHeader className="relative z-0" placeholder="">
+            <Tab
+              value="enquiry"
+              onClick={() => handleTabChange("enquiry")}
+              placeholder="enquiry tab"
             >
-              <TabPanel value="enquiry" className="p-0">
-                <EnquiryForm />
-              </TabPanel>
-              <TabPanel value="appointments" className="p-0">
-                <AppointmentForm />
-              </TabPanel>
+              <span className="hidden md:block">Enquiry</span>
+              <AiFillQuestionCircle
+                className="block md:hidden h-6 w-6"
+                style={{ color: "#2393cb" }}
+              />
+            </Tab>
+            <Tab
+              value="appointments"
+              onClick={() => handleTabChange("appointments")}
+              placeholder="appointments tab"
+            >
+              <span className="hidden md:block">Appointment</span>
+              <AiFillCalendar
+                className="block md:hidden h-6 w-6"
+                style={{ color: "#2393cb" }}
+              />
+            </Tab>
+            <Tab
+              value="contact"
+              onClick={() => handleTabChange("contact")}
+              placeholder="contact tab"
+            >
+              <span className="hidden md:block">Call</span>
+              <IoCallOutline
+                className="block md:hidden h-6 w-6"
+                style={{ color: "#2393cb" }}
+              />
+            </Tab>
+          </TabsHeader>
+          <TabsBody
+            placeholder="tabs body"
+            className="!overflow-x-hidden !overflow-y-visible"
+          >
+            <TabPanel value="enquiry" className="p-0">
+              <EnquiryForm />
+            </TabPanel>
+            <TabPanel value="appointments" className="p-0">
+              <AppointmentForm />
+            </TabPanel>
 
-              <TabPanel
-                value="contact"
-                className="flex flex-row md:flex-row items-center justify-center md:justify-start gap-2 mt-8 overflow-none"
-              >
-                <Tooltip placement="bottom" content="Chat with us on WhatsApp">
-                  <Button
-                    size="lg"
-                    onClick={handleWhatsAppClick}
-                    className="bg-green-500 hover:bg-green-600 text-white"
-                    placeholder=""
-                  >
-                    <FaWhatsapp className="h-6 w-6 mr-2" />
-                  </Button>
-                </Tooltip>
-                <Tooltip placement="bottom" content="Call Our Office">
-                  <Button
-                    size="lg"
-                    onClick={handlePhoneClick}
-                    className="w-full h-full bg-blue-500 hover:bg-blue-600 text-white md:w-auto"
-                    placeholder=""
-                  >
-                    <CiPhone className="h-6 w-6 mr-2" />
-                  </Button>
-                </Tooltip>
-              </TabPanel>
-            </TabsBody>
-          </Tabs>
-        </CardBody>
-      </Card>
-    </>
+            <TabPanel
+              value="contact"
+              className="flex flex-row md:flex-row items-center justify-center md:justify-start gap-2 mt-8 overflow-none"
+            >
+              <Tooltip placement="bottom" content="Chat with us on WhatsApp">
+                <Button
+                  size="lg"
+                  onClick={handleWhatsAppClick}
+                  className="bg-green-500 hover:bg-green-600 text-white"
+                  placeholder="whatsapp button"
+                >
+                  <FaWhatsapp className="h-6 w-6 mr-2" />
+                </Button>
+              </Tooltip>
+              <Tooltip placement="bottom" content="Call Our Office">
+                <Button
+                  size="lg"
+                  onClick={handlePhoneClick}
+                  className="w-full h-full bg-blue-500 hover:bg-blue-600 text-white md:w-auto"
+                  placeholder="phone button"
+                >
+                  <CiPhone className="h-6 w-6 mr-2" />
+                </Button>
+              </Tooltip>
+            </TabPanel>
+          </TabsBody>
+        </Tabs>
+      </CardBody>
+    </Card>
   );
 };
 

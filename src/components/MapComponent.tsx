@@ -1,6 +1,6 @@
 export default function MapComponent() {
   return (
-    <div className="w-full flex justify-center">
+    <div className="w-full flex justify-center mt-16">
       {" "}
       <iframe
         title="Location"

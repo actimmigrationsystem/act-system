@@ -4,7 +4,7 @@ import SectionContainer from "../components/SectionContainer";
 export default function StartNowSection() {
   return (
     <>
-      <SectionContainer margintop="auto" marginbottom="12px" height="70vh">
+      <SectionContainer margintop="auto" marginbottom="80px" height="60vh">
         <div className="flex h-full">
           <div
             className="flex-1 flex flex-col justify-center p-2"
@@ -16,11 +16,11 @@ export default function StartNowSection() {
             </p>
 
             <Link
-              to="contact-us"
+              to="contact-section"
               smooth={true}
               duration={500}
               style={{ backgroundColor: "#0D4E83" }}
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded self-center"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded self-center cursor-pointer"
             >
               Contact Us
             </Link>

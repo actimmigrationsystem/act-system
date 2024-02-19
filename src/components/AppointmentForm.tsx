@@ -1,99 +1,174 @@
-import { useState, Dispatch, SetStateAction } from "react";
+import { useState } from "react";
 import StepWizard from "react-step-wizard";
-import {
-  Typography,
-  Button,
-  Select,
-  MenuItem,
-} from "@material-tailwind/react";
-import { FloatingLabel } from "flowbite-react";
-import DateComponent from "./DateComponents";
+import { Typography, Button } from "@material-tailwind/react";
+import { RiMailSendLine } from "react-icons/ri";
+import { FloatingLabel, Select } from "flowbite-react";
+import AppointmentDatePicker from "./AppointmentDatePicker";
+
 
 const AppointmentForm = () => {
-  const [name, setName] = useState("");
-  const [phonenumber, setPhonenumber] = useState("");
-  const [contactEmail, setContactEmail] = useState("");
-  const [service, setService] = useState("");
-  const [immigrationStatus, setImmigrationStatus] = useState("");
-  const [previousAdvice, setPreviousAdvice] = useState("");
-  const [nationality, setNationality] = useState("");
-  const [serviceType, setServiceType] = useState("");
-  const [category, setCategory] = useState("");
-  const [appointmentDate, setAppointmentDate] = useState("");
+  const [formValues, setFormValues] = useState({
+    name: "",
+    surname: "",
+    _subject: "Appointment",
+    email: "",
+    serviceType: "",
+    appointmentType: "",
+    appointmentDate: "",
+    appointmentTime: "",
+  });
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormValues({ ...formValues, [e.target.name]: e.target.value });
+  };
+
+
+const handleAppointmentDateChange = (key: string, newDate: Date) => {
+  setFormValues((prevValues) => ({
+    ...prevValues,
+    [key]: newDate,
+  }));
+};
+  const handleRefreshClick = () => {
+    // refresh the page
+    setFormSubmitted(false);
+    window.location.reload();
+  };
+  const ThankYouMessage = () => (
+    <div>
+      <div
+        style={{
+          backgroundColor: "#EB6F6F",
+          color: "white",
+          padding: "10px",
+          marginBottom: "10px",
+        }}>
+        Thank you for your message! We will respond shortly.
+      </div>
+      <br />
+      <Button
+        placeholder="Refresh Page"
+        className="sendagain"
+        onClick={handleRefreshClick}
+      >
+        <RiMailSendLine
+          className="w-4 h-4 me-2"
+          style={{ marginRight: "12px" }}
+        />
+        Send Another Enquiry
+      </Button>
+    </div>
+  );
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Form Values:", formValues);
+    const form = document.createElement("form");
+    form.action = "https://formsubmit.co/enquiries@actimmigration.co.za";
+    form.method = "POST";
+    form.target = "_blank";
+
+    // form data
+    Object.entries(formValues).forEach(([name, value]) => {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = name;
+      input.value = value;
+      form.appendChild(input);
+    });
+
+    document.body.appendChild(form);
+    form.submit();
+
+    // Clear the form
+    setFormValues({
+      name: "",
+      surname: "",
+      _subject: "Appointment",
+      email: "",
+      serviceType: "",
+      appointmentType: "",
+      appointmentDate: "",
+      appointmentTime: "",
+    });
+    setFormSubmitted(true);
+  };
+
+  const handleAppointmentType = (value: string | undefined) => {
+    if (value) {
+      setFormValues((prevState) => ({
+        ...prevState,
+        appointmentType: value,
+      }));
+    }
+  };
+
+  const handleServiceChange = (value: string | undefined) => {
+    if (value) {
+      setFormValues((prevState) => ({ ...prevState, serviceType: value }));
+    }
+  };
 
   const nextStep = () => {};
 
   return (
-    <div>
-      <StepWizard>
-        <Step1
-          name={name}
-          setName={setName}
-          phonenumber={phonenumber}
-          setPhonenumber={setPhonenumber}
-          nextStep={nextStep}
-        />
-        <Step2
-          contactEmail={contactEmail}
-          setContactEmail={setContactEmail}
-          service={service}
-          setService={setService}
-          nextStep={nextStep}
-        />
-        <Step3
-          immigrationStatus={immigrationStatus}
-          setImmigrationStatus={setImmigrationStatus}
-          previousAdvice={previousAdvice}
-          setPreviousAdvice={setPreviousAdvice}
-          nextStep={nextStep}
-        />
-        <Step4
-          nationality={nationality}
-          setNationality={setNationality}
-          serviceType={serviceType}
-          setServiceType={setServiceType}
-          nextStep={nextStep}
-        />
-        <Step5
-          category={category}
-          setCategory={setCategory}
-          appointmentDate={appointmentDate}
-          setAppointmentDate={setAppointmentDate}
-        />
-      </StepWizard>
+    <div className="mt-8">
+      {formSubmitted ? (
+        <ThankYouMessage />
+      ) : (
+        <StepWizard>
+          <Step1
+            formValues={formValues}
+            handleChange={handleChange}
+            nextStep={nextStep}
+          />
+          <Step2
+            formValues={formValues}
+            handleChange={handleChange}
+            handleServiceChange={handleServiceChange}
+            handleAppointmentType={handleAppointmentType}
+            nextStep={nextStep}
+          />
+          <Step3
+            formValues={formValues}
+            handleSubmit={handleSubmit}
+            setFormValues={setFormValues}
+            handleChange={handleChange}
+            handleAppointmentDateChange={(date: Date) =>
+              handleAppointmentDateChange("appointmentDate", date)
+            }
+          />
+        </StepWizard>
+      )}
     </div>
   );
 };
 
 const Step1 = ({
-  name,
-  setName,
-  phonenumber,
-  setPhonenumber,
+  formValues,
+  handleChange,
   nextStep,
 }: {
-  name: string;
-  setName: Dispatch<SetStateAction<string>>;
-  phonenumber: string;
-  setPhonenumber: Dispatch<SetStateAction<string>>;
+  formValues: any;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   nextStep: () => void;
 }) => (
-  <div>
+  <div className="mt-8">
     <Typography
       placeholder={"Typography"}
       variant="small"
       color="blue-gray"
       className="mb-2 font-medium"
     >
-      Full Name
+      Name
     </Typography>
     <FloatingLabel
       variant="filled"
-      label="Fullname"
+      label="Name"
       type="text"
       name="name"
-      value={name}
-      onChange={(event) => setName(event.target.value)}
+      value={formValues.name}
+      onChange={handleChange}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     />
     <Typography
@@ -102,15 +177,33 @@ const Step1 = ({
       color="blue-gray"
       className="mb-2 font-medium"
     >
-      Phone number
+      Surname
     </Typography>
     <FloatingLabel
       variant="filled"
-      label="Phone Number"
+      label="Surname"
+      type="text"
+      name="surname"
+      value={formValues.surname}
+      onChange={handleChange}
+      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+    />
+
+    <Typography
+      placeholder={"Typography"}
+      variant="small"
+      color="blue-gray"
+      className="mb-2 font-medium"
+    >
+      Contact number
+    </Typography>
+    <FloatingLabel
+      variant="filled"
+      label="Contact Number"
       type="tel"
       name="phonenumber"
-      value={phonenumber}
-      onChange={(event) => setPhonenumber(event.target.value)}
+      value={formValues.phonenumber}
+      onChange={handleChange}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     />
     <Button
@@ -125,210 +218,73 @@ const Step1 = ({
 );
 
 const Step2 = ({
-  contactEmail,
-  setContactEmail,
-  service,
-  setService,
+  formValues,
+  handleChange,
+  handleServiceChange,
+  handleAppointmentType,
   nextStep,
 }: {
-  contactEmail: string;
-  setContactEmail: Dispatch<SetStateAction<string>>;
-  service: string;
-  setService: Dispatch<SetStateAction<string>>;
+  formValues: any;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleServiceChange: (value: string | undefined) => void;
+  handleAppointmentType: (value: string | undefined) => void;
   nextStep: () => void;
 }) => (
-  <div>
-    <div>
-      <Typography
-        placeholder={"Typography"}
-        variant="small"
-        color="blue-gray"
-        className="mb-2 font-medium"
-      >
-        Contact Email
-      </Typography>
-      <FloatingLabel
-        variant="filled"
-        label="Your Email Address"
-        type="email"
-        name="email"
-        value={contactEmail}
-        onChange={(event) => setContactEmail(event.target.value)}
-        className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-      />
-    </div>
-
-    <div>
-      <Typography
-        placeholder={"Typography"}
-        variant="small"
-        color="blue-gray"
-        className="mb-2 font-medium"
-      >
-        Which service do you require?
-      </Typography>
-      <Select
-        placeholder={"Select"}
-        value={service}
-        onChange={(value) => {
-          if (value) {
-            setService(value);
-          }
-        }}
-        className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-      >
-        <MenuItem placeholder="" value="" disabled>
-          Visa
-        </MenuItem>
-        <MenuItem placeholder="service1" value="service1">
-          Permits
-        </MenuItem>
-        <MenuItem placeholder="service2" value="service2">
-          Appeals
-        </MenuItem>
-        <MenuItem placeholder="service3" value="service3">
-          Legal Assistance(Other)
-        </MenuItem>
-      </Select>
-    </div>
-    <Button
-      style={{ backgroundColor: "#0e5a97" }}
-      type="button"
-      placeholder=""
-      onClick={nextStep}
+  <div className="mt-8">
+    <Typography
+      placeholder={"Typography"}
+      variant="small"
+      color="blue-gray"
+      className="mb-2 font-medium"
     >
-      Next
-    </Button>
-  </div>
-);
-
-const Step3 = ({
-  immigrationStatus,
-  setImmigrationStatus,
-  previousAdvice,
-  setPreviousAdvice,
-  nextStep,
-}: {
-  immigrationStatus: string;
-  setImmigrationStatus: Dispatch<SetStateAction<string>>;
-  previousAdvice: string;
-  setPreviousAdvice: Dispatch<SetStateAction<string>>;
-  nextStep: () => void;
-}) => (
-  <div>
-    <div>
-      <Typography
-        placeholder={"Typography"}
-        variant="small"
-        color="blue-gray"
-        className="mb-2 font-medium"
-      >
-        What is your current immigration status?
-      </Typography>
-      <Select
-        placeholder={"Select"}
-        value={immigrationStatus}
-        onChange={(value) => {
-          if (value) {
-            setImmigrationStatus(value);
-          }
-        }}
-        className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-      >
-        <MenuItem placeholder="" value="" disabled>
-          No Status
-        </MenuItem>
-        <MenuItem placeholder="service1" value="service1">
-          Work Visa
-        </MenuItem>
-        <MenuItem placeholder="service2" value="service2">
-          Permanent Resident
-        </MenuItem>
-        <MenuItem placeholder="service3" value="service3">
-          Asylum
-        </MenuItem>
-      </Select>
-    </div>
-    <div>
-      <Typography
-        placeholder={"Typography"}
-        variant="small"
-        color="blue-gray"
-        className="mb-2 font-medium"
-      >
-        Have you received previous advice on this before?
-      </Typography>
-      <Select
-        placeholder={"Select"}
-        value={previousAdvice}
-        onChange={(value) => {
-          if (value) {
-            setPreviousAdvice(value);
-          }
-        }}
-        className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-      >
-        <MenuItem placeholder="" value="Select Option">
-          Yes
-        </MenuItem>
-        <MenuItem placeholder="No" value="no">
-          No
-        </MenuItem>
-      </Select>
-    </div>
-    <Button
-      style={{ backgroundColor: "#0e5a97" }}
-      type="button"
-      placeholder=""
-      onClick={nextStep}
+      Email
+    </Typography>
+    <FloatingLabel
+      variant="filled"
+      label="Email"
+      type="email"
+      name="email"
+      value={formValues.email}
+      onChange={handleChange}
+      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+    />
+    <Typography
+      placeholder={"Typography"}
+      variant="small"
+      color="blue-gray"
+      className="mb-2 font-medium"
     >
-      Next
-    </Button>
-  </div>
-);
-
-const Step4 = ({
-  nationality,
-  setNationality,
-  serviceType,
-  setServiceType,
-  nextStep,
-}: {
-  nationality: string;
-  setNationality: Dispatch<SetStateAction<string>>;
-  serviceType: string;
-  setServiceType: Dispatch<SetStateAction<string>>;
-  nextStep: () => void;
-}) => (
-  <div>
-    <div>
-      <Typography
-        placeholder={"Typography"}
-        variant="small"
-        color="blue-gray"
-        className="mb-2 font-medium"
-      >
-        What is your nationality?
-      </Typography>
+      What service do you require?
+    </Typography>
+    <div className="max-w-full">
       <Select
-        placeholder={"Select"}
-        value={nationality}
-        onChange={(value) => {
-          if (value) {
-            setNationality(value);
-          }
-        }}
-        className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+        id="serviceType"
+        name="serviceType"
+        onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
+          handleServiceChange(event.target.value)
+        }
+        value={formValues.serviceType}
       >
-        <MenuItem placeholder="" value="" disabled>
-          Zimbabwe
-        </MenuItem>
-        <MenuItem placeholder="service1" value="service1">
-          Kenya
-        </MenuItem>
-        <MenuItem placeholder="service2" value="service2">
-          Ehtiopia
-        </MenuItem>
+        <option> Asylum seeker appeal/review</option>
+        <option> Asylum seeker visa extension</option>
+        <option> Asylum seeker visa extension</option>
+        <option> Critical skills visa application</option>
+        <option> Letter of good cause application (FORM 20)</option>
+        <option> Naturalisation application</option>
+        <option>Permanent residence appeal</option>
+        <option> Permanent residence application</option>
+        <option> Prohibition appeal</option>
+        <option> PRP Exemptions</option>
+        <option>PRP Waiver</option>
+        <option>Refugee permit extension</option>
+        <option>Standing Committee application</option>
+        <option>Study visa application</option>
+        <option>Study visa rejection</option>
+        <option> Temporary residence renewal</option>
+        <option>TRV Exemptions</option>
+        <option>TRV Waiver</option>
+        <option>ZEP Migration</option>
+        <option> ZEP Waiver</option>
       </Select>
     </div>
     <div>
@@ -340,119 +296,73 @@ const Step4 = ({
       >
         How would you like to receive this service?
       </Typography>
-      <Select
-        placeholder={"Select"}
-        value={serviceType}
-        onChange={(value) => {
-          if (value) {
-            setServiceType(value);
+      <div className="max-w-full">
+        <Select
+          id="appointmentType"
+          name="appointmentType"
+          onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
+            handleAppointmentType(event.target.value)
           }
-        }}
-        className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+          value={formValues.appointmentType}
+        >
+          <option>Phone call</option>
+          <option>Email</option>
+          <option>Remote(zoom|skype)</option>
+          <option>In-Person(Office)</option>
+        </Select>
+      </div>
+      <Button
+        style={{ backgroundColor: "#0e5a97" }}
+        type="button"
+        placeholder=""
+        onClick={nextStep}
       >
-        <MenuItem placeholder="" value="" disabled>
-          In Person-Office
-        </MenuItem>
-        <MenuItem placeholder="service1" value="service1">
-          Remote(Zoom)
-        </MenuItem>
-        <MenuItem placeholder="service2" value="service2">
-          Email
-        </MenuItem>
-        <MenuItem placeholder="service3" value="service3">
-          Phonecall
-        </MenuItem>
-      </Select>
+        Next
+      </Button>
     </div>
-    <Button
-      style={{ backgroundColor: "#0e5a97" }}
-      type="button"
-      placeholder=""
-      onClick={nextStep}
-    >
-      Next
-    </Button>
   </div>
 );
 
-
-const Step5 = ({
-  category,
-  setCategory,
-  appointmentDate,
-  setAppointmentDate,
+const Step3 = ({
+  formValues,
+  handleAppointmentDateChange,
+  handleSubmit,
 }: {
-  category: string;
-  setCategory: Dispatch<SetStateAction<string>>;
-  appointmentDate: string;
-  setAppointmentDate: Dispatch<SetStateAction<string>>;
+  formValues: any;
+  setFormValues: React.Dispatch<React.SetStateAction<any>>;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSubmit: (e: React.FormEvent) => void;
+  handleAppointmentDateChange: (date: Date) => void;
 }) => (
-  <>
-    <div>
+  <div className="mt-8">
+    <div className="mt-8">
       <Typography
         placeholder={"Typography"}
         variant="small"
         color="blue-gray"
         className="mb-2 font-medium"
       >
-        Select legal category
+        Select appointment Date & Time
       </Typography>
-      <Select
-        placeholder={"Select"}
-        value={category}
-        onChange={(value) => {
-          if (value) {
-            setCategory(value);
-          }
-        }}
-        className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-      >
-        <MenuItem placeholder="" value="" disabled>
-          Visa
-        </MenuItem>
-        <MenuItem placeholder="service1" value="service1">
-          Permits
-        </MenuItem>
-        <MenuItem placeholder="service2" value="service2">
-          Appeals
-        </MenuItem>
-        <MenuItem placeholder="service2" value="service2">
-          Legal Advice
-        </MenuItem>
-        <MenuItem placeholder="service2" value="service2">
-          Conveyance
-        </MenuItem>
-        <MenuItem placeholder="service2" value="service2">
-          Legal Represenation
-        </MenuItem>
-        <MenuItem placeholder="service2" value="service2">
-          Commision of Oaths
-        </MenuItem>
-      </Select>
-    </div>
-    <div>
-      <Typography
-        placeholder={"Typography"}
-        variant="small"
-        color="blue-gray"
-        className="mb-2 font-medium"
-      >
-        Select Date
-      </Typography>
-      <DateComponent
-        appointmentDate={appointmentDate}
-        setAppointmentDate={setAppointmentDate}
+
+      <AppointmentDatePicker
+        value={formValues.appointmentDate}
+        onChange={(date: Date) => handleAppointmentDateChange(date)}
       />
     </div>
-      <Button
+
+    <Button
       placeholder={"Button"}
       size="lg"
       type="submit"
       style={{ backgroundColor: "#0e5a97" }}
+      onClick={handleSubmit}
+      className="mt-8 w-full"
     >
       Book Appointment
     </Button>
-   </>
+  </div>
 );
+
 
 export default AppointmentForm;

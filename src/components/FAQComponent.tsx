@@ -43,7 +43,7 @@ const FAQComponent = ({ faqs }: FAQComponentProps) => {
     setOpenIndex(openIndex === index ? null : index);
 
   return (
-    <div className="w-full mx-auto px-20">
+    <div className="w-full mx-auto px-20 mt-2">
       {faqs.map((faq, index) => (
         <Accordion
           placeholder="Accordion"
