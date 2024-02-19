@@ -173,6 +173,9 @@ const handleDateChange = (field: string, value: Date) => {
           />
           <Step4
             formValues={formValues}
+            handleDateChange={(date: Date) =>
+              handleDateChange("entryDate", date)
+            }
             handleChange={handleChange}
             nextStep={nextStep}
           />
@@ -434,10 +437,12 @@ const Step3 = ({
 const Step4 = ({
   formValues,
   handleChange,
+  handleDateChange,
   nextStep,
 }: {
   formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleDateChange: (date: Date) => void;
   nextStep: () => void;
 }) => (
   <div className="mt-8">
@@ -449,14 +454,9 @@ const Step4 = ({
     >
       Date of first entry into SA
     </Typography>
-    <FloatingLabel
-      variant="filled"
-      label=" Date of Entry"
-      type="text"
-      name="entryDate"
+    <DatePickerComponent
       value={formValues.entryDate}
-      onChange={handleChange}
-      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+      onChange={(date: Date) => handleDateChange(date)}
     />
     <Typography
       placeholder={"Typography"}
