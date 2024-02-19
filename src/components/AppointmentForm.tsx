@@ -342,7 +342,7 @@ const Step3 = ({
         color="blue-gray"
         className="mb-2 font-medium"
       >
-        Select appointment date
+        Select appointment Date & Time
       </Typography>
 
       <AppointmentDatePicker
