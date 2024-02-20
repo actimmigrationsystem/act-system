@@ -4,8 +4,8 @@ import Img1 from "../assets/services/1.jpg";
 import Img3 from "../assets/services/3.jpg";
 import Img4 from "../assets/services/4.jpg";
 import Img2 from "../assets/services/2.jpg";
-import ContentContainer from "../components/ContentContainer";
 import SectionContainer from "../components/SectionContainer";
+import ContentContainer from "../components/ContentContainer";
 
 const serviceData = [
   {
@@ -33,24 +33,23 @@ const serviceData = [
       "The temporary residence visa must be renewed while the permanent residence application is still pending.",
   },
 ];
+
 const ServicesSection = () => (
-  <>
-    <SectionContainer height="auto" margintop="2rem" marginbottom="2rem">
-      <SectionTitle title="Services" />
-      <ContentContainer>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mt-8">
-          {serviceData.map((service) => (
-            <ServiceCard
-              key={service.title}
-              image={service.image}
-              title={service.title}
-              description={service.description}
-            />
-          ))}
-        </div>
-      </ContentContainer>
-    </SectionContainer>
-  </>
+  <SectionContainer>
+    <SectionTitle title="Services" />
+    <ContentContainer>
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 px-8">
+        {serviceData.map((service, index) => (
+          <ServiceCard
+            key={index}
+            image={service.image}
+            title={service.title}
+            description={service.description}
+          />
+        ))}
+      </div>
+    </ContentContainer>
+  </SectionContainer>
 );
 
 export default ServicesSection;

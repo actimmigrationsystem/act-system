@@ -9,18 +9,18 @@ interface SectionTitleProps {
 const StyledTitleContainer = styled.div`
   text-align: center;
   position: relative;
-  margin-bottom: 50px;
-  margin-top: -80px;
+  margin-bottom: 40px;
+  margin-top: -60px;
 `;
 
 const StyledUnderline = styled.div`
   position: absolute;
-  bottom: -12px;
+  bottom: -4px;
   left: 50%;
   transform: translateX(-50%);
   width: 5%;
   height: 2px;
-  background-color: #0E59974F;
+  background-color: #0e5a97;
 `;
 
 const SectionTitle = ({ title, className }: SectionTitleProps) => (

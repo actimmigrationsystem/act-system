@@ -1,11 +1,10 @@
 import { Link } from "react-scroll";
-import SectionContainer from "../components/SectionContainer";
 
 export default function StartNowSection() {
   return (
     <>
-      <SectionContainer margintop="auto" marginbottom="80px" height="60vh">
-        <div className="flex h-full">
+      <div className="container mx-auto mt-8 mb-16 max-w-full">
+        <div className="flex h-[400px] w-full">
           <div
             className="flex-1 flex flex-col justify-center p-2"
             style={{ backgroundColor: "#0e5a97" }}
@@ -35,7 +34,7 @@ export default function StartNowSection() {
             }}
           />
         </div>
-      </SectionContainer>
+      </div>
     </>
   );
 }

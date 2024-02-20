@@ -44,31 +44,32 @@ const FAQComponent = ({ faqs }: FAQComponentProps) => {
 
   return (
     <div className="w-full mx-auto px-20 mt-2">
-      {faqs.map((faq, index) => (
-        <Accordion
-          placeholder="Accordion"
-          key={faq.id}
-          open={openIndex === index}
-          icon={<Icon open={openIndex === index} />}
-        >
-          <AccordionHeader
-            placeholder="Accordion Header"
-            onClick={() => handleOpen(index)}
-          >
-            {faq.question}
-          </AccordionHeader>
-
-          <AccordionBody>
-            <Typography
+      <div className="max-w-[1230px] mx-auto">
+          {faqs.map((faq, index) => (
+            <Accordion
               placeholder="Accordion"
-              className="mb-2 text-xl mt-6 font-bold tracking-tight text-gray-500 dark:text-white text-center"
+              key={faq.id}
+              open={openIndex === index}
+              icon={<Icon open={openIndex === index} />}
             >
-                {" "}
-                {faq.answer}
-            </Typography>
-          </AccordionBody>
-        </Accordion>
-      ))}
+              <AccordionHeader
+                placeholder="Accordion Header"
+                onClick={() => handleOpen(index)}
+              >
+                {faq.question}
+              </AccordionHeader>
+
+              <AccordionBody>
+                <Typography
+                  placeholder="Accordion"
+                  className="mb-2 text-xl mt-6 font-bold tracking-tight text-gray-500 dark:text-white text-center"
+                >
+                  {faq.answer}
+                </Typography>
+              </AccordionBody>
+            </Accordion>
+          ))}
+      </div>
     </div>
   );
 };
