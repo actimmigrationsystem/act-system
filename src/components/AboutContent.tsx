@@ -1,14 +1,14 @@
 import { ReactNode } from "react";
-import { FaMedal, FaPoll, FaLightbulb } from "react-icons/fa";
+import { FaGavel, FaUserGraduate, FaRegLightbulb } from "react-icons/fa";
 import ArticleComponent from "./ArticleComponent";
 
 interface AboutPromptProps {
   children: ReactNode;
 }
 
-const AboutContent= ({ children }: AboutPromptProps) => (
+const AboutContent = ({ children }: AboutPromptProps) => (
   <>
-  <div className="flex flex-wrap text-center justify-center">
+    <div className="flex flex-wrap text-center justify-center">
       <div className="w-full lg:w-6/12 px-4">
         <div className="text-lg leading-relaxed mt-4 mb-4 text-gray-500">
           {children}
@@ -17,24 +17,28 @@ const AboutContent= ({ children }: AboutPromptProps) => (
     </div>
     <div className="flex flex-wrap mt-12 justify-center gap-8">
       <div className="w-full lg:w-3/12 px-4 text-center flex flex-col items-center">
-        {" "}
-        <div className="text-gray-900 p-3 shadow-lg rounded-full bg-white inline-flex items-center justify-center">
-          <FaMedal className="text-xl" />
+        <div
+          className="text-gray-900 p-3 shadow-lg rounded-full bg-white inline-flex items-center justify-center"
+          style={{ color: "#0e5a97" }}
+        >
+          <FaGavel className="text-xl" />
         </div>
         <ArticleComponent
           heading="Who we are"
           lead=""
           subheading=""
-          paragraph="We are a team of legal practitioners and consultants, specialising in Immigration and Labour-Related matters."
+          paragraph="We are a team of legal practitioners and consultants, specializing in Immigration and Labour-Related matters."
           subheading2={""}
           paragraph2={""}
           imageSrc={""}
         />
       </div>
       <div className="w-full lg:w-3/12 px-4 text-center flex flex-col items-center">
-        {" "}
-        <div className="text-gray-900 p-3 shadow-lg rounded-full bg-white inline-flex items-center justify-center">
-          <FaPoll className="text-xl" />
+        <div
+          className="text-gray-900 p-3 shadow-lg rounded-full bg-white inline-flex items-center justify-center"
+          style={{ color: "#0e5a97" }}
+        >
+          <FaUserGraduate className="text-xl" />
         </div>
         <ArticleComponent
           heading="Our Director"
@@ -47,9 +51,11 @@ const AboutContent= ({ children }: AboutPromptProps) => (
         />
       </div>
       <div className="w-full lg:w-3/12 px-4 text-center flex flex-col items-center">
-        {" "}
-        <div className="text-gray-900 p-3 shadow-lg rounded-full bg-white inline-flex items-center justify-center">
-          <FaLightbulb className="text-xl" />
+        <div
+          className="text-gray-900 p-3 shadow-lg rounded-full bg-white inline-flex items-center justify-center"
+          style={{ color: "#0e5a97" }}
+        >
+          <FaRegLightbulb className="text-xl" />
         </div>
         <ArticleComponent
           heading="Our Mission"
@@ -62,7 +68,7 @@ const AboutContent= ({ children }: AboutPromptProps) => (
         />
       </div>
     </div>
-    </>
+  </>
 );
 
 export default AboutContent;
