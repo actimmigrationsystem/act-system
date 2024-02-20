@@ -43,32 +43,32 @@ const FAQComponent = ({ faqs }: FAQComponentProps) => {
     setOpenIndex(openIndex === index ? null : index);
 
   return (
-    <div className="w-full mx-auto px-20 mt-2">
-      <div className="max-w-[1230px] mx-auto">
-          {faqs.map((faq, index) => (
-            <Accordion
-              placeholder="Accordion"
-              key={faq.id}
-              open={openIndex === index}
-              icon={<Icon open={openIndex === index} />}
+    <div className="w-full rounded-lg mx-auto px-20 mt-2 shadow-[0px_20px_95px_0px_rgba(201,203,204,0.30)] dark:shadow-[0px_20px_95px_0px_rgba(0,0,0,0.30)] sm:p-8 lg:px-6 xl:px-8">
+      <div className="max-w-[1230px] mx-auto rounded-lg bg-white">
+        {faqs.map((faq, index) => (
+          <Accordion
+            placeholder="Accordion"
+            key={faq.id}
+            open={openIndex === index}
+            icon={<Icon open={openIndex === index} />}
+          >
+            <AccordionHeader
+              placeholder="Accordion Header"
+              onClick={() => handleOpen(index)}
             >
-              <AccordionHeader
-                placeholder="Accordion Header"
-                onClick={() => handleOpen(index)}
-              >
-                {faq.question}
-              </AccordionHeader>
+              {faq.question}
+            </AccordionHeader>
 
-              <AccordionBody>
-                <Typography
-                  placeholder="Accordion"
-                  className="mb-2 text-xl mt-6 font-bold tracking-tight text-gray-500 dark:text-white text-center"
-                >
-                  {faq.answer}
-                </Typography>
-              </AccordionBody>
-            </Accordion>
-          ))}
+            <AccordionBody>
+              <Typography
+                placeholder="Accordion"
+                className="mb-2 text-xl mt-6 font-bold tracking-tight text-gray-500 dark:text-white text-center"
+              >
+                {faq.answer}
+              </Typography>
+            </AccordionBody>
+          </Accordion>
+        ))}
       </div>
     </div>
   );

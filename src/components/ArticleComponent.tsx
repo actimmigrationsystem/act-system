@@ -22,7 +22,7 @@ const ArticleComponent = ({
   imageSrc,
 }: ArticleComponentProps) => {
   return (
-    <div className="p-2 max-w-[400px] mx-auto">
+    <div className="p-2 mx-auto">
       <article className="">
         {imageSrc && (
           <img
@@ -67,11 +67,11 @@ const ArticleComponent = ({
 };
 
 ArticleComponent.propTypes = {
-  heading: PropTypes.string.isRequired,
-  lead: PropTypes.string.isRequired,
-  subheading: PropTypes.string.isRequired,
+  heading: PropTypes.string,
+  lead: PropTypes.string,
+  subheading: PropTypes.string,
   subheading2: PropTypes,
-  paragraph: PropTypes.string.isRequired,
+  paragraph: PropTypes.string,
   paragraph2: PropTypes,
   imageSrc: PropTypes.string,
 };
