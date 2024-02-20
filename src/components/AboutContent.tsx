@@ -1,12 +1,12 @@
 import { ReactNode } from "react";
 import { FaMedal, FaPoll, FaLightbulb } from "react-icons/fa";
-import ArticleComponent from "../components/ArticleComponent";
+import ArticleComponent from "./ArticleComponent";
 
 interface AboutPromptProps {
   children: ReactNode;
 }
 
-const AboutPrompt = ({ children }: AboutPromptProps) => (
+const AboutContent= ({ children }: AboutPromptProps) => (
   <>
   <div className="flex flex-wrap text-center justify-center">
       <div className="w-full lg:w-6/12 px-4">
@@ -65,4 +65,4 @@ const AboutPrompt = ({ children }: AboutPromptProps) => (
     </>
 );
 
-export default AboutPrompt;
+export default AboutContent;
