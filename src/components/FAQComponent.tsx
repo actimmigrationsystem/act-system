@@ -55,6 +55,7 @@ const FAQComponent = ({ faqs }: FAQComponentProps) => {
             <AccordionHeader
               placeholder="Accordion Header"
               onClick={() => handleOpen(index)}
+              className="mt-1 text-lg font-semibold text-dark dark:text-white"
             >
               {faq.question}
             </AccordionHeader>
