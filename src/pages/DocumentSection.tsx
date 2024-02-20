@@ -6,7 +6,7 @@ import SectionContainer from "../components/SectionContainer";
 export default function DocumentSection() {
   return (
     <>
-      <SectionContainer margintop="10px" marginbottom="20px" height="auto">
+      <SectionContainer>
         <SectionTitle title="Documents" className="text-center text-white" />
         <div className="bg-gray-700 p-2">
           <ContentContainer>

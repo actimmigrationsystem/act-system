@@ -1,35 +1,27 @@
-import React, { ReactNode } from "react";
-import styled from "styled-components";
+import PropTypes from "prop-types";
 
-interface StyledSectionContainerProps {
-  height: string;
-  margintop: string;
-  marginbottom: string;
+interface SectionContainerProps {
+  children: React.ReactNode;
+  marginTop?: string;
+  marginBottom?: string;
 }
 
-const StyledSectionContainer = styled.div<StyledSectionContainerProps>`
-  height: ${(props) => props.height};
-  margin-top: ${(props) => props.margintop};
-  margin-bottom: ${(props) => props.marginbottom};
-`;
-
-interface SectionContainerProps extends StyledSectionContainerProps {
-  children: ReactNode;
-}
-
-const SectionContainer: React.FC<SectionContainerProps> = ({
+const SectionContainer = ({
   children,
-  height,
-  margintop,
-  marginbottom,
-}) => (
-  <StyledSectionContainer
-    height={height}
-    margintop={margintop}
-    marginbottom={marginbottom}
-  >
-    {children}
-  </StyledSectionContainer>
-);
+  marginTop = "3rem",
+  marginBottom = "2rem",
+}: SectionContainerProps) => {
+  return (
+    <div className="container mx-auto" style={{ marginTop, marginBottom }}>
+      {children}
+    </div>
+  );
+};
+
+SectionContainer.propTypes = {
+  children: PropTypes.node.isRequired,
+  marginTop: PropTypes.string,
+  marginBottom: PropTypes.string,
+};
 
 export default SectionContainer;

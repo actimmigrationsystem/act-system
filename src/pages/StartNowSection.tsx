@@ -1,20 +1,18 @@
 import { Link } from "react-scroll";
-import SectionContainer from "../components/SectionContainer";
 
 export default function StartNowSection() {
   return (
     <>
-      <SectionContainer margintop="auto" marginbottom="80px" height="60vh">
-        <div className="flex h-full">
+      <div className="container mx-auto mt-8 mb-16 max-w-full">
+        <div className="flex h-[460px] w-full x-6 py-12">
           <div
             className="flex-1 flex flex-col justify-center p-2"
             style={{ backgroundColor: "#0e5a97" }}
           >
-            <p className="pt-2 mb-8 text-2xl text-center text-white">
+            <p className="pt-2 mb-8 mt-6 md:text-3xl text-2xl text-center text-white">
               Our expert knowledge goes a long way in ensuring that our clients
               receive only the best.
             </p>
-
             <Link
               to="contact-section"
               smooth={true}
@@ -35,7 +33,7 @@ export default function StartNowSection() {
             }}
           />
         </div>
-      </SectionContainer>
+      </div>
     </>
   );
 }

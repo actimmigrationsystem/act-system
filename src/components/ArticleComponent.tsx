@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import PropTypes from "prop-types";
+import { Typography } from "@material-tailwind/react";
 
 interface ArticleComponentProps {
   heading: string;
@@ -10,6 +11,7 @@ interface ArticleComponentProps {
   paragraph2: string;
   imageSrc: string;
 }
+
 const ArticleComponent = ({
   heading,
   lead,
@@ -20,7 +22,7 @@ const ArticleComponent = ({
   imageSrc,
 }: ArticleComponentProps) => {
   return (
-    <div className="p-2">
+    <div className="p-2 mx-auto">
       <article className="">
         {imageSrc && (
           <img
@@ -30,12 +32,30 @@ const ArticleComponent = ({
           />
         )}
         <div>
-          <h2 className="text-2xl font-bold mb-4">{heading}</h2>
-          <p className="text-lg text-gray-600 mb-6">{lead}</p>
-          <h2 className="text-2xl font-bold mb-2">{subheading}</h2>
-          <p className="text-lg text-gray-700 mb-4">{paragraph}</p>
+          <Typography
+            variant="h2"
+            className="text-2xl font-bold mb-4"
+            placeholder=""
+          >
+            {heading}
+          </Typography>
+          <Typography
+            placeholder=""
+            variant="h3"
+            className="text-lg text-gray-600 mb-6"
+          >
+            {lead}
+          </Typography>
+           <Typography
+            placeholder=""
+            variant="h2" className="text-2xl font-bold mb-2">{subheading}</Typography>
+           <Typography
+            placeholder=""
+            variant="h5" className="text-lg text-gray-700 mb-4">{paragraph}</Typography>
           {subheading2 && (
-            <h2 className="text-2xl font-bold mb-4">{subheading2}</h2>
+             <Typography
+            placeholder=""
+            variant="h3" className="text-2xl font-bold mb-4">{subheading2}</Typography>
           )}
           {paragraph2 && (
             <p className="text-lg text-gray-700 mb-4">{paragraph2}</p>
@@ -47,19 +67,12 @@ const ArticleComponent = ({
 };
 
 ArticleComponent.propTypes = {
-  heading: PropTypes.string.isRequired,
-  lead: PropTypes.string.isRequired,
-  subheading: PropTypes.string.isRequired,
-  subheading2: PropTypes.string,
-  paragraph: PropTypes.string.isRequired,
-  paragraph2: PropTypes.string,
+  heading: PropTypes.string,
+  lead: PropTypes.string,
+  subheading: PropTypes.string,
+  subheading2: PropTypes,
+  paragraph: PropTypes.string,
+  paragraph2: PropTypes,
   imageSrc: PropTypes.string,
 };
-
-ArticleComponent.defaultProps = {
-  subheading2: "",
-  paragraph2: "",
-  imageSrc: "",
-};
-
 export default ArticleComponent;
