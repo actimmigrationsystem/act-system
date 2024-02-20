@@ -7,8 +7,8 @@ interface AboutPromptProps {
 }
 
 const AboutPrompt = ({ children }: AboutPromptProps) => (
-  <div className="px-4 px-4 lg:pt-2 lg:pb-64 max-w-7xl">
-    <div className="flex flex-wrap text-center justify-center">
+  <>
+  <div className="flex flex-wrap text-center justify-center">
       <div className="w-full lg:w-6/12 px-4">
         <div className="text-lg leading-relaxed mt-4 mb-4 text-gray-500">
           {children}
@@ -62,7 +62,7 @@ const AboutPrompt = ({ children }: AboutPromptProps) => (
         />
       </div>
     </div>
-  </div>
+    </>
 );
 
 export default AboutPrompt;
