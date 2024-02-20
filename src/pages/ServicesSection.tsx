@@ -4,6 +4,7 @@ import Img1 from "../assets/services/1.jpg";
 import Img3 from "../assets/services/3.jpg";
 import Img4 from "../assets/services/4.jpg";
 import Img2 from "../assets/services/2.jpg";
+import Img5 from "../assets/services/5.jpeg";
 import SectionContainer from "../components/SectionContainer";
 import ContentContainer from "../components/ContentContainer";
 
@@ -15,7 +16,7 @@ const serviceData = [
       "We specialize in assisting individuals with temporary and permanent residence visa applications, as well as SCRA reviews and appeals.",
   },
   {
-    image: Img2,
+    image: Img5,
     title: "SCRA reviews and appeals",
     description:
       "Our SCRA reviews and appeals services are designed to help you navigate the process efficiently, ensuring that your rights are protected.",
@@ -38,6 +39,7 @@ const serviceData = [
     description:
       "We offer assistance with permanent residence permit applications, ensuring that your temporary residence visa is renewed while your application is pending.",
   },
+
 ];
 
 
