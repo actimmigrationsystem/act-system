@@ -1,9 +1,7 @@
 import SectionTitle from "../components/SectionTitle";
-import ContactCard from "../components/ContactCard";
 import MapComponent from "../components/MapComponent";
 import ContentContainer from "../components/ContentContainer";
 import SectionContainer from "../components/SectionContainer";
-import { Typography } from "@material-tailwind/react";
 import ContactContentStart from "../components/contactsection/ContactContentStart";
 import ContactContentEnd from "../components/contactsection/ContactContentEnd";
 
@@ -17,6 +15,7 @@ const ContactUsSection = () => {
          <ContactContentStart />
           <ContactContentEnd />
         </div>
+        <MapComponent />
       </ContentContainer>
     </SectionContainer>
   );
