@@ -2,15 +2,8 @@ import React from 'react';
 import ContactBgBottomLeft from "./ContactBgBottomLeft";
 import ContactBgRight from "./ContactBgRight";
 import ContactBgTop from "./ContactBgTop";
-import ContactInputBox from "./ContactInputBox";
-import ContactTextArea from "./ContactTextArea";
-import ContactCard from "../ContactCard";
 import {
-  Card,
-  CardHeader,
-  CardBody,
   Button,
-  Typography,
   Tabs,
   TabsHeader,
   TabsBody,

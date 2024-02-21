@@ -570,13 +570,15 @@ const Step5 = ({
         Please explain in detail what you require:
       </Typography>
 
-      <textarea
-        className="border-t-blue-800 focus:border-t-blue-800 p-2 rounded w-full"
-        rows={4}
-        name="elaborate"
-        value={formValues.elaborate}
-        onChange={handleChangeTextarea}
-      />
+      <div className="mb-6">
+        <textarea
+          rows={4}
+          name="elaborate"
+          value={formValues.elaborate}
+          onChange={handleChangeTextarea}
+          className="w-full resize-none rounded border border-stroke px-[14px] py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
+        />
+      </div>
       <div className="text-gray-500 text-right">
         {formValues.elaborate.length}/1000
       </div>
