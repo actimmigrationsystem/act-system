@@ -3,14 +3,14 @@ import ServiceCard from "../components/ServiceCard";
 import Img1 from "../assets/services/1.jpg";
 import Img3 from "../assets/services/3.jpg";
 import Img4 from "../assets/services/4.jpg";
-import Img2 from "../assets/services/2.jpg";
+import Img6 from "../assets/services/6.png";
 import Img5 from "../assets/services/5.jpeg";
 import SectionContainer from "../components/SectionContainer";
 import ContentContainer from "../components/ContentContainer";
 
 const serviceData = [
   {
-    image: Img2,
+    image: Img6,
     title: "Temporary and permanent residence visas",
     description:
       "We specialize in assisting individuals with temporary and permanent residence visa applications, as well as SCRA reviews and appeals.",
@@ -39,7 +39,6 @@ const serviceData = [
     description:
       "We offer assistance with permanent residence permit applications, ensuring that your temporary residence visa is renewed while your application is pending.",
   },
-
 ];
 
 
