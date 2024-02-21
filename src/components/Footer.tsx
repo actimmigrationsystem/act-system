@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from "react-scroll";
 import {
   FaLinkedin, FaWhatsapp, FaFacebook,
 } from 'react-icons/fa';
@@ -30,14 +31,22 @@ const CustomFooter = () => (
               </h2>
               <ul className="text-gray-200 dark:text-gray-200 font-medium">
                 <li className="mb-4">
-                  <a href="/" className="hover:underline">
+                  <Link
+                    to="service-section"
+                    smooth={true}
+                    className="cursor-pointer"
+                  >
                     Services
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/" className="hover:underline">
-                    Documents
-                  </a>
+                  <Link
+                    to="about-section"
+                    smooth={true}
+                    className="cursor-pointer"
+                  >
+                    About Us
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -47,12 +56,13 @@ const CustomFooter = () => (
               </h2>
               <ul className="text-gray-200 dark:text-gray-200 font-medium">
                 <li className="mb-4">
-                  <a
-                    href="https://github.com/themesberg/flowbite"
-                    className="hover:underline "
+                  <Link
+                    to="faq-section"
+                    smooth={true}
+                    className="cursor-pointer"
                   >
                     FAQs
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a
