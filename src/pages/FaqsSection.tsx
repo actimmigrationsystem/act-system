@@ -5,6 +5,7 @@ import faqData from "../api/data/faqData.json";
 import ContentContainer from "../components/ContentContainer";
 import SectionContainer from "../components/SectionContainer";
 import ArticleComponent from "../components/ArticleComponent";
+import { Link } from "react-scroll";
 
 const FAQsSection = () => (
   <SectionContainer>
@@ -13,18 +14,34 @@ const FAQsSection = () => (
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 px-12">
         <FAQComponent faqs={faqData} />
         <div className="relative">
-          <Typography placeholder="" variant="h3">
+          <Typography
+            placeholder=""
+            variant="h3"
+            className="flex items-center justify-center"
+          >
             Check Out Some our FAQs
           </Typography>
-          <ArticleComponent
-            paragraph2=" If you have any other questions, feel free to contact us."
-            heading={""}
-            lead={""}
-            subheading={""}
-            subheading2={""}
-            paragraph={""}
-            imageSrc={""}
-          />
+          <div className="flex items-center justify-center">
+            <ArticleComponent
+              paragraph2="If you have any other questions, feel free to contact us."
+              heading={""}
+              lead={""}
+              subheading={""}
+              subheading2={""}
+              paragraph={""}
+              imageSrc={""}
+            />
+          </div>
+          <Link
+            to="contact-section"
+            smooth={true}
+            duration={500}
+            style={{ backgroundColor: "#0D4E83" }}
+            className="flex items-center justify-center mt-4 mx-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded self-center cursor-pointer w-1/3"
+          >
+            Contact Us
+          </Link>
+
           <div className="absolute bottom-0 right-0 z-[-1] w-full h-full">
             <svg
               width="100%"
