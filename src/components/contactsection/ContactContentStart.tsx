@@ -68,9 +68,11 @@ export default function ContactContentStart() {
             <h4 className="mb-1 text-xl font-bold text-dark dark:text-white">
               Phone Number
             </h4>
-            <p className="text-base text-body-color dark:text-dark-6">
-              David Rossouw (+27)41 922 0833 (+27)72 387 6910
-            </p>
+            <div className="flex flex-col">
+              <p>David Rossouw</p>
+              <p>(+27)41 922 0833</p>
+              <p>(+27)72 387 6910</p>
+            </div>
           </div>
         </div>
 
