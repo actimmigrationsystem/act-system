@@ -70,9 +70,9 @@ ArticleComponent.propTypes = {
   heading: PropTypes.string,
   lead: PropTypes.string,
   subheading: PropTypes.string,
-  subheading2: PropTypes,
+  subheading2: PropTypes.string,
   paragraph: PropTypes.string,
-  paragraph2: PropTypes,
+  paragraph2: PropTypes.string,
   imageSrc: PropTypes.string,
 };
 export default ArticleComponent;
