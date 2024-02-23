@@ -5,6 +5,7 @@ import { RiMailSendLine } from "react-icons/ri";
 import { FloatingLabel, Select } from "flowbite-react";
 import DocumentUpload from "./DocumentUpload";
 import DatePickerComponent from "./DatePickerComponent";
+import DatePickerDialog from "./DatePickerDialog";
 
 const EnquiryForm = () => {
   const [formValues, setFormValues] = useState({
@@ -168,7 +169,9 @@ const handleDateChange = (field: string, value: Date) => {
           <Step3
             formValues={formValues}
             handleChange={handleChange}
-            handleDateChange={(date: Date) => handleDateChange("dob", date)}
+            handleDateChange={(date: Date) =>
+              handleDateChange("entryDate", date)
+            }
             handleImmigrationStatusChange={handleImmigrationStatusChange}
             nextStep={nextStep}
           />
@@ -391,7 +394,6 @@ const Step2 = ({
 const Step3 = ({
   formValues,
   handleChange,
-  handleDateChange,
   handleImmigrationStatusChange,
   nextStep,
 }: {
@@ -427,18 +429,21 @@ const Step3 = ({
         <option> SA Citizen</option>
       </Select>
     </div>
-    <Typography
-      placeholder={"Typography"}
-      variant="small"
-      color="blue-gray"
-      className="mb-2 font-medium"
-    >
-      Date of first entry into SA
-    </Typography>
-    <DatePickerComponent
-      value={formValues.entryDate}
-      onChange={(date: Date) => handleDateChange(date)}
-    />
+    <div className="w-full md:w-full">
+      <Typography
+        placeholder={"Typography"}
+        variant="small"
+        color="blue-gray"
+        className="mb-2 font-medium"
+      >
+        Date of First Entry into South Africa
+      </Typography>
+      <DatePickerDialog />
+      {/* <DatePickerComponent
+        value={formValues.dob}
+        onChange={(date: Date) => handleDateChange(date)}
+      /> */}
+    </div>
     <Typography
       placeholder={"Typography"}
       variant="small"
