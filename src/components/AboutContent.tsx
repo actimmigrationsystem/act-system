@@ -28,9 +28,9 @@ const AboutContent = ({ children }: AboutPromptProps) => (
           lead=""
           subheading=""
           paragraph="We are a team of legal practitioners and consultants, specializing in Immigration and Labour-Related matters."
-          subheading2={""}
-          paragraph2={""}
-          imageSrc={""}
+          subheading2=""
+          paragraph2=""
+          imageSrc=""
         />
       </div>
       <div className="w-full lg:w-3/12 px-4 text-center flex flex-col items-center">
@@ -45,9 +45,9 @@ const AboutContent = ({ children }: AboutPromptProps) => (
           paragraph="As a practicing attorney for over a decade, and graduating from the Nelson Mandela Metropolitan University, our Director is an Immigration Law specialist who has changed thousands of lives in the labour and immigration avenue"
           lead=""
           subheading=""
-          subheading2={""}
-          paragraph2={""}
-          imageSrc={""}
+          subheading2=""
+          paragraph2=""
+          imageSrc=""
         />
       </div>
       <div className="w-full lg:w-3/12 px-4 text-center flex flex-col items-center">
@@ -62,9 +62,9 @@ const AboutContent = ({ children }: AboutPromptProps) => (
           paragraph="Our mission is to help every client with an immigration or labour-related issue efficiently, while yielding nothing but satisfaction for our clients. We use our legal background, and innate grit, to fight for the rights of our clients. Contact us, book an appointment, and prepare for your life to be changed."
           lead=""
           subheading=""
-          subheading2={""}
-          paragraph2={""}
-          imageSrc={""}
+          subheading2=""
+          paragraph2=""
+          imageSrc=""
         />
       </div>
     </div>

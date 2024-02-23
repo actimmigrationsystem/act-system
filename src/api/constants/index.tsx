@@ -1,4 +1,4 @@
-[
+export const FAQ_DATA = [
   {
     "id": 1,
     "question": "How much do your legal services cost?",
@@ -29,4 +29,4 @@
     "question": "How do I renew a temporary residence visa?",
     "answer": "The temporary residence visa must be renewed while the permanent residence application is still pending. Our team can guide you through the process."
   }
-]
+];
