@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, SetStateAction } from "react";
 import ContactBgBottomLeft from "./ContactBgBottomLeft";
 import ContactBgRight from "./ContactBgRight";
 import ContactBgTop from "./ContactBgTop";
@@ -20,9 +20,9 @@ import AppointmentForm from "../AppointmentForm";
 
 
 const ContactContentEnd = () => {
-    const [activeTab, setActiveTab] = React.useState("enquiry");
+    const [activeTab, setActiveTab] = useState("enquiry");
 
-    const handleTabChange = (tab: React.SetStateAction<string>) => {
+    const handleTabChange = (tab: SetStateAction<string>) => {
       setActiveTab(tab);
     };
 

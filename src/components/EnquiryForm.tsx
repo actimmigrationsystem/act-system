@@ -162,24 +162,17 @@ const handleDateChange = (field: string, value: Date) => {
             handleChange={handleChange}
             handleGenderChange={handleGenderChange}
             handleDateChange={(date: Date) => handleDateChange("dob", date)}
+            handleMaritalStatusChange={handleMaritalStatusChange}
             nextStep={nextStep}
           />
           <Step3
             formValues={formValues}
             handleChange={handleChange}
+            handleDateChange={(date: Date) => handleDateChange("dob", date)}
             handleImmigrationStatusChange={handleImmigrationStatusChange}
-            handleMaritalStatusChange={handleMaritalStatusChange}
             nextStep={nextStep}
           />
           <Step4
-            formValues={formValues}
-            handleDateChange={(date: Date) =>
-              handleDateChange("entryDate", date)
-            }
-            handleChange={handleChange}
-            nextStep={nextStep}
-          />
-          <Step5
             formValues={formValues}
             handleChange={handleChange}
             handleServiceChange={handleServiceChange}
@@ -237,23 +230,46 @@ const Step1 = ({
       onChange={handleChange}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     />
-    <Typography
-      placeholder={"Typography"}
-      variant="small"
-      color="blue-gray"
-      className="mb-2 font-medium"
-    >
-      Contact number
-    </Typography>
-    <FloatingLabel
-      variant="filled"
-      label="Contact Number"
-      type="tel"
-      name="phonenumber"
-      value={formValues.phonenumber}
-      onChange={handleChange}
-      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-    />
+    <div className="flex flex-wrap -mx-2">
+      <div className="w-full md:w-1/2 px-2">
+        <Typography
+          placeholder={"Typography"}
+          variant="small"
+          color="blue-gray"
+          className="mb-2 font-medium"
+        >
+          Contact number
+        </Typography>
+        <FloatingLabel
+          variant="filled"
+          label="Contact Number"
+          type="tel"
+          name="phonenumber"
+          value={formValues.phonenumber}
+          onChange={handleChange}
+          className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+        />
+      </div>
+      <div className="w-full md:w-1/2 px-2">
+        <Typography
+          placeholder={"Typography"}
+          variant="small"
+          color="blue-gray"
+          className="mb-2 font-medium"
+        >
+          Email Address
+        </Typography>
+        <FloatingLabel
+          variant="filled"
+          label="Your Email Address"
+          type="email"
+          name="email"
+          value={formValues.email}
+          onChange={handleChange}
+          className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+        />
+      </div>
+    </div>
     <Button
       style={{ backgroundColor: "#0e5a97" }}
       type="button"
@@ -267,95 +283,59 @@ const Step1 = ({
 
 const Step2 = ({
   formValues,
-  handleChange,
   handleGenderChange,
   handleDateChange,
+  handleMaritalStatusChange,
+  handleChange,
   nextStep,
 }: {
   formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleGenderChange: (value: string | undefined) => void;
   handleDateChange: (date: Date) => void;
-  nextStep: () => void;
-}) => (
-<div className="mt-8">
-    <Typography
-      placeholder={"Typography"}
-      variant="small"
-      color="blue-gray"
-      className="mb-2 font-medium"
-    >
-      Email Address
-    </Typography>
-    <FloatingLabel
-      variant="filled"
-      label="Your Email Address"
-      type="email"
-      name="email"
-      value={formValues.email}
-      onChange={handleChange}
-      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-    />
-    <Typography
-      placeholder={"Typography"}
-      variant="small"
-      color="blue-gray"
-      className="mb-2 font-medium"
-    >
-      What is your gender
-    </Typography>
-    <div className="max-w-full">
-      <Select
-        id="gender"
-        onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
-          handleGenderChange(event.target.value)
-        }
-        value={formValues.gender}
-      >
-        <option>Female</option>
-        <option>Male</option>
-        <option>Other</option>
-      </Select>
-    </div>
-    <div className="mt-8">
-      <Typography
-        placeholder={"Typography"}
-        variant="small"
-        color="blue-gray"
-        className="mb-2 font-medium"
-      >
-        Date of Birth
-      </Typography>
-      <DatePickerComponent
-        value={formValues.dob}
-        onChange={(date: Date) => handleDateChange(date)}
-      />
-    </div>
-    <Button
-      style={{ backgroundColor: "#0e5a97" }}
-      type="button"
-      placeholder=""
-      onClick={nextStep}
-    >
-      Next
-    </Button>
-  </div>
-);
-
-const Step3 = ({
-  formValues,
-  handleChange,
-  handleMaritalStatusChange,
-  handleImmigrationStatusChange,
-  nextStep,
-}: {
-  formValues: any;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleMaritalStatusChange: (value: string | undefined) => void;
-  handleImmigrationStatusChange: (value: string | undefined) => void;
+
   nextStep: () => void;
 }) => (
   <div className="mt-8">
+    <div className="flex flex-wrap -mx-2">
+      <div className="w-full md:w-1/2 px-2">
+        <Typography
+          placeholder={"Typography"}
+          variant="small"
+          color="blue-gray"
+          className="mb-2 font-medium"
+        >
+          What is your gender
+        </Typography>
+
+        <Select
+          id="gender"
+          onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
+            handleGenderChange(event.target.value)
+          }
+          value={formValues.gender}
+        >
+          <option>Female</option>
+          <option>Male</option>
+          <option>Other</option>
+        </Select>
+      </div>
+      <div className="w-full md:w-1/2 px-2">
+        <Typography
+          placeholder={"Typography"}
+          variant="small"
+          color="blue-gray"
+          className="mb-2 font-medium"
+        >
+          Date of Birth
+        </Typography>
+        <DatePickerComponent
+          value={formValues.dob}
+          onChange={(date: Date) => handleDateChange(date)}
+        />
+      </div>
+    </div>
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -380,7 +360,6 @@ const Step3 = ({
         <option>Separated</option>
       </Select>
     </div>
-
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -398,6 +377,31 @@ const Step3 = ({
       onChange={handleChange}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     />
+    <Button
+      style={{ backgroundColor: "#0e5a97" }}
+      type="button"
+      placeholder=""
+      onClick={nextStep}
+    >
+      Next
+    </Button>
+  </div>
+);
+
+const Step3 = ({
+  formValues,
+  handleChange,
+  handleDateChange,
+  handleImmigrationStatusChange,
+  nextStep,
+}: {
+  formValues: any;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleImmigrationStatusChange: (value: string | undefined) => void;
+  handleDateChange: (date: Date) => void;
+  nextStep: () => void;
+}) => (
+  <div className="mt-8">
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -423,29 +427,6 @@ const Step3 = ({
         <option> SA Citizen</option>
       </Select>
     </div>
-    <Button
-      style={{ backgroundColor: "#0e5a97" }}
-      type="button"
-      placeholder=""
-      onClick={nextStep}
-    >
-      Next
-    </Button>
-  </div>
-);
-
-const Step4 = ({
-  formValues,
-  handleChange,
-  handleDateChange,
-  nextStep,
-}: {
-  formValues: any;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleDateChange: (date: Date) => void;
-  nextStep: () => void;
-}) => (
-  <div className="mt-8">
     <Typography
       placeholder={"Typography"}
       variant="small"
@@ -504,7 +485,7 @@ const Step4 = ({
   </div>
 );
 
-const Step5 = ({
+const Step4 = ({
   formValues,
   handleChangeTextarea,
   handleSubmit,
