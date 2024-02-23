@@ -1,7 +1,7 @@
 import SectionTitle from "../components/SectionTitle";
 import FAQComponent from "../components/FAQComponent";
 import { Typography } from "@material-tailwind/react";
-import faqData from "../api/data/faqData.json";
+import { FAQ_DATA } from "../api/constants/index";
 import ContentContainer from "../components/ContentContainer";
 import SectionContainer from "../components/SectionContainer";
 import ArticleComponent from "../components/ArticleComponent";
@@ -12,7 +12,7 @@ const FAQsSection = () => (
     <SectionTitle title="FAQ" className="text-center text-white" />
     <ContentContainer>
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 px-12">
-        <FAQComponent faqs={faqData} />
+        <FAQComponent faqs={FAQ_DATA} />
         <div className="relative">
           <Typography
             placeholder=""
