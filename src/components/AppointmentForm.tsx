@@ -164,14 +164,6 @@ const Step1 = ({
       onChange={handleChange}
       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
     />
-    <Typography
-      placeholder={"Typography"}
-      variant="small"
-      color="blue-gray"
-      className="mb-2 font-medium"
-    >
-      Surname
-    </Typography>
     <div className="flex flex-wrap -mx-2">
       <div className="w-full md:w-1/2 px-2">
         <Typography
