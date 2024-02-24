@@ -20,7 +20,7 @@ const FAQsSection = () => (
             variant="h3"
             className="flex items-center justify-center"
           >
-            Check Out Some our FAQs
+            Check out some of our FAQs
           </Typography>
           <div className="flex items-center justify-center">
             <ArticleComponent
