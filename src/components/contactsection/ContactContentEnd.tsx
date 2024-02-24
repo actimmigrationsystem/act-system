@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, SetStateAction } from "react";
 import ContactBgBottomLeft from "./ContactBgBottomLeft";
 import ContactBgRight from "./ContactBgRight";
 import ContactBgTop from "./ContactBgTop";
@@ -20,9 +20,9 @@ import AppointmentForm from "../AppointmentForm";
 
 
 const ContactContentEnd = () => {
-    const [activeTab, setActiveTab] = React.useState("enquiry");
+    const [activeTab, setActiveTab] = useState("enquiry");
 
-    const handleTabChange = (tab: React.SetStateAction<string>) => {
+    const handleTabChange = (tab: SetStateAction<string>) => {
       setActiveTab(tab);
     };
 
@@ -34,7 +34,7 @@ const ContactContentEnd = () => {
       window.location.href = "tel:+27419220833";
     };
   return (
-    <div className="w-full px-4 lg:w-1/2 xl:w-5/12 mr-16">
+    <div className="w-full px-2 mx-auto lg:w-1/2 xl:w-5/12 mr-16">
       <div className="relative rounded-lg bg-white p-8 shadow-lg dark:bg-dark-2 sm:p-12">
         <Tabs value={activeTab} className="overflow-visible">
           <TabsHeader

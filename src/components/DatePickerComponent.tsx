@@ -9,6 +9,7 @@ interface DatePickerComponentProps {
 const DatePickerComponent = ({ value, onChange }: DatePickerComponentProps) => {
   return (
     <DatePicker
+      className="border-gray-300 rounded p-2 w-full"
       selected={value}
       onChange={onChange}
       popperClassName="date-picker-popper"

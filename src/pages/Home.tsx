@@ -5,7 +5,6 @@ import ContactUsSection from './ContactUsSection';
 import FAQSection from './FaqsSection';
 import AboutUs from './AboutUsSection';
 import BackToTopButton from '../components/BackToTopButton';
-import StartNowSection from './StartNowSection';
 
 const Home = () => (
   <>
@@ -17,9 +16,6 @@ const Home = () => (
     </Element>
     <Element name="about-section">
       <AboutUs />
-    </Element>
-    <Element name="">
-      <StartNowSection />
     </Element>
     <Element name="faq-section">
       <FAQSection />

@@ -1,4 +1,7 @@
 import { Link } from "react-scroll";
+ import { Button } from "@material-tailwind/react";
+
+
 
 export default function StartNowSection() {
   return (
@@ -13,15 +16,22 @@ export default function StartNowSection() {
               Our expert knowledge goes a long way in ensuring that our clients
               receive only the best.
             </p>
-            <Link
-              to="contact-section"
-              smooth={true}
-              duration={500}
-              style={{ backgroundColor: "#0D4E83" }}
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded self-center cursor-pointer"
-            >
-              Contact Us
-            </Link>
+
+            <div className="flex justify-center">
+              <Link
+                to="contact-section"
+                smooth={true}
+                duration={500}
+                style={{ display: "inline-block" }}
+              >
+                <Button
+                  placeholder={"Start Now"}
+                  children="Start Now"
+                  style={{ backgroundColor: "#0e5a97" }}
+                  className="hover:bg-blue-900 text-white font-bold py-2 px-4 rounded cursor-pointer"
+                />
+              </Link>
+            </div>
           </div>
           <div
             className="flex-1"

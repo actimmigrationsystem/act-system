@@ -10,9 +10,9 @@ const ContactUsSection = () => {
   return (
     <SectionContainer>
       <SectionTitle title="Contact Us" className="text-center text-white" />
-       <ContentContainer>
-        <div className="-mx-4 flex flex-wrap lg:justify-between">
-         <ContactContentStart />
+      <ContentContainer>
+        <div className="-mx-1 sm:-mx-1 lg:-mx-1 flex flex-wrap lg:justify-between">
+          <ContactContentStart />
           <ContactContentEnd />
         </div>
         <MapComponent />
