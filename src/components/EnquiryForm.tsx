@@ -497,7 +497,6 @@ const Step2 = ({
 const Step3 = ({
   formValues,
   handleChange,
-  handleImmigrationStatusChange,
   nextStep,
 }: {
   formValues: any;
@@ -641,7 +640,6 @@ const Step4 = ({
   formValues,
   handleChangeTextarea,
   handleSubmit,
-  handleChange,
 }: {
   formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
