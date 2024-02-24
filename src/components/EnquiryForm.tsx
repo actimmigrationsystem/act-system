@@ -587,7 +587,7 @@ const Step3 = ({
         </Typography>
         <div className="absolute z-20">
           <DatePickerComponent
-            value={formValues.dob}
+            value={formValues.entryDate}
             onChange={(date: Date) => handleDateChange(date)}
           />
         </div>
