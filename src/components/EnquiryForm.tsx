@@ -7,7 +7,6 @@ import { RiMailSendLine } from "react-icons/ri";
 import { FloatingLabel } from "flowbite-react";
 import DocumentUpload from "./DocumentUpload";
 import DatePickerComponent from "./DatePickerComponent";
-import { HiMail } from "react-icons/hi";
 
 const EnquiryForm = () => {
   const [formValues, setFormValues] = useState({
