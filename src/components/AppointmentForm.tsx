@@ -1,10 +1,10 @@
-import { useState, ChangeEvent, Fragment } from "react";
+import { useState, Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import StepWizard from "react-step-wizard";
 import { Typography, Button } from "@material-tailwind/react";
 import { RiMailSendLine } from "react-icons/ri";
-import { FloatingLabel, Select } from "flowbite-react";
+import { FloatingLabel } from "flowbite-react";
 import AppointmentDatePicker from "./AppointmentDatePicker";
 
 const AppointmentForm = () => {
@@ -225,9 +225,6 @@ const Step1 = ({
 
 const Step2 = ({
   formValues,
-  handleChange,
-  handleServiceChange,
-  handleAppointmentType,
   handleAppointmentDateChange,
   handleSubmit,
 }: {

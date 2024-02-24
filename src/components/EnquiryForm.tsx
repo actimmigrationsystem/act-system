@@ -4,7 +4,7 @@ import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import StepWizard from "react-step-wizard";
 import { Typography, Button } from "@material-tailwind/react";
 import { RiMailSendLine } from "react-icons/ri";
-import { FloatingLabel, Select } from "flowbite-react";
+import { FloatingLabel } from "flowbite-react";
 import DocumentUpload from "./DocumentUpload";
 import DatePickerComponent from "./DatePickerComponent";
 import DatePickerDialog from "./DatePickerDialog";
@@ -287,9 +287,7 @@ const Step1 = ({
 
 const Step2 = ({
   formValues,
-  handleGenderChange,
   handleDateChange,
-  handleMaritalStatusChange,
   handleChange,
   nextStep,
 }: {
