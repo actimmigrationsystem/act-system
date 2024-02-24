@@ -7,7 +7,6 @@ import { RiMailSendLine } from "react-icons/ri";
 import { FloatingLabel } from "flowbite-react";
 import DocumentUpload from "./DocumentUpload";
 import DatePickerComponent from "./DatePickerComponent";
-import DatePickerDialog from "./DatePickerDialog";
 
 const EnquiryForm = () => {
   const [formValues, setFormValues] = useState({
@@ -495,6 +494,7 @@ const Step2 = ({
 const Step3 = ({
   formValues,
   handleChange,
+  handleDateChange,
   nextStep,
 }: {
   formValues: any;
@@ -585,7 +585,12 @@ const Step3 = ({
         >
           Date of First Entry into South Africa
         </Typography>
-        <DatePickerDialog />
+        <div className="absolute z-20">
+          <DatePickerComponent
+            value={formValues.dob}
+            onChange={(date: Date) => handleDateChange(date)}
+          />
+        </div>
       </div>
       <Typography
         placeholder={"Typography"}
