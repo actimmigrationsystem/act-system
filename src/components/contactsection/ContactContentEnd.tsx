@@ -49,31 +49,34 @@ const ContactContentEnd = () => {
             >
               <span
                 className="hidden md:block"
-                style={{ color: activeTab === "enquiry" ? "black" : "white" }}
+                style={{ color: activeTab === "enquiry" ? "#2393cb" : "white" }}
               >
                 Enquiry
               </span>
               <AiFillQuestionCircle
                 className="block md:hidden h-6 w-6"
-                style={{ color: "#2393cb" }}
+                style={{ color: activeTab === "enquiry" ? "#2393cb" : "white" }}
               />
             </Tab>
+
             <Tab
-              value="appointments"
-              onClick={() => handleTabChange("appointments")}
-              placeholder="appointments tab"
+              value="appointment"
+              onClick={() => handleTabChange("appointment")}
+              placeholder="appointment tab"
             >
               <span
                 className="hidden md:block"
                 style={{
-                  color: activeTab === "appointments" ? "black" : "white",
+                  color: activeTab === "appointment" ? "#2393cb" : "white",
                 }}
               >
                 Appointment
               </span>
               <AiFillCalendar
                 className="block md:hidden h-6 w-6"
-                style={{ color: "#2393cb" }}
+                style={{
+                  color: activeTab === "appointment" ? "#2393cb" : "white",
+                }}
               />
             </Tab>
             <Tab
@@ -83,7 +86,7 @@ const ContactContentEnd = () => {
             >
               <span
                 className="hidden md:block"
-                style={{ color: activeTab === "contact" ? "black" : "white" }}
+                style={{ color: activeTab === "contact" ? "#2393cb" : "white" }}
               >
                 Call
               </span>
