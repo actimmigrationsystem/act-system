@@ -34,7 +34,7 @@ const ContactContentEnd = () => {
       window.location.href = "tel:+27419220833";
     };
   return (
-    <div className="w-full px-2 mx-auto lg:w-1/2 xl:w-5/12 mr-16">
+    <div className="w-full px-2 mx-auto lg:w-1/2 xl:w-5/12 mr-16 mx-auto">
       <div className="relative rounded-lg bg-white p-8 shadow-lg dark:bg-dark-2 sm:p-12">
         <Tabs value={activeTab} className="overflow-visible">
           <TabsHeader
