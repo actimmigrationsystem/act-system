@@ -6,6 +6,7 @@ import ContentContainer from "../components/ContentContainer";
 import SectionContainer from "../components/SectionContainer";
 import ArticleComponent from "../components/ArticleComponent";
 import { Link } from "react-scroll";
+ import { Button } from "@material-tailwind/react";
 
 const FAQsSection = () => (
   <SectionContainer>
@@ -32,16 +33,22 @@ const FAQsSection = () => (
               imageSrc={""}
             />
           </div>
-          <Link
-            to="contact-section"
-            smooth={true}
-            duration={500}
-            style={{ backgroundColor: "#4176A1" }}
-            className="flex items-center justify-center mt-4 mx-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded self-center cursor-pointer w-1/3"
-          >
-            Contact Us
-          </Link>
 
+          <div className="flex justify-center">
+            <Link
+              to="contact-section"
+              smooth={true}
+              duration={500}
+              style={{ display: "inline-block" }}
+            >
+              <Button
+                 placeholder={"Start Now"}
+                  children="Start Now"
+                style={{ backgroundColor: "#0e5a97" }}
+                className="hover:bg-blue-900 text-white font-bold py-2 px-4 rounded cursor-pointer"
+              />
+            </Link>
+          </div>
           <div className="absolute bottom-0 right-0 z-[-1] w-full h-full">
             <svg
               width="100%"
