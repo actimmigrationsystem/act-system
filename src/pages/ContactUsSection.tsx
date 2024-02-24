@@ -11,7 +11,7 @@ const ContactUsSection = () => {
     <SectionContainer>
       <SectionTitle title="Contact Us" className="text-center text-white" />
       <ContentContainer>
-        <div className="-mx-1 sm:-mx-1 lg:-mx-1 flex flex-wrap lg:justify-between">
+        <div className="-mx-2 sm:-mx-2 lg:-mx-2 flex flex-wrap lg:justify-between">
           <ContactContentStart />
           <ContactContentEnd />
         </div>

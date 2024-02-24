@@ -6,7 +6,15 @@ interface DatePickerComponentProps {
   onChange: (date: Date) => void;
 }
 
-const DatePickerComponent = ({ value, onChange }: DatePickerComponentProps) => {
+interface DatePickerComponentProps {
+  value: Date;
+  onChange: (date: Date) => void;
+}
+
+const DatePickerComponent = ({
+  value,
+  onChange,
+}: DatePickerComponentProps) => {
   return (
     <DatePicker
       className="border-gray-300 rounded p-2 w-full"

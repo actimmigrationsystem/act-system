@@ -34,7 +34,7 @@ const ContactContentEnd = () => {
       window.location.href = "tel:+27419220833";
     };
   return (
-    <div className="w-full px-2 mx-auto lg:w-1/2 xl:w-5/12 mr-16">
+    <div className="w-full px-2 mx-auto lg:w-1/2 xl:w-5/12 mr-16 mx-auto">
       <div className="relative rounded-lg bg-white p-8 shadow-lg dark:bg-dark-2 sm:p-12">
         <Tabs value={activeTab} className="overflow-visible">
           <TabsHeader
@@ -49,15 +49,16 @@ const ContactContentEnd = () => {
             >
               <span
                 className="hidden md:block"
-                style={{ color: activeTab === "enquiry" ? "black" : "white" }}
+                style={{ color: activeTab === "enquiry" ? "#2393cb" : "white" }}
               >
                 Enquiry
               </span>
               <AiFillQuestionCircle
                 className="block md:hidden h-6 w-6"
-                style={{ color: "#2393cb" }}
+                style={{ color: activeTab === "enquiry" ? "#2393cb" : "white" }}
               />
             </Tab>
+
             <Tab
               value="appointments"
               onClick={() => handleTabChange("appointments")}
@@ -66,14 +67,16 @@ const ContactContentEnd = () => {
               <span
                 className="hidden md:block"
                 style={{
-                  color: activeTab === "appointments" ? "black" : "white",
+                  color: activeTab === "appointments" ? "#2393cb" : "white",
                 }}
               >
                 Appointment
               </span>
               <AiFillCalendar
                 className="block md:hidden h-6 w-6"
-                style={{ color: "#2393cb" }}
+                style={{
+                  color: activeTab === "appointments" ? "#2393cb" : "white",
+                }}
               />
             </Tab>
             <Tab
@@ -83,7 +86,7 @@ const ContactContentEnd = () => {
             >
               <span
                 className="hidden md:block"
-                style={{ color: activeTab === "contact" ? "black" : "white" }}
+                style={{ color: activeTab === "contact" ? "#2393cb" : "white" }}
               >
                 Call
               </span>

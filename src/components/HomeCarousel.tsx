@@ -20,7 +20,7 @@ const carouselData = [
   },
   {
     imageSrc: Img3,
-    text: "Appeals and reviews in terms of the immigration act",
+    text: "Appeals and reviews in terms of the Immigration Act",
     buttonLabel: "Learn More",
     target: "service-section",
   },
