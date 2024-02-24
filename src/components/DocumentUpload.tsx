@@ -2,7 +2,7 @@ import { FileInput, Label } from 'flowbite-react';
 
 const DocumentUpload = () => {
   return (
-    <div id="fileUpload" className="max-w-md">
+    <div id="fileUpload" className="max-w-md mb-8">
       <div className="mb-2 block">
         <Label
           htmlFor="file"

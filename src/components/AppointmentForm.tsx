@@ -4,7 +4,7 @@ import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import StepWizard from "react-step-wizard";
 import { Typography, Button } from "@material-tailwind/react";
 import { RiMailSendLine } from "react-icons/ri";
-import { FloatingLabel } from "flowbite-react";
+import { FloatingLabel, Checkbox, Label } from "flowbite-react";
 import AppointmentDatePicker from "./AppointmentDatePicker";
 
 const AppointmentForm = () => {
@@ -394,7 +394,7 @@ const Step2 = ({
           </div>
         </Listbox>
       </div>
-      <div className="flex flex-wrap -mx-2">
+      <div className="flex flex-wrap -mx-2 mb-4">
         <div className="w-full md:w-1/2 px-2">
           <Typography
             placeholder={"Typography"}
@@ -471,6 +471,21 @@ const Step2 = ({
           </div>
         </div>
       </div>
+      <div className="flex max-w-md flex-col gap-4" id="checkbox">
+        <div className="flex items-center gap-2">
+          <Checkbox id="accept" defaultChecked />
+          <Label htmlFor="accept" className="flex">
+            I agree with the&nbsp;
+            <a
+              href="#"
+              className="text-cyan-600 hover:underline dark:text-cyan-500"
+            >
+              terms and conditions
+            </a>
+          </Label>
+        </div>
+      </div>
+
 
       <Button
         placeholder={"Button"}
