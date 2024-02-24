@@ -60,14 +60,14 @@ const ContactContentEnd = () => {
             </Tab>
 
             <Tab
-              value="appointment"
-              onClick={() => handleTabChange("appointment")}
-              placeholder="appointment tab"
+              value="appointments"
+              onClick={() => handleTabChange("appointments")}
+              placeholder="appointments tab"
             >
               <span
                 className="hidden md:block"
                 style={{
-                  color: activeTab === "appointment" ? "#2393cb" : "white",
+                  color: activeTab === "appointments" ? "#2393cb" : "white",
                 }}
               >
                 Appointment
@@ -75,7 +75,7 @@ const ContactContentEnd = () => {
               <AiFillCalendar
                 className="block md:hidden h-6 w-6"
                 style={{
-                  color: activeTab === "appointment" ? "#2393cb" : "white",
+                  color: activeTab === "appointments" ? "#2393cb" : "white",
                 }}
               />
             </Tab>
