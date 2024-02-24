@@ -11,11 +11,12 @@ const DocumentUpload = () => {
       </div>
       <FileInput
         id="file"
+        multiple
         helperText="(E.g. Passport,
         Asylum/Refugee status, Visa(s), Rejection letter(s), Marriage
         certificate, etc.)"
       />
     </div>
   );
-}
+};
 export default DocumentUpload;

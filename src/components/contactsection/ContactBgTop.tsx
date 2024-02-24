@@ -1,7 +1,7 @@
 export default function ContactBgTop() {
   return (
     <div>
-      <span className="absolute -right-9 -top-10 z-[-1]">
+      <span className="absolute -right-9 -top-10 z-[-2]">
         <svg
           width={100}
           height={100}

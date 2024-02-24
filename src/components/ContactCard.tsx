@@ -40,7 +40,7 @@ const ContactForm = () => {
         style={{ backgroundColor: "#0e5a97" }}
         floated={false}
         shadow={false}
-        className="m-0 grid place-items-center px-4 py-8 text-center"
+        className="m-0 grid place-items-center px-4 py-4 text-center"
         placeholder="card header"
       >
         <Typography variant="h5" color="white" placeholder="contact text">
