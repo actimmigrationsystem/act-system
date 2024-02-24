@@ -1,4 +1,4 @@
-import { useState, ChangeEvent,Fragment } from "react";
+import { useState, ChangeEvent, Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import StepWizard from "react-step-wizard";
@@ -28,25 +28,24 @@ const EnquiryForm = () => {
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-const handleChangeTextarea = (e: ChangeEvent<HTMLTextAreaElement>) => {
-  const value = e.target.value;
-  if (value.length <= 1000) {
-    setFormValues({ ...formValues, elaborate: value });
-  }
-};
+  const handleChangeTextarea = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const value = e.target.value;
+    if (value.length <= 1000) {
+      setFormValues({ ...formValues, elaborate: value });
+    }
+  };
   const handleChange = (
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
 
-
-const handleDateChange = (field: string, value: Date) => {
-  setFormValues((prevValues) => ({
-    ...prevValues,
-    [field]: value.toISOString(),
-  }));
-};
+  const handleDateChange = (field: string, value: Date) => {
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [field]: value.toISOString(),
+    }));
+  };
 
   const handleRefreshClick = () => {
     // refresh the page
@@ -145,7 +144,6 @@ const handleDateChange = (field: string, value: Date) => {
       setFormValues((prevState) => ({ ...prevState, serviceType: value }));
     }
   };
-
 
   const nextStep = () => {};
 
@@ -388,10 +386,12 @@ const Step2 = ({
           >
             Date of Birth
           </Typography>
-          <DatePickerComponent
-            value={formValues.dob}
-            onChange={(date: Date) => handleDateChange(date)}
-          />
+          <div className="absolute z-20">
+            <DatePickerComponent
+              value={formValues.dob}
+              onChange={(date: Date) => handleDateChange(date)}
+            />
+          </div>
         </div>
       </div>
       <Typography
