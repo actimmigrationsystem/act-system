@@ -15,7 +15,7 @@ const AppointmentForm = () => {
     email: "",
     serviceType: "",
     appointmentType: "",
-    appointmentDate: "",
+    appointmentDate: new Date(),
     appointmentTime: "",
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -24,12 +24,23 @@ const AppointmentForm = () => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
 
-const handleAppointmentDateChange = (fieldName: string, date: Date) => {
-  setFormValues((prevValues) => ({
-    ...prevValues,
-    [fieldName]: date.toISOString(),
-  }));
-};
+const handleAppointmentDateChange = (date: Date | undefined) => {
+    if (date) {
+      setFormValues((prevState) => ({
+        ...prevState,
+        appointmentDate: date,
+      }));
+    } else {
+      setFormValues((prevState) => ({
+        ...prevState,
+        appointmentDate: new Date(),
+      }));
+    }
+}
+
+
+
+
 
   const handleRefreshClick = () => {
     // refresh the page
@@ -75,7 +86,7 @@ const handleAppointmentDateChange = (fieldName: string, date: Date) => {
       const input = document.createElement("input");
       input.type = "hidden";
       input.name = name;
-      input.value = value;
+      input.value = value instanceof Date ? value.toISOString() : value;
       form.appendChild(input);
     });
 
@@ -90,7 +101,7 @@ const handleAppointmentDateChange = (fieldName: string, date: Date) => {
       email: "",
       serviceType: "",
       appointmentType: "",
-      appointmentDate: "",
+      appointmentDate: new Date(),
       appointmentTime: "",
     });
     setFormSubmitted(true);
@@ -129,9 +140,7 @@ const handleAppointmentDateChange = (fieldName: string, date: Date) => {
             handleChange={handleChange}
             handleServiceChange={handleServiceChange}
             handleAppointmentType={handleAppointmentType}
-            handleAppointmentDateChange={(date: Date) =>
-              handleAppointmentDateChange("appointmentDate", date)
-            }
+            handleAppointmentDateChange={handleAppointmentDateChange}
             handleSubmit={handleSubmit}
           />
         </StepWizard>
@@ -225,9 +234,9 @@ const Step2 = ({
 }: {
   formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleAppointmentDateChange: (date: Date | undefined) => void;
   handleServiceChange: (value: string | undefined) => void;
   handleAppointmentType: (value: string | undefined) => void;
-  handleAppointmentDateChange: (date: Date) => void;
   handleSubmit: (e: React.FormEvent) => void;
 }) => {
   const serviceOptions = [
@@ -259,17 +268,19 @@ const Step2 = ({
     "In-Person (Office)",
   ];
 
-const venueOptions = ["Cape Town Office",
-"East London Office",
-"Johannesburg Office",
-"Kariega Office",
-"Mthatha"];
+  const venueOptions = [
+    "Cape Town Office",
+    "East London Office",
+    "Johannesburg Office",
+    "Kariega Office",
+    "Mthatha",
+  ];
 
   const [selectedService, setSelectedService] = useState(serviceOptions[0]);
   const [selectedAppointmentType, setSelectedAppointmentType] = useState(
     appointmentOptions[0]
   );
-    const [selectedVenueType, setSelectedVenueType] = useState(venueOptions[0]);
+  const [selectedVenueType, setSelectedVenueType] = useState(venueOptions[0]);
   return (
     <div className="mt-8">
       <Typography
