@@ -9,7 +9,7 @@ interface SectionTitleProps {
 const StyledTitleContainer = styled.div`
   text-align: center;
   position: relative;
-  margin-bottom: 40px;
+  margin-bottom: 2rem;
   margin-top: -60px;
 `;
 
