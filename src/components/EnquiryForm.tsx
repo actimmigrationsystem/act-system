@@ -4,10 +4,9 @@ import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import StepWizard from "react-step-wizard";
 import { Typography, Button } from "@material-tailwind/react";
 import { RiMailSendLine } from "react-icons/ri";
-import { FloatingLabel } from "flowbite-react";
+import { FloatingLabel, Checkbox, Label } from "flowbite-react";
 import DocumentUpload from "./DocumentUpload";
 import DatePickerComponent from "./DatePickerComponent";
-import { HiMail } from "react-icons/hi";
 
 const EnquiryForm = () => {
   const [formValues, setFormValues] = useState({
@@ -755,6 +754,22 @@ const Step4 = ({
         </div>
       </div>
       <DocumentUpload />
+      <div className="flex max-w-md flex-col gap-4" id="checkbox">
+        <div className="flex items-center gap-2">
+          <Checkbox id="accept" defaultChecked />
+          <Label htmlFor="accept" className="flex">
+            I agree with the&nbsp;
+            <a
+              href="/privacy-policy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-cyan-600 hover:underline dark:text-cyan-500"
+            >
+              terms and conditions
+            </a>
+          </Label>
+        </div>
+      </div>
       <Button
         className="w-full mt-4"
         placeholder={"Button"}
