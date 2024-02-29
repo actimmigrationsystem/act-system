@@ -1,4 +1,5 @@
 import { useState, Fragment } from "react";
+import { Link } from "react-router-dom";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import StepWizard from "react-step-wizard";
@@ -476,14 +477,14 @@ const Step2 = ({
           <Checkbox id="accept" defaultChecked />
           <Label htmlFor="accept" className="flex">
             I agree with the&nbsp;
-            <a
-              href="/privacy-policy"
+            <Link
+              to="/privacy-policy"
               target="_blank"
               rel="noopener noreferrer"
               className="text-cyan-600 hover:underline dark:text-cyan-500"
             >
               terms and conditions
-            </a>
+            </Link>
           </Label>
         </div>
       </div>
