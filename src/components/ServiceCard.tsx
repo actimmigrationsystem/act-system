@@ -23,7 +23,10 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   };
 
   return (
-    <div className="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-md transform transition duration-500 ease-in-out hover:scale-105 cursor-pointer">
+    <div
+      style={{ height: "430px" }}
+      className="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-md transform transition duration-500 ease-in-out hover:scale-105 cursor-pointer mb-4"
+    >
       <div>
         <div>
           <img

@@ -132,11 +132,9 @@ const serviceData: Service[] = [
 
 const ServiceDetails = () => {
   const { serviceTitle } = useParams<{ serviceTitle: string }>();
-
   if (!serviceTitle) {
     return <div>No service selected</div>;
   }
-
   // Find the service with the matching title
   const service = serviceData.find((service) => service.title === serviceTitle);
 
