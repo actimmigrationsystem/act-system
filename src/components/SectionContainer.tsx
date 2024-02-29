@@ -9,7 +9,7 @@ interface SectionContainerProps {
 const SectionContainer = ({
   children,
   marginTop = "3rem",
-  marginBottom = "2rem",
+  marginBottom = "3rem",
 }: SectionContainerProps) => {
   return (
     <div className="container mx-auto" style={{ marginTop, marginBottom }}>

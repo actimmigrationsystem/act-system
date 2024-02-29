@@ -1,9 +1,11 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Img1 from "../assets/services/1.jpg";
 import Img3 from "../assets/services/3.jpg";
 import Img4 from "../assets/services/4.jpg";
 import Img6 from "../assets/services/6.png";
 import Img5 from "../assets/services/5.jpeg";
+import { FaHome } from "react-icons/fa";
+import { Tooltip } from "flowbite-react";
 
 interface Service {
   title: string;
@@ -132,11 +134,9 @@ const serviceData: Service[] = [
 
 const ServiceDetails = () => {
   const { serviceTitle } = useParams<{ serviceTitle: string }>();
-
   if (!serviceTitle) {
     return <div>No service selected</div>;
   }
-
   // Find the service with the matching title
   const service = serviceData.find((service) => service.title === serviceTitle);
 
@@ -165,6 +165,15 @@ const ServiceDetails = () => {
           </div>
         ))}
       </div>
+        <Link
+          to="/"
+          className="fixed bottom-8 right-4 p-3 text-white font-medium text-xs leading-tight rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg bg-gray-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+          style={{ backgroundColor: "#0e5a97", width: "40px", height: "40px" }}
+        >
+                  <Tooltip placement="left" content="Return to Home Page">
+          <FaHome className="inline-block mr-2" />
+          </Tooltip>
+        </Link>
     </div>
   );
 };
