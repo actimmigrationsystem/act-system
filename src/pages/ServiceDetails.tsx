@@ -1,16 +1,17 @@
-import SectionTitle from "../components/SectionTitle";
-import ServiceCard from "../components/ServiceCard";
+import { useParams } from "react-router-dom";
 import Img1 from "../assets/services/1.jpg";
 import Img3 from "../assets/services/3.jpg";
 import Img4 from "../assets/services/4.jpg";
 import Img6 from "../assets/services/6.png";
 import Img5 from "../assets/services/5.jpeg";
-import SectionContainer from "../components/SectionContainer";
-import ContentContainer from "../components/ContentContainer";
-import ServiceDetails from "../pages/ServiceDetails";
-import { Link } from "react-router-dom";
 
-const serviceData = [
+interface Service {
+  title: string;
+  image: string;
+  description: string;
+}
+
+const serviceData: Service[] = [
   {
     image: Img6,
     title: "Temporary and permanent residence visas",
@@ -44,26 +45,39 @@ const serviceData = [
 ];
 
 
-const ServicesSection = () => (
-  <SectionContainer>
-    <SectionTitle title="Services" />
-    <ContentContainer>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 px-8 gap-16">
-        {serviceData.map((service, index) => (
-          <div key={index}>
-            <Link to={`/services/${service.title}`}>
-              <ServiceCard
-                image={service.image}
-                title={service.title}
-                description={service.description}
-                serviceTitle={service.title}
-              />
-            </Link>
-          </div>
-        ))}
-      </div>
-    </ContentContainer>
-  </SectionContainer>
-);
+const ServiceDetails = () => {
+  const { serviceTitle } = useParams<{ serviceTitle: string }>();
 
-export default ServicesSection;
+  if (!serviceTitle) {
+    return <div>No service selected</div>;
+  }
+
+  // Find the service with the matching title
+const service = serviceData.find((service) => service.title === serviceTitle);
+
+
+  if (!service) {
+    return <div>Service not found</div>;
+  }
+
+  // Render the service details
+  return (
+    <div className="flex flex-col">
+      <div
+        className="h-80 bg-cover bg-center relative"
+        style={{ backgroundImage: `url(${service.image})`, opacity: 0.7 }}
+      >
+        <div className="absolute inset-0 bg-black opacity-40"></div>
+        <h2 className="text-white text-3xl font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-full">
+          {service.title}
+        </h2>
+      </div>
+      <div className="p-8">
+        <p className="text-lg">{service.description}</p>
+      </div>
+    </div>
+  );
+};
+
+export default ServiceDetails;
+
