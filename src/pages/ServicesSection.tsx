@@ -7,6 +7,7 @@ import Img6 from "../assets/services/6.png";
 import Img5 from "../assets/services/5.jpeg";
 import SectionContainer from "../components/SectionContainer";
 import ContentContainer from "../components/ContentContainer";
+import { Link } from "react-router-dom";
 
 const serviceData = [
   {
@@ -48,12 +49,16 @@ const ServicesSection = () => (
     <ContentContainer>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 px-8 gap-16">
         {serviceData.map((service, index) => (
-          <ServiceCard
-            key={index}
-            image={service.image}
-            title={service.title}
-            description={service.description}
-          />
+          <div key={index}>
+            <Link to={`/services/${service.title}`}>
+              <ServiceCard
+                image={service.image}
+                title={service.title}
+                description={service.description}
+                serviceTitle={service.title}
+              />
+            </Link>
+          </div>
         ))}
       </div>
     </ContentContainer>

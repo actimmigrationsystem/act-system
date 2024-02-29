@@ -11,12 +11,12 @@ import FAQs from "./pages/FaqsSection";
 import ContactUs from "./pages/ContactUsSection";
 import SocialSidebar from "./components/SocialSidebar";
 import PrivacyPolicyPage from "./pages/PrivacyPolicy";
+import ServiceDetails from "./pages/ServiceDetails";
 
 function App() {
   return (
     <div className="flex flex-col min-h-screen">
       <SocialNav />
-      {/* Use the ExternalNavBar component for external pages */}
       <Routes>
         <Route
           path="/privacy-policy"
@@ -27,6 +27,17 @@ function App() {
             </>
           }
         />
+
+        <Route
+          path="/services/:serviceTitle"
+          element={
+            <>
+              <ExternalNavbar />
+              <ServiceDetails />
+            </>
+          }
+        />
+
         <Route
           path="/"
           element={
