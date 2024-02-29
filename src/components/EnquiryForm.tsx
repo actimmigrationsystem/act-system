@@ -762,7 +762,6 @@ const Step4 = ({
             I agree with the&nbsp;
             <Link
               to="/privacy-policy"
-              target="_blank"
               rel="noopener noreferrer"
               className="text-cyan-600 hover:underline dark:text-cyan-500"
             >
