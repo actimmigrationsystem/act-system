@@ -30,3 +30,13 @@ export const FAQ_DATA = [
     "answer": "The temporary residence visa must be renewed while the permanent residence application is still pending. Our team can guide you through the process."
   }
 ];
+
+
+export const privacypolicydata = [
+  {
+    id: 1,
+    title: "Introduction",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque lacinia eros vel auctor. Donec vel mollis magna. Integer a",
+  },
+];

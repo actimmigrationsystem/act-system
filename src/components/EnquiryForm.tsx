@@ -760,7 +760,9 @@ const Step4 = ({
           <Label htmlFor="accept" className="flex">
             I agree with the&nbsp;
             <a
-              href="#"
+              href="/privacy-policy"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-cyan-600 hover:underline dark:text-cyan-500"
             >
               terms and conditions
