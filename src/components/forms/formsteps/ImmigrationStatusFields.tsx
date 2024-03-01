@@ -3,7 +3,7 @@ import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { Typography, Button } from "@material-tailwind/react";
 import { FloatingLabel  } from "flowbite-react";
-import DatePickerComponent from "../DatePickerComponent";
+import DatePickerComponent from "../datepickers/DatePickerComponent";
 
 interface ImmigrationStatusFieldsProps {
   formValues: any;

@@ -1,6 +1,6 @@
 import { useState, Fragment } from "react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
-import AppointmentDatePicker from "../AppointmentDatePicker";
+import AppointmentDatePicker from "../datepickers/AppointmentDatePicker";
 import { Listbox, Transition } from "@headlessui/react";
 import { Typography } from "@material-tailwind/react";
 

@@ -7,7 +7,7 @@ import { Typography, Button } from "@material-tailwind/react";
 import { RiMailSendLine } from "react-icons/ri";
 import { FloatingLabel, Checkbox, Label } from "flowbite-react";
 import DocumentUpload from "../DocumentUpload";
-import DatePickerComponent from "../DatePickerComponent";
+import DatePickerComponent from "../datepickers/DatePickerComponent";
 import ContactInfoFields from "../formsteps/ContactInfoFields";
 
 const EnquiryForm = () => {

@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { Typography } from "@material-tailwind/react";
-import DatePickerComponent from "../DatePickerComponent";
+import DatePickerComponent from "../datepickers/DatePickerComponent";
 import { FloatingLabel, Button } from "flowbite-react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
