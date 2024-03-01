@@ -15,8 +15,8 @@ import { CiPhone } from "react-icons/ci";
 import { AiFillQuestionCircle, AiFillCalendar } from "react-icons/ai";
 import { IoCallOutline } from "react-icons/io5";
 import { Tooltip } from "flowbite-react";
-import EnquiryForm from "../EnquiryForm";
-import AppointmentForm from "../AppointmentForm";
+import EnquiryForm from "../forms/enquiryform/EnquiryForm";
+import AppointmentForm from "../forms/appointments/AppointmentForm";
 
 
 const ContactContentEnd = () => {

@@ -2,8 +2,8 @@ import { useState } from "react";
 import StepWizard from "react-step-wizard";
 import { Button } from "@material-tailwind/react";
 import { RiMailSendLine } from "react-icons/ri";
-import ContactInfoFields from "./forms/formsteps/ContactInfoFields";
-import AppointmentServiceFormFields from "./forms/formsteps/AppointmentServiceFormFields";
+import ContactInfoFields from "../formsteps/ContactInfoFields";
+import ServiceFormFields from "../formsteps/AppointmentServiceFormFields";
 
 const AppointmentForm = () => {
   const [formValues, setFormValues] = useState({
@@ -22,7 +22,7 @@ const AppointmentForm = () => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
 
-  const handleAppointmentDateChange = (date: Date | undefined) => {
+const handleAppointmentDateChange = (date: Date | undefined) => {
     if (date) {
       setFormValues((prevState) => ({
         ...prevState,
@@ -34,7 +34,11 @@ const AppointmentForm = () => {
         appointmentDate: new Date(),
       }));
     }
-  };
+}
+
+
+
+
 
   const handleRefreshClick = () => {
     // refresh the page
@@ -164,6 +168,8 @@ const Step1 = ({
     </Button>
   </>
 );
+
+
 const Step2 = ({
   formValues,
   handleAppointmentDateChange,
@@ -176,20 +182,22 @@ const Step2 = ({
   handleAppointmentType: (value: string | undefined) => void;
   handleSubmit: (e: React.FormEvent) => void;
 }) => (
-  <>
-    <AppointmentServiceFormFields
-      formValues={formValues}
-      handleAppointmentDateChange={handleAppointmentDateChange}
-    />
-    <Button
-      style={{ backgroundColor: "#0e5a97" }}
-      type="button"
-      placeholder=""
-      onClick={handleSubmit}
-    >
-      Next
-    </Button>
-  </>
-);
+    <>
+      <ServiceFormFields
+        formValues={formValues}
+        handleAppointmentDateChange={handleAppointmentDateChange}
+      />
+      <Button
+        placeholder={"Button"}
+        size="lg"
+        type="submit"
+        style={{ backgroundColor: "#0e5a97" }}
+        onClick={handleSubmit}
+        className="mt-8 w-full"
+      >
+        Book Appointment
+      </Button>
+    </>
+  );
 
 export default AppointmentForm;
