@@ -37,8 +37,11 @@ const AboutContent = ({ children }: AboutPromptProps) => (
       </div>
     </div>
     <div className="flex flex-wrap mt-12 justify-center gap-16">
-      {aboutcontent.map(({ icon, title, content }) => (
-        <div className="w-full lg:w-3/12 px-4 text-center flex flex-col items-center">
+      {aboutcontent.map(({ icon, title, content }, index) => (
+        <div
+          key={index}
+          className="w-full lg:w-3/12 px-4 text-center flex flex-col items-center"
+        >
           <div
             className="text-gray-900 p-3 shadow-lg rounded-full bg-white inline-flex items-center justify-center"
             style={{ color: "#0e5a97" }}
@@ -46,6 +49,7 @@ const AboutContent = ({ children }: AboutPromptProps) => (
             {createElement(icon, { className: "text-xl" })}
           </div>
           <ArticleComponent
+            key={index}
             heading={title}
             paragraph={content}
             lead=""
