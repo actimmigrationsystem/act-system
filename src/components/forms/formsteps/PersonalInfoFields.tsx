@@ -17,9 +17,7 @@ interface PersonalInfoFieldsProps {
 const PersonalInfoFields: React.FC<PersonalInfoFieldsProps> = ({
   formValues,
   handleChange,
-  handleGenderChange,
   handleDateChange,
-  handleMaritalStatusChange,
   nextStep,
 }) => {
   const genderOptions = ["Female", "Male", "Other"];

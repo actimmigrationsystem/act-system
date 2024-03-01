@@ -2,9 +2,9 @@ import SectionTitle from "../components/SectionTitle";
 import ServiceCard from "../components/ServiceCard";
 import Img1 from "../assets/services/1.jpg";
 import Img3 from "../assets/services/3.jpg";
-import Img4 from "../assets/services/4.jpg";
 import Img6 from "../assets/services/6.png";
 import Img5 from "../assets/services/5.jpeg";
+import Img7 from "../assets/services/7.png";
 import SectionContainer from "../components/SectionContainer";
 import ContentContainer from "../components/ContentContainer";
 import { Link } from "react-router-dom";
@@ -29,7 +29,7 @@ const serviceData = [
       "We provide comprehensive support for appeals and reviews under the Immigration Act.",
   },
   {
-    image: Img4,
+    image: Img7,
     title: "Types of temporary residence visas",
     description:
       "Our team is experienced in handling various types of temporary residence visas, including general work visas.",
