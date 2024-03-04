@@ -12,7 +12,7 @@ import ContactUs from "./pages/ContactUsSection";
 import SocialSidebar from "./components/SocialSidebar";
 import PrivacyPolicyPage from "./pages/PrivacyPolicy";
 import ServiceDetails from "./pages/ServiceDetails";
-import ExternalFormView from "./components/ExternalFormView";
+import ExternalFormView from "./pages/ExternalFormView";
 
 function App() {
   return (
@@ -29,7 +29,7 @@ function App() {
           }
         />
         <Route
-          path="/externalformView"
+          path="/externalform"
           element={
             <>
               <ExternalNavbar />
