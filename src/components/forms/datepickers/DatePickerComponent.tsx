@@ -17,6 +17,7 @@ const DatePickerComponent = ({
 }: DatePickerComponentProps) => {
   return (
     <DatePicker
+      placeholderText="dd/mm/yyyy"
       className="border-gray-300 rounded p-2 w-full"
       selected={value}
       onChange={onChange}
