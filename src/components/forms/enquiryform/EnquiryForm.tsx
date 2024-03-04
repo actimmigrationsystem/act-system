@@ -1,13 +1,7 @@
-import { useState, ChangeEvent, Fragment } from "react";
-import { Link } from "react-router-dom";
-import { Listbox, Transition } from "@headlessui/react";
-import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import { useState, ChangeEvent } from "react";
 import StepWizard from "react-step-wizard";
-import { Typography, Button } from "@material-tailwind/react";
+import { Button } from "@material-tailwind/react";
 import { RiMailSendLine } from "react-icons/ri";
-import { FloatingLabel, Checkbox, Label } from "flowbite-react";
-import DocumentUpload from "../DocumentUpload";
-import DatePickerComponent from "../datepickers/DatePickerComponent";
 import ContactInfoFields from "../formsteps/ContactInfoFields";
 import PersonalInfoFields from "../formsteps/PersonalInfoFields";
 import ImmigrationEnquiry from "../formsteps/ImmigrationEnquiryFields";
@@ -44,7 +38,7 @@ const EnquiryForm = () => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
 
- const handleDateChange = (fieldName: string, date: Date | undefined) => {
+ const handleDateChange = (fieldName: string, _date: Date | undefined) => {
    setFormValues((prevValues) => ({
      ...prevValues,
      [fieldName]: Date().toString(),
@@ -265,7 +259,6 @@ const Step3 = ({
 
 const Step4 = ({
   formValues,
-  handleChange,
   handleSubmit,
   handleServiceChange,
   handleChangeTextarea,
