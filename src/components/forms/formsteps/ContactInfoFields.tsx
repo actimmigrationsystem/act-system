@@ -13,7 +13,7 @@ const ContactInfoFields = ({ formValues, handleChange }: ContactInfoFieldsProps)
       <>
         <div className="mt-8">
           <Typography
-            placeholder={"Typography"}
+            placeholder={"Name"}
             variant="small"
             color="blue-gray"
             className="mb-2 font-medium"
@@ -31,7 +31,7 @@ const ContactInfoFields = ({ formValues, handleChange }: ContactInfoFieldsProps)
           />
         </div>
         <Typography
-          placeholder={"Typography"}
+          placeholder={"Surname"}
           variant="small"
           color="blue-gray"
           className="mb-2 font-medium"
@@ -50,7 +50,7 @@ const ContactInfoFields = ({ formValues, handleChange }: ContactInfoFieldsProps)
         <div className="flex flex-wrap -mx-2">
           <div className="w-full md:w-1/2 px-2">
             <Typography
-              placeholder={"Typography"}
+              placeholder={"Contact Number"}
               variant="small"
               color="blue-gray"
               className="mb-2 font-medium"
@@ -69,7 +69,7 @@ const ContactInfoFields = ({ formValues, handleChange }: ContactInfoFieldsProps)
           </div>
           <div className="w-full md:w-1/2 px-2">
             <Typography
-              placeholder={"Typography"}
+              placeholder={"Email Address"}
               variant="small"
               color="blue-gray"
               className="mb-2 font-medium"
@@ -78,7 +78,7 @@ const ContactInfoFields = ({ formValues, handleChange }: ContactInfoFieldsProps)
             </Typography>
             <FloatingLabel
               variant="filled"
-              label="Your Email Address"
+              label="name@email.com"
               type="email"
               name="email"
               value={formValues.email}

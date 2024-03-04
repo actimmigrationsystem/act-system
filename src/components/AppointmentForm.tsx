@@ -45,7 +45,7 @@ const AppointmentForm = () => {
     <div>
       <div
         style={{
-          backgroundColor: "#EB6F6F",
+          backgroundColor: "#6FA1EB",
           color: "white",
           padding: "10px",
           marginBottom: "10px",
