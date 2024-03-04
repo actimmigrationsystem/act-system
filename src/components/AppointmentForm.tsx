@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import StepWizard from "react-step-wizard";
 import { Button } from "@material-tailwind/react";
 import { RiMailSendLine } from "react-icons/ri";
@@ -17,6 +18,7 @@ const AppointmentForm = () => {
     appointmentTime: "",
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const navigate = useNavigate(); // Access the navigate function
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
@@ -67,25 +69,19 @@ const AppointmentForm = () => {
       </Button>
     </div>
   );
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     console.log("Form Values:", formValues);
-    const form = document.createElement("form");
-    form.action = "https://formsubmit.co/enquiries@actimmigration.co.za";
-    form.method = "POST";
-    form.target = "_blank";
 
-    // form data
-    Object.entries(formValues).forEach(([name, value]) => {
-      const input = document.createElement("input");
-      input.type = "hidden";
-      input.name = name;
-      input.value = value instanceof Date ? value.toISOString() : value;
-      form.appendChild(input);
-    });
-
-    document.body.appendChild(form);
-    form.submit();
+    // Navigate to the respective page
+    switch (formValues.serviceType) {
+      case "Asylum seeker appeal/review":
+      case "Asylum seeker visa extension":
+        navigate("/externalformView");
+        break;
+      default:
+        navigate("/externalformView");
+        break;
+    }
 
     // Clear the form
     setFormValues({
@@ -174,7 +170,7 @@ const Step2 = ({
   handleAppointmentDateChange: (date: Date | undefined) => void;
   handleServiceChange: (value: string | undefined) => void;
   handleAppointmentType: (value: string | undefined) => void;
-  handleSubmit: (e: React.FormEvent) => void;
+  handleSubmit: () => void;
 }) => (
   <>
     <AppointmentServiceFormFields

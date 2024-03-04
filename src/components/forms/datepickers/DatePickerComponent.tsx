@@ -23,7 +23,7 @@ const DatePickerComponent = ({
       onChange={onChange}
       popperClassName="date-picker-popper"
       popperPlacement="bottom"
-      dateFormat="dd/MM/yyyy"
+      dateFormat="dd/mm/yyyy"
       popperModifiers={[
         {
           name: "myModifier",
