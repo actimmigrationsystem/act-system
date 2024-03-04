@@ -54,7 +54,7 @@ const EnquiryForm = () => {
     <div>
       <div
         style={{
-          backgroundColor: "#EB6F6F",
+          backgroundColor: "#64B4E2",
           color: "white",
           padding: "10px",
           marginBottom: "10px",

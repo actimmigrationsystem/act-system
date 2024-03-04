@@ -12,6 +12,7 @@ import ContactUs from "./pages/ContactUsSection";
 import SocialSidebar from "./components/SocialSidebar";
 import PrivacyPolicyPage from "./pages/PrivacyPolicy";
 import ServiceDetails from "./pages/ServiceDetails";
+import ExternalFormView from "./components/ExternalFormView";
 
 function App() {
   return (
@@ -24,6 +25,15 @@ function App() {
             <>
               <ExternalNavbar />
               <PrivacyPolicyPage />
+            </>
+          }
+        />
+        <Route
+          path="/externalformView"
+          element={
+            <>
+              <ExternalNavbar />
+              <ExternalFormView />
             </>
           }
         />
