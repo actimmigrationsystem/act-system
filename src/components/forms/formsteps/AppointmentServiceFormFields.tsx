@@ -9,6 +9,7 @@ interface AppointmentServiceFormFieldsProps {
     appointmentDate: Date;
   };
   handleAppointmentDateChange: (date: Date | undefined) => void;
+  handleServiceChange: (value: string | undefined) => void;
 }
 
 const AppointmentServiceFormFields: React.FC<AppointmentServiceFormFieldsProps> = ({
@@ -57,6 +58,7 @@ const AppointmentServiceFormFields: React.FC<AppointmentServiceFormFieldsProps> 
     appointmentOptions[0]
   );
   const [selectedVenueType, setSelectedVenueType] = useState(venueOptions[0]);
+
 
   return (
     <>

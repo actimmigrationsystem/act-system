@@ -20,7 +20,7 @@ const AppointmentForm = () => {
     appointmentTime: "",
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const navigate = useNavigate(); // Access the navigate function
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
@@ -78,10 +78,29 @@ const AppointmentForm = () => {
     switch (formValues.serviceType) {
       case "Asylum seeker appeal/review":
       case "Asylum seeker visa extension":
-        navigate("/externalform");
+        case    "Asylum seeker appeal/review":
+              case "Asylum seeker visa extension":
+              case "Critical skills visa application":
+              case "Letter of good cause application (FORM 20)":
+              case "Naturalisation application":
+              case "Permanent residence appeal":
+              case "Permanent residence application":
+              case "Prohibition appeal":
+              case "PRP Exemptions":
+              case "PRP Waiver":
+              case "Refugee permit extension":
+              case "Standing Committee application":
+              case "Study visa application":
+              case "Study visa rejection":
+              case "Temporary residence renewal":
+              case "TRV Exemptions":
+              case "TRV Waiver":
+              case "ZEP Migration":
+              case "ZEP Waiver":
+              navigate("/externalform", { state: { formValues } });
         break;
       default:
-        navigate("/externalform");
+        navigate("/externalform", { state: { formValues } });
         break;
     }
     // Clear the form
@@ -165,6 +184,7 @@ const Step1 = ({
 const Step2 = ({
   formValues,
   handleAppointmentDateChange,
+  handleServiceChange,
   handleSubmit,
 }: {
   formValues: any;
@@ -178,6 +198,7 @@ const Step2 = ({
     <AppointmentServiceFormFields
       formValues={formValues}
       handleAppointmentDateChange={handleAppointmentDateChange}
+      handleServiceChange={handleServiceChange}
     />
     <div className="flex max-w-md flex-col gap-4" id="checkbox">
       <div className="flex items-center gap-2">

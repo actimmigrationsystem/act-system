@@ -1,4 +1,5 @@
 import { useState, ChangeEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import StepWizard from "react-step-wizard";
 import { Button } from "@material-tailwind/react";
 import { RiMailSendLine } from "react-icons/ri";
@@ -76,45 +77,39 @@ const EnquiryForm = () => {
       </Button>
     </div>
   );
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Form Values:", formValues);
-    const form = document.createElement("form");
-    form.action = "https://formsubmit.co/enquiries@actimmigration.co.za";
-    form.method = "POST";
-    form.target = "_blank";
+    const navigate = useNavigate();
+    const handleSubmit = () => {
+      console.log("Form Values:", formValues);
 
-    // form data
-    Object.entries(formValues).forEach(([name, value]) => {
-      const input = document.createElement("input");
-      input.type = "hidden";
-      input.name = name;
-      input.value = value;
-      form.appendChild(input);
-    });
-
-    document.body.appendChild(form);
-    form.submit();
-
-    // Clear the form
-    setFormValues({
-      name: "",
-      _subject: "Enquiry",
-      email: "",
-      gender: "",
-      dob: "",
-      maritalStatus: "",
-      residentialAddress: "",
-      entryDate: "",
-      passportNumber: "",
-      referenceNumber: "",
-      serviceType: "",
-      elaborate: "",
-      documentUpload: "",
-      immigrationStatus: "",
-    });
-    setFormSubmitted(true);
-  };
+      // Navigate to the respective page
+      switch (formValues.serviceType) {
+        case "Asylum seeker appeal/review":
+        case "Asylum seeker visa extension":
+          navigate("/externalform");
+          break;
+        default:
+          navigate("/externalform");
+          break;
+      }
+      // Clear the form
+      setFormValues({
+        name: "",
+        _subject: "Enquiry",
+        email: "",
+        gender: "",
+        dob: "",
+        maritalStatus: "",
+        residentialAddress: "",
+        entryDate: "",
+        passportNumber: "",
+        referenceNumber: "",
+        serviceType: "",
+        elaborate: "",
+        documentUpload: "",
+        immigrationStatus: "",
+      });
+      setFormSubmitted(true);
+    };
 
   const handleGenderChange = (value: string | undefined) => {
     if (value) {
