@@ -25,7 +25,7 @@ const EnquiryForm = () => {
     referenceNumber: "",
     serviceType: "",
     elaborate: "",
-    documentUpload: "",
+    documentUpload: new File([""], "filename"),
     immigrationStatus: "",
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -159,6 +159,10 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       }));
     }
   };
+  const onFileChange = (file: File) => {
+    console.log("File:", file);
+    setFormValues((prevState) => ({ ...prevState, documentUpload: file }));
+  }
 
   const nextStep = () => {};
   return (
@@ -192,6 +196,7 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             handleChange={handleChange}
             handleServiceChange={handleServiceChange}
             handleChangeTextarea={handleChangeTextarea}
+            onFileChange={onFileChange}
             handleSubmit={handleSubmit}
           />
         </StepWizard>
@@ -295,12 +300,14 @@ const Step4 = ({
   handleServiceChange,
   handleChange,
   handleSubmit,
+  onFileChange,
 }: {
   formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleChangeTextarea: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   handleSubmit: (e: React.FormEvent) => void;
   handleServiceChange: (value: string | undefined) => void;
+  onFileChange: (file: File) => void;
 }) => (
   <>
     <GeneralServiceFormFields
@@ -308,6 +315,7 @@ const Step4 = ({
       handleChange={handleChange}
       handleChangeTextarea={handleChangeTextarea}
       handleServiceChange={handleServiceChange}
+      onFileChange={onFileChange}
       handleSubmit={handleSubmit}
     />
 

@@ -1,7 +1,17 @@
-
 import { FileInput, Label } from "flowbite-react";
 
-const DocumentUpload = () => {
+interface DocumentUploadProps {
+  onFileChange: (file: File) => void;
+}
+
+const DocumentUpload: React.FC<DocumentUploadProps> = ({ onFileChange }) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      onFileChange(file);
+    }
+  };
+
   return (
     <div id="fileUpload" className="max-w-md mb-8">
       <div className="mb-2 block">
@@ -15,9 +25,7 @@ const DocumentUpload = () => {
         id="file"
         multiple
         color="primary"
-        helperText="(E.g. Passport,
-        Asylum/Refugee status, Visa(s), Rejection letter(s), Marriage
-        certificate, etc.)"
+        helperText="(E.g. Passport, Asylum/Refugee status, Visa(s), Rejection letter(s), Marriage certificate, etc.)"
         theme={{
           field: {
             input: {
@@ -27,6 +35,7 @@ const DocumentUpload = () => {
             },
           },
         }}
+        onChange={handleInputChange}
       />
     </div>
   );

@@ -12,12 +12,14 @@ interface GeneralServiceFormFieldsProps {
   handleSubmit: (e: React.FormEvent) => void;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleServiceChange: (value: string | undefined) => void;
+  onFileChange: (file: File) => void;
 }
 
 const GeneralServiceFormFields: React.FC<GeneralServiceFormFieldsProps> = ({
   formValues,
   handleChangeTextarea,
   handleServiceChange,
+  onFileChange,
 }) => {
   const serviceOptions = [
     "Asylum seeker appeal/review",
@@ -46,6 +48,12 @@ const GeneralServiceFormFields: React.FC<GeneralServiceFormFieldsProps> = ({
   useEffect(() => {
     handleServiceChange(selectedService);
   }, [selectedService]);
+
+  const handleFileChange = (file: File) => {
+    console.log("Selected file:", file);
+    // save the file to state
+    onFileChange(file);
+  };
 
   return (
     <div className="mt-8">
@@ -131,7 +139,7 @@ const GeneralServiceFormFields: React.FC<GeneralServiceFormFieldsProps> = ({
           {formValues.elaborate.length}/1000
         </div>
       </div>
-      <DocumentUpload />
+      <DocumentUpload onFileChange={handleFileChange} />
       <div className="flex max-w-md flex-col gap-4" id="checkbox">
         <div className="flex items-center gap-2">
           <Checkbox id="accept" defaultChecked />
