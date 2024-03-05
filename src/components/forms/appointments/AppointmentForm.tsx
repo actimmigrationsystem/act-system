@@ -16,6 +16,7 @@ const AppointmentForm = () => {
     email: "",
     serviceType: "",
     venueType: "",
+    appointmentType: "",
     appointmentDate: new Date(),
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -103,12 +104,18 @@ const handleSubmit = () => {
   setFormSubmitted(true);
 };
 
-  const handleVenueType = (value: string | undefined) => {
+  const handleVenueChange = (value: string | undefined) => {
     console.log("Venue Type:", value);
     if (value) {
       setFormValues((prevState) => ({ ...prevState, venueType: value }));
     }
   };
+    const handleAppointmentChange = (value: string | undefined) => {
+      console.log("Venue Type:", value);
+      if (value) {
+        setFormValues((prevState) => ({ ...prevState, appointmentType: value }));
+      }
+    };
 const handleServiceChange = useCallback((value: string | undefined) => {
    console.log("Service Change Value:", value);
    if (value) {
@@ -133,7 +140,8 @@ const handleServiceChange = useCallback((value: string | undefined) => {
             formValues={formValues}
             handleChange={handleChange}
             handleServiceChange={handleServiceChange}
-            handleVenueType={handleVenueType}
+            handleVenueChange={handleVenueChange}
+            handleAppointmentChange={handleAppointmentChange}
             handleAppointmentDateChange={handleAppointmentDateChange}
             handleSubmit={handleSubmit}
           />
@@ -168,14 +176,16 @@ const Step2 = ({
   formValues,
   handleAppointmentDateChange,
   handleServiceChange,
-  handleVenueType,
+  handleVenueChange,
+  handleAppointmentChange,
   handleSubmit,
 }: {
   formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleAppointmentDateChange: (date: Date | undefined) => void;
   handleServiceChange: (value: string | undefined) => void;
-  handleVenueType: (value: string | undefined) => void;
+  handleVenueChange: (value: string | undefined) => void;
+  handleAppointmentChange: (value: string | undefined) => void;
   handleSubmit: () => void;
 }) => (
   <>
@@ -183,7 +193,8 @@ const Step2 = ({
       formValues={formValues}
       handleAppointmentDateChange={handleAppointmentDateChange}
       handleServiceChange={handleServiceChange}
-      handleVenueType={handleVenueType}
+      handleVenueChange={handleVenueChange}
+      handleAppointmentChange={handleAppointmentChange}
     />
     <div className="flex max-w-md flex-col gap-4" id="checkbox">
       <div className="flex items-center gap-2">

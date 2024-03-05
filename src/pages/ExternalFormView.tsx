@@ -26,6 +26,7 @@ const ExternalFormView = ({ formValues }: ExternalFormViewProps) => {
     email,
     serviceType,
     venueType,
+    appointmentType,
     appointmentDate,
   } = extractedFormValues || {};
 
@@ -37,8 +38,8 @@ const ExternalFormView = ({ formValues }: ExternalFormViewProps) => {
       <p>Subject: {_subject}</p>
       <p>Email: {email}</p>
       <p>Service Type: {serviceType?.toString()}</p>
-      <p>Appointment Type: {venueType}</p>
-      <p>Service Type: {venueType}</p>
+      <p>Appointment Type: {appointmentType}</p>
+      <p>Venue: {venueType}</p>
       <p>Appointment Date: {appointmentDate?.toString()}</p>
     </div>
   );

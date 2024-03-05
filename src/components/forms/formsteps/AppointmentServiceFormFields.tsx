@@ -10,7 +10,8 @@ interface AppointmentServiceFormFieldsProps {
   };
   handleAppointmentDateChange: (date: Date | undefined) => void;
   handleServiceChange: (value: string | undefined) => void;
-  handleVenueType: (value: string | undefined) => void;
+  handleVenueChange: (value: string | undefined) => void;
+  handleAppointmentChange: (value: string | undefined) => void;
 }
 
 const AppointmentServiceFormFields: React.FC<
@@ -19,7 +20,8 @@ const AppointmentServiceFormFields: React.FC<
   formValues,
   handleAppointmentDateChange,
   handleServiceChange,
-  handleVenueType,
+  handleVenueChange,
+  handleAppointmentChange,
 }) => {
   const serviceOptions = [
     "Asylum seeker appeal/review",
@@ -61,21 +63,21 @@ const AppointmentServiceFormFields: React.FC<
   const [selectedService, setSelectedService] = useState(serviceOptions[0]);
   const [selectedVenue, setselectedVenue] = useState(venueOptions[0]);
 
-    const [selectedAppointment, setselectedAppointment] = useState(
-      appointmentOptions[0]
-    );
+  const [selectedAppointment, setselectedAppointment] = useState(
+    appointmentOptions[0]
+  );
 
   useEffect(() => {
     handleServiceChange(selectedService);
   }, [selectedService, handleServiceChange]);
 
-    useEffect(() => {
-      handleVenueType(selectedVenue);
-    }, [selectedVenue, handleVenueType]);
+  useEffect(() => {
+    handleVenueChange(selectedVenue);
+  }, [selectedVenue, handleVenueChange]);
 
-        useEffect(() => {
-          handleVenueType(selectedAppointment);
-        }, [selectedAppointment, handleVenueType]);
+  useEffect(() => {
+    handleAppointmentChange(selectedAppointment);
+  }, [selectedAppointment, handleAppointmentChange]);
 
   return (
     <>
