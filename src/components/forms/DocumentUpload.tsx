@@ -1,36 +1,31 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { Label } from "flowbite-react";
 
 interface DocumentUploadProps {
-    onFileChange: (files: File[]) => void;
+  onFileChange: (files: File[]) => void;
 }
 
-const DocumentUpload: React.FC<DocumentUploadProps> = ({
-  onFileChange,
+const DocumentUpload: React.FC<DocumentUploadProps> = ({ onFileChange }) => {
+  const [file, setFile] = useState<File | null>(null);
 
-}) => {
-  const [files, setFiles] = useState<File[]>([]);
-
-  const onDrop = (acceptedFiles: File[]) => {
-    const updatedFiles = [...files, ...acceptedFiles];
-    setFiles(updatedFiles);
-    onFileChange(updatedFiles);
-  };
+const onDrop = (acceptedFiles: File[]) => {
+  const selectedFile = acceptedFiles[0];
+  setFile(selectedFile);
+  onFileChange(acceptedFiles); 
+};
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    multiple: true,
+    multiple: false,
   });
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <Label
-        htmlFor="dropzone-file"
-        className="dark:hover:bg-bray-800 flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+      <div
         {...getRootProps()}
+        className="dark:hover:bg-bray-800 flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
       >
-        <input {...getInputProps({ id: "dropzone-file" })} className="hidden" />
+        <input {...getInputProps()} id="dropzone-file" className="hidden" />
         <div className="flex flex-col items-center justify-center pb-6 pt-5">
           <svg
             className="mb-4 h-8 w-8 text-gray-500 dark:text-gray-400"
@@ -54,14 +49,12 @@ const DocumentUpload: React.FC<DocumentUploadProps> = ({
             SVG, PNG, JPG or GIF (MAX. 800x400px)
           </p>
         </div>
-      </Label>
-      <ul>
-        {files.map((file) => (
-          <li key={file.name}>
-            {file.name} - {file.size} bytes
-          </li>
-        ))}
-      </ul>
+      </div>
+      {file && (
+        <p>
+          Selected file: {file.name} - {file.size} bytes
+        </p>
+      )}
     </div>
   );
 };

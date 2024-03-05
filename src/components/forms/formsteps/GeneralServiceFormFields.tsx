@@ -12,7 +12,7 @@ interface GeneralServiceFormFieldsProps {
   handleSubmit: (e: React.FormEvent) => void;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleServiceChange: (value: string | undefined) => void;
-  onFileChange: (file: File) => void;
+  onFileChange: (files: File[]) => void;
 }
 
 const GeneralServiceFormFields: React.FC<GeneralServiceFormFieldsProps> = ({
@@ -49,11 +49,11 @@ const GeneralServiceFormFields: React.FC<GeneralServiceFormFieldsProps> = ({
     handleServiceChange(selectedService);
   }, [selectedService]);
 
-  const handleFileChange = (files: File[]) => {
-    console.log("Selected files:", files);
-    // save the files to state
-    onFileChange(files[0]); // Pass the first file in the array
-  };
+const handleFileChange = (files: File[]) => {
+  console.log("Selected files:", files);
+  // save the files to state
+  onFileChange(files);
+};
 
 
   return (
