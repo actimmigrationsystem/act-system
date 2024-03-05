@@ -1,7 +1,7 @@
 import { useState, Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
-import { Typography, Button } from "@material-tailwind/react";
+import { Typography } from "@material-tailwind/react";
 import { FloatingLabel  } from "flowbite-react";
 import DatePickerComponent from "../datepickers/DatePickerComponent";
 
@@ -17,7 +17,7 @@ const ImmigrationStatusFields: React.FC<ImmigrationStatusFieldsProps> = ({
   formValues,
   handleChange,
   handleDateChange,
-  nextStep,
+  handleImmigrationStatusChange
 }) => {
   const immigrationStatusOptions = [
     "Recognized Refugee",
@@ -44,7 +44,10 @@ const ImmigrationStatusFields: React.FC<ImmigrationStatusFieldsProps> = ({
       <div className="max-w-full mb-4">
         <Listbox
           value={selectedImmigrationStatus}
-          onChange={setSelectedImmigrationStatus}
+          onChange={(value) => {
+            setSelectedImmigrationStatus(value);
+            handleImmigrationStatusChange(value);
+          }}
         >
           {({ open }) => (
             <>
@@ -154,14 +157,6 @@ const ImmigrationStatusFields: React.FC<ImmigrationStatusFieldsProps> = ({
         onChange={handleChange}
         className="!border-t-blue-gray-200 focus:!border-t-gray-900"
       />
-      <Button
-        style={{ backgroundColor: "#0e5a97" }}
-        type="button"
-        placeholder=""
-        onClick={nextStep}
-      >
-        Next
-      </Button>
     </div>
   );
 };

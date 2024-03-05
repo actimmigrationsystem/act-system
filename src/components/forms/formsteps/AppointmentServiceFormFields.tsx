@@ -62,22 +62,21 @@ const AppointmentServiceFormFields: React.FC<
 
   const [selectedService, setSelectedService] = useState(serviceOptions[0]);
   const [selectedVenue, setselectedVenue] = useState(venueOptions[0]);
-
   const [selectedAppointment, setselectedAppointment] = useState(
     appointmentOptions[0]
   );
 
   useEffect(() => {
     handleServiceChange(selectedService);
-  }, [selectedService, handleServiceChange]);
+  }, [selectedService]);
 
   useEffect(() => {
     handleVenueChange(selectedVenue);
-  }, [selectedVenue, handleVenueChange]);
+  }, [selectedVenue]);
 
   useEffect(() => {
     handleAppointmentChange(selectedAppointment);
-  }, [selectedAppointment, handleAppointmentChange]);
+  }, [selectedAppointment]);
 
   return (
     <>

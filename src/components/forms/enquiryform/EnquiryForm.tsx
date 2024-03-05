@@ -1,23 +1,26 @@
-import { useState, ChangeEvent } from "react";
+import { useState, useCallback, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import StepWizard from "react-step-wizard";
 import { Button } from "@material-tailwind/react";
 import { RiMailSendLine } from "react-icons/ri";
 import ContactInfoFields from "../formsteps/ContactInfoFields";
 import PersonalInfoFields from "../formsteps/PersonalInfoFields";
-import ImmigrationEnquiry from "../formsteps/ImmigrationEnquiryFields";
-import EnquiryServiceFields from "../formsteps/EnquiryServiceFields";
+import GeneralServiceFormFields from "../formsteps/GeneralServiceFormFields";
+import ImmigrationStatusFields from "../formsteps/ImmigrationStatusFields";
+
 
 const EnquiryForm = () => {
   const [formValues, setFormValues] = useState({
     name: "",
+    surname: "",
     _subject: "Enquiry",
+    phonenumber: "",
     email: "",
     gender: "",
-    dob: "",
+    dob: new Date(),
     maritalStatus: "",
     residentialAddress: "",
-    entryDate: "",
+    entryDate: new Date(),
     passportNumber: "",
     referenceNumber: "",
     serviceType: "",
@@ -26,25 +29,13 @@ const EnquiryForm = () => {
     immigrationStatus: "",
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const navigate = useNavigate();
 
-  const handleChangeTextarea = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const value = e.target.value;
-    if (value.length <= 1000) {
-      setFormValues({ ...formValues, elaborate: value });
-    }
-  };
-  const handleChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => {
-    setFormValues({ ...formValues, [e.target.name]: e.target.value });
-  };
+const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const { name, value } = e.target;
+  setFormValues({ ...formValues, [name]: value });
+};
 
- const handleDateChange = (fieldName: string, _date: Date | undefined) => {
-   setFormValues((prevValues) => ({
-     ...prevValues,
-     [fieldName]: Date().toString(),
-   }));
- };
 
   const handleRefreshClick = () => {
     // refresh the page
@@ -55,7 +46,7 @@ const EnquiryForm = () => {
     <div>
       <div
         style={{
-          backgroundColor: "#EB6F6F",
+          backgroundColor: "#6FA1EB",
           color: "white",
           padding: "10px",
           marginBottom: "10px",
@@ -77,71 +68,101 @@ const EnquiryForm = () => {
       </Button>
     </div>
   );
-    const navigate = useNavigate();
-    const handleSubmit = () => {
-      console.log("Form Values:", formValues);
-
-      // Navigate to the respective page
-      switch (formValues.serviceType) {
-        case "Asylum seeker appeal/review":
-        case "Asylum seeker visa extension":
-          navigate("/externalform");
-          break;
-        default:
-          navigate("/externalform");
-          break;
-      }
-      // Clear the form
-      setFormValues({
-        name: "",
-        _subject: "Enquiry",
-        email: "",
-        gender: "",
-        dob: "",
-        maritalStatus: "",
-        residentialAddress: "",
-        entryDate: "",
-        passportNumber: "",
-        referenceNumber: "",
-        serviceType: "",
-        elaborate: "",
-        documentUpload: "",
-        immigrationStatus: "",
-      });
-      setFormSubmitted(true);
-    };
-
-  const handleGenderChange = (value: string | undefined) => {
-    if (value) {
-      setFormValues((prevState) => ({ ...prevState, gender: value }));
+  const handleSubmit = () => {
+    console.log("Form Values:", formValues);
+    if (
+      !formValues.name ||
+      !formValues.surname ||
+      !formValues.phonenumber ||
+      !formValues.email ||
+      !formValues.serviceType
+    ) {
+      alert("Please fill in all required fields.");
+      return;
     }
+
+    // Navigate to the respective page
+    switch (formValues.serviceType) {
+      case "Asylum seeker appeal/review":
+      case "Asylum seeker visa extension":
+      case "Critical skills visa application":
+      case "Letter of good cause application (FORM 20)":
+      case "Naturalisation application":
+      case "Permanent residence appeal":
+      case "Permanent residence application":
+      case "Prohibition appeal":
+      case "PRP Exemptions":
+      case "PRP Waiver":
+      case "Refugee permit extension":
+      case "Standing Committee application":
+      case "Study visa application":
+      case "Study visa rejection":
+      case "Temporary residence renewal":
+      case "TRV Exemptions":
+      case "TRV Waiver":
+      case "ZEP Migration":
+      case "ZEP Waiver":
+        navigate("/formmanager", { state: { formValues } });
+        break;
+      default:
+        navigate("/formmanager", { state: { formValues } });
+        break;
+    }
+    setFormSubmitted(true);
   };
 
-  const handleMaritalStatusChange = (value: string | undefined) => {
+    const handleGenderChange = useCallback((value: string | undefined) => {
+      console.log("Gender Change Value:", value);
+      if (value) {
+        setFormValues((prevState) => ({ ...prevState, gender: value }));
+      }
+    }, []);
+
+    const handleImmigrationStatusChange = (value: string | undefined) => {
+      console.log("handleImmigrationStatusChange :", value);
+      if (value) {
+        setFormValues((prevState) => ({ ...prevState, immigrationStatus: value }));
+      }
+    };
+
+  const handleMaritalStatusChange = useCallback((value: string | undefined) => {
+    console.log("Service Change Value:", value);
     if (value) {
       setFormValues((prevState) => ({ ...prevState, maritalStatus: value }));
     }
-  };
+  }, []);
 
-  const handleImmigrationStatusChange = (value: string | undefined) => {
-    if (value) {
+    const handleChangeTextarea = (e: ChangeEvent<HTMLTextAreaElement>) => {
+      const value = e.target.value;
+      if (value.length <= 1000) {
+        setFormValues({ ...formValues, elaborate: value });
+      }
+    };
+    const handleServiceChange = useCallback((value: string | undefined) => {
+      console.log("Service Change Value:", value);
+      if (value) {
+        setFormValues((prevState) => ({ ...prevState, serviceType: value }));
+      }
+    }, []);
+
+
+  const handleDateChange = (date: Date | undefined) => {
+    if (date) {
       setFormValues((prevState) => ({
         ...prevState,
-        immigrationStatus: value,
+        appointmentDate: date,
+      }));
+    } else {
+      setFormValues((prevState) => ({
+        ...prevState,
+        appointmentDate: new Date(),
       }));
     }
   };
 
-  const handleServiceChange = (value: string | undefined) => {
-    if (value) {
-      setFormValues((prevState) => ({ ...prevState, serviceType: value }));
-    }
-  };
-
   const nextStep = () => {};
-
   return (
-    <div>
+    <div className="mt-8">
       {formSubmitted ? (
         <ThankYouMessage />
       ) : (
@@ -155,14 +176,14 @@ const EnquiryForm = () => {
             formValues={formValues}
             handleChange={handleChange}
             handleGenderChange={handleGenderChange}
-            handleDateChange={(date: Date) => handleDateChange("dob", date)}
+            handleDateChange={handleDateChange}
             handleMaritalStatusChange={handleMaritalStatusChange}
             nextStep={nextStep}
           />
           <Step3
             formValues={formValues}
             handleChange={handleChange}
-            handleDateChange={(date: Date) => handleDateChange("entryDate", date)}
+            handleDateChange={handleDateChange}
             handleImmigrationStatusChange={handleImmigrationStatusChange}
             nextStep={nextStep}
           />
@@ -200,7 +221,6 @@ const Step1 = ({
     </Button>
   </>
 );
-
 const Step2 = ({
   formValues,
   handleChange,
@@ -212,7 +232,7 @@ const Step2 = ({
   formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleGenderChange: (value: string | undefined) => void;
-  handleDateChange: (date: Date) => void;
+  handleDateChange: (date: Date | undefined) => void;
   handleMaritalStatusChange: (value: string | undefined) => void;
   nextStep: () => void;
 }) => (
@@ -225,14 +245,22 @@ const Step2 = ({
       handleMaritalStatusChange={handleMaritalStatusChange}
       nextStep={nextStep}
     />
+    <Button
+      style={{ backgroundColor: "#0e5a97" }}
+      type="button"
+      placeholder=""
+      onClick={nextStep}
+    >
+      Next
+    </Button>
   </>
 );
-
 
 const Step3 = ({
   formValues,
   handleChange,
   handleDateChange,
+  handleImmigrationStatusChange,
   nextStep,
 }: {
   formValues: any;
@@ -242,21 +270,31 @@ const Step3 = ({
   nextStep: () => void;
 }) => (
   <>
-    <ImmigrationEnquiry
+    <ImmigrationStatusFields
       formValues={formValues}
       handleChange={handleChange}
       handleDateChange={handleDateChange}
+      handleImmigrationStatusChange={handleImmigrationStatusChange}
       nextStep={nextStep}
     />
+
+    <Button
+      style={{ backgroundColor: "#0e5a97" }}
+      type="button"
+      placeholder=""
+      onClick={nextStep}
+    >
+      Next
+    </Button>
   </>
 );
 
-
 const Step4 = ({
   formValues,
-  handleSubmit,
-  handleServiceChange,
   handleChangeTextarea,
+  handleServiceChange,
+  handleChange,
+  handleSubmit,
 }: {
   formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -265,12 +303,25 @@ const Step4 = ({
   handleServiceChange: (value: string | undefined) => void;
 }) => (
   <>
-    <EnquiryServiceFields
+    <GeneralServiceFormFields
       formValues={formValues}
+      handleChange={handleChange}
       handleChangeTextarea={handleChangeTextarea}
-      handleSubmit={handleSubmit}
       handleServiceChange={handleServiceChange}
+      handleSubmit={handleSubmit}
     />
+
+    <Button
+      className="w-full mt-4"
+      placeholder={"Button"}
+      size="lg"
+      type="submit"
+      style={{ backgroundColor: "#0e5a97" }}
+      onClick={handleSubmit}
+    >
+      Submit Enquiry
+    </Button>
   </>
 );
+
 export default EnquiryForm;

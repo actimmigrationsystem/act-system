@@ -12,7 +12,8 @@ import ContactUs from "./pages/ContactUsSection";
 import SocialSidebar from "./components/SocialSidebar";
 import PrivacyPolicyPage from "./pages/PrivacyPolicy";
 import ServiceDetails from "./pages/ServiceDetails";
-import ExternalFormView from "./pages/ExternalFormView";
+// import FormManager from "./pages/FormManager";
+import FormManager from "./pages/FormManager";
 
 function App() {
   return (
@@ -29,11 +30,13 @@ function App() {
           }
         />
         <Route
-          path="/externalform"
+          path="/formmanager"
           element={
             <>
               <ExternalNavbar />
-              <ExternalFormView />
+              <FormManager
+                formValues={(location as any).state?.formValues || {}}
+              />
             </>
           }
         />

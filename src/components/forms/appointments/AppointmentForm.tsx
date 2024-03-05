@@ -73,6 +73,15 @@ const AppointmentForm = () => {
   );
 const handleSubmit = () => {
   console.log("Form Values:", formValues);
+   if (
+     !formValues.name ||
+     !formValues.surname ||
+     !formValues.email ||
+     !formValues.serviceType
+   ) {
+     alert("Please fill in all required fields.");
+     return;
+   }
 
   // Navigate to the respective page
   switch (formValues.serviceType) {
@@ -95,10 +104,10 @@ const handleSubmit = () => {
     case "TRV Waiver":
     case "ZEP Migration":
     case "ZEP Waiver":
-      navigate("/externalform", { state: { formValues } });
+      navigate("/formmanager", { state: { formValues } });
       break;
     default:
-      navigate("/externalform", { state: { formValues } });
+      navigate("/formmanager", { state: { formValues } });
       break;
   }
   setFormSubmitted(true);

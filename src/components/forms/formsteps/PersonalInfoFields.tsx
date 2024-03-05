@@ -2,14 +2,14 @@ import React, { useState, Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { Typography } from "@material-tailwind/react";
 import DatePickerComponent from "../datepickers/DatePickerComponent";
-import { FloatingLabel, Button } from "flowbite-react";
+import { FloatingLabel } from "flowbite-react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
 interface PersonalInfoFieldsProps {
   formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleGenderChange: (value: string | undefined) => void;
-  handleDateChange: (date: Date) => void;
+  handleDateChange: (date: Date | undefined) => void;
   handleMaritalStatusChange: (value: string | undefined) => void;
   nextStep: () => void;
 }
@@ -17,8 +17,9 @@ interface PersonalInfoFieldsProps {
 const PersonalInfoFields: React.FC<PersonalInfoFieldsProps> = ({
   formValues,
   handleChange,
+  handleGenderChange,
+  handleMaritalStatusChange,
   handleDateChange,
-  nextStep,
 }) => {
   const genderOptions = ["Female", "Male", "Other"];
   const maritalStatusOptions = [
@@ -45,7 +46,13 @@ const PersonalInfoFields: React.FC<PersonalInfoFieldsProps> = ({
           >
             What is your gender
           </Typography>
-          <Listbox value={selectedGender} onChange={setSelectedGender}>
+          <Listbox
+            value={selectedGender}
+            onChange={(value) => {
+              setSelectedGender(value);
+              handleGenderChange(value);
+            }}
+          >
             {({ open }) => (
               <>
                 <div className="relative mt-1 mb-4">
@@ -131,7 +138,10 @@ const PersonalInfoFields: React.FC<PersonalInfoFieldsProps> = ({
         <div className="max-w-full mb-4">
           <Listbox
             value={selectedMaritalStatus}
-            onChange={setSelectedMaritalStatus}
+            onChange={(value) => {
+              setSelectedMaritalStatus(value);
+              handleMaritalStatusChange(value);
+            }}
           >
             {({ open }) => (
               <>
@@ -208,13 +218,6 @@ const PersonalInfoFields: React.FC<PersonalInfoFieldsProps> = ({
         onChange={handleChange}
         className="!border-t-blue-gray-200 focus:!border-t-gray-900"
       />
-      <Button
-        style={{ backgroundColor: "#0e5a97" }}
-        type="button"
-        onClick={nextStep}
-      >
-        Next
-      </Button>
     </div>
   );
 };

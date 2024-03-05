@@ -1,4 +1,4 @@
-import { useState, Fragment } from "react";
+import { useState, Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
@@ -10,11 +10,15 @@ interface GeneralServiceFormFieldsProps {
   formValues: any;
   handleChangeTextarea: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   handleSubmit: (e: React.FormEvent) => void;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleServiceChange: (value: string | undefined) => void;
 }
 
 const GeneralServiceFormFields: React.FC<GeneralServiceFormFieldsProps> = ({
   formValues,
   handleChangeTextarea,
+  handleServiceChange,
+  handleChange,
   handleSubmit,
 }) => {
   const serviceOptions = [
@@ -40,6 +44,10 @@ const GeneralServiceFormFields: React.FC<GeneralServiceFormFieldsProps> = ({
   ];
 
   const [selectedService, setSelectedService] = useState(serviceOptions[0]);
+
+  useEffect(() => {
+    handleServiceChange(selectedService);
+  }, [selectedService]);
 
   return (
     <div className="mt-8">
@@ -136,16 +144,6 @@ const GeneralServiceFormFields: React.FC<GeneralServiceFormFieldsProps> = ({
           </Label>
         </div>
       </div>
-      <Button
-        className="w-full mt-4"
-        placeholder={"Button"}
-        size="lg"
-        type="submit"
-        style={{ backgroundColor: "#0e5a97" }}
-        onClick={handleSubmit}
-      >
-        Submit Enquiry
-      </Button>
     </div>
   );
 };
