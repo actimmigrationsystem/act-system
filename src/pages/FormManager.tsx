@@ -26,7 +26,7 @@ const FormManager: React.FC<FormManagerProps> = ({
   const mergedFormValues = { ...formValues, ...extractedFormValues };
 
   return (
-    <>
+    <div className="">
       <SectionContainer>
         <SectionTitle title="Preview" />
         <ContentContainer>
@@ -82,7 +82,7 @@ const FormManager: React.FC<FormManagerProps> = ({
           </div>
         </ContentContainer>
       </SectionContainer>
-    </>
+    </div>
   );
 };
 
