@@ -17,7 +17,7 @@ const ImmigrationStatusFields: React.FC<ImmigrationStatusFieldsProps> = ({
   formValues,
   handleChange,
   handleDateChange,
-  handleImmigrationStatusChange
+  handleImmigrationStatusChange,
 }) => {
   const immigrationStatusOptions = [
     "Recognized Refugee",

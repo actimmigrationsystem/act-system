@@ -2,7 +2,7 @@ import { useState, Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
-import { Typography, Button } from "@material-tailwind/react";
+import { Typography } from "@material-tailwind/react";
 import { Checkbox, Label } from "flowbite-react";
 import DocumentUpload from "../DocumentUpload";
 
@@ -18,8 +18,6 @@ const GeneralServiceFormFields: React.FC<GeneralServiceFormFieldsProps> = ({
   formValues,
   handleChangeTextarea,
   handleServiceChange,
-  handleChange,
-  handleSubmit,
 }) => {
   const serviceOptions = [
     "Asylum seeker appeal/review",
@@ -60,7 +58,13 @@ const GeneralServiceFormFields: React.FC<GeneralServiceFormFieldsProps> = ({
         What service do you require?
       </Typography>
       <div className="max-w-full">
-        <Listbox value={selectedService} onChange={setSelectedService}>
+        <Listbox
+          value={selectedService}
+          onChange={(value) => {
+            setSelectedService(value);
+            handleServiceChange(value);
+          }}
+        >
           <div className="relative mt-1">
             <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
               <span className="block truncate">{selectedService}</span>
