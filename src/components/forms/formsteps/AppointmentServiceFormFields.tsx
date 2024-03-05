@@ -21,7 +21,7 @@ const AppointmentServiceFormFields: React.FC<
   handleAppointmentDateChange,
   handleServiceChange,
   handleVenueChange,
-  handleAppointmentChange,
+  handleAppointmentChange
 }) => {
   const serviceOptions = [
     "Asylum seeker appeal/review",
@@ -62,21 +62,22 @@ const AppointmentServiceFormFields: React.FC<
 
   const [selectedService, setSelectedService] = useState(serviceOptions[0]);
   const [selectedVenue, setselectedVenue] = useState(venueOptions[0]);
+
   const [selectedAppointment, setselectedAppointment] = useState(
     appointmentOptions[0]
   );
 
   useEffect(() => {
     handleServiceChange(selectedService);
-  }, [selectedService]);
+  }, [selectedService, handleServiceChange]);
 
   useEffect(() => {
     handleVenueChange(selectedVenue);
-  }, [selectedVenue]);
+  }, [selectedVenue, handleVenueChange]);
 
   useEffect(() => {
     handleAppointmentChange(selectedAppointment);
-  }, [selectedAppointment]);
+  }, [selectedAppointment, handleAppointmentChange]);
 
   return (
     <>
