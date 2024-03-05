@@ -7,7 +7,6 @@ interface FormValues {
 interface FormManagerProps {
   formValues: FormValues;
 }
-
 const FormManager: React.FC<FormManagerProps> = ({ formValues }) => {
   const location = useLocation();
   const extractedFormValues: FormValues = location.state?.formValues || {};

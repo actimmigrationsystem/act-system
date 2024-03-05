@@ -49,11 +49,12 @@ const GeneralServiceFormFields: React.FC<GeneralServiceFormFieldsProps> = ({
     handleServiceChange(selectedService);
   }, [selectedService]);
 
-  const handleFileChange = (file: File) => {
-    console.log("Selected file:", file);
-    // save the file to state
-    onFileChange(file);
+  const handleFileChange = (files: File[]) => {
+    console.log("Selected files:", files);
+    // save the files to state
+    onFileChange(files[0]); // Pass the first file in the array
   };
+
 
   return (
     <div className="mt-8">

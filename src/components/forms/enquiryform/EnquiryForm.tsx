@@ -196,7 +196,7 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             handleChange={handleChange}
             handleServiceChange={handleServiceChange}
             handleChangeTextarea={handleChangeTextarea}
-            onFileChange={onFileChange}
+            onFileChange={(files: File[]) => onFileChange(files[0])}
             handleSubmit={handleSubmit}
           />
         </StepWizard>
@@ -307,7 +307,7 @@ const Step4 = ({
   handleChangeTextarea: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   handleSubmit: (e: React.FormEvent) => void;
   handleServiceChange: (value: string | undefined) => void;
-  onFileChange: (file: File) => void;
+  onFileChange: (files: File[]) => any;
 }) => (
   <>
     <GeneralServiceFormFields
@@ -315,7 +315,7 @@ const Step4 = ({
       handleChange={handleChange}
       handleChangeTextarea={handleChangeTextarea}
       handleServiceChange={handleServiceChange}
-      onFileChange={onFileChange}
+      onFileChange={(file: File) => onFileChange([file])}
       handleSubmit={handleSubmit}
     />
 
