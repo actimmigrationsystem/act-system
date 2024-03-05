@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { Checkbox, Label } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
@@ -15,9 +15,8 @@ const AppointmentForm = () => {
     _subject: "Appointment",
     email: "",
     serviceType: "",
-    appointmentType: "",
+    venueType: "",
     appointmentDate: new Date(),
-    appointmentTime: "",
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
   const navigate = useNavigate();
@@ -71,70 +70,54 @@ const AppointmentForm = () => {
       </Button>
     </div>
   );
-  const handleSubmit = () => {
-    console.log("Form Values:", formValues);
+const handleSubmit = () => {
+  console.log("Form Values:", formValues);
 
-    // Navigate to the respective page
-    switch (formValues.serviceType) {
-      case "Asylum seeker appeal/review":
-      case "Asylum seeker visa extension":
-        case    "Asylum seeker appeal/review":
-              case "Asylum seeker visa extension":
-              case "Critical skills visa application":
-              case "Letter of good cause application (FORM 20)":
-              case "Naturalisation application":
-              case "Permanent residence appeal":
-              case "Permanent residence application":
-              case "Prohibition appeal":
-              case "PRP Exemptions":
-              case "PRP Waiver":
-              case "Refugee permit extension":
-              case "Standing Committee application":
-              case "Study visa application":
-              case "Study visa rejection":
-              case "Temporary residence renewal":
-              case "TRV Exemptions":
-              case "TRV Waiver":
-              case "ZEP Migration":
-              case "ZEP Waiver":
-              navigate("/externalform", { state: { formValues } });
-        break;
-      default:
-        navigate("/externalform", { state: { formValues } });
-        break;
-    }
-    // Clear the form
-    setFormValues({
-      name: "",
-      surname: "",
-      _subject: "Appointment",
-      email: "",
-      serviceType: "",
-      appointmentType: "",
-      appointmentDate: new Date(),
-      appointmentTime: "",
-    });
-    setFormSubmitted(true);
-  };
+  // Navigate to the respective page
+  switch (formValues.serviceType) {
+    case "Asylum seeker appeal/review":
+    case "Asylum seeker visa extension":
+    case "Critical skills visa application":
+    case "Letter of good cause application (FORM 20)":
+    case "Naturalisation application":
+    case "Permanent residence appeal":
+    case "Permanent residence application":
+    case "Prohibition appeal":
+    case "PRP Exemptions":
+    case "PRP Waiver":
+    case "Refugee permit extension":
+    case "Standing Committee application":
+    case "Study visa application":
+    case "Study visa rejection":
+    case "Temporary residence renewal":
+    case "TRV Exemptions":
+    case "TRV Waiver":
+    case "ZEP Migration":
+    case "ZEP Waiver":
+      navigate("/externalform", { state: { formValues } });
+      break;
+    default:
+      navigate("/externalform", { state: { formValues } });
+      break;
+  }
+  setFormSubmitted(true);
+};
 
-
-  const handleAppointmentType = (value: string | undefined) => {
+  const handleVenueType = (value: string | undefined) => {
+    console.log("Venue Type:", value);
     if (value) {
-      setFormValues((prevState) => ({
-        ...prevState,
-        appointmentType: value,
-      }));
+      setFormValues((prevState) => ({ ...prevState, venueType: value }));
     }
   };
+const handleServiceChange = useCallback((value: string | undefined) => {
+   console.log("Service Change Value:", value);
+   if (value) {
+     setFormValues((prevState) => ({ ...prevState, serviceType: value }));
+   }
+}, []);
 
-  const handleServiceChange = (value: string | undefined) => {
-    if (value) {
-      setFormValues((prevState) => ({ ...prevState, serviceType: value }));
-    }
-  };
 
   const nextStep = () => {};
-
   return (
     <div className="mt-8">
       {formSubmitted ? (
@@ -150,7 +133,7 @@ const AppointmentForm = () => {
             formValues={formValues}
             handleChange={handleChange}
             handleServiceChange={handleServiceChange}
-            handleAppointmentType={handleAppointmentType}
+            handleVenueType={handleVenueType}
             handleAppointmentDateChange={handleAppointmentDateChange}
             handleSubmit={handleSubmit}
           />
@@ -185,13 +168,14 @@ const Step2 = ({
   formValues,
   handleAppointmentDateChange,
   handleServiceChange,
+  handleVenueType,
   handleSubmit,
 }: {
   formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleAppointmentDateChange: (date: Date | undefined) => void;
   handleServiceChange: (value: string | undefined) => void;
-  handleAppointmentType: (value: string | undefined) => void;
+  handleVenueType: (value: string | undefined) => void;
   handleSubmit: () => void;
 }) => (
   <>
@@ -199,6 +183,7 @@ const Step2 = ({
       formValues={formValues}
       handleAppointmentDateChange={handleAppointmentDateChange}
       handleServiceChange={handleServiceChange}
+      handleVenueType={handleVenueType}
     />
     <div className="flex max-w-md flex-col gap-4" id="checkbox">
       <div className="flex items-center gap-2">

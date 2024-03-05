@@ -7,9 +7,8 @@ interface ExternalFormViewProps {
     _subject?: string;
     email?: string;
     serviceType?: string;
-    appointmentType?: string;
+    venueType?: string;
     appointmentDate?: Date;
-    appointmentTime?: string;
   };
 }
 
@@ -26,9 +25,8 @@ const ExternalFormView = ({ formValues }: ExternalFormViewProps) => {
     _subject,
     email,
     serviceType,
-    appointmentType,
+    venueType,
     appointmentDate,
-    appointmentTime,
   } = extractedFormValues || {};
 
   return (
@@ -38,10 +36,10 @@ const ExternalFormView = ({ formValues }: ExternalFormViewProps) => {
       <p>Surname: {surname}</p>
       <p>Subject: {_subject}</p>
       <p>Email: {email}</p>
-      <p>Service Type: {serviceType}</p>
-      <p>Appointment Type: {appointmentType}</p>
+      <p>Service Type: {serviceType?.toString()}</p>
+      <p>Appointment Type: {venueType}</p>
+      <p>Service Type: {venueType}</p>
       <p>Appointment Date: {appointmentDate?.toString()}</p>
-      <p>Appointment Time: {appointmentTime}</p>
     </div>
   );
 };

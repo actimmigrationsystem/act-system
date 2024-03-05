@@ -25,7 +25,7 @@ const ContactInfoFields = ({ formValues, handleChange }: ContactInfoFieldsProps)
             label="Name"
             type="text"
             name="name"
-            value={formValues.name}
+            value={formValues.name || ""}
             onChange={handleChange}
             className="!border-t-blue-gray-200 focus:!border-t-gray-900"
           />
@@ -43,7 +43,7 @@ const ContactInfoFields = ({ formValues, handleChange }: ContactInfoFieldsProps)
           label="Surname"
           type="text"
           name="surname"
-          value={formValues.surname}
+          value={formValues.surname || ""}
           onChange={handleChange}
           className="!border-t-blue-gray-200 focus:!border-t-gray-900 mb-4"
         />
@@ -62,7 +62,7 @@ const ContactInfoFields = ({ formValues, handleChange }: ContactInfoFieldsProps)
               label="Contact Number"
               type="tel"
               name="phonenumber"
-              value={formValues.phonenumber}
+              value={formValues.phonenumber || ""}
               onChange={handleChange}
               className="!border-t-blue-gray-200 focus:!border-t-gray-900"
             />
@@ -81,7 +81,7 @@ const ContactInfoFields = ({ formValues, handleChange }: ContactInfoFieldsProps)
               label="name@email.com"
               type="email"
               name="email"
-              value={formValues.email}
+              value={formValues.email || ""}
               onChange={handleChange}
               className="!border-t-blue-gray-200 focus:!border-t-gray-900"
             />
