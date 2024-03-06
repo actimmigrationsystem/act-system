@@ -10,6 +10,7 @@ const AboutUs = () => (
     <ContentContainer>
       <AboutContent children />
       <StartNowSection />
+      
     </ContentContainer>
   </SectionContainer>
 );

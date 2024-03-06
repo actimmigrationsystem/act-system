@@ -1,4 +1,4 @@
-import { useState, Fragment } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import AppointmentDatePicker from "../datepickers/AppointmentDatePicker";
 import { Listbox, Transition } from "@headlessui/react";
@@ -9,11 +9,19 @@ interface AppointmentServiceFormFieldsProps {
     appointmentDate: Date;
   };
   handleAppointmentDateChange: (date: Date | undefined) => void;
+  handleServiceChange: (value: string | undefined) => void;
+  handleVenueChange: (value: string | undefined) => void;
+  handleAppointmentChange: (value: string | undefined) => void;
 }
 
-const AppointmentServiceFormFields: React.FC<AppointmentServiceFormFieldsProps> = ({
+const AppointmentServiceFormFields: React.FC<
+  AppointmentServiceFormFieldsProps
+> = ({
   formValues,
   handleAppointmentDateChange,
+  handleServiceChange,
+  handleVenueChange,
+  handleAppointmentChange
 }) => {
   const serviceOptions = [
     "Asylum seeker appeal/review",
@@ -53,10 +61,23 @@ const AppointmentServiceFormFields: React.FC<AppointmentServiceFormFieldsProps> 
   ];
 
   const [selectedService, setSelectedService] = useState(serviceOptions[0]);
-  const [selectedAppointmentType, setSelectedAppointmentType] = useState(
+  const [selectedVenue, setselectedVenue] = useState(venueOptions[0]);
+
+  const [selectedAppointment, setselectedAppointment] = useState(
     appointmentOptions[0]
   );
-  const [selectedVenueType, setSelectedVenueType] = useState(venueOptions[0]);
+
+  useEffect(() => {
+    handleServiceChange(selectedService);
+  }, [selectedService, handleServiceChange]);
+
+  useEffect(() => {
+    handleVenueChange(selectedVenue);
+  }, [selectedVenue, handleVenueChange]);
+
+  useEffect(() => {
+    handleAppointmentChange(selectedAppointment);
+  }, [selectedAppointment, handleAppointmentChange]);
 
   return (
     <>
@@ -128,14 +149,12 @@ const AppointmentServiceFormFields: React.FC<AppointmentServiceFormFieldsProps> 
         </Typography>
         <div className="max-w-full mb-4">
           <Listbox
-            value={selectedAppointmentType}
-            onChange={setSelectedAppointmentType}
+            value={selectedAppointment}
+            onChange={setselectedAppointment}
           >
             <div className="relative mt-1">
               <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-                <span className="block truncate">
-                  {selectedAppointmentType}
-                </span>
+                <span className="block truncate">{selectedAppointment}</span>
                 <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                   <ChevronUpDownIcon
                     className="h-5 w-5 text-gray-400"
@@ -205,13 +224,10 @@ const AppointmentServiceFormFields: React.FC<AppointmentServiceFormFieldsProps> 
               Select Appointment Venue
             </Typography>
             <div className="max-w-full">
-              <Listbox
-                value={selectedVenueType}
-                onChange={setSelectedVenueType}
-              >
+              <Listbox value={selectedVenue} onChange={setselectedVenue}>
                 <div className="relative mt-1">
                   <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-                    <span className="block truncate">{selectedVenueType}</span>
+                    <span className="block truncate">{selectedVenue}</span>
                     <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                       <ChevronUpDownIcon
                         className="h-5 w-5 text-gray-400"
@@ -266,3 +282,5 @@ const AppointmentServiceFormFields: React.FC<AppointmentServiceFormFieldsProps> 
 };
 
 export default AppointmentServiceFormFields;
+
+

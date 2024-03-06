@@ -1,134 +1,73 @@
-import { useState, ChangeEvent } from "react";
+import { useState, useCallback, ChangeEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import StepWizard from "react-step-wizard";
 import { Button } from "@material-tailwind/react";
 import { RiMailSendLine } from "react-icons/ri";
 import ContactInfoFields from "../formsteps/ContactInfoFields";
 import PersonalInfoFields from "../formsteps/PersonalInfoFields";
-import ImmigrationEnquiry from "../formsteps/ImmigrationEnquiryFields";
-import EnquiryServiceFields from "../formsteps/EnquiryServiceFields";
+import GeneralServiceFormFields from "../formsteps/GeneralServiceFormFields";
+import ImmigrationStatusFields from "../formsteps/ImmigrationStatusFields";
 
 const EnquiryForm = () => {
   const [formValues, setFormValues] = useState({
     name: "",
+    surname: "",
     _subject: "Enquiry",
+    phonenumber: "",
     email: "",
     gender: "",
-    dob: "",
+    dob: new Date(),
     maritalStatus: "",
     residentialAddress: "",
-    entryDate: "",
+    entryDate: new Date(),
     passportNumber: "",
     referenceNumber: "",
     serviceType: "",
     elaborate: "",
-    documentUpload: "",
+    documentUpload: [] as File[],
     immigrationStatus: "",
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const navigate = useNavigate();
 
-  const handleChangeTextarea = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const value = e.target.value;
-    if (value.length <= 1000) {
-      setFormValues({ ...formValues, elaborate: value });
-    }
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
   };
-  const handleChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => {
-    setFormValues({ ...formValues, [e.target.name]: e.target.value });
-  };
-
- const handleDateChange = (fieldName: string, _date: Date | undefined) => {
-   setFormValues((prevValues) => ({
-     ...prevValues,
-     [fieldName]: Date().toString(),
-   }));
- };
 
   const handleRefreshClick = () => {
     // refresh the page
     setFormSubmitted(false);
     window.location.reload();
   };
-  const ThankYouMessage = () => (
-    <div>
-      <div
-        style={{
-          backgroundColor: "#EB6F6F",
-          color: "white",
-          padding: "10px",
-          marginBottom: "10px",
-        }}
-      >
-        Thank you for your message! We will respond shortly.
-      </div>
-      <br />
-      <Button
-        placeholder="Refresh Page"
-        className="sendagain"
-        onClick={handleRefreshClick}
-      >
-        <RiMailSendLine
-          className="w-4 h-4 me-2"
-          style={{ marginRight: "12px" }}
-        />
-        Send Another Enquiry
-      </Button>
-    </div>
-  );
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+
+  const handleSubmit = () => {
     console.log("Form Values:", formValues);
-    const form = document.createElement("form");
-    form.action = "https://formsubmit.co/enquiries@actimmigration.co.za";
-    form.method = "POST";
-    form.target = "_blank";
+    if (
+      !formValues.name ||
+      !formValues.surname ||
+      !formValues.phonenumber ||
+      !formValues.email ||
+      !formValues.serviceType
+    ) {
+      alert("Please fill in all required fields.");
+      return;
+    }
 
-    // form data
-    Object.entries(formValues).forEach(([name, value]) => {
-      const input = document.createElement("input");
-      input.type = "hidden";
-      input.name = name;
-      input.value = value;
-      form.appendChild(input);
-    });
-
-    document.body.appendChild(form);
-    form.submit();
-
-    // Clear the form
-    setFormValues({
-      name: "",
-      _subject: "Enquiry",
-      email: "",
-      gender: "",
-      dob: "",
-      maritalStatus: "",
-      residentialAddress: "",
-      entryDate: "",
-      passportNumber: "",
-      referenceNumber: "",
-      serviceType: "",
-      elaborate: "",
-      documentUpload: "",
-      immigrationStatus: "",
-    });
+    // Navigate to the respective page
+    navigate("/enquirymanager", { state: { formValues } });
     setFormSubmitted(true);
   };
 
-  const handleGenderChange = (value: string | undefined) => {
+  const handleGenderChange = useCallback((value: string | undefined) => {
+    console.log("Gender Change Value:", value);
     if (value) {
       setFormValues((prevState) => ({ ...prevState, gender: value }));
     }
-  };
-
-  const handleMaritalStatusChange = (value: string | undefined) => {
-    if (value) {
-      setFormValues((prevState) => ({ ...prevState, maritalStatus: value }));
-    }
-  };
+  }, []);
 
   const handleImmigrationStatusChange = (value: string | undefined) => {
+    console.log("handleImmigrationStatusChange :", value);
     if (value) {
       setFormValues((prevState) => ({
         ...prevState,
@@ -137,18 +76,74 @@ const EnquiryForm = () => {
     }
   };
 
-  const handleServiceChange = (value: string | undefined) => {
+  const handleMaritalStatusChange = useCallback((value: string | undefined) => {
+    console.log("Service Change Value:", value);
+    if (value) {
+      setFormValues((prevState) => ({ ...prevState, maritalStatus: value }));
+    }
+  }, []);
+
+  const handleChangeTextarea = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const value = e.target.value;
+    if (value.length <= 1000) {
+      setFormValues({ ...formValues, elaborate: value });
+    }
+  };
+
+  const handleServiceChange = useCallback((value: string | undefined) => {
+    console.log("Service Change Value:", value);
     if (value) {
       setFormValues((prevState) => ({ ...prevState, serviceType: value }));
     }
+  }, []);
+
+  const handleDateChange = (date: Date | undefined) => {
+    if (date) {
+      setFormValues((prevState) => ({
+        ...prevState,
+        appointmentDate: date,
+      }));
+    } else {
+      setFormValues((prevState) => ({
+        ...prevState,
+        appointmentDate: new Date(),
+      }));
+    }
+  };
+
+  const onFileChange = (files: File[]) => {
+    setFormValues((prevState) => ({ ...prevState, documentUpload: files }));
   };
 
   const nextStep = () => {};
 
   return (
-    <div>
+    <div className="mt-8">
       {formSubmitted ? (
-        <ThankYouMessage />
+        <div>
+          <div
+            style={{
+              backgroundColor: "#6FA1EB",
+              color: "white",
+              padding: "10px",
+              marginBottom: "10px",
+            }}
+          >
+            Thank you for your message! We will respond shortly.
+          </div>
+          <br />
+          <Button
+            placeholder="Refresh Page"
+            className="sendagain"
+            onClick={handleRefreshClick}
+          >
+            <RiMailSendLine
+              className="w-4 h-4 me-2"
+              style={{ marginRight: "12px" }}
+            />
+            Send Another Enquiry
+          </Button>
+        </div>
       ) : (
         <StepWizard>
           <Step1
@@ -160,14 +155,14 @@ const EnquiryForm = () => {
             formValues={formValues}
             handleChange={handleChange}
             handleGenderChange={handleGenderChange}
-            handleDateChange={(date: Date) => handleDateChange("dob", date)}
+            handleDateChange={handleDateChange}
             handleMaritalStatusChange={handleMaritalStatusChange}
             nextStep={nextStep}
           />
           <Step3
             formValues={formValues}
             handleChange={handleChange}
-            handleDateChange={(date: Date) => handleDateChange("entryDate", date)}
+            handleDateChange={handleDateChange}
             handleImmigrationStatusChange={handleImmigrationStatusChange}
             nextStep={nextStep}
           />
@@ -176,6 +171,7 @@ const EnquiryForm = () => {
             handleChange={handleChange}
             handleServiceChange={handleServiceChange}
             handleChangeTextarea={handleChangeTextarea}
+            onFileChange={onFileChange}
             handleSubmit={handleSubmit}
           />
         </StepWizard>
@@ -193,7 +189,8 @@ const Step1 = ({
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   nextStep: () => void;
 }) => (
-  <>
+    <div>
+
     <ContactInfoFields formValues={formValues} handleChange={handleChange} />
     <Button
       style={{ backgroundColor: "#0e5a97" }}
@@ -203,9 +200,8 @@ const Step1 = ({
     >
       Next
     </Button>
-  </>
+  </div>
 );
-
 const Step2 = ({
   formValues,
   handleChange,
@@ -217,11 +213,11 @@ const Step2 = ({
   formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleGenderChange: (value: string | undefined) => void;
-  handleDateChange: (date: Date) => void;
+  handleDateChange: (date: Date | undefined) => void;
   handleMaritalStatusChange: (value: string | undefined) => void;
   nextStep: () => void;
 }) => (
-  <>
+  <div>
     <PersonalInfoFields
       formValues={formValues}
       handleChange={handleChange}
@@ -230,14 +226,22 @@ const Step2 = ({
       handleMaritalStatusChange={handleMaritalStatusChange}
       nextStep={nextStep}
     />
-  </>
+    <Button
+      style={{ backgroundColor: "#0e5a97" }}
+      type="button"
+      placeholder=""
+      onClick={nextStep}
+    >
+      Next
+    </Button>
+  </div>
 );
-
 
 const Step3 = ({
   formValues,
   handleChange,
   handleDateChange,
+  handleImmigrationStatusChange,
   nextStep,
 }: {
   formValues: any;
@@ -247,35 +251,64 @@ const Step3 = ({
   nextStep: () => void;
 }) => (
   <>
-    <ImmigrationEnquiry
-      formValues={formValues}
-      handleChange={handleChange}
-      handleDateChange={handleDateChange}
-      nextStep={nextStep}
-    />
+    <div className="mb-8">
+      <ImmigrationStatusFields
+        formValues={formValues}
+        handleChange={handleChange}
+        handleDateChange={handleDateChange}
+        handleImmigrationStatusChange={handleImmigrationStatusChange}
+        nextStep={nextStep}
+      />
+    </div>
+
+      <Button
+        style={{ backgroundColor: "#0e5a97" }}
+        type="button"
+        placeholder=""
+        onClick={nextStep}
+      >
+        Next
+      </Button>
+
   </>
 );
 
-
 const Step4 = ({
   formValues,
-  handleSubmit,
-  handleServiceChange,
   handleChangeTextarea,
+  handleServiceChange,
+  handleChange,
+  handleSubmit,
+  onFileChange,
 }: {
   formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleChangeTextarea: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   handleSubmit: (e: React.FormEvent) => void;
   handleServiceChange: (value: string | undefined) => void;
+  onFileChange: (files: File[]) => void;
 }) => (
   <>
-    <EnquiryServiceFields
+    <GeneralServiceFormFields
       formValues={formValues}
+      handleChange={handleChange}
       handleChangeTextarea={handleChangeTextarea}
-      handleSubmit={handleSubmit}
       handleServiceChange={handleServiceChange}
+      onFileChange= {onFileChange}
+      handleSubmit={handleSubmit}
     />
+
+    <Button
+      className="w-full mt-4"
+      placeholder={"Button"}
+      size="lg"
+      type="submit"
+      style={{ backgroundColor: "#0e5a97" }}
+      onClick={handleSubmit}
+    >
+      Submit Enquiry
+    </Button>
   </>
 );
+
 export default EnquiryForm;

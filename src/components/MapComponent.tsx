@@ -1,4 +1,4 @@
-export default function MapComponent() {
+const MapComponent = () => {
   return (
     <div className="w-full flex justify-center">
       {" "}
@@ -13,4 +13,5 @@ export default function MapComponent() {
       />
     </div>
   );
-}
+};
+export default MapComponent;

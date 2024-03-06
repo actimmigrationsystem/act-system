@@ -56,6 +56,7 @@ const HomeCarousel = () => {
           </div>
         ))}
       </Carousel>
+      
     </div>
   );
 };
