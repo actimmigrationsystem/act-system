@@ -104,10 +104,10 @@ const handleSubmit = () => {
     case "TRV Waiver":
     case "ZEP Migration":
     case "ZEP Waiver":
-      navigate("/formmanager", { state: { formValues } });
+      navigate("/appointmentmanager", { state: { formValues } });
       break;
     default:
-      navigate("/formmanager", { state: { formValues } });
+      navigate("/appointmentmanager", { state: { formValues } });
       break;
   }
   setFormSubmitted(true);

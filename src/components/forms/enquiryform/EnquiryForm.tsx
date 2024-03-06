@@ -55,7 +55,7 @@ const EnquiryForm = () => {
     }
 
     // Navigate to the respective page
-    navigate("/formmanager", { state: { formValues } });
+    navigate("/enquirymanager", { state: { formValues } });
     setFormSubmitted(true);
   };
 

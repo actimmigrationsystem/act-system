@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { FaFilePdf } from "react-icons/fa";
-import { Typography, Button, Card } from "@material-tailwind/react";
+import { Typography, Card } from "@material-tailwind/react";
 import SectionTitle from "../components/SectionTitle";
 import ContentContainer from "../components/ContentContainer";
 import SectionContainer from "../components/SectionContainer";
@@ -17,15 +17,12 @@ interface FormManagerProps {
   onSubmit: () => void;
 }
 
-const FormManager = ({ formValues, onSubmit }: FormManagerProps) => {
+const FormManager = ({ formValues }: FormManagerProps) => {
   const location = useLocation();
   const extractedFormValues: FormValues = location.state?.formValues || {};
   const mergedFormValues = { ...formValues, ...extractedFormValues };
 
   const [showAlert, setShowAlert] = useState(true);
-  const [confirmedItems, setConfirmedItems] = useState<{
-    [key: string]: boolean;
-  }>({});
 
   useEffect(() => {
     setShowAlert(true);
@@ -35,34 +32,19 @@ const FormManager = ({ formValues, onSubmit }: FormManagerProps) => {
     setShowAlert(false);
   };
 
-  const handleConfirmItem = (key: string) => {
-    setConfirmedItems((prevConfirmedItems) => ({
-      ...prevConfirmedItems,
-      [key]: true,
-    }));
-  };
-
-  const handleConfirmAllItems = () => {
-    const newConfirmedItems: { [key: string]: boolean } = {};
-    Object.keys(mergedFormValues).forEach((key) => {
-      newConfirmedItems[key] = true;
-    });
-    setConfirmedItems(newConfirmedItems);
-  };
 
   const serviceType = mergedFormValues["serviceType"];
-
   return (
     <div className="mt-8">
       <SectionContainer>
-        <SectionTitle title={String(serviceType)} />
+        <SectionTitle title={String(serviceType) + " Appointment"} />
         <ContentContainer>
           <Card placeholder="" className="mb-8">
             <div className="card-body">
               <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
                 <MessageAlert
                   open={showAlert}
-                  message="Thank you for your submission. We require more details from you to proceed."
+                  message="Thank you for your Enquiry.We will revert back as soon as possible"
                   actionText="Continue"
                   onActionClick={handleAlertActionClick}
                 />
@@ -102,14 +84,7 @@ const FormManager = ({ formValues, onSubmit }: FormManagerProps) => {
                         </a>
                       ) : (
                         <>
-                          <MdCheckCircle
-                            className={
-                              confirmedItems[key]
-                                ? "text-green-500 mr-2"
-                                : "text-gray-500 mr-2"
-                            }
-                            onClick={() => handleConfirmItem(key)}
-                          />
+                          <MdCheckCircle className="text-green-500 mr-2" />
                           <Typography placeholder="">
                             {value?.toString()}
                           </Typography>
@@ -119,44 +94,8 @@ const FormManager = ({ formValues, onSubmit }: FormManagerProps) => {
                   </div>
                 ))}
               </div>
-              <div className="mt-4 mb-6 flex items-center justify-center">
-                <span className="mr-4">
-                  Please Verify and confirm the details you filled in above or
-                  return to the home page to refill
-                </span>
-                <Button
-                  placeholder=""
-                  onClick={handleConfirmAllItems}
-                  className="mr-2"
-                >
-                  Confirm
-                </Button>
-              </div>
             </div>
           </Card>
-          <div className="text-center">
-            <Typography placeholder="" color="gray">
-              Since you selected {String(serviceType)},Please fill in the
-              additional details required below:
-            </Typography>
-          </div>
-
-          <div className="mt-4 mb-4 flex items-center justify-center">
-            <span className="mr-4">
-              Please Verify and confirm the details you filled in above or
-              return to the home page to refill
-            </span>
-            <Button
-              placeholder=""
-              onClick={handleConfirmAllItems}
-              className="mr-2"
-            >
-              Confirm
-            </Button>
-            <Button placeholder="" color="green" onClick={onSubmit}>
-              Submit
-            </Button>
-          </div>
         </ContentContainer>
       </SectionContainer>
     </div>
