@@ -189,7 +189,8 @@ const Step1 = ({
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   nextStep: () => void;
 }) => (
-  <>
+    <div>
+
     <ContactInfoFields formValues={formValues} handleChange={handleChange} />
     <Button
       style={{ backgroundColor: "#0e5a97" }}
@@ -199,7 +200,7 @@ const Step1 = ({
     >
       Next
     </Button>
-  </>
+  </div>
 );
 const Step2 = ({
   formValues,
@@ -216,7 +217,7 @@ const Step2 = ({
   handleMaritalStatusChange: (value: string | undefined) => void;
   nextStep: () => void;
 }) => (
-  <>
+  <div>
     <PersonalInfoFields
       formValues={formValues}
       handleChange={handleChange}
@@ -233,7 +234,7 @@ const Step2 = ({
     >
       Next
     </Button>
-  </>
+  </div>
 );
 
 const Step3 = ({
@@ -250,22 +251,25 @@ const Step3 = ({
   nextStep: () => void;
 }) => (
   <>
-    <ImmigrationStatusFields
-      formValues={formValues}
-      handleChange={handleChange}
-      handleDateChange={handleDateChange}
-      handleImmigrationStatusChange={handleImmigrationStatusChange}
-      nextStep={nextStep}
-    />
+    <div className="mb-8">
+      <ImmigrationStatusFields
+        formValues={formValues}
+        handleChange={handleChange}
+        handleDateChange={handleDateChange}
+        handleImmigrationStatusChange={handleImmigrationStatusChange}
+        nextStep={nextStep}
+      />
+    </div>
 
-    <Button
-      style={{ backgroundColor: "#0e5a97" }}
-      type="button"
-      placeholder=""
-      onClick={nextStep}
-    >
-      Next
-    </Button>
+      <Button
+        style={{ backgroundColor: "#0e5a97" }}
+        type="button"
+        placeholder=""
+        onClick={nextStep}
+      >
+        Next
+      </Button>
+
   </>
 );
 

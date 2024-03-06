@@ -51,7 +51,7 @@ const ContactForm = () => {
         <Tabs value={activeTab} className="overflow-visible">
           <TabsHeader className="relative z-0" placeholder="">
             <Tab
-              value="enquiry"
+              value="k "
               onClick={() => handleTabChange("enquiry")}
               placeholder="enquiry tab"
             >
@@ -89,12 +89,11 @@ const ContactForm = () => {
             className="!overflow-x-hidden !overflow-y-visible"
           >
             <TabPanel value="enquiry" className="p-0">
-              <EnquiryForm />
-            </TabPanel>
-            <TabPanel value="appointments" className="p-0">
               <AppointmentForm />
             </TabPanel>
-
+            <TabPanel value="appointments" className="p-0">
+              <EnquiryForm />
+            </TabPanel>
             <TabPanel
               value="contact"
               className="flex flex-row md:flex-row items-center justify-center md:justify-start gap-2 mt-8 overflow-none"

@@ -12,12 +12,12 @@ interface FormValues {
   [key: string]: string | undefined | Date | File | File[];
 }
 
-interface FormManagerProps {
+interface EnquiryManagerProps {
   formValues: FormValues;
   onSubmit: () => void;
 }
 
-const FormManager = ({ formValues }: FormManagerProps) => {
+const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
   const location = useLocation();
   const extractedFormValues: FormValues = location.state?.formValues || {};
   const mergedFormValues = { ...formValues, ...extractedFormValues };
@@ -37,7 +37,7 @@ const FormManager = ({ formValues }: FormManagerProps) => {
   return (
     <div className="mt-8">
       <SectionContainer>
-        <SectionTitle title={String(serviceType) + " Appointment"} />
+        <SectionTitle title={String(serviceType) + " Enquiry"} />
         <ContentContainer>
           <Card placeholder="" className="mb-8">
             <div className="card-body">
@@ -102,4 +102,4 @@ const FormManager = ({ formValues }: FormManagerProps) => {
   );
 };
 
-export default FormManager;
+export default EnquiryManager;

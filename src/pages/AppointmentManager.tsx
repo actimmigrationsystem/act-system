@@ -55,7 +55,7 @@ const AppointmentManager = ({ formValues, onSubmit }: AppointmentManagerProps) =
   return (
     <div className="mt-8">
       <SectionContainer>
-        <SectionTitle title={String(serviceType)} />
+        <SectionTitle title={String(serviceType) + " Appointment"} />
         <ContentContainer>
           <Card placeholder="" className="mb-8">
             <div className="card-body">
