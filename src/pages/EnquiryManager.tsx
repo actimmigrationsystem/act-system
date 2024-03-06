@@ -45,7 +45,7 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
                 <MessageAlert
                   open={showAlert}
                   message="Thank you for your Enquiry.We will revert back as soon as possible"
-                  actionText="Continue"
+                  actionText="Close"
                   onActionClick={handleAlertActionClick}
                 />
               </div>
