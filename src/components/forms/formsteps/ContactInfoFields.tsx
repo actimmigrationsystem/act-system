@@ -13,7 +13,7 @@ const ContactInfoFields = ({ formValues, handleChange }: ContactInfoFieldsProps)
       <>
         <div className="mt-8">
           <Typography
-            placeholder={"Typography"}
+            placeholder={"Name"}
             variant="small"
             color="blue-gray"
             className="mb-2 font-medium"
@@ -25,13 +25,13 @@ const ContactInfoFields = ({ formValues, handleChange }: ContactInfoFieldsProps)
             label="Name"
             type="text"
             name="name"
-            value={formValues.name}
+            value={formValues.name || ""}
             onChange={handleChange}
             className="!border-t-blue-gray-200 focus:!border-t-gray-900"
           />
         </div>
         <Typography
-          placeholder={"Typography"}
+          placeholder={"Surname"}
           variant="small"
           color="blue-gray"
           className="mb-2 font-medium"
@@ -43,14 +43,14 @@ const ContactInfoFields = ({ formValues, handleChange }: ContactInfoFieldsProps)
           label="Surname"
           type="text"
           name="surname"
-          value={formValues.surname}
+          value={formValues.surname || ""}
           onChange={handleChange}
           className="!border-t-blue-gray-200 focus:!border-t-gray-900 mb-4"
         />
         <div className="flex flex-wrap -mx-2">
           <div className="w-full md:w-1/2 px-2">
             <Typography
-              placeholder={"Typography"}
+              placeholder={"Contact Number"}
               variant="small"
               color="blue-gray"
               className="mb-2 font-medium"
@@ -62,14 +62,14 @@ const ContactInfoFields = ({ formValues, handleChange }: ContactInfoFieldsProps)
               label="Contact Number"
               type="tel"
               name="phonenumber"
-              value={formValues.phonenumber}
+              value={formValues.phonenumber || ""}
               onChange={handleChange}
               className="!border-t-blue-gray-200 focus:!border-t-gray-900"
             />
           </div>
           <div className="w-full md:w-1/2 px-2">
             <Typography
-              placeholder={"Typography"}
+              placeholder={"Email Address"}
               variant="small"
               color="blue-gray"
               className="mb-2 font-medium"
@@ -78,10 +78,10 @@ const ContactInfoFields = ({ formValues, handleChange }: ContactInfoFieldsProps)
             </Typography>
             <FloatingLabel
               variant="filled"
-              label="Your Email Address"
+              label="name@email.com"
               type="email"
               name="email"
-              value={formValues.email}
+              value={formValues.email || ""}
               onChange={handleChange}
               className="!border-t-blue-gray-200 focus:!border-t-gray-900"
             />

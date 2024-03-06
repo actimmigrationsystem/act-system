@@ -12,6 +12,9 @@ import ContactUs from "./pages/ContactUsSection";
 import SocialSidebar from "./components/SocialSidebar";
 import PrivacyPolicyPage from "./pages/PrivacyPolicy";
 import ServiceDetails from "./pages/ServiceDetails";
+// import FormManager from "./pages/FormManager";
+import EnquiryManager from "./pages/EnquiryManager";
+import AppointmentManager from "./pages/AppointmentManager";
 
 function App() {
   return (
@@ -24,6 +27,35 @@ function App() {
             <>
               <ExternalNavbar />
               <PrivacyPolicyPage />
+            </>
+          }
+        />
+        <Route
+          path="/enquirymanager"
+          element={
+            <>
+              <ExternalNavbar />
+              <EnquiryManager
+                formValues={(location as any).state?.formValues || {}}
+                onSubmit={function (): void {
+                  throw new Error("Function not implemented.");
+                }}
+              />
+            </>
+          }
+        />
+
+        <Route
+          path="/appointmentmanager"
+          element={
+            <>
+              <ExternalNavbar />
+              <AppointmentManager
+                formValues={(location as any).state?.formValues || {}}
+                onSubmit={function (): void {
+                  throw new Error("Function not implemented.");
+                }}
+              />
             </>
           }
         />

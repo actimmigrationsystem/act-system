@@ -1,8 +1,8 @@
-import { useState, Fragment } from "react";
+import { useState, Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
-import { Typography, Button } from "@material-tailwind/react";
+import { Typography } from "@material-tailwind/react";
 import { Checkbox, Label } from "flowbite-react";
 import DocumentUpload from "../DocumentUpload";
 
@@ -10,12 +10,16 @@ interface GeneralServiceFormFieldsProps {
   formValues: any;
   handleChangeTextarea: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   handleSubmit: (e: React.FormEvent) => void;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleServiceChange: (value: string | undefined) => void;
+  onFileChange: (files: File[]) => void;
 }
 
 const GeneralServiceFormFields: React.FC<GeneralServiceFormFieldsProps> = ({
   formValues,
   handleChangeTextarea,
-  handleSubmit,
+  handleServiceChange,
+  onFileChange,
 }) => {
   const serviceOptions = [
     "Asylum seeker appeal/review",
@@ -41,6 +45,17 @@ const GeneralServiceFormFields: React.FC<GeneralServiceFormFieldsProps> = ({
 
   const [selectedService, setSelectedService] = useState(serviceOptions[0]);
 
+  useEffect(() => {
+    handleServiceChange(selectedService);
+  }, [selectedService]);
+
+const handleFileChange = (files: File[]) => {
+  console.log("Selected files:", files);
+  // save the files to state
+  onFileChange(files);
+};
+
+
   return (
     <div className="mt-8">
       <Typography
@@ -52,7 +67,13 @@ const GeneralServiceFormFields: React.FC<GeneralServiceFormFieldsProps> = ({
         What service do you require?
       </Typography>
       <div className="max-w-full">
-        <Listbox value={selectedService} onChange={setSelectedService}>
+        <Listbox
+          value={selectedService}
+          onChange={(value) => {
+            setSelectedService(value);
+            handleServiceChange(value);
+          }}
+        >
           <div className="relative mt-1">
             <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
               <span className="block truncate">{selectedService}</span>
@@ -119,7 +140,7 @@ const GeneralServiceFormFields: React.FC<GeneralServiceFormFieldsProps> = ({
           {formValues.elaborate.length}/1000
         </div>
       </div>
-      <DocumentUpload />
+      <DocumentUpload onFileChange={handleFileChange} />
       <div className="flex max-w-md flex-col gap-4" id="checkbox">
         <div className="flex items-center gap-2">
           <Checkbox id="accept" defaultChecked />
@@ -136,16 +157,6 @@ const GeneralServiceFormFields: React.FC<GeneralServiceFormFieldsProps> = ({
           </Label>
         </div>
       </div>
-      <Button
-        className="w-full mt-4"
-        placeholder={"Button"}
-        size="lg"
-        type="submit"
-        style={{ backgroundColor: "#0e5a97" }}
-        onClick={handleSubmit}
-      >
-        Submit Enquiry
-      </Button>
     </div>
   );
 };
