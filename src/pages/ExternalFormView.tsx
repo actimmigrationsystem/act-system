@@ -12,9 +12,7 @@ interface ExternalFormViewProps {
   };
 }
 
-const ExternalFormView = ({ formValues }: ExternalFormViewProps) => {
-  const test = formValues;
-  console.log(test);
+const ExternalFormView = ({ }: ExternalFormViewProps) => {
 
   // Access location state to retrieve formValues
   const location = useLocation();

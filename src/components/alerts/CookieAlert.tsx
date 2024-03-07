@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Alert, Button } from "@material-tailwind/react";
 import Cookies from "js-cookie";
 
-interface AlertsProps {
+interface CookieAlertProps {
   message?: string;
   actionText?: string;
   onActionClick?: () => void;
@@ -27,7 +27,7 @@ function Icon() {
   );
 }
 
-const Alerts: React.FC<AlertsProps> = ({
+const CookieAlert: React.FC<CookieAlertProps> = ({
   message = "Sorry, something went wrong. Please try again.",
   actionText = "Close",
   onActionClick,
@@ -35,8 +35,8 @@ const Alerts: React.FC<AlertsProps> = ({
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const alertAccepted = Cookies.get("alertAccepted");
-    if (alertAccepted) {
+    const cookieAccepted = Cookies.get("cookieAccepted");
+    if (cookieAccepted) {
       setOpen(false);
     } else {
       setOpen(true);
@@ -44,7 +44,7 @@ const Alerts: React.FC<AlertsProps> = ({
   }, []);
 
   const handleAccept = () => {
-    Cookies.set("alertAccepted", "true", { expires: 365 });
+    Cookies.set("cookieAccepted", "true", { expires: 365 });
     setOpen(false);
     if (onActionClick) {
       onActionClick();
@@ -54,28 +54,26 @@ const Alerts: React.FC<AlertsProps> = ({
   return (
     <>
       <Alert
-              variant="gradient"
-              open={open}
-              icon={<Icon />}
-              action={<>
-                  <div
-                      className="flex justify-between items-center"
-          
-                  >
-                      <p>{message}</p>
-                      <Button
-                          placeholder={""}
-                          variant="text"
-                          color="white"
-                          size="sm"
-                          onClick={handleAccept}
-                      >
-                          {actionText}
-                      </Button>
-                  </div>
-              </>} children={undefined}      />
+        variant="gradient"
+        open={open}
+        icon={<Icon />}
+        action={<div className="flex justify-between items-center">
+          <p>{message}</p>
+          <Button
+            placeholder={actionText}
+            variant="text"
+            color="white"
+            size="sm"
+            onClick={handleAccept}
+          >
+            {actionText}
+          </Button>
+        </div>
+      }
+    children={""}
+      />
     </>
   );
 };
 
-export default Alerts;
+export default CookieAlert;

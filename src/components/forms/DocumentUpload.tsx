@@ -11,7 +11,7 @@ const DocumentUpload: React.FC<DocumentUploadProps> = ({ onFileChange }) => {
 const onDrop = (acceptedFiles: File[]) => {
   const selectedFile = acceptedFiles[0];
   setFile(selectedFile);
-  onFileChange(acceptedFiles); 
+  onFileChange(acceptedFiles);
 };
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -20,13 +20,13 @@ const onDrop = (acceptedFiles: File[]) => {
   });
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center mb-2">
       <div
         {...getRootProps()}
         className="dark:hover:bg-bray-800 flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
       >
         <input {...getInputProps()} id="dropzone-file" className="hidden" />
-        <div className="flex flex-col items-center justify-center pb-6 pt-5">
+        <div className="flex flex-col items-center justify-center pb-4 pt-4">
           <svg
             className="mb-4 h-8 w-8 text-gray-500 dark:text-gray-400"
             aria-hidden="true"
@@ -42,11 +42,10 @@ const onDrop = (acceptedFiles: File[]) => {
             />
           </svg>
           <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-            <span className="font-semibold">Click to upload</span> or drag and
-            drop
+            <span className="font-semibold">Upload additional documents here</span>(drag and drop)
           </p>
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            SVG, PNG, JPG or GIF (MAX. 800x400px)
+            SVG, PNG, JPG,Pdf or GIF (MAX. 800x400px)
           </p>
         </div>
       </div>

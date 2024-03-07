@@ -7,6 +7,7 @@ import ContactInfoFields from "../formsteps/ContactInfoFields";
 import PersonalInfoFields from "../formsteps/PersonalInfoFields";
 import GeneralServiceFormFields from "../formsteps/GeneralServiceFormFields";
 import ImmigrationStatusFields from "../formsteps/ImmigrationStatusFields";
+import { FaArrowLeft } from "react-icons/fa";
 
 const EnquiryForm = () => {
   const [formValues, setFormValues] = useState({
@@ -42,7 +43,7 @@ const EnquiryForm = () => {
   };
 
   const handleSubmit = () => {
-    console.log("Form Values:", formValues);
+    // console.log("Form Values:", formValues);
     if (
       !formValues.name ||
       !formValues.surname ||
@@ -60,14 +61,14 @@ const EnquiryForm = () => {
   };
 
   const handleGenderChange = useCallback((value: string | undefined) => {
-    console.log("Gender Change Value:", value);
+    // console.log("Gender Change Value:", value);
     if (value) {
       setFormValues((prevState) => ({ ...prevState, gender: value }));
     }
   }, []);
 
   const handleImmigrationStatusChange = (value: string | undefined) => {
-    console.log("handleImmigrationStatusChange :", value);
+    // console.log("handleImmigrationStatusChange :", value);
     if (value) {
       setFormValues((prevState) => ({
         ...prevState,
@@ -77,7 +78,7 @@ const EnquiryForm = () => {
   };
 
   const handleMaritalStatusChange = useCallback((value: string | undefined) => {
-    console.log("Service Change Value:", value);
+    // console.log("Service Change Value:", value);
     if (value) {
       setFormValues((prevState) => ({ ...prevState, maritalStatus: value }));
     }
@@ -91,22 +92,26 @@ const EnquiryForm = () => {
   };
 
   const handleServiceChange = useCallback((value: string | undefined) => {
-    console.log("Service Change Value:", value);
+    // console.log("Service Change Value:", value);
     if (value) {
       setFormValues((prevState) => ({ ...prevState, serviceType: value }));
     }
   }, []);
 
-  const handleDateChange = (date: Date | undefined) => {
+  const handleDOBChange = (date: Date | undefined) => {
     if (date) {
       setFormValues((prevState) => ({
         ...prevState,
-        appointmentDate: date,
+        dob: date,
       }));
-    } else {
+    }
+  };
+
+  const handleEntryDateChange = (date: Date | undefined) => {
+    if (date) {
       setFormValues((prevState) => ({
         ...prevState,
-        appointmentDate: new Date(),
+        entryDate: date,
       }));
     }
   };
@@ -116,6 +121,7 @@ const EnquiryForm = () => {
   };
 
   const nextStep = () => {};
+
 
   return (
     <div className="mt-8">
@@ -145,7 +151,7 @@ const EnquiryForm = () => {
           </Button>
         </div>
       ) : (
-        <StepWizard>
+        <StepWizard isHashEnabled>
           <Step1
             formValues={formValues}
             handleChange={handleChange}
@@ -155,24 +161,27 @@ const EnquiryForm = () => {
             formValues={formValues}
             handleChange={handleChange}
             handleGenderChange={handleGenderChange}
-            handleDateChange={handleDateChange}
+            handleDOBChange={handleDOBChange}
             handleMaritalStatusChange={handleMaritalStatusChange}
             nextStep={nextStep}
+            previousStep={() => {}}
           />
           <Step3
             formValues={formValues}
             handleChange={handleChange}
-            handleDateChange={handleDateChange}
+            handleEntryDateChange={handleEntryDateChange}
             handleImmigrationStatusChange={handleImmigrationStatusChange}
             nextStep={nextStep}
+            previousStep={() => {}}
           />
           <Step4
             formValues={formValues}
-            handleChange={handleChange}
-            handleServiceChange={handleServiceChange}
             handleChangeTextarea={handleChangeTextarea}
-            onFileChange={onFileChange}
+            handleServiceChange={handleServiceChange}
+            handleChange={handleChange}
             handleSubmit={handleSubmit}
+            onFileChange={onFileChange}
+            previousStep={() => {}}
           />
         </StepWizard>
       )}
@@ -188,9 +197,9 @@ const Step1 = ({
   formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   nextStep: () => void;
-}) => (
-    <div>
 
+}) => (
+  <div>
     <ContactInfoFields formValues={formValues} handleChange={handleChange} />
     <Button
       style={{ backgroundColor: "#0e5a97" }}
@@ -198,7 +207,7 @@ const Step1 = ({
       placeholder=""
       onClick={nextStep}
     >
-      Next
+      Continue
     </Button>
   </div>
 );
@@ -206,70 +215,94 @@ const Step2 = ({
   formValues,
   handleChange,
   handleGenderChange,
-  handleDateChange,
+  handleDOBChange,
   handleMaritalStatusChange,
+  previousStep,
   nextStep,
 }: {
   formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleGenderChange: (value: string | undefined) => void;
-  handleDateChange: (date: Date | undefined) => void;
+  handleDOBChange: (date: Date | undefined) => void;
   handleMaritalStatusChange: (value: string | undefined) => void;
   nextStep: () => void;
+  previousStep: () => void;
 }) => (
   <div>
     <PersonalInfoFields
       formValues={formValues}
       handleChange={handleChange}
       handleGenderChange={handleGenderChange}
-      handleDateChange={handleDateChange}
+      handleDOBChange={handleDOBChange}
       handleMaritalStatusChange={handleMaritalStatusChange}
       nextStep={nextStep}
     />
-    <Button
-      style={{ backgroundColor: "#0e5a97" }}
-      type="button"
-      placeholder=""
-      onClick={nextStep}
-    >
-      Next
-    </Button>
-  </div>
-);
-
-const Step3 = ({
-  formValues,
-  handleChange,
-  handleDateChange,
-  handleImmigrationStatusChange,
-  nextStep,
-}: {
-  formValues: any;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleImmigrationStatusChange: (value: string | undefined) => void;
-  handleDateChange: (date: Date) => void;
-  nextStep: () => void;
-}) => (
-  <>
-    <div className="mb-8">
-      <ImmigrationStatusFields
-        formValues={formValues}
-        handleChange={handleChange}
-        handleDateChange={handleDateChange}
-        handleImmigrationStatusChange={handleImmigrationStatusChange}
-        nextStep={nextStep}
-      />
-    </div>
-
+    <div className="flex">
+      <Button
+        className="mr-4"
+        style={{ backgroundColor: "#0e5a97" }}
+        type="button"
+        placeholder=""
+        onClick={previousStep}
+      >
+        <FaArrowLeft />
+      </Button>
       <Button
         style={{ backgroundColor: "#0e5a97" }}
         type="button"
         placeholder=""
         onClick={nextStep}
       >
-        Next
+        Continue
       </Button>
+    </div>
+  </div>
+);
+const Step3 = ({
+  formValues,
+  handleChange,
+  handleEntryDateChange,
+  handleImmigrationStatusChange,
+  previousStep,
+  nextStep,
+}: {
+  formValues: any;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleImmigrationStatusChange: (value: string | undefined) => void;
+  handleEntryDateChange: (date: Date) => void;
+  nextStep: () => void;
+  previousStep: () => void;
+}) => (
+  <>
+    <div className="mb-8">
+      <ImmigrationStatusFields
+        formValues={formValues}
+        handleChange={handleChange}
+        handleEntryDateChange={handleEntryDateChange}
+        handleImmigrationStatusChange={handleImmigrationStatusChange}
+        nextStep={nextStep}
+      />
+    </div>
 
+    <div className="flex">
+      <Button
+        className="mr-4"
+        style={{ backgroundColor: "#0e5a97" }}
+        type="button"
+        placeholder=""
+        onClick={previousStep}
+      >
+        <FaArrowLeft />
+      </Button>
+      <Button
+        style={{ backgroundColor: "#0e5a97" }}
+        type="button"
+        placeholder=""
+        onClick={nextStep}
+      >
+        Continue
+      </Button>
+    </div>
   </>
 );
 
@@ -280,12 +313,14 @@ const Step4 = ({
   handleChange,
   handleSubmit,
   onFileChange,
+  previousStep,
 }: {
   formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleChangeTextarea: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   handleSubmit: (e: React.FormEvent) => void;
   handleServiceChange: (value: string | undefined) => void;
+  previousStep: () => void;
   onFileChange: (files: File[]) => void;
 }) => (
   <>
@@ -294,20 +329,30 @@ const Step4 = ({
       handleChange={handleChange}
       handleChangeTextarea={handleChangeTextarea}
       handleServiceChange={handleServiceChange}
-      onFileChange= {onFileChange}
+      onFileChange={onFileChange}
       handleSubmit={handleSubmit}
     />
-
-    <Button
-      className="w-full mt-4"
-      placeholder={"Button"}
-      size="lg"
-      type="submit"
-      style={{ backgroundColor: "#0e5a97" }}
-      onClick={handleSubmit}
-    >
-      Submit Enquiry
-    </Button>
+    <div className="flex">
+      <Button
+        className="mr-4"
+        style={{ backgroundColor: "#0e5a97" }}
+        type="button"
+        placeholder=""
+        onClick={previousStep}
+      >
+        <FaArrowLeft />
+      </Button>
+      <Button
+        className="w-full"
+        placeholder={"Button"}
+        size="lg"
+        type="submit"
+        style={{ backgroundColor: "#0e5a97" }}
+        onClick={handleSubmit}
+      >
+        Submit Enquiry
+      </Button>
+    </div>
   </>
 );
 

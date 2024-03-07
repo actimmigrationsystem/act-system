@@ -10,7 +10,7 @@ interface ContactInfoFieldsProps {
 const ContactInfoFields = ({ formValues, handleChange }: ContactInfoFieldsProps) => {
 
     return (
-      <>
+
         <div className="mt-8">
           <Typography
             placeholder={"Name"}
@@ -29,7 +29,7 @@ const ContactInfoFields = ({ formValues, handleChange }: ContactInfoFieldsProps)
             onChange={handleChange}
             className="!border-t-blue-gray-200 focus:!border-t-gray-900"
           />
-        </div>
+
         <Typography
           placeholder={"Surname"}
           variant="small"
@@ -87,7 +87,7 @@ const ContactInfoFields = ({ formValues, handleChange }: ContactInfoFieldsProps)
             />
           </div>
         </div>
-      </>
+      </div>
     );
     };
 

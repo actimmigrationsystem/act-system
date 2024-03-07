@@ -51,7 +51,7 @@ const ContactContentEnd = () => {
                 className="hidden md:block"
                 style={{ color: activeTab === "enquiry" ? "#2393cb" : "white" }}
               >
-                Enquiry
+                Pre-Consultation
               </span>
               <AiFillQuestionCircle
                 className="block md:hidden h-6 w-6"

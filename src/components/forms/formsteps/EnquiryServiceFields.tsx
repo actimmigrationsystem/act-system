@@ -129,8 +129,9 @@ const EnquiryServiceFields: React.FC<EnquiryServiceFieldsProps> = ({
           {formValues.elaborate.length}/1000
         </div>
       </div>
-      <DocumentUpload onFileChange={handleFileChange} />
-
+      <DocumentUpload onFileChange={function (_files: File[]): void {
+        throw new Error("Function not implemented.");
+      } } />
       <div className="flex max-w-md flex-col gap-4" id="checkbox">
         <div className="flex items-center gap-2">
           <Checkbox id="accept" defaultChecked />
