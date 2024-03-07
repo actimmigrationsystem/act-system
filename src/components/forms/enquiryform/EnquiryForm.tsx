@@ -28,6 +28,7 @@ const EnquiryForm = () => {
     immigrationStatus: "",
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +43,7 @@ const EnquiryForm = () => {
   };
 
   const handleSubmit = () => {
-    console.log("Form Values:", formValues);
+    // console.log("Form Values:", formValues);
     if (
       !formValues.name ||
       !formValues.surname ||
@@ -60,14 +61,14 @@ const EnquiryForm = () => {
   };
 
   const handleGenderChange = useCallback((value: string | undefined) => {
-    console.log("Gender Change Value:", value);
+    // console.log("Gender Change Value:", value);
     if (value) {
       setFormValues((prevState) => ({ ...prevState, gender: value }));
     }
   }, []);
 
   const handleImmigrationStatusChange = (value: string | undefined) => {
-    console.log("handleImmigrationStatusChange :", value);
+    // console.log("handleImmigrationStatusChange :", value);
     if (value) {
       setFormValues((prevState) => ({
         ...prevState,
@@ -77,7 +78,7 @@ const EnquiryForm = () => {
   };
 
   const handleMaritalStatusChange = useCallback((value: string | undefined) => {
-    console.log("Service Change Value:", value);
+    // console.log("Service Change Value:", value);
     if (value) {
       setFormValues((prevState) => ({ ...prevState, maritalStatus: value }));
     }
@@ -91,7 +92,7 @@ const EnquiryForm = () => {
   };
 
   const handleServiceChange = useCallback((value: string | undefined) => {
-    console.log("Service Change Value:", value);
+    // console.log("Service Change Value:", value);
     if (value) {
       setFormValues((prevState) => ({ ...prevState, serviceType: value }));
     }
@@ -115,25 +116,17 @@ const EnquiryForm = () => {
     }
   };
 
-  // const handleDateChange = (date: Date | undefined) => {
-  //   if (date) {
-  //     setFormValues((prevState) => ({
-  //       ...prevState,
-  //       dob: date,
-  //     }));
-  //   } else {
-  //     setFormValues((prevState) => ({
-  //       ...prevState,
-  //       entryDate: new Date(),
-  //     }));
-  //   }
-  // };
-
   const onFileChange = (files: File[]) => {
     setFormValues((prevState) => ({ ...prevState, documentUpload: files }));
   };
 
-  const nextStep = () => {};
+  const nextStep = () => {
+    setCurrentStep((prevStep) => prevStep + 1);
+  };
+
+  const prevStep = () => {
+    setCurrentStep((prevStep) => prevStep - 1);
+  };
 
   return (
     <div className="mt-8">
@@ -186,13 +179,23 @@ const EnquiryForm = () => {
           />
           <Step4
             formValues={formValues}
-            handleChange={handleChange}
-            handleServiceChange={handleServiceChange}
             handleChangeTextarea={handleChangeTextarea}
-            onFileChange={onFileChange}
+            handleServiceChange={handleServiceChange}
+            handleChange={handleChange}
             handleSubmit={handleSubmit}
+            onFileChange={onFileChange}
           />
         </StepWizard>
+      )}
+      {currentStep > 1 && (
+        <Button
+          style={{ backgroundColor: "#0e5a97" }}
+          type="button"
+          placeholder=""
+          onClick={prevStep}
+        >
+          Previous
+        </Button>
       )}
     </div>
   );

@@ -21,6 +21,7 @@ const AppointmentForm = () => {
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
   const navigate = useNavigate();
+  const [currentStep, setCurrentStep] = useState(1);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
@@ -45,6 +46,7 @@ const AppointmentForm = () => {
     setFormSubmitted(false);
     window.location.reload();
   };
+
   const ThankYouMessage = () => (
     <div>
       <div
@@ -71,69 +73,97 @@ const AppointmentForm = () => {
       </Button>
     </div>
   );
-const handleSubmit = () => {
-  console.log("Form Values:", formValues);
-   if (
-     !formValues.name ||
-     !formValues.surname ||
-     !formValues.email ||
-     !formValues.serviceType
-   ) {
-     alert("Please fill in all required fields.");
-     return;
-   }
 
-  // Navigate to the respective page
-  switch (formValues.serviceType) {
-    case "Asylum seeker appeal/review":
-    case "Asylum seeker visa extension":
-    case "Critical skills visa application":
-    case "Letter of good cause application (FORM 20)":
-    case "Naturalisation application":
-    case "Permanent residence appeal":
-    case "Permanent residence application":
-    case "Prohibition appeal":
-    case "PRP Exemptions":
-    case "PRP Waiver":
-    case "Refugee permit extension":
-    case "Standing Committee application":
-    case "Study visa application":
-    case "Study visa rejection":
-    case "Temporary residence renewal":
-    case "TRV Exemptions":
-    case "TRV Waiver":
-    case "ZEP Migration":
-    case "ZEP Waiver":
-      navigate("/appointmentmanager", { state: { formValues } });
-      break;
-    default:
-      navigate("/appointmentmanager", { state: { formValues } });
-      break;
-  }
-  setFormSubmitted(true);
-};
-
-  const handleVenueChange = (value: string | undefined) => {
-    console.log("Venue Type:", value);
-    if (value) {
-      setFormValues((prevState) => ({ ...prevState, venueType: value }));
+  const handleSubmit = () => {
+    // console.log("Form Values:", formValues);
+    if (
+      !formValues.name ||
+      !formValues.surname ||
+      !formValues.email ||
+      !formValues.serviceType
+    ) {
+      alert("Please fill in all required fields.");
+      return;
     }
+
+    // Navigate to the respective page
+    switch (formValues.serviceType) {
+      case "Asylum seeker appeal/review":
+      case "Asylum seeker visa extension":
+      case "Critical skills visa application":
+      case "Letter of good cause application (FORM 20)":
+      case "Naturalisation application":
+      case "Permanent residence appeal":
+      case "Permanent residence application":
+      case "Prohibition appeal":
+      case "PRP Exemptions":
+      case "PRP Waiver":
+      case "Refugee permit extension":
+      case "Standing Committee application":
+      case "Study visa application":
+      case "Study visa rejection":
+      case "Temporary residence renewal":
+      case "TRV Exemptions":
+      case "TRV Waiver":
+      case "ZEP Migration":
+      case "ZEP Waiver":
+        navigate("/appointmentmanager", { state: { formValues } });
+        break;
+      default:
+        navigate("/appointmentmanager", { state: { formValues } });
+        break;
+    }
+    setFormSubmitted(true);
   };
-    const handleAppointmentChange = (value: string | undefined) => {
-      console.log("Venue Type:", value);
-      if (value) {
-        setFormValues((prevState) => ({ ...prevState, appointmentType: value }));
+
+  // const handleVenueChange = (value: string | undefined) => {
+  //   // console.log("Venue Type:", value);
+  //   if (value) {
+  //     setFormValues((prevState) => ({ ...prevState, venueType: value }));
+  //   }
+  // };
+  const handleVenueChange = useCallback(
+    (value: string | undefined) => {
+      if (value && value !== formValues.venueType) {
+        setFormValues((prevState) => ({ ...prevState, venueType: value }));
       }
-    };
-const handleServiceChange = useCallback((value: string | undefined) => {
-   console.log("Service Change Value:", value);
-   if (value) {
-     setFormValues((prevState) => ({ ...prevState, serviceType: value }));
-   }
-}, []);
+    },
+    [formValues.venueType]
+  );
+
+    const handleAppointmentChange = useCallback(
+      (value: string | undefined) => {
+        if (value && value !== formValues.appointmentType) {
+          setFormValues((prevState) => ({
+            ...prevState,
+            appointmentType: value,
+          }));
+        }
+      },
+      [formValues.appointmentType]
+    );
+
+        const handleServiceChange = useCallback(
+          (value: string | undefined) => {
+            if (value && value !== formValues.serviceType) {
+              setFormValues((prevState) => ({
+                ...prevState,
+                serviceType: value,
+              }));
+            }
+          },
+          [formValues.serviceType]
+        );
 
 
-  const nextStep = () => {};
+  const nextStep = () => {
+    setCurrentStep((prevStep) => prevStep + 1);
+  };
+
+  const prevStep = () => {
+    setCurrentStep((prevStep) => prevStep - 1);
+  };
+
   return (
     <div className="mt-8">
       {formSubmitted ? (
@@ -155,6 +185,16 @@ const handleServiceChange = useCallback((value: string | undefined) => {
             handleSubmit={handleSubmit}
           />
         </StepWizard>
+      )}
+      {currentStep !== 1 && (
+        <Button
+          style={{ backgroundColor: "#0e5a97" }}
+          type="button"
+          placeholder=""
+          onClick={prevStep}
+        >
+          Previous
+        </Button>
       )}
     </div>
   );
