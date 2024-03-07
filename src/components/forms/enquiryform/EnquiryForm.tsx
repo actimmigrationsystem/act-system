@@ -1,6 +1,6 @@
 import { useState, useCallback, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import StepWizard from "react-step-wizard";
+import StepWizard,{ StepWizardChildProps } from "react-step-wizard";
 import { Button } from "@material-tailwind/react";
 import { RiMailSendLine } from "react-icons/ri";
 import ContactInfoFields from "../formsteps/ContactInfoFields";
@@ -124,9 +124,6 @@ const EnquiryForm = () => {
     setCurrentStep((prevStep) => prevStep + 1);
   };
 
-  const prevStep = () => {
-    setCurrentStep((prevStep) => prevStep - 1);
-  };
 
   return (
     <div className="mt-8">
@@ -156,7 +153,7 @@ const EnquiryForm = () => {
           </Button>
         </div>
       ) : (
-        <StepWizard>
+        <StepWizard isHashEnabled>
           <Step1
             formValues={formValues}
             handleChange={handleChange}
@@ -169,6 +166,7 @@ const EnquiryForm = () => {
             handleDOBChange={handleDOBChange}
             handleMaritalStatusChange={handleMaritalStatusChange}
             nextStep={nextStep}
+            previousStep={() => {}}
           />
           <Step3
             formValues={formValues}
@@ -176,6 +174,7 @@ const EnquiryForm = () => {
             handleEntryDateChange={handleEntryDateChange}
             handleImmigrationStatusChange={handleImmigrationStatusChange}
             nextStep={nextStep}
+            previousStep={() => {}}
           />
           <Step4
             formValues={formValues}
@@ -186,16 +185,6 @@ const EnquiryForm = () => {
             onFileChange={onFileChange}
           />
         </StepWizard>
-      )}
-      {currentStep > 1 && (
-        <Button
-          style={{ backgroundColor: "#0e5a97" }}
-          type="button"
-          placeholder=""
-          onClick={prevStep}
-        >
-          Previous
-        </Button>
       )}
     </div>
   );
@@ -209,9 +198,9 @@ const Step1 = ({
   formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   nextStep: () => void;
-}) => (
-    <div>
 
+}) => (
+  <div>
     <ContactInfoFields formValues={formValues} handleChange={handleChange} />
     <Button
       style={{ backgroundColor: "#0e5a97" }}
@@ -229,6 +218,7 @@ const Step2 = ({
   handleGenderChange,
   handleDOBChange,
   handleMaritalStatusChange,
+  previousStep,
   nextStep,
 }: {
   formValues: any;
@@ -237,6 +227,7 @@ const Step2 = ({
   handleDOBChange: (date: Date | undefined) => void;
   handleMaritalStatusChange: (value: string | undefined) => void;
   nextStep: () => void;
+  previousStep: () => void;
 }) => (
   <div>
     <PersonalInfoFields
@@ -251,18 +242,26 @@ const Step2 = ({
       style={{ backgroundColor: "#0e5a97" }}
       type="button"
       placeholder=""
+      onClick={previousStep}
+    >
+      Previous
+    </Button>
+    <Button
+      style={{ backgroundColor: "#0e5a97" }}
+      type="button"
+      placeholder=""
       onClick={nextStep}
     >
       Next
     </Button>
   </div>
 );
-
 const Step3 = ({
   formValues,
   handleChange,
   handleEntryDateChange,
   handleImmigrationStatusChange,
+  previousStep,
   nextStep,
 }: {
   formValues: any;
@@ -270,6 +269,7 @@ const Step3 = ({
   handleImmigrationStatusChange: (value: string | undefined) => void;
   handleEntryDateChange: (date: Date) => void;
   nextStep: () => void;
+  previousStep: () => void;
 }) => (
   <>
     <div className="mb-8">
@@ -281,7 +281,14 @@ const Step3 = ({
         nextStep={nextStep}
       />
     </div>
-
+    <Button
+      style={{ backgroundColor: "#0e5a97" }}
+      type="button"
+      placeholder=""
+      onClick={previousStep}
+    >
+      Previous
+    </Button>
     <Button
       style={{ backgroundColor: "#0e5a97" }}
       type="button"
