@@ -7,6 +7,7 @@ import ContactInfoFields from "../formsteps/ContactInfoFields";
 import PersonalInfoFields from "../formsteps/PersonalInfoFields";
 import GeneralServiceFormFields from "../formsteps/GeneralServiceFormFields";
 import ImmigrationStatusFields from "../formsteps/ImmigrationStatusFields";
+import { FaArrowLeft } from "react-icons/fa";
 
 const EnquiryForm = () => {
   const [formValues, setFormValues] = useState({
@@ -28,7 +29,7 @@ const EnquiryForm = () => {
     immigrationStatus: "",
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [currentStep, setCurrentStep] = useState(1);
+  const [setCurrentStep] = useState(1);
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -120,9 +121,7 @@ const EnquiryForm = () => {
     setFormValues((prevState) => ({ ...prevState, documentUpload: files }));
   };
 
-  const nextStep = () => {
-    setCurrentStep((prevStep) => prevStep + 1);
-  };
+  const nextStep = () => {};
 
 
   return (
@@ -183,6 +182,7 @@ const EnquiryForm = () => {
             handleChange={handleChange}
             handleSubmit={handleSubmit}
             onFileChange={onFileChange}
+            previousStep={() => {}}
           />
         </StepWizard>
       )}
@@ -208,7 +208,7 @@ const Step1 = ({
       placeholder=""
       onClick={nextStep}
     >
-      Next
+      Continue
     </Button>
   </div>
 );
@@ -238,22 +238,25 @@ const Step2 = ({
       handleMaritalStatusChange={handleMaritalStatusChange}
       nextStep={nextStep}
     />
-    <Button
-      style={{ backgroundColor: "#0e5a97" }}
-      type="button"
-      placeholder=""
-      onClick={previousStep}
-    >
-      Previous
-    </Button>
-    <Button
-      style={{ backgroundColor: "#0e5a97" }}
-      type="button"
-      placeholder=""
-      onClick={nextStep}
-    >
-      Next
-    </Button>
+    <div className="flex">
+      <Button
+        className="mr-4"
+        style={{ backgroundColor: "#0e5a97" }}
+        type="button"
+        placeholder=""
+        onClick={previousStep}
+      >
+        <FaArrowLeft />
+      </Button>
+      <Button
+        style={{ backgroundColor: "#0e5a97" }}
+        type="button"
+        placeholder=""
+        onClick={nextStep}
+      >
+        Continue
+      </Button>
+    </div>
   </div>
 );
 const Step3 = ({
@@ -281,22 +284,26 @@ const Step3 = ({
         nextStep={nextStep}
       />
     </div>
-    <Button
-      style={{ backgroundColor: "#0e5a97" }}
-      type="button"
-      placeholder=""
-      onClick={previousStep}
-    >
-      Previous
-    </Button>
-    <Button
-      style={{ backgroundColor: "#0e5a97" }}
-      type="button"
-      placeholder=""
-      onClick={nextStep}
-    >
-      Next
-    </Button>
+
+    <div className="flex">
+      <Button
+        className="mr-4"
+        style={{ backgroundColor: "#0e5a97" }}
+        type="button"
+        placeholder=""
+        onClick={previousStep}
+      >
+        <FaArrowLeft />
+      </Button>
+      <Button
+        style={{ backgroundColor: "#0e5a97" }}
+        type="button"
+        placeholder=""
+        onClick={nextStep}
+      >
+        Continue
+      </Button>
+    </div>
   </>
 );
 
@@ -307,12 +314,14 @@ const Step4 = ({
   handleChange,
   handleSubmit,
   onFileChange,
+  previousStep,
 }: {
   formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleChangeTextarea: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   handleSubmit: (e: React.FormEvent) => void;
   handleServiceChange: (value: string | undefined) => void;
+  previousStep: () => void;
   onFileChange: (files: File[]) => void;
 }) => (
   <>
@@ -321,20 +330,30 @@ const Step4 = ({
       handleChange={handleChange}
       handleChangeTextarea={handleChangeTextarea}
       handleServiceChange={handleServiceChange}
-      onFileChange= {onFileChange}
+      onFileChange={onFileChange}
       handleSubmit={handleSubmit}
     />
-
-    <Button
-      className="w-full mt-4"
-      placeholder={"Button"}
-      size="lg"
-      type="submit"
-      style={{ backgroundColor: "#0e5a97" }}
-      onClick={handleSubmit}
-    >
-      Submit Enquiry
-    </Button>
+    <div className="flex">
+      <Button
+        className="mr-4"
+        style={{ backgroundColor: "#0e5a97" }}
+        type="button"
+        placeholder=""
+        onClick={previousStep}
+      >
+        <FaArrowLeft />
+      </Button>
+      <Button
+        className="w-full"
+        placeholder={"Button"}
+        size="lg"
+        type="submit"
+        style={{ backgroundColor: "#0e5a97" }}
+        onClick={handleSubmit}
+      >
+        Submit Enquiry
+      </Button>
+    </div>
   </>
 );
 

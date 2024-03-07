@@ -58,7 +58,7 @@ const handleFileChange = (files: File[]) => {
 
   return (
     <div className="mt-8">
-      <div className="w-full md:w-full mb-8">
+      <div className="w-full md:w-full mb-4">
         <Typography
           placeholder={"Typography"}
           variant="small"
@@ -145,9 +145,11 @@ const handleFileChange = (files: File[]) => {
           {formValues.elaborate.length}/1000
         </div>
       </div>
-      <DocumentUpload onFileChange={handleFileChange} />
+
+        <DocumentUpload onFileChange={handleFileChange} />
+
       <div className="flex max-w-md flex-col gap-4" id="checkbox">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 mb-4 text-center justify-center">
           <Checkbox id="accept" defaultChecked />
           <Label htmlFor="accept" className="flex">
             I agree with the&nbsp;
