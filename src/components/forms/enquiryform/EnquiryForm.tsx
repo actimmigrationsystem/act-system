@@ -29,7 +29,6 @@ const EnquiryForm = () => {
     immigrationStatus: "",
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [setCurrentStep] = useState(1);
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
