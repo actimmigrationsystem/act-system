@@ -7,6 +7,7 @@ import { Button } from "@material-tailwind/react";
 import { RiMailSendLine } from "react-icons/ri";
 import ContactInfoFields from "../formsteps/ContactInfoFields";
 import AppointmentServiceFormFields from "../formsteps/AppointmentServiceFormFields";
+import { FaArrowLeft } from "react-icons/fa";
 
 const AppointmentForm = () => {
   const [formValues, setFormValues] = useState({
@@ -182,6 +183,7 @@ const AppointmentForm = () => {
             handleVenueChange={handleVenueChange}
             handleAppointmentChange={handleAppointmentChange}
             handleAppointmentDateChange={handleAppointmentDateChange}
+            previousStep={() => {}}
             handleSubmit={handleSubmit}
           />
         </StepWizard>
@@ -227,6 +229,7 @@ const Step2 = ({
   handleServiceChange,
   handleVenueChange,
   handleAppointmentChange,
+  previousStep,
   handleSubmit,
 }: {
   formValues: any;
@@ -235,6 +238,7 @@ const Step2 = ({
   handleServiceChange: (value: string | undefined) => void;
   handleVenueChange: (value: string | undefined) => void;
   handleAppointmentChange: (value: string | undefined) => void;
+  previousStep: () => void;
   handleSubmit: () => void;
 }) => (
   <>
@@ -245,13 +249,15 @@ const Step2 = ({
       handleVenueChange={handleVenueChange}
       handleAppointmentChange={handleAppointmentChange}
     />
+
     <div className="flex max-w-md flex-col gap-4" id="checkbox">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 mb-4 text-center justify-center">
         <Checkbox id="accept" defaultChecked />
         <Label htmlFor="accept" className="flex">
-          I agree with the&nbsp;
+          I have read and agree with the&nbsp;
           <Link
             to="/privacy-policy"
+            target="_blank"
             rel="noopener noreferrer"
             className="text-cyan-600 hover:underline dark:text-cyan-500"
           >
@@ -260,16 +266,28 @@ const Step2 = ({
         </Label>
       </div>
     </div>
-    <Button
-      className="w-full mt-4"
-      placeholder={"Button"}
-      size="lg"
-      type="submit"
-      style={{ backgroundColor: "#0e5a97" }}
-      onClick={handleSubmit}
-    >
-      Book Appointment
-    </Button>
+
+    <div className="flex">
+      <Button
+        className="mr-4"
+        style={{ backgroundColor: "#0e5a97" }}
+        type="button"
+        placeholder=""
+        onClick={previousStep}
+      >
+        <FaArrowLeft />
+      </Button>
+      <Button
+        className="w-full"
+        placeholder={"Button"}
+        size="lg"
+        type="submit"
+        style={{ backgroundColor: "#0e5a97" }}
+        onClick={handleSubmit}
+      >
+        Book Appointment
+      </Button>
+    </div>
   </>
 );
 

@@ -152,7 +152,7 @@ const handleFileChange = (files: File[]) => {
         <div className="flex items-center gap-2 mb-4 text-center justify-center">
           <Checkbox id="accept" defaultChecked />
           <Label htmlFor="accept" className="flex">
-            I agree with the&nbsp;
+            I have read and agree with the&nbsp;
             <Link
               to="/privacy-policy"
               target="_blank"
