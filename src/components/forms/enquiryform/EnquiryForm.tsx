@@ -97,19 +97,37 @@ const EnquiryForm = () => {
     }
   }, []);
 
-  const handleDateChange = (date: Date | undefined) => {
+  const handleDOBChange = (date: Date | undefined) => {
     if (date) {
       setFormValues((prevState) => ({
         ...prevState,
-        appointmentDate: date,
-      }));
-    } else {
-      setFormValues((prevState) => ({
-        ...prevState,
-        appointmentDate: new Date(),
+        dob: date,
       }));
     }
   };
+
+  const handleEntryDateChange = (date: Date | undefined) => {
+    if (date) {
+      setFormValues((prevState) => ({
+        ...prevState,
+        entryDate: date,
+      }));
+    }
+  };
+
+  // const handleDateChange = (date: Date | undefined) => {
+  //   if (date) {
+  //     setFormValues((prevState) => ({
+  //       ...prevState,
+  //       dob: date,
+  //     }));
+  //   } else {
+  //     setFormValues((prevState) => ({
+  //       ...prevState,
+  //       entryDate: new Date(),
+  //     }));
+  //   }
+  // };
 
   const onFileChange = (files: File[]) => {
     setFormValues((prevState) => ({ ...prevState, documentUpload: files }));
@@ -155,14 +173,14 @@ const EnquiryForm = () => {
             formValues={formValues}
             handleChange={handleChange}
             handleGenderChange={handleGenderChange}
-            handleDateChange={handleDateChange}
+            handleDOBChange={handleDOBChange}
             handleMaritalStatusChange={handleMaritalStatusChange}
             nextStep={nextStep}
           />
           <Step3
             formValues={formValues}
             handleChange={handleChange}
-            handleDateChange={handleDateChange}
+            handleEntryDateChange={handleEntryDateChange}
             handleImmigrationStatusChange={handleImmigrationStatusChange}
             nextStep={nextStep}
           />
@@ -206,14 +224,14 @@ const Step2 = ({
   formValues,
   handleChange,
   handleGenderChange,
-  handleDateChange,
+  handleDOBChange,
   handleMaritalStatusChange,
   nextStep,
 }: {
   formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleGenderChange: (value: string | undefined) => void;
-  handleDateChange: (date: Date | undefined) => void;
+  handleDOBChange: (date: Date | undefined) => void;
   handleMaritalStatusChange: (value: string | undefined) => void;
   nextStep: () => void;
 }) => (
@@ -222,7 +240,7 @@ const Step2 = ({
       formValues={formValues}
       handleChange={handleChange}
       handleGenderChange={handleGenderChange}
-      handleDateChange={handleDateChange}
+      handleDOBChange={handleDOBChange}
       handleMaritalStatusChange={handleMaritalStatusChange}
       nextStep={nextStep}
     />
@@ -240,14 +258,14 @@ const Step2 = ({
 const Step3 = ({
   formValues,
   handleChange,
-  handleDateChange,
+  handleEntryDateChange,
   handleImmigrationStatusChange,
   nextStep,
 }: {
   formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleImmigrationStatusChange: (value: string | undefined) => void;
-  handleDateChange: (date: Date) => void;
+  handleEntryDateChange: (date: Date) => void;
   nextStep: () => void;
 }) => (
   <>
@@ -255,21 +273,20 @@ const Step3 = ({
       <ImmigrationStatusFields
         formValues={formValues}
         handleChange={handleChange}
-        handleDateChange={handleDateChange}
+        handleEntryDateChange={handleEntryDateChange}
         handleImmigrationStatusChange={handleImmigrationStatusChange}
         nextStep={nextStep}
       />
     </div>
 
-      <Button
-        style={{ backgroundColor: "#0e5a97" }}
-        type="button"
-        placeholder=""
-        onClick={nextStep}
-      >
-        Next
-      </Button>
-
+    <Button
+      style={{ backgroundColor: "#0e5a97" }}
+      type="button"
+      placeholder=""
+      onClick={nextStep}
+    >
+      Next
+    </Button>
   </>
 );
 

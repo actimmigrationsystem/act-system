@@ -9,7 +9,7 @@ interface PersonalInfoFieldsProps {
   formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleGenderChange: (value: string | undefined) => void;
-  handleDateChange: (date: Date | undefined) => void;
+  handleDOBChange: (date: Date | undefined) => void;
   handleMaritalStatusChange: (value: string | undefined) => void;
   nextStep: () => void;
 }
@@ -19,7 +19,7 @@ const PersonalInfoFields: React.FC<PersonalInfoFieldsProps> = ({
   handleChange,
   handleGenderChange,
   handleMaritalStatusChange,
-  handleDateChange,
+  handleDOBChange,
 }) => {
   const genderOptions = ["Female", "Male", "Other"];
   const maritalStatusOptions = [
@@ -120,7 +120,7 @@ const PersonalInfoFields: React.FC<PersonalInfoFieldsProps> = ({
           <div className="absolute z-20 mb-8">
             <DatePickerComponent
               value={formValues.dob}
-              onChange={(date: Date) => handleDateChange(date)}
+              onChange={(date: Date) => handleDOBChange(date)}
             />
           </div>
         </div>

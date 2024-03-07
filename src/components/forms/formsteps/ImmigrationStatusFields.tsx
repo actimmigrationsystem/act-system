@@ -9,14 +9,14 @@ interface ImmigrationStatusFieldsProps {
   formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleImmigrationStatusChange: (value: string | undefined) => void;
-  handleDateChange: (date: Date) => void;
+  handleEntryDateChange: (date: Date) => void;
   nextStep: () => void;
 }
 
 const ImmigrationStatusFields: React.FC<ImmigrationStatusFieldsProps> = ({
   formValues,
   handleChange,
-  handleDateChange,
+  handleEntryDateChange,
   handleImmigrationStatusChange,
 }) => {
   const immigrationStatusOptions = [
@@ -157,7 +157,7 @@ const ImmigrationStatusFields: React.FC<ImmigrationStatusFieldsProps> = ({
         <div className="absolute z-20 mb-8">
           <DatePickerComponent
             value={formValues.entryDate}
-            onChange={(date: Date) => handleDateChange(date)}
+            onChange={(date: Date) => handleEntryDateChange(date)}
           />
         </div>
       </div>
