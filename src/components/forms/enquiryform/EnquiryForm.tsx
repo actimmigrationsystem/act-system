@@ -1,6 +1,6 @@
 import { useState, useCallback, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import StepWizard,{ StepWizardChildProps } from "react-step-wizard";
+import StepWizard from "react-step-wizard";
 import { Button } from "@material-tailwind/react";
 import { RiMailSendLine } from "react-icons/ri";
 import ContactInfoFields from "../formsteps/ContactInfoFields";
