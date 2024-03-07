@@ -6,7 +6,7 @@ import ContactUsSection from "./ContactUsSection";
 import FAQSection from "./FaqsSection";
 import AboutUs from "./AboutUsSection";
 import BackToTopButton from "../components/BackToTopButton";
-import Alerts from "../components/Alert";
+import CookieAlert from "../components/alerts/CookieAlert";
 
 const Home = () => {
   const [showAlert, setShowAlert] = useState(true);
@@ -47,7 +47,7 @@ const Home = () => {
       <BackToTopButton />
       {showAlert && (
         <div className="fixed bottom-20 left-1/2 transform -translate-x-1/2 z-50">
-          <Alerts
+          <CookieAlert
             open={showAlert}
             message="This website uses cookies to ensure you get the best experience. By continuing to use this site, you accept our use of cookies."
             actionText="Accept"
