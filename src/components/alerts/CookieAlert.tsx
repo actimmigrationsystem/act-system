@@ -35,8 +35,8 @@ const CookieAlert: React.FC<CookieAlertProps> = ({
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const alertAccepted = Cookies.get("alertAccepted");
-    if (alertAccepted) {
+    const cookieAccepted = Cookies.get("cookieAccepted");
+    if (cookieAccepted) {
       setOpen(false);
     } else {
       setOpen(true);
@@ -44,7 +44,7 @@ const CookieAlert: React.FC<CookieAlertProps> = ({
   }, []);
 
   const handleAccept = () => {
-    Cookies.set("alertAccepted", "true", { expires: 365 });
+    Cookies.set("cookieAccepted", "true", { expires: 365 });
     setOpen(false);
     if (onActionClick) {
       onActionClick();
