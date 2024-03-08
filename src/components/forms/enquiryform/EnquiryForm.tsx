@@ -120,7 +120,9 @@ const EnquiryForm = () => {
     setFormValues((prevState) => ({ ...prevState, documentUpload: files }));
   };
 
-  const nextStep = () => {};
+  const nextStep = () => {
+
+  };
 
 
   return (
@@ -200,15 +202,15 @@ const Step1 = ({
 
 }) => (
   <div>
-    <ContactInfoFields formValues={formValues} handleChange={handleChange} />
-    <Button
+    <ContactInfoFields formValues={formValues} handleChange={handleChange} nextStep={nextStep} />
+    {/* <Button
       style={{ backgroundColor: "#0e5a97" }}
       type="button"
       placeholder=""
       onClick={nextStep}
     >
       Continue
-    </Button>
+    </Button> */}
   </div>
 );
 const Step2 = ({
