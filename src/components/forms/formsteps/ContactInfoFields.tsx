@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import { Typography, Button } from "@material-tailwind/react";
 import { FloatingLabel } from "flowbite-react";
 
@@ -14,15 +14,36 @@ const ContactInfoFields = ({
   handleChange,
   nextStep,
 }: ContactInfoFieldsProps) => {
+  const [filledFields, setFilledFields] = useState<Record<string, boolean>>({});
+  const allFieldsFilled = Object.values(filledFields).every(Boolean);
+  useEffect(() => {
+    const allFieldsFilled = Object.values(filledFields).every(Boolean);
+    console.log("All fields filled:", allFieldsFilled);
+  }, [filledFields]);
 
-const [filledFields, setFilledFields] = useState<Record<string, boolean>>({});
 const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   handleChange(e);
-  setFilledFields({
+  const updatedFilledFields = {
     ...filledFields,
     [e.target.name]: !!e.target.value,
-  });
+  };
+  console.log("Updated filled fields:", updatedFilledFields);
+  setFilledFields(updatedFilledFields);
 };
+
+  // Check if all fields are filled
+// useEffect(() => {
+//   const allFieldsFilled = Object.values(filledFields).every((value) => value);
+//   console.log("All fields filled:", allFieldsFilled);
+//   const continueButton = document.getElementById(
+//     "continueButton"
+//   ) as HTMLButtonElement;
+//   if (continueButton) {
+//     continueButton.disabled = !allFieldsFilled;
+//   }
+// }, [filledFields]);
+
+
   return (
     <div className="mt-8">
       <Typography
@@ -110,10 +131,12 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       </div>
       <div className="flex justify-end mt-4">
         <Button
+          id="continueButton"
           placeholder={""}
           style={{ backgroundColor: "#0e5a97" }}
           type="button"
           onClick={nextStep}
+          disabled={!Object.values(filledFields).every(Boolean)}
         >
           Continue
         </Button>
