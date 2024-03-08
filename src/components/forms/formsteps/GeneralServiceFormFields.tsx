@@ -54,6 +54,15 @@ const handleFileChange = (files: File[]) => {
   // save the files to state
   onFileChange(files);
 };
+const [filledFields, setFilledFields] = useState<Record<string, boolean>>({});
+
+const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  handleChangeTextarea(e);
+  setFilledFields({
+    ...filledFields,
+    [e.target.name]: !!e.target.value,
+  });
+};
 
 
   return (
@@ -137,16 +146,21 @@ const handleFileChange = (files: File[]) => {
             rows={4}
             name="elaborate"
             value={formValues.elaborate}
-            onChange={handleChangeTextarea}
-            className="w-full resize-none rounded border border-stroke px-[14px] py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
+            onChange={handleTextareaChange}
+            className={`w-full border-gray-300 resize-none rounded border border-stroke px-[14px] py-3 text-base text-body-color outline-none dark:bg-dark dark:text-dark-6 ${
+              filledFields["elaborate"]
+                ? "border-green-600"
+                : "focus:border-red-600"
+            }`}
           />
         </div>
+
         <div className="text-gray-500 text-right">
           {formValues.elaborate.length}/1000
         </div>
       </div>
 
-        <DocumentUpload onFileChange={handleFileChange} />
+      <DocumentUpload onFileChange={handleFileChange} />
 
       <div className="flex max-w-md flex-col gap-4" id="checkbox">
         <div className="flex items-center gap-2 mb-4 text-center justify-center">
