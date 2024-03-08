@@ -1,9 +1,10 @@
 import React, { useState, Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
-import { Typography } from "@material-tailwind/react";
+import { Typography, Button } from "@material-tailwind/react";
 import DatePickerComponent from "../datepickers/DatePickerComponent";
 import { FloatingLabel } from "flowbite-react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import { FaArrowLeft } from "react-icons/fa";
 
 interface PersonalInfoFieldsProps {
   formValues: any;
@@ -11,6 +12,7 @@ interface PersonalInfoFieldsProps {
   handleGenderChange: (value: string | undefined) => void;
   handleDOBChange: (date: Date | undefined) => void;
   handleMaritalStatusChange: (value: string | undefined) => void;
+  previousStep: () => void;
   nextStep: () => void;
 }
 
@@ -20,6 +22,8 @@ const PersonalInfoFields: React.FC<PersonalInfoFieldsProps> = ({
   handleGenderChange,
   handleMaritalStatusChange,
   handleDOBChange,
+  previousStep,
+  nextStep,
 }) => {
   const genderOptions = ["Female", "Male", "Other"];
   const maritalStatusOptions = [
@@ -33,6 +37,15 @@ const PersonalInfoFields: React.FC<PersonalInfoFieldsProps> = ({
   const [selectedMaritalStatus, setSelectedMaritalStatus] = useState(
     maritalStatusOptions[0]
   );
+
+  const [filledFields, setFilledFields] = useState<Record<string, boolean>>({});
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleChange(e);
+    setFilledFields({
+      ...filledFields,
+      [e.target.name]: !!e.target.value,
+    });
+  };
 
   return (
     <div className="mt-8">
@@ -117,10 +130,19 @@ const PersonalInfoFields: React.FC<PersonalInfoFieldsProps> = ({
           >
             Date of Birth
           </Typography>
-          <div className="absolute z-20 mb-8">
+          <div
+            className={`absolute z-20 mb-8 ${
+              filledFields["dob"] ? "border-green-600" : "focus:border-red-600"
+            }`}
+          >
             <DatePickerComponent
               value={formValues.dob}
-              onChange={(date: Date) => handleDOBChange(date)}
+              onChange={(date: Date) => {
+                handleDOBChange(date);
+                handleInputChange({
+                  target: { name: "dob", value: date },
+                } as unknown as React.ChangeEvent<HTMLInputElement>);
+              }}
             />
           </div>
         </div>
@@ -215,9 +237,30 @@ const PersonalInfoFields: React.FC<PersonalInfoFieldsProps> = ({
         type="text"
         name="residentialAddress"
         value={formValues.residentialAddress}
-        onChange={handleChange}
-        className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+        onChange={handleInputChange}
+        className={`focus:border-red-600 ${
+          filledFields["residentialAddress"] ? "border-green-600" : ""
+        }`}
       />
+      <div className="flex justify-between">
+        <Button
+          className="mr-4"
+          style={{ backgroundColor: "#0e5a97" }}
+          type="button"
+          placeholder=""
+          onClick={previousStep}
+        >
+          <FaArrowLeft />
+        </Button>
+        <Button
+          style={{ backgroundColor: "#0e5a97" }}
+          type="button"
+          placeholder=""
+          onClick={nextStep}
+        >
+          Continue
+        </Button>
+      </div>
     </div>
   );
 };

@@ -116,13 +116,6 @@ const AppointmentForm = () => {
     }
     setFormSubmitted(true);
   };
-
-  // const handleVenueChange = (value: string | undefined) => {
-  //   // console.log("Venue Type:", value);
-  //   if (value) {
-  //     setFormValues((prevState) => ({ ...prevState, venueType: value }));
-  //   }
-  // };
   const handleVenueChange = useCallback(
     (value: string | undefined) => {
       if (value && value !== formValues.venueType) {
@@ -212,15 +205,7 @@ const Step1 = ({
   nextStep: () => void;
 }) => (
   <>
-    <ContactInfoFields formValues={formValues} handleChange={handleChange} />
-    <Button
-      style={{ backgroundColor: "#0e5a97" }}
-      type="button"
-      placeholder=""
-      onClick={nextStep}
-    >
-      Next
-    </Button>
+    <ContactInfoFields formValues={formValues} handleChange={handleChange} nextStep={nextStep} />
   </>
 );
 const Step2 = ({
