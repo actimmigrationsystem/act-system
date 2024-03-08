@@ -116,13 +116,6 @@ const AppointmentForm = () => {
     }
     setFormSubmitted(true);
   };
-
-  // const handleVenueChange = (value: string | undefined) => {
-  //   // console.log("Venue Type:", value);
-  //   if (value) {
-  //     setFormValues((prevState) => ({ ...prevState, venueType: value }));
-  //   }
-  // };
   const handleVenueChange = useCallback(
     (value: string | undefined) => {
       if (value && value !== formValues.venueType) {

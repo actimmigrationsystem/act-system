@@ -119,9 +119,12 @@ const EnquiryForm = () => {
     setFormValues((prevState) => ({ ...prevState, documentUpload: files }));
   };
 
-  const nextStep = () => {
-
-  };
+const nextStep = () => {
+  // Get the current step from the URL hash
+  const currentStep = Number(location.hash.replace("#step", ""));
+  // Update the URL hash with the custom step name
+  navigate(`/enquiryform#step${currentStep + 1}`);
+};
 
 
   return (
@@ -198,10 +201,13 @@ const Step1 = ({
   formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   nextStep: () => void;
-
 }) => (
   <div>
-    <ContactInfoFields formValues={formValues} handleChange={handleChange} nextStep={nextStep} />
+    <ContactInfoFields
+      formValues={formValues}
+      handleChange={handleChange}
+      nextStep={nextStep}
+    />
   </div>
 );
 const Step2 = ({
