@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FaFilePdf } from "react-icons/fa";
 import { Typography, Card } from "@material-tailwind/react";
 import SectionTitle from "../components/SectionTitle";
@@ -23,13 +23,14 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
   const mergedFormValues = { ...formValues, ...extractedFormValues };
 
   const [showAlert, setShowAlert] = useState(true);
-
+  const navigate = useNavigate();
   useEffect(() => {
     setShowAlert(true);
   }, []);
 
   const handleAlertActionClick = () => {
     setShowAlert(false);
+    navigate("/");
   };
 
 
