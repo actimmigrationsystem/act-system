@@ -203,14 +203,6 @@ const Step1 = ({
 }) => (
   <div>
     <ContactInfoFields formValues={formValues} handleChange={handleChange} nextStep={nextStep} />
-    {/* <Button
-      style={{ backgroundColor: "#0e5a97" }}
-      type="button"
-      placeholder=""
-      onClick={nextStep}
-    >
-      Continue
-    </Button> */}
   </div>
 );
 const Step2 = ({
