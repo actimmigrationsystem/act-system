@@ -7,7 +7,6 @@ import ContactInfoFields from "../formsteps/ContactInfoFields";
 import PersonalInfoFields from "../formsteps/PersonalInfoFields";
 import GeneralServiceFormFields from "../formsteps/GeneralServiceFormFields";
 import ImmigrationStatusFields from "../formsteps/ImmigrationStatusFields";
-import { FaArrowLeft } from "react-icons/fa";
 
 const EnquiryForm = () => {
   const [formValues, setFormValues] = useState({
@@ -229,27 +228,9 @@ const Step2 = ({
       handleGenderChange={handleGenderChange}
       handleDOBChange={handleDOBChange}
       handleMaritalStatusChange={handleMaritalStatusChange}
+      previousStep={previousStep}
       nextStep={nextStep}
     />
-    <div className="flex">
-      <Button
-        className="mr-4"
-        style={{ backgroundColor: "#0e5a97" }}
-        type="button"
-        placeholder=""
-        onClick={previousStep}
-      >
-        <FaArrowLeft />
-      </Button>
-      <Button
-        style={{ backgroundColor: "#0e5a97" }}
-        type="button"
-        placeholder=""
-        onClick={nextStep}
-      >
-        Continue
-      </Button>
-    </div>
   </div>
 );
 const Step3 = ({
@@ -274,28 +255,9 @@ const Step3 = ({
         handleChange={handleChange}
         handleEntryDateChange={handleEntryDateChange}
         handleImmigrationStatusChange={handleImmigrationStatusChange}
+        previousStep={previousStep}
         nextStep={nextStep}
       />
-    </div>
-
-    <div className="flex">
-      <Button
-        className="mr-4"
-        style={{ backgroundColor: "#0e5a97" }}
-        type="button"
-        placeholder=""
-        onClick={previousStep}
-      >
-        <FaArrowLeft />
-      </Button>
-      <Button
-        style={{ backgroundColor: "#0e5a97" }}
-        type="button"
-        placeholder=""
-        onClick={nextStep}
-      >
-        Continue
-      </Button>
     </div>
   </>
 );
@@ -307,7 +269,6 @@ const Step4 = ({
   handleChange,
   handleSubmit,
   onFileChange,
-  previousStep,
 }: {
   formValues: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -327,15 +288,6 @@ const Step4 = ({
       handleSubmit={handleSubmit}
     />
     <div className="flex">
-      <Button
-        className="mr-4"
-        style={{ backgroundColor: "#0e5a97" }}
-        type="button"
-        placeholder=""
-        onClick={previousStep}
-      >
-        <FaArrowLeft />
-      </Button>
       <Button
         className="w-full"
         placeholder={"Button"}

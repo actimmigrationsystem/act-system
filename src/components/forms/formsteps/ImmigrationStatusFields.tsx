@@ -1,9 +1,10 @@
 import { useState, Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
-import { Typography } from "@material-tailwind/react";
+import { Typography, Button } from "@material-tailwind/react";
 import { FloatingLabel  } from "flowbite-react";
 import DatePickerComponent from "../datepickers/DatePickerComponent";
+import { FaArrowLeft } from "react-icons/fa";
 
 interface ImmigrationStatusFieldsProps {
   formValues: any;
@@ -11,6 +12,7 @@ interface ImmigrationStatusFieldsProps {
   handleImmigrationStatusChange: (value: string | undefined) => void;
   handleEntryDateChange: (date: Date) => void;
   nextStep: () => void;
+  previousStep: () => void;
 }
 
 const ImmigrationStatusFields: React.FC<ImmigrationStatusFieldsProps> = ({
@@ -18,6 +20,8 @@ const ImmigrationStatusFields: React.FC<ImmigrationStatusFieldsProps> = ({
   handleChange,
   handleEntryDateChange,
   handleImmigrationStatusChange,
+  previousStep,
+  nextStep,
 }) => {
   const immigrationStatusOptions = [
     "Recognized Refugee",
@@ -25,10 +29,23 @@ const ImmigrationStatusFields: React.FC<ImmigrationStatusFieldsProps> = ({
     "Permanent Resident",
     "Temporary Resident",
     "SA Citizen",
+    "Other",
+    "Undocumented",
   ];
   const [selectedImmigrationStatus, setSelectedImmigrationStatus] = useState(
     immigrationStatusOptions[0]
   );
+
+    const [filledFields, setFilledFields] = useState<Record<string, boolean>>(
+      {}
+    );
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      handleChange(e);
+      setFilledFields({
+        ...filledFields,
+        [e.target.name]: !!e.target.value,
+      });
+    };
 
   return (
     <div className="mt-8">
@@ -141,8 +158,10 @@ const ImmigrationStatusFields: React.FC<ImmigrationStatusFieldsProps> = ({
           type="text"
           name="passportNumber"
           value={formValues.passportNumber}
-          onChange={handleChange}
-          className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+          onChange={handleInputChange}
+          className={`focus:border-red-600 ${
+            filledFields["residentialAddress"] ? "border-green-600" : ""
+          }`}
         />
       </div>
       <div className="w-full md:w-full mb-4">
@@ -152,7 +171,7 @@ const ImmigrationStatusFields: React.FC<ImmigrationStatusFieldsProps> = ({
           color="blue-gray"
           className="mb-2 font-medium"
         >
-          Asylum/Refugee Reference number:
+          Asylum/Refugee/Permit Reference number:
         </Typography>
         <FloatingLabel
           variant="filled"
@@ -163,6 +182,25 @@ const ImmigrationStatusFields: React.FC<ImmigrationStatusFieldsProps> = ({
           onChange={handleChange}
           className="!border-t-blue-gray-200 focus:!border-t-gray-900"
         />
+      </div>
+      <div className="flex justify-between">
+        <Button
+          className="mr-4"
+          style={{ backgroundColor: "#0e5a97" }}
+          type="button"
+          placeholder=""
+          onClick={previousStep}
+        >
+          <FaArrowLeft />
+        </Button>
+        <Button
+          style={{ backgroundColor: "#0e5a97" }}
+          type="button"
+          placeholder=""
+          onClick={nextStep}
+        >
+          Continue
+        </Button>
       </div>
     </div>
   );
