@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 
 interface DocumentUploadProps {
@@ -7,12 +7,27 @@ interface DocumentUploadProps {
 
 const DocumentUpload: React.FC<DocumentUploadProps> = ({ onFileChange }) => {
   const [file, setFile] = useState<File | null>(null);
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
 
-const onDrop = (acceptedFiles: File[]) => {
-  const selectedFile = acceptedFiles[0];
-  setFile(selectedFile);
-  onFileChange(acceptedFiles);
-};
+  const onDrop = (acceptedFiles: File[]) => {
+    const selectedFile = acceptedFiles[0];
+    setFile(selectedFile);
+    onFileChange(acceptedFiles);
+  };
+
+  useEffect(() => {
+    if (file) {
+      const timer = setInterval(() => {
+        setUploadProgress((oldProgress) => {
+          if (oldProgress === 100) {
+            clearInterval(timer);
+            return 100;
+          }
+          return Math.min(oldProgress + 10, 100);
+        });
+      }, 500);
+    }
+  }, [file]);
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
@@ -42,10 +57,13 @@ const onDrop = (acceptedFiles: File[]) => {
             />
           </svg>
           <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-            <span className="font-semibold">Upload additional documents here</span>(drag and drop)
+            <span className="font-semibold">
+              Upload additional documents here
+            </span>
+            (drag and drop)
           </p>
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            SVG, PNG, JPG,Pdf or GIF (MAX. 800x400px)
+            SVG, PNG, JPG, PDF or GIF (MAX. 800x400px)
           </p>
         </div>
       </div>
@@ -53,6 +71,9 @@ const onDrop = (acceptedFiles: File[]) => {
         <p>
           Selected file: {file.name} - {file.size} bytes
         </p>
+      )}
+      {uploadProgress > 0 && uploadProgress < 100 && (
+        <p>Uploading file: {uploadProgress}%</p>
       )}
     </div>
   );

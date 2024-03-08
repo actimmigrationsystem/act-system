@@ -43,16 +43,16 @@ const EnquiryForm = () => {
 
   const handleSubmit = () => {
     // console.log("Form Values:", formValues);
-    if (
-      !formValues.name ||
-      !formValues.surname ||
-      !formValues.phonenumber ||
-      !formValues.email ||
-      !formValues.serviceType
-    ) {
-      alert("Please fill in all required fields.");
-      return;
-    }
+    // if (
+    //   !formValues.name ||
+    //   !formValues.surname ||
+    //   !formValues.phonenumber ||
+    //   !formValues.email ||
+    //   !formValues.serviceType
+    // ) {
+    //   alert("Please fill in all required fields.");
+    //   return;
+    // }
 
     // Navigate to the respective page
     navigate("/enquirymanager", { state: { formValues } });

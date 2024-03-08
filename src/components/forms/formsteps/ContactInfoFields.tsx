@@ -15,7 +15,6 @@ const ContactInfoFields = ({
   nextStep,
 }: ContactInfoFieldsProps) => {
   const [filledFields, setFilledFields] = useState<Record<string, boolean>>({});
-  const allFieldsFilled = Object.values(filledFields).every(Boolean);
   useEffect(() => {
     const allFieldsFilled = Object.values(filledFields).every(Boolean);
     console.log("All fields filled:", allFieldsFilled);
