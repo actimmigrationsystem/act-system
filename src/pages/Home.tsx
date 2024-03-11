@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Element } from "react-scroll";
 import HomeCarousel from "../components/HomeCarousel";
 import ServicesSection from "./ServicesSection";
@@ -49,7 +50,17 @@ const Home = () => {
         <div className="fixed bottom-20 left-1/2 transform -translate-x-1/2 z-50">
           <CookieAlert
             open={showAlert}
-            message="This website uses cookies to ensure you get the best experience. By continuing to use this site, you accept our use of cookies."
+            message={
+              <span>
+                ACTImmigration uses cookies to personalize your experience on
+                our website. By continuing to use this site, you agree to our
+                <Link to="/cookie-policy" className="text-blue-500 underline">
+                  {" "}
+                  cookie policy
+                </Link>
+                .
+              </span>
+            }
             actionText="Accept"
             onActionClick={handleAcceptCookies}
           />

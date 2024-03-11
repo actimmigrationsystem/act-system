@@ -12,9 +12,9 @@ import ContactUs from "./pages/ContactUsSection";
 import SocialSidebar from "./components/SocialSidebar";
 import PrivacyPolicyPage from "./pages/PrivacyPolicy";
 import ServiceDetails from "./pages/ServiceDetails";
-// import FormManager from "./pages/FormManager";
 import EnquiryManager from "./pages/EnquiryManager";
 import AppointmentManager from "./pages/AppointmentManager";
+import CookiePolicy from "./pages/CookiePolicy";
 
 function App() {
   return (
@@ -27,6 +27,17 @@ function App() {
             <>
               <ExternalNavbar />
               <PrivacyPolicyPage />
+              <CustomFooter />
+            </>
+          }
+        />
+        <Route
+          path="/cookie-policy"
+          element={
+            <>
+              <ExternalNavbar />
+              <CookiePolicy />
+              <CustomFooter />
             </>
           }
         />
