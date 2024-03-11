@@ -3,7 +3,7 @@ import { Alert, Button } from "@material-tailwind/react";
 import Cookies from "js-cookie";
 
 interface CookieAlertProps {
-  message?: string;
+  message?: React.ReactNode;
   actionText?: string;
   onActionClick?: () => void;
   backgroundColor?: string;
