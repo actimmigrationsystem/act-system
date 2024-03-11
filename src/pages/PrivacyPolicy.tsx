@@ -6,7 +6,7 @@ import { PiStrategy } from "react-icons/pi";
 import { MdBlock } from "react-icons/md";
 import { MdEditNote } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
-import { Button } from "@material-tailwind/react";
+import { Button } from "flowbite-react";
 import { FaHome } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
@@ -271,7 +271,6 @@ const PrivacyPolicy = () => {
           </div>
         </div>
         <Button
-          placeholder="Return to Home"
           onClick={returnToHome}
           className="fixed bottom-16 right-4 p-3 text-white font-medium text-xs leading-tight rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg bg-gray-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
           style={{
