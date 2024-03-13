@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { useState } from "react";
 import NavBar from "./components/NavBar";
 import ExternalNavbar from "./components/ExternalNavbar";
 import SocialNav from "./components/SocialNav";
@@ -17,6 +18,11 @@ import AppointmentManager from "./pages/AppointmentManager";
 import CookiePolicy from "./pages/CookiePolicy";
 
 function App() {
+   const [submittedFormData, setSubmittedFormData] = useState(null);
+   const handleSubmit = (formData: any) => {
+     console.log("Form submitted with data:", formData);
+     setSubmittedFormData(formData);
+   };
   return (
     <div className="flex flex-col min-h-screen">
       <SocialNav />
@@ -47,10 +53,8 @@ function App() {
             <>
               <ExternalNavbar />
               <EnquiryManager
-                formValues={(location as any).state?.formValues || {}}
-                onSubmit={function (): void {
-                  throw new Error("Function not implemented.");
-                }}
+                formValues={submittedFormData || {}}
+                onSubmit={handleSubmit}
               />
             </>
           }

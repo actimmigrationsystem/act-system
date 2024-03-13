@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaFilePdf } from "react-icons/fa";
-import { Typography, Card } from "@material-tailwind/react";
+import { Typography, Card, Button } from "@material-tailwind/react";
 import SectionTitle from "../components/SectionTitle";
 import ContentContainer from "../components/ContentContainer";
 import SectionContainer from "../components/SectionContainer";
@@ -14,18 +14,22 @@ interface FormValues {
 
 interface EnquiryManagerProps {
   formValues: FormValues;
-  onSubmit: () => void;
+  onSubmit: (formData: FormValues) => void;
 }
 
-const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
+const EnquiryManager = ({ formValues, onSubmit }: EnquiryManagerProps) => {
   const location = useLocation();
   const extractedFormValues: FormValues = location.state?.formValues || {};
   const mergedFormValues = { ...formValues, ...extractedFormValues };
+  const [confirmedItems, setConfirmedItems] = useState<{
+    [key: string]: boolean;
+  }>({});
 
-  const [showAlert, setShowAlert] = useState(true);
+  const [showAlert, setShowAlert] = useState(false); // Initialize showAlert state to false
   const navigate = useNavigate();
+
   useEffect(() => {
-    setShowAlert(true);
+    setShowAlert(false); // Hide the alert when the component mounts
   }, []);
 
   const handleAlertActionClick = () => {
@@ -33,23 +37,45 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
     navigate("/");
   };
 
+  const handleConfirmItem = (key: string) => {
+    setConfirmedItems((prevConfirmedItems) => ({
+      ...prevConfirmedItems,
+      [key]: true,
+    }));
+  };
+
+  const handleConfirmAllItems = () => {
+    const newConfirmedItems: { [key: string]: boolean } = {};
+    Object.keys(mergedFormValues).forEach((key) => {
+      newConfirmedItems[key] = true;
+    });
+    setConfirmedItems(newConfirmedItems);
+  };
+
+  const handleSubmit = () => {
+    console.log("Submitting form...");
+    onSubmit(mergedFormValues); // Pass the mergedFormValues as an argument
+    setShowAlert(true); // Show the alert after the form is submitted
+  };
 
   const serviceType = mergedFormValues["serviceType"];
   return (
     <div className="mt-8">
       <SectionContainer>
-        <SectionTitle title={String(serviceType) + " Enquiry"} />
+        <SectionTitle title={String(serviceType) + " PreConsulation"} />
         <ContentContainer>
           <Card placeholder="" className="mb-8">
             <div className="card-body">
-              <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
-                <MessageAlert
-                  open={showAlert}
-                  message="Thank you for your Enquiry.We will revert back as soon as possible"
-                  actionText="Continue"
-                  onActionClick={handleAlertActionClick}
-                />
-              </div>
+              {showAlert && ( // Render the alert message only if showAlert is true
+                <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
+                  <MessageAlert
+                    open={true}
+                    message="Thank you for your Enquiry. We will revert back as soon as possible"
+                    actionText="Continue"
+                    onActionClick={handleAlertActionClick}
+                  />
+                </div>
+              )}
               <div className="grid grid-cols-2 gap-1 items-center justify-center mb-4">
                 {Object.entries(mergedFormValues).map(([key, value]) => (
                   <div key={key} className="mb-4 flex justify-center">
@@ -94,6 +120,11 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
                     </div>
                   </div>
                 ))}
+              </div>
+              <div className="mt-4 mb-4 flex items-center justify-center">
+                <Button placeholder="" color="green" onClick={handleSubmit}>
+                  Submit
+                </Button>
               </div>
             </div>
           </Card>

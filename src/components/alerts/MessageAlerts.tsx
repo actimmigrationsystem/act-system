@@ -32,48 +32,37 @@ const MessageAlert = ({
   message = "Sorry, something went wrong. Please try again.",
   actionText = "Close",
   onActionClick,
+  open,
 }: MessageAlertProps) => {
-  const [open, setOpen] = useState(false);
-  useEffect(() => {
-    if (message) {
-      setOpen(true);
-    } else {
-      setOpen(false);
-    }
-  }, [message]);
-
   const handleAccept = () => {
-    setOpen(false);
     if (onActionClick) {
       onActionClick();
     }
   };
 
   return (
-    <>
-      <Alert
-        variant="gradient"
-        open={open}
-        icon={<Icon />}
-        action={
-          <>
-            <div className="flex justify-between items-center">
-              <p>{message}</p>
-              <Button
-                placeholder={""}
-                variant="text"
-                color="white"
-                size="sm"
-                onClick={handleAccept}
-              >
-                {actionText}
-              </Button>
-            </div>
-          </>
-        }
-        children={undefined}
-      />
-    </>
+    <Alert
+      variant="gradient"
+      open={open}
+      icon={<Icon />}
+      action={
+        <>
+          <div className="flex justify-between items-center">
+            <p>{message}</p>
+            <Button
+              placeholder={""}
+              variant="text"
+              color="white"
+              size="sm"
+              onClick={handleAccept}
+            >
+              {actionText}
+            </Button>
+          </div>
+        </>
+      }
+      children=""
+    />
   );
 };
 

@@ -302,7 +302,7 @@ const Step4 = ({
         style={{ backgroundColor: "#0e5a97" }}
         onClick={handleSubmit}
       >
-        Submit Enquiry
+        Confirm Enquiry
       </Button>
     </div>
   </>
