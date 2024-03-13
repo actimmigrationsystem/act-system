@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Alert, Button } from "@material-tailwind/react";
 
 interface MessageAlertProps {

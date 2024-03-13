@@ -21,9 +21,6 @@ const EnquiryManager = ({ formValues, onSubmit }: EnquiryManagerProps) => {
   const location = useLocation();
   const extractedFormValues: FormValues = location.state?.formValues || {};
   const mergedFormValues = { ...formValues, ...extractedFormValues };
-  const [confirmedItems, setConfirmedItems] = useState<{
-    [key: string]: boolean;
-  }>({});
 
   const [showAlert, setShowAlert] = useState(false); // Initialize showAlert state to false
   const navigate = useNavigate();
@@ -37,20 +34,20 @@ const EnquiryManager = ({ formValues, onSubmit }: EnquiryManagerProps) => {
     navigate("/");
   };
 
-  const handleConfirmItem = (key: string) => {
-    setConfirmedItems((prevConfirmedItems) => ({
-      ...prevConfirmedItems,
-      [key]: true,
-    }));
-  };
+  // const handleConfirmItem = (key: string) => {
+  //   setConfirmedItems((prevConfirmedItems) => ({
+  //     ...prevConfirmedItems,
+  //     [key]: true,
+  //   }));
+  // };
 
-  const handleConfirmAllItems = () => {
-    const newConfirmedItems: { [key: string]: boolean } = {};
-    Object.keys(mergedFormValues).forEach((key) => {
-      newConfirmedItems[key] = true;
-    });
-    setConfirmedItems(newConfirmedItems);
-  };
+  // const handleConfirmAllItems = () => {
+  //   const newConfirmedItems: { [key: string]: boolean } = {};
+  //   Object.keys(mergedFormValues).forEach((key) => {
+  //     newConfirmedItems[key] = true;
+  //   });
+  //   setConfirmedItems(newConfirmedItems);
+  // };
 
   const handleSubmit = () => {
     console.log("Submitting form...");
@@ -66,7 +63,7 @@ const EnquiryManager = ({ formValues, onSubmit }: EnquiryManagerProps) => {
         <ContentContainer>
           <Card placeholder="" className="mb-8">
             <div className="card-body">
-              {showAlert && ( // Render the alert message only if showAlert is true
+              {showAlert && (
                 <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
                   <MessageAlert
                     open={true}
