@@ -160,7 +160,7 @@ const ImmigrationStatusFields: React.FC<ImmigrationStatusFieldsProps> = ({
           value={formValues.passportNumber}
           onChange={handleInputChange}
           className={`focus:border-red-600 ${
-            filledFields["residentialAddress"] ? "border-green-600" : ""
+            filledFields["residential_address"] ? "border-green-600" : ""
           }`}
         />
       </div>
