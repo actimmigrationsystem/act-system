@@ -136,7 +136,7 @@ const ImmigrationStatusFields: React.FC<ImmigrationStatusFieldsProps> = ({
           </Typography>
           <div className="absolute z-20 mb-8">
             <DatePickerComponent
-              value={formValues.entryDate}
+              value={formValues.entry_date}
               onChange={(date: Date) => handleEntryDateChange(date)}
             />
           </div>

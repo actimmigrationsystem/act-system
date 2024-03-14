@@ -17,15 +17,15 @@ const EnquiryForm = () => {
     email: "",
     gender: "",
     dob: new Date(),
-    maritalStatus: "",
+    marital_status: "",
     residential_address: "",
-    entryDate: new Date(),
-    passportNumber: "",
-    referenceNumber: "",
-    serviceType: "",
+    entry_date: new Date(),
+    passport_number: "",
+    reference_number: "",
+    service_type: "",
     elaborate: "",
     documentUpload: [] as File[],
-    immigrationStatus: "",
+    immigration_status: "",
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
   const navigate = useNavigate();
@@ -59,7 +59,7 @@ const EnquiryForm = () => {
     if (value) {
       setFormValues((prevState) => ({
         ...prevState,
-        immigrationStatus: value,
+        immigration_status: value,
       }));
     }
   };
@@ -67,7 +67,7 @@ const EnquiryForm = () => {
   const handleMaritalStatusChange = useCallback((value: string | undefined) => {
     // console.log("Service Change Value:", value);
     if (value) {
-      setFormValues((prevState) => ({ ...prevState, maritalStatus: value }));
+      setFormValues((prevState) => ({ ...prevState, marital_status: value }));
     }
   }, []);
 
@@ -81,7 +81,7 @@ const EnquiryForm = () => {
   const handleServiceChange = useCallback((value: string | undefined) => {
     // console.log("Service Change Value:", value);
     if (value) {
-      setFormValues((prevState) => ({ ...prevState, serviceType: value }));
+      setFormValues((prevState) => ({ ...prevState, service_type: value }));
     }
   }, []);
 
@@ -98,7 +98,7 @@ const EnquiryForm = () => {
     if (date) {
       setFormValues((prevState) => ({
         ...prevState,
-        entryDate: date,
+        entry_date: date,
       }));
     }
   };

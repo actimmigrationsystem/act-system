@@ -12,21 +12,23 @@ import { MdCheckCircle } from "react-icons/md";
 const SUBMIT_ENQUIRY = gql`
   mutation SubmitEnquiry($input: EnquiryInput!) {
     submitEnquiry(input: $input) {
-      id
-      name
-      surname
-      phonenumber
-      email
-      gender
-      dob
-      marital_status
-      residential_address
-      immigration_status
-      entry_date
-      passport_number
-      reference_number
-      service_type
-      elaborate
+      enquiry {
+        id
+        name
+        surname
+        phonenumber
+        email
+        gender
+        dob
+        marital_status
+        residential_address
+        immigration_status
+        entry_date
+        passport_number
+        reference_number
+        service_type
+        elaborate
+      }
     }
   }
 `;
@@ -57,16 +59,43 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
     navigate("/");
   };
 
+  // const handleSubmit = async () => {
+  //   try {
+  //     console.log("Submitting form...");
+  //     await submitEnquiry({ variables: { input: mergedFormValues } });
+  //     setShowAlert(true);
+  //   } catch (error) {
+  //     console.error("Error submitting form:", error);
+  //   }
+  // };
+
   const handleSubmit = async () => {
     try {
       console.log("Submitting form...");
-      await submitEnquiry({ variables: { input: formValues } });
-      console.log("the values being submited are" + formValues);
+      const input = {
+        name: mergedFormValues.name,
+        surname: mergedFormValues.surname,
+        phonenumber: mergedFormValues.phonenumber,
+        email: mergedFormValues.email,
+        gender: mergedFormValues.gender,
+        dob: mergedFormValues.dob,
+        marital_status: mergedFormValues.marital_status,
+        residential_address: mergedFormValues.residential_address,
+        immigration_status: mergedFormValues.immigration_status,
+        entry_date: mergedFormValues.entry_date,
+        passport_number: mergedFormValues.passport_number,
+        reference_number: mergedFormValues.reference_number,
+        service_type: mergedFormValues.service_type,
+        elaborate: mergedFormValues.elaborate,
+      };
+
+      await submitEnquiry({ variables: { input } });
       setShowAlert(true);
     } catch (error) {
       console.error("Error submitting form:", error);
     }
   };
+
 
   const serviceType = mergedFormValues["serviceType"];
   return (
