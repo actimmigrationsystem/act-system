@@ -20,13 +20,13 @@ const SUBMIT_ENQUIRY = gql`
         email
         gender
         dob
-        marital_status
-        residential_address
-        immigration_status
-        entry_date
-        passport_number
-        reference_number
-        service_type
+        maritalStatus
+        residentialAddress
+        immigrationStatus
+        entryDate
+        passportNumber
+        referenceNumber
+        serviceType
         elaborate
       }
     }
@@ -63,23 +63,28 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
 
 const handleSubmit = async () => {
   try {
-    const enquiryInput = {
+    const enquiryInput: FormValues = {
       name: mergedFormValues.name,
       surname: mergedFormValues.surname,
       phonenumber: mergedFormValues.phonenumber,
       email: mergedFormValues.email,
       gender: mergedFormValues.gender,
-      dob: mergedFormValues.dob,
-      marital_status: mergedFormValues.marital_status,
-      residential_address: mergedFormValues.residential_address,
-      immigration_status: mergedFormValues.immigration_status,
-      entry_date: mergedFormValues.entry_date?.toString() || "",
-      passport_number: mergedFormValues.passport_number,
-      reference_number: mergedFormValues.reference_number,
-      service_type: mergedFormValues.service_type,
+      dob:
+        mergedFormValues.dob instanceof Date
+          ? mergedFormValues.dob.toISOString()
+          : "",
+      maritalStatus: mergedFormValues.maritalStatus,
+      residentialAddress: mergedFormValues.residentialAddress,
+      immigrationStatus: mergedFormValues.immigrationStatus,
+      entryDate:
+        mergedFormValues.entryDate instanceof Date
+          ? mergedFormValues.entryDate.toISOString()
+          : "",
+      passportNumber: mergedFormValues.passportNumber,
+      referenceNumber: mergedFormValues.referenceNumber,
+      serviceType: mergedFormValues.serviceType,
       elaborate: mergedFormValues.elaborate,
       contact_info_id: mergedFormValues.contact_info_id,
-      documentUpload: mergedFormValues.documentUpload,
     };
 
     console.log("Enquiry Input:", enquiryInput);
@@ -92,6 +97,8 @@ const handleSubmit = async () => {
     console.error("Error submitting form:", error);
   }
 };
+
+
 
 
 

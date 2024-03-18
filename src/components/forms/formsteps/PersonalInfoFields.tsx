@@ -235,11 +235,11 @@ const PersonalInfoFields: React.FC<PersonalInfoFieldsProps> = ({
         variant="filled"
         label="Residential Address"
         type="text"
-        name="residential_address"
-        value={formValues.residential_address}
+        name="residentialAddress"
+        value={formValues.residentialAddress}
         onChange={handleInputChange}
         className={`focus:border-red-600 ${
-          filledFields["residential_address"] ? "border-green-600" : ""
+          filledFields["residentialAddress"] ? "border-green-600" : ""
         }`}
       />
       <div className="flex justify-between">
