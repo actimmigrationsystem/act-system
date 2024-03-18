@@ -11,7 +11,7 @@ import { MdCheckCircle } from "react-icons/md";
 
 const SUBMIT_ENQUIRY = gql`
   mutation SubmitEnquiry($input: EnquiryInput!) {
-    submitEnquiry(input: $input) {
+    submitEnquiry(input: { input: $input }) {
       enquiry {
         id
         name
