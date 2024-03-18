@@ -43,6 +43,7 @@ const EnquiryForm = () => {
 
   const handleSubmit = () => {
     // Navigate to the respective page
+    console.log("Form Values sent to form manager:", formValues);
     navigate("/enquirymanager", { state: { formValues } });
     setFormSubmitted(true);
   };

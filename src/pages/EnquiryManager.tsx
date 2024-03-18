@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FaFilePdf } from "react-icons/fa";
 import { Typography, Card, Button } from "@material-tailwind/react";
 import SectionTitle from "../components/SectionTitle";
@@ -32,6 +32,7 @@ const SUBMIT_ENQUIRY = gql`
     }
   }
 `;
+
 interface FormValues {
   [key: string]: string | undefined | Date | File | File[];
 }
@@ -42,13 +43,14 @@ interface EnquiryManagerProps {
 }
 
 const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
+   const [submitEnquiry] = useMutation(SUBMIT_ENQUIRY);
   const location = useLocation();
   const extractedFormValues: FormValues = location.state?.formValues || {};
   const mergedFormValues = { ...formValues, ...extractedFormValues };
 
   const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate();
-  const [submitEnquiry] = useMutation(SUBMIT_ENQUIRY);
+
 
   useEffect(() => {
     setShowAlert(false); // Hide the alert when the component mounts
@@ -59,42 +61,38 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
     navigate("/");
   };
 
-  // const handleSubmit = async () => {
-  //   try {
-  //     console.log("Submitting form...");
-  //     await submitEnquiry({ variables: { input: mergedFormValues } });
-  //     setShowAlert(true);
-  //   } catch (error) {
-  //     console.error("Error submitting form:", error);
-  //   }
-  // };
+const handleSubmit = async () => {
+  try {
+    const enquiryInput = {
+      name: mergedFormValues.name,
+      surname: mergedFormValues.surname,
+      phonenumber: mergedFormValues.phonenumber,
+      email: mergedFormValues.email,
+      gender: mergedFormValues.gender,
+      dob: mergedFormValues.dob,
+      marital_status: mergedFormValues.marital_status,
+      residential_address: mergedFormValues.residential_address,
+      immigration_status: mergedFormValues.immigration_status,
+      entry_date: mergedFormValues.entry_date?.toString() || "",
+      passport_number: mergedFormValues.passport_number,
+      reference_number: mergedFormValues.reference_number,
+      service_type: mergedFormValues.service_type,
+      elaborate: mergedFormValues.elaborate,
+      contact_info_id: mergedFormValues.contact_info_id,
+      documentUpload: mergedFormValues.documentUpload,
+    };
 
-  const handleSubmit = async () => {
-    try {
-      console.log("Submitting form...");
-      const input = {
-        name: mergedFormValues.name,
-        surname: mergedFormValues.surname,
-        phonenumber: mergedFormValues.phonenumber,
-        email: mergedFormValues.email,
-        gender: mergedFormValues.gender,
-        dob: mergedFormValues.dob,
-        marital_status: mergedFormValues.marital_status,
-        residential_address: mergedFormValues.residential_address,
-        immigration_status: mergedFormValues.immigration_status,
-        entry_date: mergedFormValues.entry_date,
-        passport_number: mergedFormValues.passport_number,
-        reference_number: mergedFormValues.reference_number,
-        service_type: mergedFormValues.service_type,
-        elaborate: mergedFormValues.elaborate,
-      };
+    console.log("Enquiry Input:", enquiryInput);
+    const { data } = await submitEnquiry({
+      variables: { input: enquiryInput },
+    });
+    console.log("Form Submitted:", data);
+    setShowAlert(true); // Show success alert
+  } catch (error) {
+    console.error("Error submitting form:", error);
+  }
+};
 
-      await submitEnquiry({ variables: { input } });
-      setShowAlert(true);
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
-  };
 
 
   const serviceType = mergedFormValues["serviceType"];
