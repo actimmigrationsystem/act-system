@@ -9,9 +9,71 @@ import SectionContainer from "../components/SectionContainer";
 import MessageAlert from "../components/alerts/MessageAlerts";
 import { MdCheckCircle } from "react-icons/md";
 
+// type FormValues = {
+//   name: string;
+//   surname: string;
+//   phonenumber: string;
+//   email: string;
+//   gender: string;
+//   dob: Date | string;
+//   maritalStatus: string;
+//   residentialAddress: string;
+//   immigrationStatus: string;
+//   entryDate: Date | string;
+//   passportNumber: string;
+//   referenceNumber: string;
+//   serviceType: string;
+//   elaborate: string;
+//   contactInfo: {
+//     name: string;
+//     surname: string;
+//     phonenumber: string;
+//     email: string;
+//   };
+// };
+
+
+// const handleSubmit = async () => {
+//   try {
+//     console.log("Merged Form Values:", mergedFormValues);
+
+//     const enquiryInput = {
+//       name: mergedFormValues.name || "",
+//       surname: mergedFormValues.surname || "",
+//       phonenumber: mergedFormValues.phonenumber || "",
+//       email: mergedFormValues.email || "",
+//       gender: mergedFormValues.gender || "",
+//       dob: mergedFormValues.dob || "",
+//       maritalStatus: mergedFormValues.maritalStatus || "",
+//       residentialAddress: mergedFormValues.residentialAddress || "",
+//       immigrationStatus: mergedFormValues.immigrationStatus || "",
+//       entryDate: mergedFormValues.entryDate || "",
+//       passportNumber: mergedFormValues.passportNumber || "",
+//       referenceNumber: mergedFormValues.referenceNumber || "",
+//       serviceType: mergedFormValues.serviceType || "",
+//       elaborate: mergedFormValues.elaborate || "",
+//       contactInfo: {
+//         name: mergedFormValues.name || "",
+//         surname: mergedFormValues.surname || "",
+//         phonenumber: mergedFormValues.phonenumber || "",
+//         email: mergedFormValues.email || "",
+//       },
+//     };
+
+//     console.log("Enquiry Input:", enquiryInput);
+//     const { data } = await submitEnquiry({
+//       variables: { input: enquiryInput },
+//     });
+//     console.log("Form Submitted:", data);
+//     setShowAlert(true); // Show success alert
+//   } catch (error) {
+//     console.error("Error submitting form:", error);
+//   }
+// };
+
 const SUBMIT_ENQUIRY = gql`
-  mutation SubmitEnquiry($input: EnquiryInput!) {
-    submitEnquiry(input: { input: $input }) {
+  mutation SubmitEnquiry($input: SubmitEnquiryInput!) {
+    submitEnquiry(input: $input) {
       enquiry {
         id
         name
@@ -28,24 +90,32 @@ const SUBMIT_ENQUIRY = gql`
         referenceNumber
         serviceType
         elaborate
+        contactInfo {
+          id
+          name
+          surname
+          phonenumber
+          email
+        }
       }
     }
   }
 `;
 
-interface FormValues {
+interface FormValuesInterface {
   [key: string]: string | undefined | Date | File | File[];
 }
 
 interface EnquiryManagerProps {
-  formValues: FormValues;
-  onSubmit: (formData: FormValues) => void;
+  formValues: FormValuesInterface;
+  onSubmit: (formData: FormValuesInterface) => void;
 }
 
 const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
    const [submitEnquiry] = useMutation(SUBMIT_ENQUIRY);
   const location = useLocation();
-  const extractedFormValues: FormValues = location.state?.formValues || {};
+  const extractedFormValues: FormValuesInterface =
+    location.state?.formValues || {};
   const mergedFormValues = { ...formValues, ...extractedFormValues };
 
   const [showAlert, setShowAlert] = useState(false);
@@ -63,28 +133,50 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
 
 const handleSubmit = async () => {
   try {
-    const enquiryInput: FormValues = {
-      name: mergedFormValues.name,
-      surname: mergedFormValues.surname,
-      phonenumber: mergedFormValues.phonenumber,
-      email: mergedFormValues.email,
-      gender: mergedFormValues.gender,
-      dob:
-        mergedFormValues.dob instanceof Date
-          ? mergedFormValues.dob.toISOString()
-          : "",
-      maritalStatus: mergedFormValues.maritalStatus,
-      residentialAddress: mergedFormValues.residentialAddress,
-      immigrationStatus: mergedFormValues.immigrationStatus,
-      entryDate:
-        mergedFormValues.entryDate instanceof Date
-          ? mergedFormValues.entryDate.toISOString()
-          : "",
-      passportNumber: mergedFormValues.passportNumber,
-      referenceNumber: mergedFormValues.referenceNumber,
-      serviceType: mergedFormValues.serviceType,
-      elaborate: mergedFormValues.elaborate,
-      contact_info_id: mergedFormValues.contact_info_id,
+    console.log("Merged Form Values:", mergedFormValues);
+
+const formatDate = (date: string | Date | File | File[]) => {
+  if (date instanceof Date) {
+    let day = String(date.getDate()).padStart(2, "0");
+    let month = String(date.getMonth() + 1).padStart(2, "0"); //January is 0!
+    let year = date.getFullYear();
+
+    return day + "-" + month + "-" + year;
+  } else if (date instanceof File) {
+    // handle File type
+    return date.name;
+  } else if (
+    Array.isArray(date) &&
+    date.every((item) => item instanceof File)
+  ) {
+    // handle File[] type
+    return date.map((file) => file.name).join(", ");
+  } else {
+    return date;
+  }
+};
+
+    const enquiryInput = {
+      name: mergedFormValues.name || "",
+      surname: mergedFormValues.surname || "",
+      phonenumber: mergedFormValues.phonenumber || "",
+      email: mergedFormValues.email || "",
+      gender: mergedFormValues.gender || "",
+      dob: formatDate(mergedFormValues.dob || ""),
+      maritalStatus: mergedFormValues.maritalStatus || "",
+      residentialAddress: mergedFormValues.residentialAddress || "",
+      immigrationStatus: mergedFormValues.immigrationStatus || "",
+      entryDate: formatDate(mergedFormValues.entryDate || ""),
+      passportNumber: mergedFormValues.passportNumber || "",
+      referenceNumber: mergedFormValues.referenceNumber || "",
+      serviceType: mergedFormValues.serviceType || "",
+      elaborate: mergedFormValues.elaborate || "",
+      contactInfo: {
+        name: mergedFormValues.name || "",
+        surname: mergedFormValues.surname || "",
+        phonenumber: mergedFormValues.phonenumber || "",
+        email: mergedFormValues.email || "",
+      },
     };
 
     console.log("Enquiry Input:", enquiryInput);
@@ -92,15 +184,11 @@ const handleSubmit = async () => {
       variables: { input: enquiryInput },
     });
     console.log("Form Submitted:", data);
-    setShowAlert(true); // Show success alert
+    setShowAlert(true); // Show success alert on successful submit
   } catch (error) {
     console.error("Error submitting form:", error);
   }
 };
-
-
-
-
 
   const serviceType = mergedFormValues["serviceType"];
   return (
