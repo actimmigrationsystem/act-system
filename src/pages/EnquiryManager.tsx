@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { gql, useMutation } from "@apollo/client";
+import axios from "axios"; // Import Axios
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaFilePdf } from "react-icons/fa";
 import { Typography, Card, Button } from "@material-tailwind/react";
@@ -8,99 +8,6 @@ import ContentContainer from "../components/ContentContainer";
 import SectionContainer from "../components/SectionContainer";
 import MessageAlert from "../components/alerts/MessageAlerts";
 import { MdCheckCircle } from "react-icons/md";
-
-// type FormValues = {
-//   name: string;
-//   surname: string;
-//   phonenumber: string;
-//   email: string;
-//   gender: string;
-//   dob: Date | string;
-//   maritalStatus: string;
-//   residentialAddress: string;
-//   immigrationStatus: string;
-//   entryDate: Date | string;
-//   passportNumber: string;
-//   referenceNumber: string;
-//   serviceType: string;
-//   elaborate: string;
-//   contactInfo: {
-//     name: string;
-//     surname: string;
-//     phonenumber: string;
-//     email: string;
-//   };
-// };
-
-
-// const handleSubmit = async () => {
-//   try {
-//     console.log("Merged Form Values:", mergedFormValues);
-
-//     const enquiryInput = {
-//       name: mergedFormValues.name || "",
-//       surname: mergedFormValues.surname || "",
-//       phonenumber: mergedFormValues.phonenumber || "",
-//       email: mergedFormValues.email || "",
-//       gender: mergedFormValues.gender || "",
-//       dob: mergedFormValues.dob || "",
-//       maritalStatus: mergedFormValues.maritalStatus || "",
-//       residentialAddress: mergedFormValues.residentialAddress || "",
-//       immigrationStatus: mergedFormValues.immigrationStatus || "",
-//       entryDate: mergedFormValues.entryDate || "",
-//       passportNumber: mergedFormValues.passportNumber || "",
-//       referenceNumber: mergedFormValues.referenceNumber || "",
-//       serviceType: mergedFormValues.serviceType || "",
-//       elaborate: mergedFormValues.elaborate || "",
-//       contactInfo: {
-//         name: mergedFormValues.name || "",
-//         surname: mergedFormValues.surname || "",
-//         phonenumber: mergedFormValues.phonenumber || "",
-//         email: mergedFormValues.email || "",
-//       },
-//     };
-
-//     console.log("Enquiry Input:", enquiryInput);
-//     const { data } = await submitEnquiry({
-//       variables: { input: enquiryInput },
-//     });
-//     console.log("Form Submitted:", data);
-//     setShowAlert(true); // Show success alert
-//   } catch (error) {
-//     console.error("Error submitting form:", error);
-//   }
-// };
-
-const SUBMIT_ENQUIRY = gql`
-  mutation SubmitEnquiry($input: SubmitEnquiryInput!) {
-    submitEnquiry(input: $input) {
-      enquiry {
-        id
-        name
-        surname
-        phonenumber
-        email
-        gender
-        dob
-        maritalStatus
-        residentialAddress
-        immigrationStatus
-        entryDate
-        passportNumber
-        referenceNumber
-        serviceType
-        elaborate
-        contactInfo {
-          id
-          name
-          surname
-          phonenumber
-          email
-        }
-      }
-    }
-  }
-`;
 
 interface FormValuesInterface {
   [key: string]: string | undefined | Date | File | File[];
@@ -112,7 +19,6 @@ interface EnquiryManagerProps {
 }
 
 const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
-   const [submitEnquiry] = useMutation(SUBMIT_ENQUIRY);
   const location = useLocation();
   const extractedFormValues: FormValuesInterface =
     location.state?.formValues || {};
@@ -120,7 +26,6 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
 
   const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate();
-
 
   useEffect(() => {
     setShowAlert(false); // Hide the alert when the component mounts
@@ -131,70 +36,74 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
     navigate("/");
   };
 
-const handleSubmit = async () => {
-  try {
-    console.log("Merged Form Values:", mergedFormValues);
+  const formatDate = (date: string | Date | File | File[]) => {
+    if (date instanceof Date) {
+      // Check if the date is not invalid
+      if (!isNaN(date.getTime())) {
+        return date.toISOString().split("T")[0];
+      }
+      return "";
+    } else if (date instanceof File) {
+      // handle File type
+      return date.name;
+    } else if (
+      Array.isArray(date) &&
+      date.every((item) => item instanceof File)
+    ) {
+      // handle File[] type
+      return date.map((file) => file.name).join(", ");
+    } else {
+      return date;
+    }
+  };
 
-const formatDate = (date: string | Date | File | File[]) => {
-  if (date instanceof Date) {
-    let day = String(date.getDate()).padStart(2, "0");
-    let month = String(date.getMonth() + 1).padStart(2, "0"); //January is 0!
-    let year = date.getFullYear();
+  const handleSubmit = async () => {
+    try {
+      console.log("Merged Form Values:", mergedFormValues);
 
-    return day + "-" + month + "-" + year;
-  } else if (date instanceof File) {
-    // handle File type
-    return date.name;
-  } else if (
-    Array.isArray(date) &&
-    date.every((item) => item instanceof File)
-  ) {
-    // handle File[] type
-    return date.map((file) => file.name).join(", ");
-  } else {
-    return date;
-  }
-};
-
-    const enquiryInput = {
-      name: mergedFormValues.name || "",
-      surname: mergedFormValues.surname || "",
-      phonenumber: mergedFormValues.phonenumber || "",
-      email: mergedFormValues.email || "",
-      gender: mergedFormValues.gender || "",
-      dob: formatDate(mergedFormValues.dob || ""),
-      maritalStatus: mergedFormValues.maritalStatus || "",
-      residentialAddress: mergedFormValues.residentialAddress || "",
-      immigrationStatus: mergedFormValues.immigrationStatus || "",
-      entryDate: formatDate(mergedFormValues.entryDate || ""),
-      passportNumber: mergedFormValues.passportNumber || "",
-      referenceNumber: mergedFormValues.referenceNumber || "",
-      serviceType: mergedFormValues.serviceType || "",
-      elaborate: mergedFormValues.elaborate || "",
-      contactInfo: {
+      const enquiryInput = {
         name: mergedFormValues.name || "",
         surname: mergedFormValues.surname || "",
         phonenumber: mergedFormValues.phonenumber || "",
         email: mergedFormValues.email || "",
-      },
-    };
+        gender: mergedFormValues.gender || "",
+        dob: formatDate(mergedFormValues.dob || ""),
+        maritalStatus: mergedFormValues.maritalStatus || "",
+        residentialAddress: mergedFormValues.residentialAddress || "",
+        immigrationStatus: mergedFormValues.immigrationStatus || "",
+        entryDate: formatDate(mergedFormValues.entryDate || ""),
+        passportNumber: mergedFormValues.passportNumber || "",
+        referenceNumber: mergedFormValues.referenceNumber || "",
+        serviceType: mergedFormValues.serviceType || "",
+        elaborate: mergedFormValues.elaborate || "",
+        contact_info: {
+          name: mergedFormValues.name || "",
+          surname: mergedFormValues.surname || "",
+          phonenumber: mergedFormValues.phonenumber || "",
+          email: mergedFormValues.email || "",
+        },
+        documentUpload: Array.isArray(mergedFormValues.documentUpload)
+          ? mergedFormValues.documentUpload.map((file) => file.name).join(", ")
+          : "",
+      };
 
-    console.log("Enquiry Input:", enquiryInput);
-    const { data } = await submitEnquiry({
-      variables: { input: enquiryInput },
-    });
-    console.log("Form Submitted:", data);
-    setShowAlert(true); // Show success alert on successful submit
-  } catch (error) {
-    console.error("Error submitting form:", error);
-  }
-};
+      console.log("Enquiry Input:", enquiryInput);
+      const response = await axios.post("http://127.0.0.1:3000/", enquiryInput); // POST request to the API endpoint
+      console.log("Form Submitted:", response.data);
+      setShowAlert(true); // Show success alert on successful submit
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      console.log("Error response data:", (error as any).response.data);
+
+
+    }
+  };
 
   const serviceType = mergedFormValues["serviceType"];
   return (
     <div className="mt-8">
       <SectionContainer>
-        <SectionTitle title={String(serviceType) + " PreConsulation"} />
+        <SectionTitle title={String(serviceType) + " PreConsultation"} />
         <ContentContainer>
           <Card placeholder="" className="mb-8">
             <div className="card-body">
