@@ -39,13 +39,24 @@ const ImmigrationStatusFields: React.FC<ImmigrationStatusFieldsProps> = ({
     const [filledFields, setFilledFields] = useState<Record<string, boolean>>(
       {}
     );
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      handleChange(e);
-      setFilledFields({
-        ...filledFields,
-        [e.target.name]: !!e.target.value,
-      });
-    };
+  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target;
+  //   handleChange(e);
+  //   setFilledFields({
+  //     ...filledFields,
+  //     [name]: !!value,
+  //   });
+  // };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    handleChange(e);
+    setFilledFields({
+      ...filledFields,
+      [name]: !!value,
+    });
+  };
+
 
   return (
     <div className="mt-8">
@@ -160,7 +171,7 @@ const ImmigrationStatusFields: React.FC<ImmigrationStatusFieldsProps> = ({
           value={formValues.passportNumber}
           onChange={handleInputChange}
           className={`focus:border-red-600 ${
-            filledFields["residentialAddress"] ? "border-green-600" : ""
+            filledFields["residential_address"] ? "border-green-600" : ""
           }`}
         />
       </div>

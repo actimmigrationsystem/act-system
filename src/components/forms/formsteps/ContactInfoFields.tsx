@@ -29,20 +29,6 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   console.log("Updated filled fields:", updatedFilledFields);
   setFilledFields(updatedFilledFields);
 };
-
-  // Check if all fields are filled
-// useEffect(() => {
-//   const allFieldsFilled = Object.values(filledFields).every((value) => value);
-//   console.log("All fields filled:", allFieldsFilled);
-//   const continueButton = document.getElementById(
-//     "continueButton"
-//   ) as HTMLButtonElement;
-//   if (continueButton) {
-//     continueButton.disabled = !allFieldsFilled;
-//   }
-// }, [filledFields]);
-
-
   return (
     <div className="mt-8">
       <Typography

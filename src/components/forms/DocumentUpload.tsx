@@ -63,7 +63,7 @@ const DocumentUpload: React.FC<DocumentUploadProps> = ({ onFileChange }) => {
             (drag and drop)
           </p>
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            SVG, PNG, JPG, PDF or GIF (MAX. 800x400px)
+            PDF, DOC.
           </p>
         </div>
       </div>
