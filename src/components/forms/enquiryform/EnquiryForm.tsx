@@ -24,7 +24,7 @@ const EnquiryForm = () => {
     referenceNumber: "",
     serviceType: "",
     elaborate: "",
-    documentUpload: [] as File[],
+    document_upload: [] as File[],
     immigrationStatus: "",
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -105,7 +105,7 @@ const EnquiryForm = () => {
   };
 
   const onFileChange = (files: File[]) => {
-    setFormValues((prevState) => ({ ...prevState, documentUpload: files }));
+    setFormValues((prevState) => ({ ...prevState, document_upload: files }));
   };
 
 const nextStep = () => {

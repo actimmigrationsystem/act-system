@@ -57,47 +57,64 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
     }
   };
 
-  const handleSubmit = async () => {
-    try {
-      console.log("Merged Form Values:", mergedFormValues);
+const handleSubmit = async () => {
+  try {
+    console.log("Merged Form Values:", mergedFormValues);
+    const formData = new FormData();
+    // Append document uploads to formData
+    if (Array.isArray(mergedFormValues.documentUpload)) {
+      mergedFormValues.documentUpload.forEach((file, index) => {
+        formData.append(`enquiry[document_upload][${index}]`, file);
+      });
+    }
 
-      const enquiryInput = {
+    const enquiryInput = {
+      name: mergedFormValues.name || "",
+      surname: mergedFormValues.surname || "",
+      phonenumber: mergedFormValues.phonenumber || "",
+      email: mergedFormValues.email || "",
+      gender: mergedFormValues.gender || "",
+      dob: formatDate(mergedFormValues.dob || ""),
+      maritalStatus: mergedFormValues.maritalStatus || "",
+      residentialAddress: mergedFormValues.residentialAddress || "",
+      immigrationStatus: mergedFormValues.immigrationStatus || "",
+      entryDate: formatDate(mergedFormValues.entryDate || ""),
+      passportNumber: mergedFormValues.passportNumber || "",
+      referenceNumber: mergedFormValues.referenceNumber || "",
+      serviceType: mergedFormValues.serviceType || "",
+      elaborate: mergedFormValues.elaborate || "",
+      contact_info: {
         name: mergedFormValues.name || "",
         surname: mergedFormValues.surname || "",
         phonenumber: mergedFormValues.phonenumber || "",
         email: mergedFormValues.email || "",
-        gender: mergedFormValues.gender || "",
-        dob: formatDate(mergedFormValues.dob || ""),
-        maritalStatus: mergedFormValues.maritalStatus || "",
-        residentialAddress: mergedFormValues.residentialAddress || "",
-        immigrationStatus: mergedFormValues.immigrationStatus || "",
-        entryDate: formatDate(mergedFormValues.entryDate || ""),
-        passportNumber: mergedFormValues.passportNumber || "",
-        referenceNumber: mergedFormValues.referenceNumber || "",
-        serviceType: mergedFormValues.serviceType || "",
-        elaborate: mergedFormValues.elaborate || "",
-        contact_info: {
-          name: mergedFormValues.name || "",
-          surname: mergedFormValues.surname || "",
-          phonenumber: mergedFormValues.phonenumber || "",
-          email: mergedFormValues.email || "",
-        },
-        documentUpload: Array.isArray(mergedFormValues.documentUpload)
-          ? mergedFormValues.documentUpload.map((file) => file.name).join(", ")
-          : "",
-      };
+      },
+    };
+    // Append enquiryInput object to formData
+    Object.entries(enquiryInput).forEach(([key, value]) => {
+      // Exclude 'document_upload' key
+      if (key !== "document_upload") {
+        if (key === "contact_info") {
+          formData.append(`enquiry[${key}]`, JSON.stringify(value));
+        } else {
+          formData.append(`enquiry[${key}]`, String(value));
+        }
+      }
+    });
 
-      console.log("Enquiry Input:", enquiryInput);
-      const response = await axios.post("http://127.0.0.1:3000/", enquiryInput); // POST request to the API endpoint
-      console.log("Form Submitted:", response.data);
-      setShowAlert(true); // Show success alert on successful submit
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      console.log("Error response data:", (error as any).response.data);
-
-
-    }
-  };
+    console.log("Enquiry Input in Manger:", enquiryInput);
+    const response = await axios.post("http://127.0.0.1:3000/", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }); // POST request to the API endpoint
+    console.log("Form Submitted:", response.data);
+    setShowAlert(true); // Show success alert on successful submit
+  } catch (error) {
+    console.error("Error submitting form:", error);
+    console.log("Error response data:", (error as any).response.data);
+  }
+};
 
   const serviceType = mergedFormValues["serviceType"];
   return (
