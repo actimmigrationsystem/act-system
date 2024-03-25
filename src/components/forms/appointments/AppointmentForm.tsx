@@ -16,7 +16,7 @@ const AppointmentForm = () => {
     _subject: "Appointment",
     email: "",
     serviceType: "",
-    venueType: "",
+    venue: "",
     appointmentType: "",
     appointmentDate: new Date(),
   });
@@ -118,11 +118,11 @@ const AppointmentForm = () => {
   };
   const handleVenueChange = useCallback(
     (value: string | undefined) => {
-      if (value && value !== formValues.venueType) {
-        setFormValues((prevState) => ({ ...prevState, venueType: value }));
+      if (value && value !== formValues.venue) {
+        setFormValues((prevState) => ({ ...prevState, venue: value }));
       }
     },
-    [formValues.venueType]
+    [formValues.venue]
   );
 
     const handleAppointmentChange = useCallback(
