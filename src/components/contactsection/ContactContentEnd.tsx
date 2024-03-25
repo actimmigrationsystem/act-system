@@ -38,7 +38,7 @@ const ContactContentEnd = () => {
       <div className="relative rounded-lg bg-white p-8 shadow-lg dark:bg-dark-2 sm:p-12">
         <Tabs value={activeTab} className="overflow-visible">
           <TabsHeader
-            className="relative z-0"
+            className="relative z-0 flex"
             placeholder=""
             style={{ backgroundColor: "#0e5a97" }}
           >
@@ -46,12 +46,14 @@ const ContactContentEnd = () => {
               value="enquiry"
               onClick={() => handleTabChange("enquiry")}
               placeholder="enquiry tab"
+
+
             >
               <span
                 className="hidden md:block"
-                style={{ color: activeTab === "enquiry" ? "#2393cb" : "white" }}
+                style={{ color: activeTab === "enquiry" ? "#2393cb" : "white",fontSize: "1rem" }}
               >
-                Pre-Consultation
+                PreConsultation
               </span>
               <AiFillQuestionCircle
                 className="block md:hidden h-6 w-6"

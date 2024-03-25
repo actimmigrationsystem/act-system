@@ -1,4 +1,4 @@
-import { useState, Fragment } from "react";
+import { useState, Fragment,useEffect } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { Typography, Button } from "@material-tailwind/react";
@@ -36,16 +36,35 @@ const ImmigrationStatusFields: React.FC<ImmigrationStatusFieldsProps> = ({
     immigrationStatusOptions[0]
   );
 
-    const [filledFields, setFilledFields] = useState<Record<string, boolean>>(
-      {}
-    );
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      handleChange(e);
-      setFilledFields({
-        ...filledFields,
-        [e.target.name]: !!e.target.value,
-      });
-    };
+  const [filledFields, setFilledFields] = useState<Record<string, boolean>>({
+    passportNumber: false,
+    referenceNumber: true,
+
+  });
+
+  useEffect(() => {
+    const allFieldsFilled = Object.values(filledFields).every(Boolean);
+    console.log("All fields filled:", allFieldsFilled);
+  }, [filledFields]);
+
+const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const { name, value } = e.target;
+  handleChange(e);
+  setFilledFields({
+    ...filledFields,
+    [name]: !!value.trim(), // Check if value is not empty
+  });
+};
+
+
+  const handleContinue = () => {
+    const allFieldsFilled = Object.values(filledFields).every(Boolean);
+    if (allFieldsFilled) {
+      nextStep();
+    } else {
+      console.log("Some fields are not filled");
+    }
+  };
 
   return (
     <div className="mt-8">
@@ -160,7 +179,7 @@ const ImmigrationStatusFields: React.FC<ImmigrationStatusFieldsProps> = ({
           value={formValues.passportNumber}
           onChange={handleInputChange}
           className={`focus:border-red-600 ${
-            filledFields["residentialAddress"] ? "border-green-600" : ""
+            filledFields["residential_address"] ? "border-green-600" : ""
           }`}
         />
       </div>
@@ -197,7 +216,8 @@ const ImmigrationStatusFields: React.FC<ImmigrationStatusFieldsProps> = ({
           style={{ backgroundColor: "#0e5a97" }}
           type="button"
           placeholder=""
-          onClick={nextStep}
+          onClick={handleContinue}
+          disabled={!Object.values(filledFields).every(Boolean)}
         >
           Continue
         </Button>

@@ -55,7 +55,9 @@ const ContactForm = () => {
               onClick={() => handleTabChange("enquiry")}
               placeholder="enquiry tab"
             >
-              <span className="hidden md:block">Pre-Consultation</span>
+              <span className="hidden md:block">
+                <Typography placeholder="pre-consulattion" className="text-sm">PreConsultation</Typography>
+              </span>
               <AiFillQuestionCircle
                 className="block md:hidden h-6 w-6"
                 style={{ color: "#2393cb" }}

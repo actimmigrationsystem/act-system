@@ -24,7 +24,7 @@ const EnquiryForm = () => {
     referenceNumber: "",
     serviceType: "",
     elaborate: "",
-    documentUpload: [] as File[],
+    document_upload: [] as File[],
     immigrationStatus: "",
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -42,19 +42,8 @@ const EnquiryForm = () => {
   };
 
   const handleSubmit = () => {
-    // console.log("Form Values:", formValues);
-    // if (
-    //   !formValues.name ||
-    //   !formValues.surname ||
-    //   !formValues.phonenumber ||
-    //   !formValues.email ||
-    //   !formValues.serviceType
-    // ) {
-    //   alert("Please fill in all required fields.");
-    //   return;
-    // }
-
     // Navigate to the respective page
+    console.log("Form Values sent to form manager:", formValues);
     navigate("/enquirymanager", { state: { formValues } });
     setFormSubmitted(true);
   };
@@ -116,7 +105,7 @@ const EnquiryForm = () => {
   };
 
   const onFileChange = (files: File[]) => {
-    setFormValues((prevState) => ({ ...prevState, documentUpload: files }));
+    setFormValues((prevState) => ({ ...prevState, document_upload: files }));
   };
 
 const nextStep = () => {
@@ -302,7 +291,7 @@ const Step4 = ({
         style={{ backgroundColor: "#0e5a97" }}
         onClick={handleSubmit}
       >
-        Submit Enquiry
+        Confirm Enquiry
       </Button>
     </div>
   </>

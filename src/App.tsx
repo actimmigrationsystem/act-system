@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { useState } from "react";
 import NavBar from "./components/NavBar";
 import ExternalNavbar from "./components/ExternalNavbar";
 import SocialNav from "./components/SocialNav";
@@ -15,16 +16,26 @@ import ServiceDetails from "./pages/ServiceDetails";
 import EnquiryManager from "./pages/EnquiryManager";
 import AppointmentManager from "./pages/AppointmentManager";
 import CookiePolicy from "./pages/CookiePolicy";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignUpPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
+import ExternalSocialNav from "./components/ExternalSocialNav";
 
 function App() {
+  const [submittedFormData, setSubmittedFormData] = useState(null);
+  const handleSubmit = (formData: any) => {
+    console.log("Form submitted with data:", formData);
+    setSubmittedFormData(formData);
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
-      <SocialNav />
       <Routes>
         <Route
           path="/privacy-policy"
           element={
             <>
+              <ExternalSocialNav />
               <ExternalNavbar />
               <PrivacyPolicyPage />
               <CustomFooter />
@@ -35,6 +46,7 @@ function App() {
           path="/cookie-policy"
           element={
             <>
+              <ExternalSocialNav />
               <ExternalNavbar />
               <CookiePolicy />
               <CustomFooter />
@@ -45,46 +57,73 @@ function App() {
           path="/enquirymanager"
           element={
             <>
+              <ExternalSocialNav />
               <ExternalNavbar />
               <EnquiryManager
-                formValues={(location as any).state?.formValues || {}}
-                onSubmit={function (): void {
-                  throw new Error("Function not implemented.");
-                }}
+                formValues={submittedFormData || {}}
+                onSubmit={handleSubmit}
               />
             </>
           }
         />
-
         <Route
           path="/appointmentmanager"
           element={
             <>
+              <ExternalSocialNav />
               <ExternalNavbar />
               <AppointmentManager
                 formValues={(location as any).state?.formValues || {}}
-                onSubmit={function (): void {
-                  throw new Error("Function not implemented.");
-                }}
+                onSubmit={handleSubmit}
               />
             </>
           }
         />
-
         <Route
           path="/services/:serviceTitle"
           element={
             <>
+              <ExternalSocialNav />
               <ExternalNavbar />
               <ServiceDetails />
             </>
           }
         />
-
+        <Route
+          path="/login"
+          element={
+            <>
+              <ExternalSocialNav />
+              <LoginPage />
+              <CustomFooter />
+            </>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <>
+              <ExternalSocialNav />
+              <SignupPage />
+              <CustomFooter />
+            </>
+          }
+        />
+        <Route
+          path="/reset"
+          element={
+            <>
+              <ExternalSocialNav />
+              <ResetPasswordPage />
+              <CustomFooter />
+            </>
+          }
+        />
         <Route
           path="/"
           element={
             <>
+              <SocialNav />
               <NavBar />
               <SocialSidebar />
               <Routes>

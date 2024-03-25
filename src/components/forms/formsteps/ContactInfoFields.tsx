@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Typography, Button } from "@material-tailwind/react";
 import { FloatingLabel } from "flowbite-react";
 
@@ -8,40 +8,42 @@ interface ContactInfoFieldsProps {
   nextStep: () => void;
 }
 
-
 const ContactInfoFields = ({
   formValues,
   handleChange,
   nextStep,
 }: ContactInfoFieldsProps) => {
-  const [filledFields, setFilledFields] = useState<Record<string, boolean>>({});
+  const [filledFields, setFilledFields] = useState<Record<string, boolean>>({
+    name: false,
+    surname: false,
+    phonenumber: false,
+    email: false,
+  });
+
   useEffect(() => {
     const allFieldsFilled = Object.values(filledFields).every(Boolean);
     console.log("All fields filled:", allFieldsFilled);
   }, [filledFields]);
 
-const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  handleChange(e);
-  const updatedFilledFields = {
-    ...filledFields,
-    [e.target.name]: !!e.target.value,
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    handleChange(e);
+    const updatedFilledFields = {
+      ...filledFields,
+      [name]: !!value, // Set to true if value is not empty
+    };
+    console.log("Updated filled fields:", updatedFilledFields);
+    setFilledFields(updatedFilledFields);
   };
-  console.log("Updated filled fields:", updatedFilledFields);
-  setFilledFields(updatedFilledFields);
-};
 
-  // Check if all fields are filled
-// useEffect(() => {
-//   const allFieldsFilled = Object.values(filledFields).every((value) => value);
-//   console.log("All fields filled:", allFieldsFilled);
-//   const continueButton = document.getElementById(
-//     "continueButton"
-//   ) as HTMLButtonElement;
-//   if (continueButton) {
-//     continueButton.disabled = !allFieldsFilled;
-//   }
-// }, [filledFields]);
-
+  const handleContinue = () => {
+    const allFieldsFilled = Object.values(filledFields).every(Boolean);
+    if (allFieldsFilled) {
+      nextStep();
+    } else {
+      console.log("Some fields are not filled");
+    }
+  };
 
   return (
     <div className="mt-8">
@@ -134,7 +136,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           placeholder={""}
           style={{ backgroundColor: "#0e5a97" }}
           type="button"
-          onClick={nextStep}
+          onClick={handleContinue}
           disabled={!Object.values(filledFields).every(Boolean)}
         >
           Continue
