@@ -207,7 +207,7 @@ const AppointmentServiceFormFields: React.FC<
               color="blue-gray"
               className="mb-2 font-medium"
             >
-              Select Appointment Date/Time
+              Appointment Date/Time
             </Typography>
             <AppointmentDatePicker
               value={formValues.appointmentDate}
