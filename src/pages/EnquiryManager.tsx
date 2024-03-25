@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios"; // Import Axios
+import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaFilePdf } from "react-icons/fa";
 import { Typography, Card, Button } from "@material-tailwind/react";
@@ -103,7 +103,7 @@ const handleSubmit = async () => {
     });
 
     console.log("Enquiry Input in Manger:", enquiryInput);
-    const response = await axios.post("http://127.0.0.1:3000/", formData, {
+    const response = await axios.post("http://127.0.0.1:3000/enquiries", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },

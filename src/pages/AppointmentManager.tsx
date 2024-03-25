@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { FaFilePdf } from "react-icons/fa";
 import { Typography, Button, Card } from "@material-tailwind/react";
@@ -8,18 +9,20 @@ import SectionContainer from "../components/SectionContainer";
 import MessageAlert from "../components/alerts/MessageAlerts";
 import { MdCheckCircle } from "react-icons/md";
 
-interface FormValues {
-  [key: string]: string | undefined | Date | File | File[];
+
+interface FormValuesInterface {
+  [key: string]: string | undefined | Date;
 }
 
 interface AppointmentManagerProps {
-  formValues: FormValues;
-  onSubmit: () => void;
+  formValues: FormValuesInterface;
+  onSubmit: (formData: FormValuesInterface) => void;
 }
 
-const AppointmentManager = ({ formValues, onSubmit }: AppointmentManagerProps) => {
+const AppointmentManager = ({ formValues }: AppointmentManagerProps) => {
   const location = useLocation();
-  const extractedFormValues: FormValues = location.state?.formValues || {};
+  const extractedFormValues: FormValuesInterface =
+    location.state?.formValues || {};
   const mergedFormValues = { ...formValues, ...extractedFormValues };
 
   const [showAlert, setShowAlert] = useState(true);
@@ -48,6 +51,52 @@ const AppointmentManager = ({ formValues, onSubmit }: AppointmentManagerProps) =
       newConfirmedItems[key] = true;
     });
     setConfirmedItems(newConfirmedItems);
+  };
+
+  const formatDate = (date: string | Date) => {
+    if (date instanceof Date) {
+      if (!isNaN(date.getTime())) {
+        return date.toISOString().split("T")[0];
+      }
+      return "";
+    } else {
+      return date;
+    }
+  };
+
+  const handleSubmit = async () => {
+    try {
+        console.log("Merged Form Values:", mergedFormValues);
+      const appointmentInput = {
+        name: mergedFormValues.name || "",
+        surname: mergedFormValues.surname || "",
+        phonenumber: mergedFormValues.phonenumber || "",
+        email: mergedFormValues.email || "",
+        serviceType: mergedFormValues.serviceType || "",
+        venue: mergedFormValues.venue || "",
+        appointmentDate: formatDate(mergedFormValues.appointmentDate || ""),
+        appointmentType: mergedFormValues.appointmentType || "",
+      };
+        console.log(
+          "Appointment Input in AppointmentManager:",
+          appointmentInput
+        );
+      const response = await axios.post(
+        "http://127.0.0.1:3000/appointments",
+        appointmentInput,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log("Form Submitted:", response.data);
+      setShowAlert(true); // Show success alert on successful submit
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      console.log("Error response data:", (error as any).response.data);
+    }
   };
 
   const serviceType = mergedFormValues["serviceType"];
@@ -136,25 +185,22 @@ const AppointmentManager = ({ formValues, onSubmit }: AppointmentManagerProps) =
           </Card>
           <div className="text-center">
             <Typography placeholder="" color="gray">
-              Since you selected {String(serviceType)},Please fill in the
-              additional details required below:
+              Since you selected {String(serviceType)}, You will be required to
+              fill in additional forms before your appointment.
             </Typography>
           </div>
 
           <div className="mt-4 mb-4 flex items-center justify-center">
-            <span className="mr-4">
-              Please Verify and confirm the details you filled in above or
-              return to the home page to refill
-            </span>
-            <Button
+            <span className="mr-4">Confirm Booking</span>
+            {/* <Button
               placeholder=""
               onClick={handleConfirmAllItems}
               className="mr-2"
             >
               Confirm
-            </Button>
-            <Button placeholder="" color="green" onClick={onSubmit}>
-              Submit
+            </Button> */}
+            <Button placeholder="" color="green" onClick={handleSubmit}>
+              Book Appointment
             </Button>
           </div>
         </ContentContainer>
