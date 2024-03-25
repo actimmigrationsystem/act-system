@@ -11,7 +11,8 @@ const FormExtra = () => {
         />
         <label
           htmlFor="remember-me"
-          className="ml-2 block text-sm text-gray-900">
+          className="ml-2 block text-sm text-gray-900"
+        >
           Remember me
         </label>
       </div>
@@ -23,6 +24,15 @@ const FormExtra = () => {
           style={{ color: "#0e5a97" }}
         >
           Forgot your password?
+        </a>
+      </div>
+      <div className="text-sm">
+        <a
+          href="/"
+          className="font-medium hover:text-blue-500"
+          style={{ color: "#0e5a97" }}
+        >
+         Return Home
         </a>
       </div>
     </div>
