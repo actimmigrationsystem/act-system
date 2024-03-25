@@ -16,6 +16,9 @@ import ServiceDetails from "./pages/ServiceDetails";
 import EnquiryManager from "./pages/EnquiryManager";
 import AppointmentManager from "./pages/AppointmentManager";
 import CookiePolicy from "./pages/CookiePolicy";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignUpPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 
 function App() {
    const [submittedFormData, setSubmittedFormData] = useState(null);
@@ -27,6 +30,33 @@ function App() {
     <div className="flex flex-col min-h-screen">
       <SocialNav />
       <Routes>
+        <Route
+          path="/login"
+          element={
+            <>
+              <LoginPage />
+              <CustomFooter />
+            </>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <>
+              <SignupPage />
+              <CustomFooter />
+            </>
+          }
+        />
+        <Route
+          path="/reset"
+          element={
+            <>
+              <ResetPasswordPage />
+              <CustomFooter />
+            </>
+          }
+        />
         <Route
           path="/privacy-policy"
           element={

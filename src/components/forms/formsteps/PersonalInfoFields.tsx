@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { Typography, Button } from "@material-tailwind/react";
 import DatePickerComponent from "../datepickers/DatePickerComponent";
@@ -38,13 +38,32 @@ const PersonalInfoFields: React.FC<PersonalInfoFieldsProps> = ({
     maritalStatusOptions[0]
   );
 
-  const [filledFields, setFilledFields] = useState<Record<string, boolean>>({});
+  const [filledFields, setFilledFields] = useState<Record<string, boolean>>({
+    residentialAddress: false,
+  });
+
+useEffect(() => {
+  const allFieldsFilled = Object.values(filledFields).every(Boolean);
+  console.log("All fields filled:", allFieldsFilled);
+}, [filledFields]);
+
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
     handleChange(e);
     setFilledFields({
       ...filledFields,
-      [e.target.name]: !!e.target.value,
+      [name]: !!value.trim(),
     });
+  };
+
+  const handleContinue = () => {
+    const allFieldsFilled = Object.values(filledFields).every(Boolean);
+    if (allFieldsFilled) {
+      nextStep();
+    } else {
+      console.log("Some fields are not filled");
+    }
   };
 
   return (
@@ -252,14 +271,18 @@ const PersonalInfoFields: React.FC<PersonalInfoFieldsProps> = ({
         >
           <FaArrowLeft />
         </Button>
-        <Button
-          style={{ backgroundColor: "#0e5a97" }}
-          type="button"
-          placeholder=""
-          onClick={nextStep}
-        >
-          Continue
-        </Button>
+        <div className="flex justify-end mt-4">
+          <Button
+            id="continueButton"
+            placeholder={""}
+            style={{ backgroundColor: "#0e5a97" }}
+            type="button"
+            onClick={handleContinue}
+            disabled={!Object.values(filledFields).every(Boolean)}
+          >
+            Continue
+          </Button>
+        </div>
       </div>
     </div>
   );

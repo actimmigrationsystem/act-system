@@ -85,7 +85,7 @@ const CustomFooter = () => (
                   </a>
                 </li>
                 <li>
-                  <a href="/terms-and-conditions" className="hover:underline">
+                  <a href="/privacy-policy" className="hover:underline">
                     Terms &amp; Conditions
                   </a>
                 </li>
