@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FaFilePdf } from "react-icons/fa";
 import { Typography, Button, Card } from "@material-tailwind/react";
 import SectionTitle from "../components/SectionTitle";
@@ -26,17 +26,20 @@ const AppointmentManager = ({ formValues }: AppointmentManagerProps) => {
   const mergedFormValues = { ...formValues, ...extractedFormValues };
 
   const [showAlert, setShowAlert] = useState(true);
+  const navigate = useNavigate();
   const [confirmedItems, setConfirmedItems] = useState<{
     [key: string]: boolean;
   }>({});
 
   useEffect(() => {
-    setShowAlert(true);
+    setShowAlert(false);
   }, []);
 
   const handleAlertActionClick = () => {
     setShowAlert(false);
+    navigate("/");
   };
+
 
   const handleConfirmItem = (key: string) => {
     setConfirmedItems((prevConfirmedItems) => ({
@@ -111,7 +114,7 @@ const AppointmentManager = ({ formValues }: AppointmentManagerProps) => {
               <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
                 <MessageAlert
                   open={showAlert}
-                  message="Thank you for your submission. We require more details from you to proceed."
+                  message="Thank you for your submission. We might require more details from you before your appointment."
                   actionText="Continue"
                   onActionClick={handleAlertActionClick}
                 />
@@ -191,7 +194,7 @@ const AppointmentManager = ({ formValues }: AppointmentManagerProps) => {
           </div>
 
           <div className="mt-4 mb-4 flex items-center justify-center">
-            <span className="mr-4">Confirm Booking</span>
+            <span className="mr-4">Submit appointment Booking</span>
             {/* <Button
               placeholder=""
               onClick={handleConfirmAllItems}
