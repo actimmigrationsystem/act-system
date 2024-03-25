@@ -31,8 +31,7 @@ const serviceData: Service[] = [
   {
     image: Img5,
     title: "SCRA reviews and appeals",
-    description:
-      "",
+    description: "",
     subsections: [
       {
         subtitle: "APPEALS AND REVIEWS",
@@ -165,18 +164,17 @@ const ServiceDetails = () => {
           </div>
         ))}
       </div>
-        <Link
-          to="/"
-          className="fixed bottom-8 right-4 p-3 text-white font-medium text-xs leading-tight rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg bg-gray-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-          style={{ backgroundColor: "#0e5a97", width: "40px", height: "40px" }}
-        >
-                  <Tooltip placement="left" content="Return to Home Page">
+      <Link
+        to="/"
+        className="fixed bottom-8 right-4 p-3 text-white font-medium text-xs leading-tight rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg bg-gray-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+        style={{ backgroundColor: "#0e5a97", width: "40px", height: "40px" }}
+      >
+        <Tooltip placement="left" content="Return to Home Page">
           <FaHome className="inline-block mr-2" />
-          </Tooltip>
-        </Link>
+        </Tooltip>
+      </Link>
     </div>
   );
 };
 
 export default ServiceDetails;
-

@@ -17,9 +17,9 @@ const CookiePolicy = () => {
     query: "(min-device-width: 1224px)",
   });
   const navigate = useNavigate();
-    const returnToHome = () => {
-      navigate("/");
-    };
+  const returnToHome = () => {
+    navigate("/");
+  };
 
   return (
     <SectionContainer>

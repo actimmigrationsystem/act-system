@@ -6,7 +6,6 @@ import ContactContentStart from "../components/contactsection/ContactContentStar
 import ContactContentEnd from "../components/contactsection/ContactContentEnd";
 
 const ContactUsSection = () => {
-
   return (
     <SectionContainer>
       <SectionTitle title="Contact Us" className="text-center text-white" />
@@ -22,6 +21,3 @@ const ContactUsSection = () => {
 };
 
 export default ContactUsSection;
-
-
-

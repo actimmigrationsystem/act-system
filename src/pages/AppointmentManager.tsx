@@ -9,7 +9,6 @@ import SectionContainer from "../components/SectionContainer";
 import MessageAlert from "../components/alerts/MessageAlerts";
 import { MdCheckCircle } from "react-icons/md";
 
-
 interface FormValuesInterface {
   [key: string]: string | undefined | Date;
 }
@@ -40,7 +39,6 @@ const AppointmentManager = ({ formValues }: AppointmentManagerProps) => {
     navigate("/");
   };
 
-
   const handleConfirmItem = (key: string) => {
     setConfirmedItems((prevConfirmedItems) => ({
       ...prevConfirmedItems,
@@ -69,7 +67,7 @@ const AppointmentManager = ({ formValues }: AppointmentManagerProps) => {
 
   const handleSubmit = async () => {
     try {
-        console.log("Merged Form Values:", mergedFormValues);
+      console.log("Merged Form Values:", mergedFormValues);
       const appointmentInput = {
         name: mergedFormValues.name || "",
         surname: mergedFormValues.surname || "",
@@ -80,10 +78,7 @@ const AppointmentManager = ({ formValues }: AppointmentManagerProps) => {
         appointmentDate: formatDate(mergedFormValues.appointmentDate || ""),
         appointmentType: mergedFormValues.appointmentType || "",
       };
-        console.log(
-          "Appointment Input in AppointmentManager:",
-          appointmentInput
-        );
+      console.log("Appointment Input in AppointmentManager:", appointmentInput);
       const response = await axios.post(
         "http://127.0.0.1:3000/appointments",
         appointmentInput,
