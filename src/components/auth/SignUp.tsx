@@ -7,6 +7,8 @@ import FormExtra from "./FormExtra";
 import Input from "./Input";
 
 const fields = signupFields;
+const apiHost = import.meta.env.VITE_API_HOST;
+const registrationRoute = import.meta.env.VITE_SIGN_UP_ROUTE;
 
 interface SignupState {
   [key: string]: string;
@@ -41,7 +43,7 @@ const SignUp = () => {
    const signupUser = async () => {
      try {
        const response = await axios.post(
-         "http://127.0.0.1:3000/registrations",
+         `${apiHost}${registrationRoute}`,
          {
            user: {
              email: signupState.email,

@@ -7,6 +7,8 @@ import FormExtra from "./FormExtra";
 import Input from "./Input";
 
 const fields = loginFields;
+const apiHost = import.meta.env.VITE_API_HOST;
+const loginRoute = import.meta.env.VITE_LOGIN_ROUTE;
 
 interface loginState {
   [key: string]: string;
@@ -36,7 +38,7 @@ const Login = () => {
   const signupUser = async () => {
     try {
       const response = await axios.post(
-        "http://127.0.0.1:3000/users/sign_in",
+        `${apiHost}${loginRoute}`,
         {
           user: {
             email: loginState.email,
