@@ -21,7 +21,7 @@ const SignUp = () => {
   const location = useLocation();
    const navigate = useNavigate();
   const prefillEmail = location.state?.prefillEmail || "";
-  console.log("Signup prefill Email  is " + prefillEmail);
+  // console.log("Signup prefill Email  is " + prefillEmail);
 
   let fieldsState: SignupState = {
     email: prefillEmail,
@@ -74,7 +74,7 @@ const SignUp = () => {
        console.error("Signup failed", error);
        setSignupState((prevState) => ({
          ...prevState,
-         error: "Signup failed. Please try again later.",
+         error: "Signup failed. Please try again or contact support.",
        }));
      }
    };

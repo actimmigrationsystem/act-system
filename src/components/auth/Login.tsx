@@ -55,7 +55,7 @@ const Login = () => {
       if (response.status === 200) {
         // Redirect user to dashboard upon successful signup
         navigate("/dashboard");
-        console.log("User successfully signedIn!");
+        // console.log("User successfully signedIn!");
       } else {
         // Handle other status codes or errors
         setloginState((prevState) => ({
@@ -65,10 +65,10 @@ const Login = () => {
       }
     } catch (error) {
       // Handle error
-      console.error("SignIn failed", error);
+      // console.error("SignIn failed", error);
       setloginState((prevState) => ({
         ...prevState,
-        error: "SignIn failed. Please try again.",
+        error: "SignIn failed. Incorrect username | password.",
       }));
     }
   };
@@ -102,6 +102,9 @@ const Login = () => {
 
       <FormExtra />
       <FormAction handleSubmit={handleSubmit} text="Login" />
+      {loginState.error && (
+        <div className="text-red-600">{loginState.error}</div>
+      )}
     </form>
   );
 };

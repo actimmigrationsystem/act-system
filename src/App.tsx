@@ -25,7 +25,7 @@ import Dashboard from "./pages/dashboard/Dashboard";
 function App() {
   const [submittedFormData, setSubmittedFormData] = useState(null);
   const handleSubmit = (formData: any) => {
-    console.log("Form submitted with data:", formData);
+    // console.log("Form submitted with data:", formData);
     setSubmittedFormData(formData);
   };
 

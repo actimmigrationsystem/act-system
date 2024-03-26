@@ -134,7 +134,7 @@ const handleSubmit = async () => {
                 <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
                   <MessageAlert
                     open={true}
-                    message="Thank you for your Enquiry. We will revert back as soon as possible"
+                    message="Thank you for your Submission. Please proceed to signup to track your Pre-Consultation "
                     actionText="Continue"
                     onActionClick={handleAlertActionClick}
                   />
