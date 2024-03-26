@@ -1,16 +1,17 @@
 import { useState } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
-import { loginFields } from "./authFormFields";
+import { signupFields } from "./authFormFields";
 import FormAction from "./FormAction";
 import FormExtra from "./FormExtra";
 import Input from "./Input";
 
-const fields = loginFields;
+const fields = signupFields;
 
 interface SignupState {
   [key: string]: string;
   email: string;
+  password: string;
 }
 
 const SignUp = () => {
@@ -21,14 +22,14 @@ const SignUp = () => {
   console.log("Signup prefill Email  is " + prefillEmail);
 
   let fieldsState: SignupState = {
-    "email-address": "",
-    email: ""
+    email: prefillEmail,
+    password: "",
   };
   fields.forEach((field) => (fieldsState[field.id] = ""));
 
   const [signupState, setSignupState] = useState<SignupState>({
     ...fieldsState,
-    "email-address": prefillEmail,
+    "email": prefillEmail,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,17 +39,16 @@ const SignUp = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    authenticateUser();
+    signupUser();
   };
-const authenticateUser = async () => {
+const signupUser = async () => {
   try {
     const response = await axios.post(
-      "http://127.0.0.1:3000/users",
+      "http://127.0.0.1:3000/registrations",
       {
         user: {
-          email: signupState["email-address"],
+          email: signupState["email"],
           password: signupState.password,
-          role: signupState["Client"],
         },
       },
       {

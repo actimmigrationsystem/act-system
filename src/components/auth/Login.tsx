@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useState } from "react";
 import { loginFields } from "./authFormFields";
 import FormAction from "./FormAction";
 import FormExtra from "./FormExtra";
@@ -10,16 +9,7 @@ let fieldsState: { [key: string]: any } = {};
 fields.forEach((field) => (fieldsState[field.id] = ""));
 
 const Login = () => {
-  // auth hooks and states
-  const location = useLocation();
-  const [loginState, setLoginState] = useState({ ...fieldsState });
-  const prefillEmail = location.state?.prefillEmail || "";
-
-  useEffect(() => {
-    if (prefillEmail) {
-      setLoginState((prevState) => ({ ...prevState, email: prefillEmail }));
-    }
-  }, [prefillEmail]);
+  const [loginState, setLoginState] = useState(fieldsState);
 
   const handleChange = (e: any) => {
     setLoginState({ ...loginState, [e.target.id]: e.target.value });
