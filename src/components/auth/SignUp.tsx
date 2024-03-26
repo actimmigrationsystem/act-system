@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 import { loginFields } from "./authFormFields";
 import FormAction from "./FormAction";
 import FormExtra from "./FormExtra";
@@ -15,6 +16,7 @@ interface SignupState {
 const SignUp = () => {
   // auth hooks and states
   const location = useLocation();
+   const navigate = useNavigate();
   const prefillEmail = location.state?.prefillEmail || "";
   console.log("Signup prefill Email  is " + prefillEmail);
 
@@ -38,7 +40,35 @@ const SignUp = () => {
     e.preventDefault();
     authenticateUser();
   };
-  const authenticateUser = () => {};
+const authenticateUser = async () => {
+  try {
+    const response = await axios.post(
+      "http://127.0.0.1:3000/users",
+      {
+        user: {
+          email: signupState["email-address"],
+          password: signupState.password,
+          role: signupState["Client"],
+        },
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (response.status === 200) {
+      navigate("/dashboard");
+    } else {
+      // handle error
+      console.error("Signup failed");
+    }
+  } catch (error) {
+    // handle error
+    console.error("Signup failed", error);
+  }
+};
   return (
     <form
       className="mt-8 space-y-6 max-w-md mx-auto w-1/2"
