@@ -44,6 +44,7 @@ const PersonalInfoFields: React.FC<PersonalInfoFieldsProps> = ({
 
 useEffect(() => {
   const allFieldsFilled = Object.values(filledFields).every(Boolean);
+  console.log(allFieldsFilled);
 }, [filledFields]);
 
 
