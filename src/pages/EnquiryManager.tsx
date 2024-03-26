@@ -31,10 +31,16 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
     setShowAlert(false); // Hide the alert when the component mounts
   }, []);
 
+  // const handleAlertActionClick = () => {
+  //   setShowAlert(false);
+  //   navigate("/login");
+  // };
+
   const handleAlertActionClick = () => {
     setShowAlert(false);
-    navigate("/");
+    navigate("/signup", { state: { prefillEmail: mergedFormValues.email } });
   };
+
 
   const formatDate = (date: string | Date | File | File[]) => {
     if (date instanceof Date) {
@@ -128,7 +134,7 @@ const handleSubmit = async () => {
                 <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
                   <MessageAlert
                     open={true}
-                    message="Thank you for your Enquiry. We will revert back as soon as possible"
+                    message="Thank you for your Submission. Please proceed to signup to track your Pre-Consultation "
                     actionText="Continue"
                     onActionClick={handleAlertActionClick}
                   />

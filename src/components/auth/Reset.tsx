@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { resetFields } from "./loginFormFields";
+import { resetFields } from "./authFormFields";
 import FormAction from "./FormAction";
 import Input from "./Input";
 

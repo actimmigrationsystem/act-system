@@ -32,7 +32,7 @@ const ContactInfoFields = ({
       ...filledFields,
       [name]: !!value, // Set to true if value is not empty
     };
-    console.log("Updated filled fields:", updatedFilledFields);
+    // console.log("Updated filled fields:", updatedFilledFields);
     setFilledFields(updatedFilledFields);
   };
 

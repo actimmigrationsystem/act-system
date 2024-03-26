@@ -20,17 +20,29 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignUpPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import ExternalSocialNav from "./components/ExternalSocialNav";
+import Dashboard from "./pages/dashboard/Dashboard";
 
 function App() {
   const [submittedFormData, setSubmittedFormData] = useState(null);
   const handleSubmit = (formData: any) => {
-    console.log("Form submitted with data:", formData);
+    // console.log("Form submitted with data:", formData);
     setSubmittedFormData(formData);
   };
 
   return (
     <div className="flex flex-col min-h-screen">
       <Routes>
+        <Route
+          path="/dashboard"
+          element={
+            <>
+              <ExternalSocialNav />
+              <ExternalNavbar />
+              <Dashboard />
+              <CustomFooter />
+            </>
+          }
+        />
         <Route
           path="/privacy-policy"
           element={
@@ -119,6 +131,7 @@ function App() {
             </>
           }
         />
+
         <Route
           path="/"
           element={

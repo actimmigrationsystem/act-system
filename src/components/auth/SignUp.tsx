@@ -1,51 +1,120 @@
 import { useState } from "react";
-import { signupFields } from "./loginFormFields";
+import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
+import { signupFields } from "./authFormFields";
 import FormAction from "./FormAction";
+import FormExtra from "./FormExtra";
 import Input from "./Input";
 
 const fields = signupFields;
-let fieldsState: { [key: string]: any } = {};
+const apiHost = import.meta.env.VITE_API_HOST;
+const registrationRoute = import.meta.env.VITE_SIGN_UP_ROUTE;
 
-fields.forEach((field) => (fieldsState[field.id] = ""));
+interface SignupState {
+  [key: string]: string;
+  email: string;
+  password: string;
+}
 
-export default function Signup() {
-  const [signupState, setSignupState] = useState(fieldsState);
+const SignUp = () => {
+  // auth hooks and states
+  const location = useLocation();
+   const navigate = useNavigate();
+  const prefillEmail = location.state?.prefillEmail || "";
+  // console.log("Signup prefill Email  is " + prefillEmail);
 
-  const handleChange = (e:any) =>
-    setSignupState({ ...signupState, [e.target.id]: e.target.value });
+  let fieldsState: SignupState = {
+    email: prefillEmail,
+    password: "",
+  };
+  fields.forEach((field) => (fieldsState[field.id] = ""));
 
-  const handleSubmit = (e:any) => {
-    e.preventDefault();
-    console.log(signupState);
-    createAccount();
+  const [signupState, setSignupState] = useState<SignupState>({
+    ...fieldsState,
+    "email": prefillEmail,
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setSignupState((prevState) => ({ ...prevState, [id]: value }));
   };
 
-  //handle Signup API Integration here
-  const createAccount = () => {};
+
+   const signupUser = async () => {
+     try {
+       const response = await axios.post(
+         `${apiHost}${registrationRoute}`,
+         {
+           user: {
+             email: signupState.email,
+             password: signupState.password,
+             role: signupState.role,
+           },
+         },
+         {
+           headers: {
+             "Content-Type": "application/json",
+           },
+         }
+       );
+
+       if (response.status === 201) {
+         // Redirect user to dashboard upon successful signup
+         navigate("/dashboard");
+         console.log("User successfully created!");
+       } else {
+         // Handle other status codes or errors
+         setSignupState((prevState) => ({
+           ...prevState,
+           error: "Signup failed. Please try again later.",
+         }));
+       }
+     } catch (error) {
+       // Handle error
+       console.error("Signup failed", error);
+       setSignupState((prevState) => ({
+         ...prevState,
+         error: "Signup failed. Please try again or contact support.",
+       }));
+     }
+   };
+
+     const handleSubmit = (e: any) => {
+       e.preventDefault();
+       signupUser();
+     };
 
   return (
     <form
       className="mt-8 space-y-6 max-w-md mx-auto w-1/2"
       onSubmit={handleSubmit}
     >
-      <div className="">
-        {fields.map((field) => (
-          <Input
-            key={field.id}
-            handleChange={handleChange}
-            value={signupState[field.id]}
-            labelText={field.labelText}
-            labelFor={field.labelFor}
-            id={field.id}
-            name={field.name}
-            type={field.type}
-            isRequired={field.isRequired}
-            placeholder={field.placeholder}
-            customClass={""}
-          />
-        ))}
-        <FormAction handleSubmit={handleSubmit} text="Signup" />
+      <div className="-space-y-px">
+        {fields.map((field) => {
+          return (
+            <Input
+              key={field.id}
+              handleChange={handleChange}
+              value={signupState[field.id]}
+              labelText={field.labelText}
+              labelFor={field.labelFor}
+              id={field.id}
+              name={field.name}
+              type={field.type}
+              isRequired={field.isRequired}
+              placeholder={field.placeholder}
+              customClass=""
+            />
+          );
+        })}
       </div>
+
+      <FormExtra />
+      <FormAction handleSubmit={handleSubmit} text="SignUp" />
+      {signupState.error && (
+        <div className="text-red-600">{signupState.error}</div>
+      )}
     </form>
   );
-}
+};
+export default SignUp;
