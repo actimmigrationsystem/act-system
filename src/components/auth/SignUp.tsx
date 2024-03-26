@@ -1,51 +1,72 @@
 import { useState } from "react";
-import { signupFields } from "./loginFormFields";
+import { useLocation } from "react-router-dom";
+import { loginFields } from "./authFormFields";
 import FormAction from "./FormAction";
+import FormExtra from "./FormExtra";
 import Input from "./Input";
 
-const fields = signupFields;
-let fieldsState: { [key: string]: any } = {};
+const fields = loginFields;
 
-fields.forEach((field) => (fieldsState[field.id] = ""));
+interface SignupState {
+  [key: string]: string;
+  email: string;
+}
 
-export default function Signup() {
-  const [signupState, setSignupState] = useState(fieldsState);
+const SignUp = () => {
+  // auth hooks and states
+  const location = useLocation();
+  const prefillEmail = location.state?.prefillEmail || "";
+  console.log("Signup prefill Email  is " + prefillEmail);
 
-  const handleChange = (e:any) =>
-    setSignupState({ ...signupState, [e.target.id]: e.target.value });
+  let fieldsState: SignupState = {
+    "email-address": "",
+    email: ""
+  };
+  fields.forEach((field) => (fieldsState[field.id] = ""));
 
-  const handleSubmit = (e:any) => {
-    e.preventDefault();
-    console.log(signupState);
-    createAccount();
+  const [signupState, setSignupState] = useState<SignupState>({
+    ...fieldsState,
+    "email-address": prefillEmail,
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setSignupState((prevState) => ({ ...prevState, [id]: value }));
   };
 
-  //handle Signup API Integration here
-  const createAccount = () => {};
-
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    authenticateUser();
+  };
+  const authenticateUser = () => {};
   return (
     <form
       className="mt-8 space-y-6 max-w-md mx-auto w-1/2"
       onSubmit={handleSubmit}
     >
-      <div className="">
-        {fields.map((field) => (
-          <Input
-            key={field.id}
-            handleChange={handleChange}
-            value={signupState[field.id]}
-            labelText={field.labelText}
-            labelFor={field.labelFor}
-            id={field.id}
-            name={field.name}
-            type={field.type}
-            isRequired={field.isRequired}
-            placeholder={field.placeholder}
-            customClass={""}
-          />
-        ))}
-        <FormAction handleSubmit={handleSubmit} text="Signup" />
+      <div className="-space-y-px">
+        {fields.map((field) => {
+          return (
+            <Input
+              key={field.id}
+              handleChange={handleChange}
+              value={signupState[field.id]}
+              labelText={field.labelText}
+              labelFor={field.labelFor}
+              id={field.id}
+              name={field.name}
+              type={field.type}
+              isRequired={field.isRequired}
+              placeholder={field.placeholder}
+              customClass=""
+            />
+          );
+        })}
       </div>
+
+      <FormExtra />
+      <FormAction handleSubmit={handleSubmit} text="SignUp" />
     </form>
   );
-}
+};
+export default SignUp;

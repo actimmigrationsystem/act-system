@@ -31,10 +31,16 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
     setShowAlert(false); // Hide the alert when the component mounts
   }, []);
 
+  // const handleAlertActionClick = () => {
+  //   setShowAlert(false);
+  //   navigate("/login");
+  // };
+
   const handleAlertActionClick = () => {
     setShowAlert(false);
-    navigate("/");
+    navigate("/signup", { state: { prefillEmail: mergedFormValues.email } });
   };
+
 
   const formatDate = (date: string | Date | File | File[]) => {
     if (date instanceof Date) {
