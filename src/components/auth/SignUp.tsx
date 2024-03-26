@@ -81,40 +81,6 @@ const SignUp = () => {
        e.preventDefault();
        signupUser();
      };
-// const signupUser = async () => {
-//   try {
-//     const response = await axios.post(
-//       "http://127.0.0.1:3000/registrations",
-//       {
-//         user: {
-//           email: signupState["email"],
-//           password: signupState.password,
-//           role: signupState.role,
-//         },
-//       },
-//       {
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//       }
-//     );
-
-//     console.log("Response data:", response.data); // Log response data for debugging
-
-//     if (response.status === 201) {
-//       // Redirect user to dashboard upon successful signup
-//       navigate("/dashboard");
-//       console.log("User successfully created!"); // Log success message
-//     } else {
-//       // Handle other status codes or errors
-//       console.error("Signup failed");
-//     }
-//   } catch (error) {
-//     // Handle error
-//     console.error("Signup failed", error);
-//   }
-// };
-
 
   return (
     <form

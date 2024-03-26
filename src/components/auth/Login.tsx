@@ -1,25 +1,80 @@
 import { useState } from "react";
+import axios from "axios";
+import {  useNavigate } from "react-router-dom";
 import { loginFields } from "./authFormFields";
 import FormAction from "./FormAction";
 import FormExtra from "./FormExtra";
 import Input from "./Input";
 
 const fields = loginFields;
-let fieldsState: { [key: string]: any } = {};
-fields.forEach((field) => (fieldsState[field.id] = ""));
+
+interface loginState {
+  [key: string]: string;
+  email: string;
+  password: string;
+}
 
 const Login = () => {
-  const [loginState, setLoginState] = useState(fieldsState);
+  // auth hooks and states
+  const navigate = useNavigate();
 
-  const handleChange = (e: any) => {
-    setLoginState({ ...loginState, [e.target.id]: e.target.value });
+  let fieldsState: loginState = {
+    email: "",
+    password: "",
+  };
+  fields.forEach((field) => (fieldsState[field.id] = ""));
+
+  const [loginState, setloginState] = useState<loginState>({
+    ...fieldsState
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setloginState((prevState) => ({ ...prevState, [id]: value }));
+  };
+
+  const signupUser = async () => {
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:3000/users/sign_in",
+        {
+          user: {
+            email: loginState.email,
+            password: loginState.password,
+          },
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        // Redirect user to dashboard upon successful signup
+        navigate("/dashboard");
+        console.log("User successfully signedIn!");
+      } else {
+        // Handle other status codes or errors
+        setloginState((prevState) => ({
+          ...prevState,
+          error: "SignIn  failed. Please try again.",
+        }));
+      }
+    } catch (error) {
+      // Handle error
+      console.error("SignIn failed", error);
+      setloginState((prevState) => ({
+        ...prevState,
+        error: "SignIn failed. Please try again.",
+      }));
+    }
   };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    authenticateUser();
+    signupUser();
   };
-  const authenticateUser = () => {};
   return (
     <form
       className="mt-8 space-y-6 max-w-md mx-auto w-1/2"
@@ -48,4 +103,5 @@ const Login = () => {
     </form>
   );
 };
+
 export default Login;
