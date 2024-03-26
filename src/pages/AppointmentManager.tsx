@@ -36,7 +36,7 @@ const AppointmentManager = ({ formValues }: AppointmentManagerProps) => {
 
   const handleAlertActionClick = () => {
     setShowAlert(false);
-    navigate("/");
+    navigate("/login");
   };
 
   const handleConfirmItem = (key: string) => {
@@ -109,7 +109,7 @@ const AppointmentManager = ({ formValues }: AppointmentManagerProps) => {
               <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
                 <MessageAlert
                   open={showAlert}
-                  message="Thank you for your submission. We might require more details from you before your appointment."
+                  message="Thank you for your submission. We might require more details before your appointment.Please proceed to SignIn/Signup to track your Appointment"
                   actionText="Continue"
                   onActionClick={handleAlertActionClick}
                 />
