@@ -21,6 +21,7 @@ import SignupPage from "./pages/SignUpPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import ExternalSocialNav from "./components/ExternalSocialNav";
 import Dashboard from "./pages/dashboard/Dashboard";
+import DashboardNavBar from "./pages/dashboard/DashboardNavbar";
 
 function App() {
   const [submittedFormData, setSubmittedFormData] = useState(null);
@@ -36,8 +37,7 @@ function App() {
           path="/dashboard"
           element={
             <>
-              <ExternalSocialNav />
-              <ExternalNavbar />
+              <DashboardNavBar />
               <Dashboard />
               <CustomFooter />
             </>

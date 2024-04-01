@@ -35,7 +35,7 @@ const Login = () => {
     setloginState((prevState) => ({ ...prevState, [id]: value }));
   };
 
-  const signupUser = async () => {
+  const signinUser = async () => {
     try {
       const response = await axios.post(
         `${apiHost}${loginRoute}`,
@@ -75,7 +75,7 @@ const Login = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    signupUser();
+    signinUser();
   };
   return (
     <form

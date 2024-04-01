@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import DashboardLogo from "../assets/logo.jpeg";
+import DashboardLogo from "../assets/dashboard-logo.png";
 
 interface LogoProps {
   color?: string;
@@ -13,8 +13,8 @@ const LogoContainer = styled.div`
 `;
 
 const LogoImg = styled.img`
-  max-width: 60px;
-  max-height: 60px;
+  max-width: 30px;
+  max-height: 30px;
   margin-right: 10px; /* Space between text and logo */
 `;
 
@@ -31,13 +31,12 @@ const CompanyName = styled.div<{ color?: string }>`
 
 const Logo: React.FC<LogoProps> = ({
   color = "#2393cb",
-  companyName = "ACT Immigration",
+  companyName = "ACT Dashboard",
 }) => (
   <LogoContainer>
-    <LogoImg src={DashboardLogo} alt="Company Logo" />
+    <LogoImg src={DashboardLogo} alt="Dashboard Logo" />
     <LogoTextContainer>
       <CompanyName color={color}>{companyName}</CompanyName>
-      <CompanyName color={color}>& Labour Consultants</CompanyName>
     </LogoTextContainer>
   </LogoContainer>
 );

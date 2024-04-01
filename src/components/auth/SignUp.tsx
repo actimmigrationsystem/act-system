@@ -69,15 +69,29 @@ const SignUp = () => {
            error: "Signup failed. Please try again later.",
          }));
        }
-     } catch (error) {
+     } catch (error: any) {
+       // Type assertion here
        // Handle error
        console.error("Signup failed", error);
-       setSignupState((prevState) => ({
-         ...prevState,
-         error: "Signup failed. Please try again or contact support.",
-       }));
+
+       // Check if the error response indicates that the user already exists
+       if (error.response && error.response.status === 422) {
+         const errorMessage =
+           error.response.data.error || "User already exists. Please login.";
+         setSignupState((prevState) => ({
+           ...prevState,
+           error: errorMessage,
+         }));
+       } else {
+         // For other errors, provide a generic error message
+         setSignupState((prevState) => ({
+           ...prevState,
+           error: "Signup failed. Please try again or contact support.",
+         }));
+       }
      }
    };
+
 
      const handleSubmit = (e: any) => {
        e.preventDefault();

@@ -1,7 +1,7 @@
 import AuthHeader from "../components/auth/AuthHeader";
 import Login from "../components/auth/Login";
 
-const AuthPage = () => {
+const LoginPage = () => {
   return (
     <>
       <AuthHeader
@@ -15,5 +15,5 @@ const AuthPage = () => {
   );
 };
 
-export default AuthPage;
+export default LoginPage;
 
