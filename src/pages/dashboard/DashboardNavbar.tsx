@@ -1,4 +1,4 @@
-import {Fragment, useState } from "react";
+import { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { CgProfile } from "react-icons/cg";
@@ -9,11 +9,10 @@ import {
   SearchIcon,
   BellIcon,
   SVG1,
-  SVG2,
   SVG6,
   AppsIcon,
 } from "../../components/dashboard/icons";
-
+import Sidebar from "./SideBar";
 
 const DropdownProfile = [
   {
@@ -32,42 +31,41 @@ const DropdownProfile = [
 
 const notificationItems = [
   {
-    name: "Bonnie Green",
-    message: "Hey, what's up? All set for the presentation?",
+    name: "John Doe",
+    message: "You have a new document awaiting your review.",
     time: "a few moments ago",
   },
   {
-    name: "Jese leos",
-    message: "Jese leos and 5 others started following you.",
+    name: "Jane Smith",
+    message: "Jane Smith requested access to document XYZ.",
     time: "10 minutes ago",
   },
   {
-    name: "Joseph Mcfall",
+    name: "Legal Team",
     message:
-      "Joseph Mcfall and 141 others love your story. See it and view more stories.",
+      "Legal Team has updated the status of case ABC. Click here to view.",
     time: "44 minutes ago",
   },
 ];
 
-
-
-
 const classNames = (...classes: (false | string | undefined)[]) =>
   classes.filter(Boolean).join(" ");
-const DashboardNavBar = () => {
-  // State to manage the visibility of the profile dropdown
-const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
- const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  // Function to toggle the profile dropdown
+const DashboardNavBar = () => {
+  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const toggleProfileDropdown = () => {
     setIsProfileDropdownOpen(!isProfileDropdownOpen);
   };
-    const toggleDropdown = () => {
-      setIsDropdownOpen(!isDropdownOpen);
-    };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
   return (
     <>
+      <Sidebar />
       <nav className="fixed z-30 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
         <div className="px-3 py-3 lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">
