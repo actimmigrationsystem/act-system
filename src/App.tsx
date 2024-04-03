@@ -21,6 +21,8 @@ import SignupPage from "./pages/SignUpPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import ExternalSocialNav from "./components/ExternalSocialNav";
 import DashboardView from "./pages/dashboard/DashboardView";
+// import DashboardLayout from "./pages/dashboard/DashBoardLayout";
+import DocumentView from "./pages/dashboard/DocumentView";
 
 function App() {
   const [submittedFormData, setSubmittedFormData] = useState(null);
@@ -32,15 +34,10 @@ function App() {
   return (
     <div className="flex flex-col min-h-screen">
       <Routes>
-        <Route
-          path="/dashboard"
-          element={
-            <>
-              <DashboardView />
-              <CustomFooter />
-            </>
-          }
-        />
+        {/* Dashboard routes */}
+        <Route path="/dashboard" element={<DashboardView />} />
+        <Route path="/documentation" element={<DocumentView />} />
+        {/* External routes */}
         <Route
           path="/privacy-policy"
           element={
@@ -99,6 +96,7 @@ function App() {
             </>
           }
         />
+        {/* Auth routes */}
         <Route
           path="/login"
           element={
@@ -130,6 +128,7 @@ function App() {
           }
         />
 
+        {/* Landing page routes */}
         <Route
           path="/"
           element={
