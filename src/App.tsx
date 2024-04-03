@@ -23,6 +23,13 @@ import ExternalSocialNav from "./components/ExternalSocialNav";
 import DashboardView from "./pages/dashboard/DashboardView";
 // import DashboardLayout from "./pages/dashboard/DashBoardLayout";
 import DocumentView from "./pages/dashboard/DocumentView";
+import FormsView from "./pages/dashboard/FormsViews";
+import MessagesView from "./pages/dashboard/MessagesView";
+import SettingsView from "./pages/dashboard/SettingsView";
+import PaymentsView from "./pages/dashboard/PaymentsView";
+import SubmissionsView from "./pages/dashboard/SubmissionsView";
+import AppointmentsViews from "./pages/dashboard/AppointmentsViews";
+
 
 function App() {
   const [submittedFormData, setSubmittedFormData] = useState(null);
@@ -37,6 +44,13 @@ function App() {
         {/* Dashboard routes */}
         <Route path="/dashboard" element={<DashboardView />} />
         <Route path="/documentation" element={<DocumentView />} />
+        <Route path="/forms" element={<FormsView />} />
+        <Route path="/messages" element={<MessagesView />} />
+        <Route path="/settings" element={<SettingsView />} />
+        <Route path="/payments" element={<PaymentsView />} />
+        <Route path="/submissions" element={<SubmissionsView />} />
+        <Route path="/appointments" element={<AppointmentsViews />} />
+
         {/* External routes */}
         <Route
           path="/privacy-policy"

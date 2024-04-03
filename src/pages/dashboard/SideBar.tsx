@@ -9,6 +9,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { SiGoogleforms } from "react-icons/si";
 import { IoDocuments } from "react-icons/io5";
 import { SiProgress } from "react-icons/si";
+import { TiMessages } from "react-icons/ti";
 import DashboardLogo from "../../components/DashboardLogo";
 // import ThemeButton from "../../components/ThemeButton";
 
@@ -39,6 +40,12 @@ const SidebarMenuItems: SidebarMenuItem[] = [
     subMenu: [],
   },
   {
+    text: "Messages`",
+    icon: <TiMessages />,
+    path: "/messages",
+    subMenu: [],
+  },
+  {
     text: "Settings",
     icon: <CiSettings />,
     path: "/settings",
@@ -51,9 +58,15 @@ const SidebarMenuItems: SidebarMenuItem[] = [
     subMenu: [],
   },
   {
-    text: "Progress",
+    text: "Submissions",
     icon: <SiProgress />,
-    path: "/progress",
+    path: "/submissions",
+    subMenu: [],
+  },
+  {
+    text: "Appointments",
+    icon: <SiProgress />,
+    path: "/appointments",
     subMenu: [],
   },
   {
