@@ -17,15 +17,19 @@ import Sidebar from "./SideBar";
 const DropdownProfile = [
   {
     text: "Dashboard",
+    path: "/dashboard",
   },
   {
-    text: "Settings",
+    text: "Profile",
+    path: "/profile",
   },
   {
-    text: "Payments",
+    text: "Help",
+    path: "/help",
   },
   {
     text: "Sign out",
+     path: "/login",
   },
 ];
 
@@ -255,7 +259,7 @@ const DashboardNavBar = () => {
               <div
                 id="tooltip-toggle"
                 role="tooltip"
-                className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip"
+                className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-gray-900 transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip"
               >
                 Toggle dark mode
                 <div className="tooltip-arrow" data-popper-arrow></div>
@@ -289,7 +293,7 @@ const DashboardNavBar = () => {
                           <Menu.Item key={index}>
                             {({ active }: { active: boolean }) => (
                               <Link
-                                to={`/${item.text.toLowerCase()}`}
+                                to={item.path}
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
                                   "block px-4 py-2 text-sm text-gray-900"

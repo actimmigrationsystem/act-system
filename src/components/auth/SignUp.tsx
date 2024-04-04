@@ -60,7 +60,7 @@ const SignUp = () => {
 
        if (response.status === 201) {
          // Redirect user to dashboard upon successful signup
-         navigate("/dashboard");
+         navigate("/client_dashboard");
          console.log("User successfully created!");
        } else {
          // Handle other status codes or errors
@@ -82,11 +82,11 @@ const SignUp = () => {
            ...prevState,
            error: errorMessage,
          }));
-       } else {
+       } else if (error.response && error.response.status === 409) {
          // For other errors, provide a generic error message
          setSignupState((prevState) => ({
            ...prevState,
-           error: "Signup failed. Please try again or contact support.",
+           error: "You already have an existing account. Please login.",
          }));
        }
      }

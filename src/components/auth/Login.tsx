@@ -54,7 +54,7 @@ const Login = () => {
 
       if (response.status === 200) {
         // Redirect user to dashboard upon successful signup
-        navigate("/dashboard");
+        navigate("/client_dashboard");
         // console.log("User successfully signedIn!");
       } else {
         // Handle other status codes or errors
