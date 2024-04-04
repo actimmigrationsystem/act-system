@@ -29,6 +29,7 @@ import SettingsView from "./pages/dashboard/SettingsView";
 import PaymentsView from "./pages/dashboard/PaymentsView";
 import SubmissionsView from "./pages/dashboard/SubmissionsView";
 import AppointmentsViews from "./pages/dashboard/AppointmentsViews";
+import ProfileView from "./pages/dashboard/ProfileView";
 
 
 function App() {
@@ -42,7 +43,7 @@ function App() {
     <div className="flex flex-col min-h-screen">
       <Routes>
         {/* Dashboard routes */}
-        <Route path="/dashboard" element={<DashboardView />} />
+        <Route path="/client_dashboard" element={<DashboardView />} />
         <Route path="/documentation" element={<DocumentView />} />
         <Route path="/forms" element={<FormsView />} />
         <Route path="/messages" element={<MessagesView />} />
@@ -50,6 +51,7 @@ function App() {
         <Route path="/payments" element={<PaymentsView />} />
         <Route path="/submissions" element={<SubmissionsView />} />
         <Route path="/appointments" element={<AppointmentsViews />} />
+        <Route path="/profile" element={<ProfileView />} />
 
         {/* External routes */}
         <Route
