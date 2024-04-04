@@ -14,11 +14,7 @@ const classNames = (...classes: (false | string | undefined)[]) =>
   classes.filter(Boolean).join(" ");
 
 const ExternalNavBar = () => (
-  <Disclosure
-    as="nav"
-    style={{ backgroundColor: "#" }}
-    className="shadow-md"
-  >
+  <Disclosure as="nav" style={{ backgroundColor: "#" }} className="shadow-md">
     {({ open }: { open: boolean }) => (
       <>
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 p-4">
@@ -85,7 +81,7 @@ const ExternalNavBar = () => (
                     <Menu.Item>
                       {({ active }: { active: boolean }) => (
                         <RouterLink
-                          to="/login"
+                          to="/users/sign_in"
                           className={classNames(
                             active ? "bg-gray-100" : "",
                             "block px-4 py-2 text-sm text-gray-900"
@@ -121,8 +117,6 @@ const ExternalNavBar = () => (
               <Link
                 key={item.name}
                 to={item.to}
-
-
                 className={classNames(
                   item.current
                     ? "bg-gray-900 text-white"

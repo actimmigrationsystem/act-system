@@ -30,6 +30,7 @@ import PaymentsView from "./pages/dashboard/PaymentsView";
 import SubmissionsView from "./pages/dashboard/SubmissionsView";
 import AppointmentsViews from "./pages/dashboard/AppointmentsViews";
 import ProfileView from "./pages/dashboard/ProfileView";
+import { AuthProvider } from "./components/auth/AuthProvider";
 
 
 function App() {
@@ -41,17 +42,53 @@ function App() {
 
   return (
     <div className="flex flex-col min-h-screen">
+      <AuthProvider>
+        <Routes>
+          {/* Auth routes */}
+          <Route
+            path="/users/sign_in"
+            element={
+              <>
+                <ExternalSocialNav />
+                <LoginPage />
+                <CustomFooter />
+              </>
+            }
+          />
+          <Route
+            path="/registrations"
+            element={
+              <>
+                <ExternalSocialNav />
+                <SignupPage />
+                <CustomFooter />
+              </>
+            }
+          />
+          <Route
+            path="/reset"
+            element={
+              <>
+                <ExternalSocialNav />
+                <ResetPasswordPage />
+                <CustomFooter />
+              </>
+            }
+          />
+          <Route path="/client_dashboard" element={<DashboardView />} />
+          <Route path="/documentation" element={<DocumentView />} />
+          <Route path="/forms" element={<FormsView />} />
+          <Route path="/messages" element={<MessagesView />} />
+          <Route path="/settings" element={<SettingsView />} />
+          <Route path="/payments" element={<PaymentsView />} />
+          <Route path="/submissions" element={<SubmissionsView />} />
+          <Route path="/appointments" element={<AppointmentsViews />} />
+          <Route path="/profile" element={<ProfileView />} />
+        </Routes>
+      </AuthProvider>
+
       <Routes>
         {/* Dashboard routes */}
-        <Route path="/client_dashboard" element={<DashboardView />} />
-        <Route path="/documentation" element={<DocumentView />} />
-        <Route path="/forms" element={<FormsView />} />
-        <Route path="/messages" element={<MessagesView />} />
-        <Route path="/settings" element={<SettingsView />} />
-        <Route path="/payments" element={<PaymentsView />} />
-        <Route path="/submissions" element={<SubmissionsView />} />
-        <Route path="/appointments" element={<AppointmentsViews />} />
-        <Route path="/profile" element={<ProfileView />} />
 
         {/* External routes */}
         <Route
@@ -109,37 +146,6 @@ function App() {
               <ExternalSocialNav />
               <ExternalNavbar />
               <ServiceDetails />
-            </>
-          }
-        />
-        {/* Auth routes */}
-        <Route
-          path="/login"
-          element={
-            <>
-              <ExternalSocialNav />
-              <LoginPage />
-              <CustomFooter />
-            </>
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            <>
-              <ExternalSocialNav />
-              <SignupPage />
-              <CustomFooter />
-            </>
-          }
-        />
-        <Route
-          path="/reset"
-          element={
-            <>
-              <ExternalSocialNav />
-              <ResetPasswordPage />
-              <CustomFooter />
             </>
           }
         />

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { loginFields } from "./authFormFields";
 import FormAction from "./FormAction";
 import FormExtra from "./FormExtra";
@@ -10,33 +10,30 @@ const fields = loginFields;
 const apiHost = import.meta.env.VITE_API_HOST;
 const loginRoute = import.meta.env.VITE_LOGIN_ROUTE;
 
-interface loginState {
-  [key: string]: string;
+interface LoginState {
   email: string;
   password: string;
+  loading: boolean;
+  [key: string]: string | boolean;
 }
 
 const Login = () => {
-  // auth hooks and states
   const navigate = useNavigate();
-
-  let fieldsState: loginState = {
+  const [loginState, setLoginState] = useState<LoginState>({
     email: "",
     password: "",
-  };
-  fields.forEach((field) => (fieldsState[field.id] = ""));
-
-  const [loginState, setloginState] = useState<loginState>({
-    ...fieldsState
+    loading: false,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
-    setloginState((prevState) => ({ ...prevState, [id]: value }));
+    setLoginState((prevState) => ({ ...prevState, [id]: value }));
   };
 
   const signinUser = async () => {
     try {
+      setLoginState((prevState) => ({ ...prevState, loading: true }));
+
       const response = await axios.post(
         `${apiHost}${loginRoute}`,
         {
@@ -53,30 +50,38 @@ const Login = () => {
       );
 
       if (response.status === 200) {
-        // Redirect user to dashboard upon successful signup
-        navigate("/client_dashboard");
-        // console.log("User successfully signedIn!");
+        const { role } = response.data.user;
+
+        if (role === "client") {
+          navigate("/client_dashboard");
+        } else if (role === "admin") {
+          navigate("/admin_dashboard");
+        } else {
+          console.error("Unknown user role:", role);
+          navigate("/users/sign_in");
+        }
       } else {
-        // Handle other status codes or errors
-        setloginState((prevState) => ({
+        setLoginState((prevState) => ({
           ...prevState,
-          error: "SignIn  failed. Please try again.",
+          error: "Sign-in failed. Please try again.",
         }));
       }
     } catch (error) {
-      // Handle error
-      // console.error("SignIn failed", error);
-      setloginState((prevState) => ({
+      console.error("Sign-in failed:", error);
+      setLoginState((prevState) => ({
         ...prevState,
-        error: "SignIn failed. Incorrect username | password.",
+        error: "Sign-in failed. Incorrect username or password.",
       }));
+    } finally {
+      setLoginState((prevState) => ({ ...prevState, loading: false }));
     }
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     signinUser();
   };
+
   return (
     <form
       className="mt-8 space-y-6 max-w-md mx-auto w-1/2"
@@ -87,7 +92,7 @@ const Login = () => {
           <Input
             key={field.id}
             handleChange={handleChange}
-            value={loginState[field.id]}
+            value={loginState[field.id].toString()} // Convert the value to a string
             labelText={field.labelText}
             labelFor={field.labelFor}
             id={field.id}
@@ -100,8 +105,11 @@ const Login = () => {
         ))}
       </div>
 
-      <FormExtra />
-      <FormAction handleSubmit={handleSubmit} text="Login" />
+    <FormExtra />
+      <FormAction
+      handleSubmit={handleSubmit}
+       loading={loginState.loading}
+        text="Login" />
       {loginState.error && (
         <div className="text-red-600">{loginState.error}</div>
       )}

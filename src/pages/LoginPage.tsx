@@ -8,7 +8,7 @@ const LoginPage = () => {
         heading="Login to your account"
         paragraph="Dont have an account? "
         linkName="SignUp"
-        linkUrl="/signup"
+        linkUrl="/registrations"
       />
       <Login />
     </>

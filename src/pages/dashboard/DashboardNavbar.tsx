@@ -29,7 +29,7 @@ const DropdownProfile = [
   },
   {
     text: "Sign out",
-     path: "/login",
+    path: "/users/sign_in",
   },
 ];
 

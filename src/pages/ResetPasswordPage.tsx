@@ -8,7 +8,7 @@ const ResetPasswordPage = () => {
         heading="reset your password"
         paragraph="return to Login? "
         linkName="Login"
-        linkUrl="/login"
+        linkUrl="/users/sign_in"
       />
       <Reset />
     </>

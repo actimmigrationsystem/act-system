@@ -37,7 +37,7 @@ const AppointmentManager = ({ formValues }: AppointmentManagerProps) => {
 
   const handleAlertActionClick = () => {
     setShowAlert(false);
-    navigate("/login");
+    navigate("");
   };
 
 

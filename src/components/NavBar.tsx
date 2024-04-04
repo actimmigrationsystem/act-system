@@ -25,7 +25,6 @@ const NavBar = () => (
   >
     {({ open }: { open: boolean }) => (
       <>
-
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 p-4">
           <div className="relative flex h-16 items-center justify-between">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -94,7 +93,7 @@ const NavBar = () => (
                     <Menu.Item>
                       {({ active }: { active: boolean }) => (
                         <RouterLink
-                          to="/login"
+                          to="/users/sign_in"
                           className={classNames(
                             active ? "bg-gray-100" : "",
                             "block px-4 py-2 text-sm text-gray-900"

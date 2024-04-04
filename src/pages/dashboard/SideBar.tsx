@@ -72,7 +72,7 @@ const SidebarMenuItems: SidebarMenuItem[] = [
   {
     text: "Sign out",
     icon: <GoSignOut />,
-    path: "/login",
+    path: "/users/sign_in",
     subMenu: [],
   },
 ];
