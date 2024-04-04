@@ -92,7 +92,7 @@ const Login = () => {
           <Input
             key={field.id}
             handleChange={handleChange}
-            value={loginState[field.id].toString()} // Convert the value to a string
+            value={loginState[field.id].toString()}
             labelText={field.labelText}
             labelFor={field.labelFor}
             id={field.id}
