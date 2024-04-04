@@ -24,7 +24,7 @@ const SidebarMenuItems: SidebarMenuItem[] = [
   {
     text: "Dashboard",
     icon: <MdDashboard />,
-    path: "/dashboard",
+    path: "/client_dashboard",
     subMenu: [],
   },
   {

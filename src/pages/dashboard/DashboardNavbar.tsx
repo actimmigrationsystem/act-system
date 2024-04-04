@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { CgProfile } from "react-icons/cg";
@@ -56,16 +56,16 @@ const classNames = (...classes: (false | string | undefined)[]) =>
   classes.filter(Boolean).join(" ");
 
 const DashboardNavBar = () => {
-  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  // const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const toggleProfileDropdown = () => {
-    setIsProfileDropdownOpen(!isProfileDropdownOpen);
-  };
+  // const toggleProfileDropdown = () => {
+  //   setIsProfileDropdownOpen(!isProfileDropdownOpen);
+  // };
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
+  // const toggleDropdown = () => {
+  //   setIsDropdownOpen(!isDropdownOpen);
+  // };
 
   return (
     <>
