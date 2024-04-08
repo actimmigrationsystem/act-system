@@ -1,23 +1,20 @@
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { CgProfile } from "react-icons/cg";
-import DashboardLogo from "../../components/DashboardLogo";
+import { CiMenuBurger } from "react-icons/ci";
+import { IoPersonCircle } from "react-icons/io5";
 import { Menu, Transition } from "@headlessui/react";
 import ThemeButton from "../../components/ThemeButton";
+import { IoClose } from "react-icons/io5";
 import {
   SearchIcon,
   BellIcon,
-  SVG1,
-  SVG6,
   AppsIcon,
 } from "../../components/dashboard/icons";
-import SideBar from "./SideBar";
 
 const DropdownProfile = [
   {
     text: "Dashboard",
-    path: "/dashboard",
+    path: "/client_dashboard",
   },
   {
     text: "Profile",
@@ -67,8 +64,8 @@ const DashboardNavBar = () => {
               aria-controls="sidebar"
               className="p-2 text-gray-600 rounded cursor-pointer lg:hidden hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 dark:focus:bg-gray-700 focus:ring-2 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
             >
-              {/* <MenuIcon className="w-6 h-6" />
-              <XIcon className="hidden w-6 h-6" /> */}
+              <CiMenuBurger className="w-6 h-6" />
+              <IoClose className="hidden w-6 h-6" />
             </button>
             <form action="#" method="GET" className="hidden lg:block lg:pl-3.5">
               <label htmlFor="topbar-search" className="sr-only">
@@ -88,7 +85,7 @@ const DashboardNavBar = () => {
               </div>
             </form>
           </div>
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center justify-end space-x-4">
             {/* Notifications */}
             <Menu as="div" className="relative z-40">
               <Menu.Button className="p-2 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100">
@@ -168,7 +165,7 @@ const DashboardNavBar = () => {
             {/* Profile */}
             <Menu as="div" className="relative z-40">
               <Menu.Button className="p-2 rounded-lg hover:text-gray-900 hover:bg-gray-100">
-                <CgProfile className="w-8 h-8 text-gray-900" />
+                <IoPersonCircle className="h-8 w-8" />
               </Menu.Button>
               <Transition
                 as={Fragment}

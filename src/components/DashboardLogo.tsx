@@ -31,7 +31,7 @@ const CompanyName = styled.div<{ color?: string }>`
 
 const Logo: React.FC<LogoProps> = ({
   color = "#2393cb",
-  companyName = "ACT Dashboard",
+  companyName = "",
 }) => (
   <LogoContainer>
     <LogoImg src={DashboardLogo} alt="Dashboard Logo" />
