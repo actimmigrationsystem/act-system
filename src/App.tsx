@@ -21,7 +21,6 @@ import SignupPage from "./pages/SignUpPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import ExternalSocialNav from "./components/ExternalSocialNav";
 import DashboardView from "./pages/dashboard/DashboardView";
-// import DashboardLayout from "./pages/dashboard/DashBoardLayout";
 import DocumentView from "./pages/dashboard/DocumentView";
 import FormsView from "./pages/dashboard/FormsViews";
 import MessagesView from "./pages/dashboard/MessagesView";

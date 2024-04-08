@@ -1,21 +1,26 @@
 import { ReactNode } from "react";
-import Sidebar from "./SideBar";
 import DashboardNavBar from "./DashboardNavBar";
+import SideBar from "./SideBar";
+import Breadcrumb from "./BreadCrumb";
 
 interface DashboardLayoutProps {
   children: ReactNode;
+  pageTitle: string;
 }
 
-const DashboardLayout = ({ children }: DashboardLayoutProps) => {
+const DashboardLayout = ({ children, pageTitle }: DashboardLayoutProps) => {
   return (
     <div className="flex h-screen overflow-hidden">
-      <div className="w-64 flex-shrink-0">
-        <Sidebar />
-      </div>
-      <div className="flex flex-col flex-1">
+      <SideBar />
+      <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
         <DashboardNavBar />
-        <main className="flex-1 p-5 overflow-y-auto bg-gray-100 dark:bg-gray-800 mt-16">
-          {children}
+        <header className="px-2 sm:px-6 lg:px-8 py-4">
+          <div className="max-w-full">
+            <Breadcrumb pageName={pageTitle} />
+          </div>
+        </header>
+        <main className="flex-1">
+          <div className="px-4 sm:px-6 lg:px-8 py-8 max-w-full">{children}</div>
         </main>
       </div>
     </div>
