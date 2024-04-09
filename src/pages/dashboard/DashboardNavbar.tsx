@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { BiSearch, BiBell, BiMessage } from "react-icons/bi";
+import { CgProfile } from "react-icons/cg";
 
 interface DropdownItem {
   text: string;
@@ -7,7 +8,7 @@ interface DropdownItem {
 }
 
 interface NotificationItem {
-  text: string;
+  notif: string;
   time: string;
 }
 
@@ -37,12 +38,12 @@ const DropdownProfile: DropdownItem[] = [
 ];
 const notificationItems: NotificationItem[] = [
   {
-    text: "You have a new document awaiting your review.",
-    time: "a few moments ago",
+    notif: "You have a new document awaiting your review.",
+    time: "a minute ago",
   },
   {
-    text: "You have a new document awaiting your review.",
-    time: "a few moments ago",
+    notif: "You have a new document awaiting your review.",
+    time: "12:00:- 2/12/2024",
   },
 ];
 
@@ -64,7 +65,7 @@ const messageItems: MessageItem[] = [
   },
 ];
 const DashboardNavBar: React.FC = () => {
-   const [isNotificationOpen, setNotificationOpen] = useState(false);
+  const [isNotificationOpen, setNotificationOpen] = useState(false);
   const [isProfileOpen, setProfileOpen] = useState(false);
   const [isMessageOpen, setMessageOpen] = useState(false);
 
@@ -130,12 +131,12 @@ const DashboardNavBar: React.FC = () => {
           </div>
           <div className="flex items-center ml-6">
             {/* Notifications Dropdown */}
-            <div className="relative ml-3">
+            <div className="relative ml-8">
               <button
                 type="button"
                 className="text-white focus:outline-none"
                 onClick={() => {
-                  setProfileOpen(!isNotificationOpen);
+                  setNotificationOpen(!isNotificationOpen);
                   setMessageOpen(false);
                 }}
               >
@@ -149,14 +150,20 @@ const DashboardNavBar: React.FC = () => {
                   aria-orientation="vertical"
                   aria-labelledby="menu-button"
                 >
+                  <div className="px-4 py-2 text-sm text-white bg-blue-500">
+                    Notifications
+                  </div>
                   <div className="py-1" role="none">
                     {notificationItems.map((item, index) => (
                       <a
                         key={index}
-                        href={item.text}
+                        href={item.notif}
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       >
-                        {item.time}
+                        <div className="flex justify-between">
+                          <span>{item.notif}</span>
+                          <span className="text-gray-500">{item.time}</span>
+                        </div>
                       </a>
                     ))}
                   </div>
@@ -165,7 +172,7 @@ const DashboardNavBar: React.FC = () => {
             </div>
 
             {/* Messages Dropdown */}
-            <div className="relative ml-3">
+            <div className="relative ml-8">
               <button
                 type="button"
                 className="text-white focus:outline-none"
@@ -184,6 +191,9 @@ const DashboardNavBar: React.FC = () => {
                   aria-orientation="vertical"
                   aria-labelledby="menu-button"
                 >
+                  <div className="px-4 py-2 text-sm text-white bg-blue-500">
+                    Messages
+                  </div>
                   <div className="py-1" role="none">
                     {messageItems.map((item, index) => (
                       <a
@@ -191,7 +201,10 @@ const DashboardNavBar: React.FC = () => {
                         href={item.name}
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       >
-                        {item.message} {item.time}
+                        <div className="flex justify-between">
+                          <span>{item.message}</span>
+                          <span className="text-gray-500">{item.time}</span>
+                        </div>
                       </a>
                     ))}
                   </div>
@@ -199,7 +212,7 @@ const DashboardNavBar: React.FC = () => {
               )}
             </div>
             {/* Profile Dropdown */}
-            <div className="relative ml-3">
+            <div className="relative ml-8">
               <button
                 type="button"
                 className="text-white focus:outline-none"
@@ -208,7 +221,7 @@ const DashboardNavBar: React.FC = () => {
                   setMessageOpen(false);
                 }}
               >
-                <BiBell className="h-6 w-6" />
+                <CgProfile className="h-6 w-6" />
               </button>
               {isProfileOpen && (
                 <div
@@ -218,6 +231,10 @@ const DashboardNavBar: React.FC = () => {
                   aria-orientation="vertical"
                   aria-labelledby="menu-button"
                 >
+                  <div className="px-4 py-2 text-sm text-white bg-blue-500">
+                    myemail@email.com
+                  </div>
+                  <hr />
                   <div className="py-1" role="none">
                     {DropdownProfile.map((item, index) => (
                       <a
