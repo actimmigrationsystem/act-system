@@ -85,7 +85,7 @@ const DashboardNavBar = () => {
               </div>
             </form>
           </div>
-          <div className="flex items-center justify-end space-x-4">
+          <div className="flex justify-end space-x-4">
             {/* Notifications */}
             <Menu as="div" className="relative z-40">
               <Menu.Button className="p-2 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100">

@@ -2,13 +2,13 @@ import DashboardLayout from "./DashBoardLayout";
 
 const MessagesView = () => {
   return (
-    <DashboardLayout>
+    <DashboardLayout pageTitle="Messages">
       <div className="flex items-center justify-center h-full">
         <div className="px-4 pt-6">
           <div className="grid gap-4 xl:grid-cols-2 2xl:grid-cols-3">
             <div className="w-full">
               <h3 className="mb-2 text-base font-normal text-gray-500 dark:text-gray-400">
-               Progress
+                Progress
               </h3>
               <div className="flex items-center mb-2">
                 <div className="w-16 text-sm font-medium dark:text-white">
