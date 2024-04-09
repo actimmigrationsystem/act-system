@@ -1,17 +1,23 @@
-import { Fragment } from "react";
-import { Link } from "react-router-dom";
-import { CiMenuBurger } from "react-icons/ci";
-import { IoPersonCircle } from "react-icons/io5";
-import { Menu, Transition } from "@headlessui/react";
-import ThemeButton from "../../components/ThemeButton";
-import { IoClose } from "react-icons/io5";
-import {
-  SearchIcon,
-  BellIcon,
-  AppsIcon,
-} from "../../components/dashboard/icons";
+import React, { useState, useEffect, useRef } from "react";
+import { BiSearch, BiBell, BiMessage } from "react-icons/bi";
 
-const DropdownProfile = [
+interface DropdownItem {
+  text: string;
+  path: string;
+}
+
+interface NotificationItem {
+  text: string;
+  time: string;
+}
+
+interface MessageItem {
+  name: string;
+  message: string;
+  time: string;
+}
+
+const DropdownProfile: DropdownItem[] = [
   {
     text: "Dashboard",
     path: "/client_dashboard",
@@ -29,180 +35,208 @@ const DropdownProfile = [
     path: "/users/sign_in",
   },
 ];
-
-const notificationItems = [
+const notificationItems: NotificationItem[] = [
   {
-    name: "John Doe",
-    message: "You have a new document awaiting your review.",
+    text: "You have a new document awaiting your review.",
     time: "a few moments ago",
   },
   {
-    name: "Jane Smith",
-    message: "Jane Smith requested access to document XYZ.",
-    time: "10 minutes ago",
-  },
-  {
-    name: "Legal Team",
-    message:
-      "Legal Team has updated the status of case ABC. Click here to view.",
-    time: "44 minutes ago",
+    text: "You have a new document awaiting your review.",
+    time: "a few moments ago",
   },
 ];
 
-const classNames = (...classes: (false | string | undefined)[]) =>
-  classes.filter(Boolean).join(" ");
+const messageItems: MessageItem[] = [
+  {
+    name: "Alice",
+    message: "Hi there!",
+    time: "5 minutes ago",
+  },
+  {
+    name: "Bob",
+    message: "How are you doing?",
+    time: "12 minutes ago",
+  },
+  {
+    name: "Charlie",
+    message: "Meeting at 2 PM today.",
+    time: "30 minutes ago",
+  },
+];
+const DashboardNavBar: React.FC = () => {
+   const [isNotificationOpen, setNotificationOpen] = useState(false);
+  const [isProfileOpen, setProfileOpen] = useState(false);
+  const [isMessageOpen, setMessageOpen] = useState(false);
 
-const DashboardNavBar = () => {
+  const notificationDropdownRef = useRef<HTMLDivElement>(null);
+  const profileDropdownRef = useRef<HTMLDivElement>(null);
+  const messageDropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const clickHandler = (event: MouseEvent) => {
+      if (
+        !notificationDropdownRef.current ||
+        !profileDropdownRef.current ||
+        !messageDropdownRef.current ||
+        (profileDropdownRef.current.contains(event.target as Node) &&
+          !messageDropdownRef.current.contains(event.target as Node)) ||
+        (notificationDropdownRef.current.contains(event.target as Node) &&
+          !notificationDropdownRef.current.contains(event.target as Node))
+      ) {
+        return;
+      }
+      setNotificationOpen(false);
+      setProfileOpen(false);
+      setMessageOpen(false);
+    };
+
+    document.addEventListener("click", clickHandler);
+    return () => {
+      document.removeEventListener("click", clickHandler);
+    };
+  }, []);
+
+  useEffect(() => {
+    const keyHandler = (event: KeyboardEvent) => {
+      if (event.keyCode === 27) {
+        setProfileOpen(false);
+        setMessageOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", keyHandler);
+    return () => {
+      document.removeEventListener("keydown", keyHandler);
+    };
+  }, []);
+
   return (
-    <>
-      <nav className="fixed z-30 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-        <div className="px-3 py-3 lg:px-5 lg:pl-3 flex justify-between items-center">
+    <nav className="bg-gray-800 shadow">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <button
-              id="toggleSidebarMobile"
-              aria-expanded="true"
-              aria-controls="sidebar"
-              className="p-2 text-gray-600 rounded cursor-pointer lg:hidden hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 dark:focus:bg-gray-700 focus:ring-2 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            >
-              <CiMenuBurger className="w-6 h-6" />
-              <IoClose className="hidden w-6 h-6" />
-            </button>
-            <form action="#" method="GET" className="hidden lg:block lg:pl-3.5">
-              <label htmlFor="topbar-search" className="sr-only">
-                Search
-              </label>
-              <div className="relative mt-1 lg:w-96">
-                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  <SearchIcon />
-                </div>
+            <div className="hidden sm:-my-px sm:ml-6 sm:flex">
+              <div className="relative">
                 <input
                   type="text"
-                  name="email"
-                  id="topbar-search"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Search"
+                  className="bg-gray-900 text-white border border-gray-600 rounded-lg px-3 py-2 pl-10 placeholder-gray-400 focus:outline-none focus:ring focus:border-indigo-500 focus:z-10 transition ease-in-out duration-150"
+                  placeholder="Search..."
                 />
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <BiSearch className="h-5 w-5 text-gray-400" />
+                </div>
               </div>
-            </form>
+            </div>
           </div>
-          <div className="flex justify-end space-x-4">
-            {/* Notifications */}
-            <Menu as="div" className="relative z-40">
-              <Menu.Button className="p-2 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100">
-                <span className="sr-only">View notifications</span>
-                <BellIcon />
-              </Menu.Button>
-              <Transition
-                as={Fragment}
-                enter="transition ease-out duration-100"
-                enterFrom="transform opacity-0 scale-95"
-                enterTo="transform opacity-100 scale-100"
-                leave="transition ease-in duration-75"
-                leaveFrom="transform opacity-100 scale-100"
-                leaveTo="transform opacity-0 scale-95"
+          <div className="flex items-center ml-6">
+            {/* Notifications Dropdown */}
+            <div className="relative ml-3">
+              <button
+                type="button"
+                className="text-white focus:outline-none"
+                onClick={() => {
+                  setProfileOpen(!isNotificationOpen);
+                  setMessageOpen(false);
+                }}
               >
-                <Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right bg-white dark:bg-gray-800 shadow-lg rounded-md ring-1 ring-black ring-opacity-5 focus:outline-none">
-                  {notificationItems.map((item, index) => (
-                    <Menu.Item key={index}>
-                      {({ active }) => (
-                        <div
-                          className={classNames(
-                            active ? "bg-gray-100" : "",
-                            "block px-4 py-2 text-sm text-gray-700"
-                          )}
-                        >
-                          <div className="font-bold">{item.name}</div>
-                          <div className="text-gray-500">{item.message}</div>
-                          <div className="text-xs text-gray-500">
-                            {item.time}
-                          </div>
-                        </div>
-                      )}
-                    </Menu.Item>
-                  ))}
-                </Menu.Items>
-              </Transition>
-            </Menu>
+                <BiBell className="h-6 w-6" />
+              </button>
+              {isNotificationOpen && (
+                <div
+                  ref={notificationDropdownRef}
+                  className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  role="menu"
+                  aria-orientation="vertical"
+                  aria-labelledby="menu-button"
+                >
+                  <div className="py-1" role="none">
+                    {notificationItems.map((item, index) => (
+                      <a
+                        key={index}
+                        href={item.text}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.time}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
 
-            {/* Apps */}
-            <Menu as="div" className="relative z-40">
-              <Menu.Button className="p-2 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100">
-                <span className="sr-only">View Apps</span>
-                <AppsIcon />
-              </Menu.Button>
-              <Transition
-                as={Fragment}
-                enter="transition ease-out duration-100"
-                enterFrom="transform opacity-0 scale-95"
-                enterTo="transform opacity-100 scale-100"
-                leave="transition ease-in duration-75"
-                leaveFrom="transform opacity-100 scale-100"
-                leaveTo="transform opacity-0 scale-95"
+            {/* Messages Dropdown */}
+            <div className="relative ml-3">
+              <button
+                type="button"
+                className="text-white focus:outline-none"
+                onClick={() => {
+                  setMessageOpen(!isMessageOpen);
+                  setProfileOpen(false); // Close notification dropdown if open
+                }}
               >
-                <Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right bg-white dark:bg-gray-800 shadow-lg rounded-md ring-1 ring-black ring-opacity-5 focus:outline-none">
-                  {notificationItems.map((item, index) => (
-                    <Menu.Item key={index}>
-                      {({ active }) => (
-                        <div
-                          className={classNames(
-                            active ? "bg-gray-100" : "",
-                            "block px-4 py-2 text-sm text-gray-700"
-                          )}
-                        >
-                          <div className="font-bold">{item.name}</div>
-                          <div className="text-gray-500">{item.message}</div>
-                          <div className="text-xs text-gray-500">
-                            {item.time}
-                          </div>
-                        </div>
-                      )}
-                    </Menu.Item>
-                  ))}
-                </Menu.Items>
-              </Transition>
-            </Menu>
-
-            {/* Profile */}
-            <Menu as="div" className="relative z-40">
-              <Menu.Button className="p-2 rounded-lg hover:text-gray-900 hover:bg-gray-100">
-                <IoPersonCircle className="h-8 w-8" />
-              </Menu.Button>
-              <Transition
-                as={Fragment}
-                enter="transition ease-out duration-100"
-                enterFrom="transform opacity-0 scale-95"
-                enterTo="transform opacity-100 scale-100"
-                leave="transition ease-in duration-75"
-                leaveFrom="transform opacity-100 scale-100"
-                leaveTo="transform opacity-0 scale-95"
+                <BiMessage className="h-6 w-6" />
+              </button>
+              {isMessageOpen && (
+                <div
+                  ref={messageDropdownRef}
+                  className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  role="menu"
+                  aria-orientation="vertical"
+                  aria-labelledby="menu-button"
+                >
+                  <div className="py-1" role="none">
+                    {messageItems.map((item, index) => (
+                      <a
+                        key={index}
+                        href={item.name}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.message} {item.time}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+            {/* Profile Dropdown */}
+            <div className="relative ml-3">
+              <button
+                type="button"
+                className="text-white focus:outline-none"
+                onClick={() => {
+                  setProfileOpen(!isProfileOpen);
+                  setMessageOpen(false);
+                }}
               >
-                <Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right bg-white dark:bg-gray-800 shadow-lg rounded-md ring-1 ring-black ring-opacity-5 focus:outline-none">
-                  {DropdownProfile.map((item, index) => (
-                    <Menu.Item key={index}>
-                      {({ active }) => (
-                        <Link
-                          to={item.path}
-                          className={classNames(
-                            active ? "bg-gray-100" : "",
-                            "block px-4 py-2 text-sm text-gray-700"
-                          )}
-                        >
-                          {item.text}
-                        </Link>
-                      )}
-                    </Menu.Item>
-                  ))}
-                </Menu.Items>
-              </Transition>
-            </Menu>
-          </div>
-          <div className="">
-            {/* Theme Toggle */}
-            <ThemeButton />
+                <BiBell className="h-6 w-6" />
+              </button>
+              {isProfileOpen && (
+                <div
+                  ref={profileDropdownRef}
+                  className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  role="menu"
+                  aria-orientation="vertical"
+                  aria-labelledby="menu-button"
+                >
+                  <div className="py-1" role="none">
+                    {DropdownProfile.map((item, index) => (
+                      <a
+                        key={index}
+                        href={item.path}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        {item.text}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </nav>
-    </>
+      </div>
+    </nav>
   );
 };
+
 export default DashboardNavBar;
