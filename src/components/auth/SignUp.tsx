@@ -62,7 +62,7 @@ const SignUp = () => {
 
       if (response.status === 201) {
         // Redirect user to dashboard upon successful signup
-        navigate("/client_dashboard");
+        navigate("/users/sign_in");
         console.log("User successfully created!");
       } else {
         // Handle other status codes or errors

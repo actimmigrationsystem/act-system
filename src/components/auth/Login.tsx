@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { useUser } from "../auth/UserContext"
 import { useNavigate } from "react-router-dom";
 import { loginFields } from "./authFormFields";
 import FormAction from "./FormAction";
@@ -29,7 +30,7 @@ const Login = () => {
     const { id, value } = e.target;
     setLoginState((prevState) => ({ ...prevState, [id]: value }));
   };
-
+const { setEmail } = useUser();
   const signinUser = async () => {
     try {
       setLoginState((prevState) => ({ ...prevState, loading: true }));
@@ -51,7 +52,8 @@ const Login = () => {
       );
 
       if (response.status === 200) {
-        const { role } = response.data.user;
+        const { email,role } = response.data.user;
+         setEmail(email);
 
         if (role === "client") {
           navigate("/client_dashboard");

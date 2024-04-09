@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
+import { UserProvider } from "./components/auth/UserContext"
 import NavBar from "./components/NavBar";
 import ExternalNavbar from "./components/ExternalNavbar";
 import SocialNav from "./components/SocialNav";
@@ -42,48 +43,51 @@ function App() {
   return (
     <div className="flex flex-col min-h-screen">
       <AuthProvider>
-        <Routes>
-          {/* Auth routes */}
-          <Route
-            path="/users/sign_in"
-            element={
-              <>
-                <ExternalSocialNav />
-                <LoginPage />
-                <CustomFooter />
-              </>
-            }
-          />
-          <Route
-            path="/registrations"
-            element={
-              <>
-                <ExternalSocialNav />
-                <SignupPage />
-                <CustomFooter />
-              </>
-            }
-          />
-          <Route
-            path="/reset"
-            element={
-              <>
-                <ExternalSocialNav />
-                <ResetPasswordPage />
-                <CustomFooter />
-              </>
-            }
-          />
-          <Route path="/client_dashboard" element={<DashboardView />} />
-          <Route path="/documentation" element={<DocumentView />} />
-          <Route path="/forms" element={<FormsView />} />
-          <Route path="/messages" element={<MessagesView />} />
-          <Route path="/settings" element={<SettingsView />} />
-          <Route path="/payments" element={<PaymentsView />} />
-          <Route path="/submissions" element={<SubmissionsView />} />
-          <Route path="/appointments" element={<AppointmentsViews />} />
-          <Route path="/profile" element={<ProfileView />} />
-        </Routes>
+        <UserProvider>
+          <Routes>
+            {/* Auth routes */}
+            <Route
+              path="/users/sign_in"
+              element={
+                <>
+                  <ExternalSocialNav />
+                  <LoginPage />
+                  <CustomFooter />
+                </>
+              }
+            />
+            <Route
+              path="/registrations"
+              element={
+                <>
+                  <ExternalSocialNav />
+                  <SignupPage />
+                  <CustomFooter />
+                </>
+              }
+            />
+            <Route
+              path="/reset"
+              element={
+                <>
+                  <ExternalSocialNav />
+                  <ResetPasswordPage />
+                  <CustomFooter />
+                </>
+              }
+            />
+
+            <Route path="/client_dashboard" element={<DashboardView />} />
+            <Route path="/documentation" element={<DocumentView />} />
+            <Route path="/forms" element={<FormsView />} />
+            <Route path="/messages" element={<MessagesView />} />
+            <Route path="/settings" element={<SettingsView />} />
+            <Route path="/payments" element={<PaymentsView />} />
+            <Route path="/submissions" element={<SubmissionsView />} />
+            <Route path="/appointments" element={<AppointmentsViews />} />
+            <Route path="/profile" element={<ProfileView />} />
+          </Routes>
+        </UserProvider>
       </AuthProvider>
 
       <Routes>
