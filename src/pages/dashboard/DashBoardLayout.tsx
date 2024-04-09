@@ -15,7 +15,7 @@ const DashboardLayout = ({ children, pageTitle }: DashboardLayoutProps) => {
       <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
        <DashboardNavBar />
 
-        <main className="flex-1 mt-20 px-2 sm:px-6 lg:px-8 py-4">
+        <main className="flex-1 mt-5 px-2 sm:px-6 lg:px-8 py-4">
           <div className="max-w-full">
             <Breadcrumb pageName={pageTitle} />
           </div>
