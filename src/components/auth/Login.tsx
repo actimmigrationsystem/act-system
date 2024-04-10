@@ -54,6 +54,7 @@ const { setEmail } = useUser();
       if (response.status === 200) {
         const { email,role } = response.data.user;
          setEmail(email);
+         localStorage.setItem("email", email);
 
         if (role === "client") {
           navigate("/client_dashboard");

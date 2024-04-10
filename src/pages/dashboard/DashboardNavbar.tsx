@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useUser } from "../../components/auth/UserContext";
 import { BiSearch, BiBell, BiMessage } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 
@@ -65,6 +66,7 @@ const messageItems: MessageItem[] = [
   },
 ];
 const DashboardNavBar: React.FC = () => {
+  const { email } = useUser();
   const [isNotificationOpen, setNotificationOpen] = useState(false);
   const [isProfileOpen, setProfileOpen] = useState(false);
   const [isMessageOpen, setMessageOpen] = useState(false);
@@ -110,6 +112,12 @@ const DashboardNavBar: React.FC = () => {
       document.removeEventListener("keydown", keyHandler);
     };
   }, []);
+
+   const handleSignOut = () => {
+    // handle sign out
+     window.location.href = "/users/sign_in";
+
+   }
 
   return (
     <nav className="bg-gray-800 shadow">
@@ -232,7 +240,7 @@ const DashboardNavBar: React.FC = () => {
                   aria-labelledby="menu-button"
                 >
                   <div className="px-4 py-2 text-sm text-white bg-blue-500">
-                    myemail@email.com
+                    {email}
                   </div>
                   <hr />
                   <div className="py-1" role="none">
@@ -240,6 +248,9 @@ const DashboardNavBar: React.FC = () => {
                       <a
                         key={index}
                         href={item.path}
+                        onClick={
+                          item.text === "Sign out" ? handleSignOut : undefined
+                        }
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       >
                         {item.text}

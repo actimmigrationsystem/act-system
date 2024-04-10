@@ -33,7 +33,9 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
 
   const handleAlertActionClick = () => {
     setShowAlert(false);
-    navigate("/signup", { state: { prefillEmail: mergedFormValues.email } });
+    navigate("/registrations", {
+      state: { prefillEmail: mergedFormValues.email },
+    });
   };
 
   const formatDate = (date: string | Date | File | File[]) => {

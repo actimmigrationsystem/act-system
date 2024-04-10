@@ -1,21 +1,30 @@
-// UserContext.tsx
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, } from "react";
 
 interface UserContextProps {
   email: string;
-  setEmail: React.Dispatch<React.SetStateAction<string>>;
+  setEmail: (newEmail: string) => void;
 }
 
 const UserContext = createContext<UserContextProps | undefined>(undefined);
 
-export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [email, setEmail] = useState("");
+export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [email, setEmailState] = useState<string>(() => {
+    const storedEmail = localStorage.getItem("email");
+    return storedEmail ? storedEmail : "";
+  });
 
-    return (
-        <UserContext.Provider value={{ email, setEmail }}>
-            {children}
-        </UserContext.Provider>
-    );
+  const setEmail = (newEmail: string) => {
+    localStorage.setItem("email", newEmail);
+    setEmailState(newEmail);
+  };
+
+  return (
+    <UserContext.Provider value={{ email, setEmail }}>
+      {children}
+    </UserContext.Provider>
+  );
 };
 
 export const useUser = () => {

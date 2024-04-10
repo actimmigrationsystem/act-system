@@ -37,7 +37,7 @@ const AppointmentManager = ({ formValues }: AppointmentManagerProps) => {
 
   const handleAlertActionClick = () => {
     setShowAlert(false);
-    navigate("");
+    navigate("/users/sign_in");
   };
 
 
@@ -67,10 +67,10 @@ const AppointmentManager = ({ formValues }: AppointmentManagerProps) => {
     }
   };
 
-  const handleSubmit = async () => {
-    try {
-        console.log("Merged Form Values:", mergedFormValues);
-      const appointmentInput = {
+const handleSubmit = async () => {
+  try {
+    const appointmentInput = {
+      appointment: {
         name: mergedFormValues.name || "",
         surname: mergedFormValues.surname || "",
         phonenumber: mergedFormValues.phonenumber || "",
@@ -79,28 +79,34 @@ const AppointmentManager = ({ formValues }: AppointmentManagerProps) => {
         venue: mergedFormValues.venue || "",
         appointmentDate: formatDate(mergedFormValues.appointmentDate || ""),
         appointmentType: mergedFormValues.appointmentType || "",
-      };
-        console.log(
-          "Appointment Input in AppointmentManager:",
-          appointmentInput
-        );
-      const response = await axios.post(
-        "http://127.0.0.1:3000/appointments",
-        appointmentInput,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+        contact_info: {
+          name: mergedFormValues.name || "",
+          surname: mergedFormValues.surname || "",
+          phonenumber: mergedFormValues.phonenumber || "",
+          email: mergedFormValues.email || "",
+        },
+      },
+    };
 
-      console.log("Form Submitted:", response.data);
-      setShowAlert(true); // Show success alert on successful submit
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      console.log("Error response data:", (error as any).response.data);
-    }
-  };
+    const response = await axios.post(
+      "http://127.0.0.1:3000/appointments",
+      appointmentInput,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    console.log("Form Submitted:", response.data);
+    setShowAlert(true); // Show success alert on successful submit
+  } catch (error) {
+    console.error("Error submitting form:", error);
+    console.log("Error response data:", (error as any).response.data);
+  }
+};
+
+
 
   const serviceType = mergedFormValues["serviceType"];
 
@@ -114,7 +120,7 @@ const AppointmentManager = ({ formValues }: AppointmentManagerProps) => {
               <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
                 <MessageAlert
                   open={showAlert}
-                  message="Thank you for your submission. We might require more details before your appointment.Please proceed to SignIn/Signup to track your Appointment"
+                  message="Thank you for your submission. We might require more details before your appointment.Press Continue, to proceed to SignIn or Create an account to track your Appointment"
                   actionText="Continue"
                   onActionClick={handleAlertActionClick}
                 />
