@@ -3,6 +3,8 @@ import axios from "axios";
 import { useUser } from "../../components/auth/UserContext";
 import DashboardLayout from "./DashBoardLayout";
 
+const enquiryRoute = import.meta.env.VITE_ENQUIRY_ROUTE;
+
 interface Enquiry {
   id: number;
   name: string;
@@ -19,7 +21,7 @@ useEffect(() => {
     console.error("Email is not defined");
     return;
   }
-  const url = `/enquiries_by_email/${email}`;
+  const url = `${enquiryRoute}/${email}`;
   console.log("Making request to:", url);
   axios
     .get(url, {
