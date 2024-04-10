@@ -62,6 +62,8 @@ useEffect(() => {
         <h1 className="text-3xl font-bold text-gray-800 dark:text-white">
           Welcome to your Dashboard, {email}
         </h1>
+      </div>
+      <div className="flex items-center justify-center h-full">
         <div className="grid grid-cols-3 gap-4 mt-10">
           <div className="col-span-1"></div>
           <div className="col-span-2">
