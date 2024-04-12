@@ -56,12 +56,12 @@ const SidebarMenuItems = [
     path: "/settings",
     subMenu: [],
   },
-  {
-    text: "Payments",
-    icon: <MdPayments />,
-    path: "/payments",
-    subMenu: [],
-  },
+  // {
+  //   text: "Payments",
+  //   icon: <MdPayments />,
+  //   path: "/payments",
+  //   subMenu: [],
+  // },
   {
     text: "Submissions",
     icon: <SiProgress />,
