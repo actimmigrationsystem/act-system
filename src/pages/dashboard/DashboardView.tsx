@@ -191,7 +191,7 @@ useEffect(() => {
               </div>
             ))}
           </div>
-          <div className="col-span-1 max-w-md overflow-y-auto max-h-[400px]">
+          <div className="col-span-2 max-w-md overflow-y-auto max-h-[400px]">
             {enquiries.map((enquiry) => (
               <div
                 key={enquiry.id}
