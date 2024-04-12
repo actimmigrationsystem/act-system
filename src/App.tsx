@@ -28,7 +28,8 @@ import MessagesView from "./pages/dashboard/MessagesView";
 import SettingsView from "./pages/dashboard/SettingsView";
 import PaymentsView from "./pages/dashboard/PaymentsView";
 import SubmissionsView from "./pages/dashboard/SubmissionsView";
-import AppointmentsViews from "./pages/dashboard/AppointmentsViews";
+import AppointmentsView from "./pages/dashboard/AppointmentsView";
+import EnquiryView from "./pages/dashboard/EnquiryView";
 import ProfileView from "./pages/dashboard/ProfileView";
 import { AuthProvider } from "./components/auth/AuthProvider";
 
@@ -84,7 +85,8 @@ function App() {
             <Route path="/settings" element={<SettingsView />} />
             <Route path="/payments" element={<PaymentsView />} />
             <Route path="/submissions" element={<SubmissionsView />} />
-            <Route path="/appointments" element={<AppointmentsViews />} />
+            <Route path="/appointments" element={<AppointmentsView />} />
+            <Route path="/enquiries" element={<EnquiryView />} />
             <Route path="/profile" element={<ProfileView />} />
           </Routes>
         </UserProvider>

@@ -61,6 +61,12 @@ const SidebarMenuItems = [
     subMenu: [],
   },
   {
+    text: "Enquiries",
+    icon: <SiProgress />,
+    path: "/enquiries",
+    subMenu: [],
+  },
+  {
     text: "Sign out",
     icon: <GoSignOut />,
     path: "/users/sign_in",

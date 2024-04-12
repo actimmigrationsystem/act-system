@@ -61,8 +61,8 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
 
   const handleSubmit = async () => {
     try {
-      console.log("Merged Form Values:", mergedFormValues);
       const formData = new FormData();
+
       // Append document uploads to formData
       if (Array.isArray(mergedFormValues.documentUpload)) {
         mergedFormValues.documentUpload.forEach((file, index) => {
@@ -70,6 +70,7 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
         });
       }
 
+      // Create the enquiryInput object
       const enquiryInput = {
         name: mergedFormValues.name || "",
         surname: mergedFormValues.surname || "",
@@ -86,25 +87,24 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
         serviceType: mergedFormValues.serviceType || "",
         elaborate: mergedFormValues.elaborate || "",
         contact_info: {
+          // Create the contact_info object
           name: mergedFormValues.name || "",
           surname: mergedFormValues.surname || "",
           phonenumber: mergedFormValues.phonenumber || "",
           email: mergedFormValues.email || "",
         },
       };
+
       // Append enquiryInput object to formData
       Object.entries(enquiryInput).forEach(([key, value]) => {
-        // Exclude 'document_upload' key
-        if (key !== "document_upload") {
-          if (key === "contact_info") {
-            formData.append(`enquiry[${key}]`, JSON.stringify(value));
-          } else {
-            formData.append(`enquiry[${key}]`, String(value));
-          }
+        if (key === "contact_info") {
+          formData.append(`enquiry[${key}]`, JSON.stringify(value)); // Stringify contact_info
+        } else {
+          formData.append(`enquiry[${key}]`, String(value));
         }
       });
 
-      console.log("Enquiry Input in Manger:", enquiryInput);
+      // Make the POST request
       const response = await axios.post(
         "http://127.0.0.1:3000/enquiries",
         formData,
@@ -113,7 +113,8 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
             "Content-Type": "multipart/form-data",
           },
         }
-      ); // POST request to the API endpoint
+      );
+
       console.log("Form Submitted:", response.data);
       setShowAlert(true); // Show success alert on successful submit
     } catch (error) {
@@ -121,6 +122,7 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
       console.log("Error response data:", (error as any).response.data);
     }
   };
+
 
   const serviceType = mergedFormValues["serviceType"];
   return (
