@@ -87,7 +87,7 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
         serviceType: mergedFormValues.serviceType || "",
         elaborate: mergedFormValues.elaborate || "",
         contact_info: {
-          // Create the contact_info object
+          // contact_info object
           name: mergedFormValues.name || "",
           surname: mergedFormValues.surname || "",
           phonenumber: mergedFormValues.phonenumber || "",
