@@ -59,7 +59,7 @@ const AppointmentView = () => {
   }, [email]);
 
   return (
-    <DashboardLayout pageTitle="Appointments">
+    <DashboardLayout pageTitle="My Appointments">
       <div className="flex items-center justify-center h-full">
         <div className="grid grid-cols-3 gap-4 mt-10">
           {appointments.map((appointment) => (
