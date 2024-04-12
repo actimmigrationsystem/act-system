@@ -9,6 +9,8 @@ import { SiGoogleforms } from "react-icons/si";
 import { IoDocuments } from "react-icons/io5";
 import { SiProgress } from "react-icons/si";
 import { TiMessages } from "react-icons/ti";
+import { FaCalendarAlt } from "react-icons/fa";
+import { BsFillPatchQuestionFill } from "react-icons/bs";
 import DashboardLogo from "../../components/DashboardLogo";
 
 const SidebarMenuItems = [
@@ -16,6 +18,18 @@ const SidebarMenuItems = [
     text: "Dashboard",
     icon: <MdDashboard />,
     path: "/client_dashboard",
+    subMenu: [],
+  },
+  {
+    text: "Appointments",
+    icon: <FaCalendarAlt />,
+    path: "/appointments",
+    subMenu: [],
+  },
+  {
+    text: "Enquiries",
+    icon: <BsFillPatchQuestionFill />,
+    path: "/enquiries",
     subMenu: [],
   },
   {
@@ -54,18 +68,7 @@ const SidebarMenuItems = [
     path: "/submissions",
     subMenu: [],
   },
-  {
-    text: "Appointments",
-    icon: <SiProgress />,
-    path: "/appointments",
-    subMenu: [],
-  },
-  {
-    text: "Enquiries",
-    icon: <SiProgress />,
-    path: "/enquiries",
-    subMenu: [],
-  },
+
   {
     text: "Sign out",
     icon: <GoSignOut />,
