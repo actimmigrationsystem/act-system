@@ -20,12 +20,13 @@ const DocumentView = () => {
   const [documentError, setDocumentError] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (files && files.length > 0) {
-      setSelectedFile(files[0]);
-    }
-  };
+const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const files = event.target.files;
+  if (files && files.length > 0) {
+    setSelectedFile(files[0]);
+  }
+};
+
 
   const handleUpload = async () => {
     if (!selectedFile) {

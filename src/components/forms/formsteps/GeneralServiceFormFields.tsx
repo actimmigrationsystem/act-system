@@ -22,6 +22,7 @@ const GeneralServiceFormFields: React.FC<GeneralServiceFormFieldsProps> = ({
   onFileChange,
 }) => {
   const serviceOptions = [
+    "Select Service",
     "Asylum seeker appeal/review",
     "Asylum seeker visa extension",
     "Critical skills visa application",

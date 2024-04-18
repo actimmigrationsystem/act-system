@@ -25,8 +25,9 @@ const PersonalInfoFields: React.FC<PersonalInfoFieldsProps> = ({
   previousStep,
   nextStep,
 }) => {
-  const genderOptions = ["Female", "Male", "Other"];
+  const genderOptions = ["Select Gender", ,"Female", "Male", "Other"];
   const maritalStatusOptions = [
+    "Select Marital Status",
     "Single",
     "Married",
     "Divorced",
@@ -43,16 +44,24 @@ const PersonalInfoFields: React.FC<PersonalInfoFieldsProps> = ({
   });
 
 useEffect(() => {
-  const allFieldsFilled = Object.values(filledFields).every(Boolean);
 }, [filledFields]);
 
+
+  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target;
+  //   handleChange(e);
+  //   setFilledFields({
+  //     ...filledFields,
+  //     [name]: !!value.trim(),
+  //   });
+  // };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     handleChange(e);
     setFilledFields({
       ...filledFields,
-      [name]: !!value.trim(),
+      [name]: typeof value === "string" ? !!value.trim() : true,
     });
   };
 

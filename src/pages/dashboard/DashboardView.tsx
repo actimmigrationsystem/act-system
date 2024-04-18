@@ -37,6 +37,11 @@ interface Appointment {
   appointmentType: string;
 }
 
+interface DashboardViewProps {
+  children?: React.ReactNode;
+}
+
+
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);
   const month = date.toLocaleString("en-US", { month: "short" });
@@ -65,7 +70,7 @@ useEffect(() => {
       },
     })
     .then((response) => {
-      console.log("Full response:", response);
+      console.log("Enquiry response data:", response);
 
       if (Array.isArray(response.data)) {
         setEnquiries(response.data);
@@ -75,7 +80,7 @@ useEffect(() => {
       }
     })
     .catch((error) => {
-      console.error("There was an error!", error);
+      console.error("There was an error fetching data!", error);
     });
 }, [email]);
 
@@ -255,7 +260,7 @@ useEffect(() => {
                     </div>
                     <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                       <dt className="text-sm font-medium text-gray-500">
-                        Date Of Birth
+                        Marital Status
                       </dt>
                       <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                         {enquiry.maritalStatus}
@@ -272,7 +277,7 @@ useEffect(() => {
 
                     <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                       <dt className="text-sm font-medium text-gray-500">
-                        Residential Address
+                        Immigration Status
                       </dt>
                       <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                         {enquiry.immigrationStatus}
@@ -280,7 +285,7 @@ useEffect(() => {
                     </div>
                     <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                       <dt className="text-sm font-medium text-gray-500">
-                        Residential Address
+                        Entry Date
                       </dt>
                       <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                         {enquiry.entryDate}
@@ -288,7 +293,7 @@ useEffect(() => {
                     </div>
                     <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                       <dt className="text-sm font-medium text-gray-500">
-                        Residential Address
+                        Passport Number
                       </dt>
                       <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                         {enquiry.passportNumber}
@@ -296,7 +301,7 @@ useEffect(() => {
                     </div>
                     <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                       <dt className="text-sm font-medium text-gray-500">
-                        Residential Address
+                        Reference Number
                       </dt>
                       <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                         {enquiry.referenceNumber}

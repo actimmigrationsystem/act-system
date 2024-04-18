@@ -19,7 +19,7 @@ interface Enquiry {
   entryDate: string;
   passportNumber: string;
   referenceNumber: string;
-  documentUpload: string;
+  documentUpload: string[];
   serviceType: string;
   elaborate: string;
 }
@@ -179,7 +179,21 @@ useEffect(() => {
                         Documents
                       </dt>
                       <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        {enquiry.documentUpload}
+                        {enquiry.documentUpload &&
+                          enquiry.documentUpload.map(
+                            (documentUrl: string, index: number) => (
+                              <div key={index}>
+                                <a
+                                  href={documentUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-blue-500 hover:text-blue-700"
+                                >
+                                  Document {index + 1}
+                                </a>
+                              </div>
+                            )
+                          )}
                       </dd>
                     </div>
 

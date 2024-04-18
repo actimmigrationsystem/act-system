@@ -12,7 +12,7 @@ const EnquiryForm = () => {
   const [formValues, setFormValues] = useState({
     name: "",
     surname: "",
-    _subject: "Enquiry",
+    _subject: "PreConsulation",
     phonenumber: "",
     email: "",
     gender: "",
@@ -42,7 +42,6 @@ const EnquiryForm = () => {
   };
 
   const handleSubmit = () => {
-    // Navigate to the respective page
     // console.log("Form Values sent to form manager:", formValues);
     navigate("/enquirymanager", { state: { formValues } });
     setFormSubmitted(true);
@@ -65,12 +64,15 @@ const EnquiryForm = () => {
     }
   };
 
-  const handleMaritalStatusChange = useCallback((value: string | undefined) => {
-    // console.log("Service Change Value:", value);
-    if (value) {
-      setFormValues((prevState) => ({ ...prevState, maritalStatus: value }));
-    }
-  }, []);
+    const handleMaritalStatusChange = (value: string | undefined) => {
+      // console.log("handleImmigrationStatusChange :", value);
+      if (value) {
+        setFormValues((prevState) => ({
+          ...prevState,
+          maritalStatus: value,
+        }));
+      }
+    };
 
   const handleChangeTextarea = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;

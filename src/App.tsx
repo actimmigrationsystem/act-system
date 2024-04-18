@@ -93,8 +93,6 @@ function App() {
       </AuthProvider>
 
       <Routes>
-        {/* Dashboard routes */}
-
         {/* External routes */}
         <Route
           path="/privacy-policy"

@@ -24,6 +24,7 @@ const ImmigrationStatusFields: React.FC<ImmigrationStatusFieldsProps> = ({
   nextStep,
 }) => {
   const immigrationStatusOptions = [
+    "Immigration Status",
     "Recognized Refugee",
     "Asylum Seeker",
     "Permanent Resident",
@@ -52,7 +53,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   handleChange(e);
   setFilledFields({
     ...filledFields,
-    [name]: !!value.trim(), // Check if value is not empty
+    [name]: !!value.trim(),
   });
 };
 
