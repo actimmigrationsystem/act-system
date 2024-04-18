@@ -9,6 +9,8 @@ import SectionContainer from "../components/SectionContainer";
 import MessageAlert from "../components/alerts/MessageAlerts";
 import { MdCheckCircle } from "react-icons/md";
 
+const createEnquiryRoute = import.meta.env.VITE_CREATE_ENQUIRY_ROUTE;
+
 interface FormValuesInterface {
   [key: string]: string | undefined | Date | File | File[];
 }
@@ -105,8 +107,9 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
       });
 
       // Make the POST request
+      const url = `${createEnquiryRoute}`;
       const response = await axios.post(
-        "http://127.0.0.1:3000/enquiries",
+        url,
         formData,
         {
           headers: {

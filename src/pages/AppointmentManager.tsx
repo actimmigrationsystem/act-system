@@ -9,7 +9,7 @@ import SectionContainer from "../components/SectionContainer";
 import MessageAlert from "../components/alerts/MessageAlerts";
 import { MdCheckCircle } from "react-icons/md";
 
-
+const createAppointmentRoute = import.meta.env.VITE_CREATE_APPOINTMENT_ROUTE;
 interface FormValuesInterface {
   [key: string]: string | undefined | Date;
 }
@@ -87,9 +87,9 @@ const handleSubmit = async () => {
         },
       },
     };
-
+    const url = `${createAppointmentRoute}`;
     const response = await axios.post(
-      "http://127.0.0.1:3000/appointments",
+      url,
       appointmentInput,
       {
         headers: {
