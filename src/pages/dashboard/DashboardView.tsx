@@ -37,11 +37,6 @@ interface Appointment {
   appointmentType: string;
 }
 
-interface DashboardViewProps {
-  children?: React.ReactNode;
-}
-
-
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);
   const month = date.toLocaleString("en-US", { month: "short" });
