@@ -10,6 +10,7 @@ import MessageAlert from "../components/alerts/MessageAlerts";
 import { MdCheckCircle } from "react-icons/md";
 
 const createEnquiryRoute = import.meta.env.VITE_CREATE_ENQUIRY_ROUTE;
+const uploadDocumentRoute = import.meta.env.VITE_DOCUMENT_UPLOAD;
 
 interface FormValuesInterface {
   [key: string]: string | undefined | Date | File | File[];
@@ -100,7 +101,7 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
       // Append enquiryInput object to formData
       Object.entries(enquiryInput).forEach(([key, value]) => {
         if (key === "contact_info") {
-          formData.append(`enquiry[${key}]`, JSON.stringify(value)); // Stringify contact_info
+          formData.append(`enquiry[${key}]`, JSON.stringify(value)); 
         } else {
           formData.append(`enquiry[${key}]`, String(value));
         }
@@ -125,6 +126,13 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
       console.log("Error response data:", (error as any).response.data);
     }
   };
+
+
+
+
+
+
+
 
 
   const serviceType = mergedFormValues["serviceType"];
