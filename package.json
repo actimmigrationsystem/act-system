@@ -15,6 +15,7 @@
     "@headlessui/tailwindcss": "^0.2.0",
     "@heroicons/react": "^2.1.1",
     "@material-tailwind/react": "^2.1.9",
+    "@reduxjs/toolkit": "^2.2.5",
     "@types/react-scroll": "^1.8.10",
     "activestorage": "^5.2.8-1",
     "autoprefixer": "^10.4.17",
