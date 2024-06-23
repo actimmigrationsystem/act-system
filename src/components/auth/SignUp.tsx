@@ -91,7 +91,7 @@ const SignUp = () => {
       className="mt-8 space-y-6 max-w-md mx-auto w-1/2"
       onSubmit={handleSubmit}
     >
-      <div className="-space-y-px">
+      <div className="space-y-4">
         {fields.map((field) => {
           return (
             <Input
