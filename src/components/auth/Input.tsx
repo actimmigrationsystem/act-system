@@ -1,20 +1,20 @@
-const fixedInputClass =
-  "rounded-md appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm";
+import React, { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-  interface InputProps {
-    handleChange: any;
-    value: string;
-    labelText: string;
-    labelFor: string;
-    id: string;
-    name: string;
-    type: string;
-    isRequired?: boolean;
-    placeholder: string;
-    customClass: string;
-  }
+interface InputProps {
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string;
+  labelText: string;
+  labelFor: string;
+  id: string;
+  name: string;
+  type: string;
+  isRequired: boolean;
+  placeholder: string;
+  customClass: string;
+}
 
-const Input = ({
+const Input: React.FC<InputProps> = ({
   handleChange,
   value,
   labelText,
@@ -22,27 +22,41 @@ const Input = ({
   id,
   name,
   type,
-  isRequired = false,
+  isRequired,
   placeholder,
   customClass,
-}: InputProps ) => {
+}) => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
-    <div className="my-5">
+    <div className="relative mb-4">
       <label htmlFor={labelFor} className="sr-only">
         {labelText}
       </label>
       <input
-        onChange={handleChange}
-        value={value}
         id={id}
         name={name}
-        type={type}
+        type={showPassword && type === "password" ? "text" : type}
         required={isRequired}
-        className={fixedInputClass + customClass}
         placeholder={placeholder}
+        className={`appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${customClass}`}
+        value={value}
+        onChange={handleChange}
       />
+      {type === "password" && (
+        <div
+          className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 cursor-pointer"
+          onClick={togglePasswordVisibility}
+        >
+          {showPassword ? <FaEyeSlash /> : <FaEye />}
+        </div>
+      )}
     </div>
   );
 };
-export default Input;
 
+export default Input;

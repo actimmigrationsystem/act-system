@@ -101,7 +101,7 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
       // Append enquiryInput object to formData
       Object.entries(enquiryInput).forEach(([key, value]) => {
         if (key === "contact_info") {
-          formData.append(`enquiry[${key}]`, JSON.stringify(value)); 
+          formData.append(`enquiry[${key}]`, JSON.stringify(value));
         } else {
           formData.append(`enquiry[${key}]`, String(value));
         }
@@ -139,32 +139,38 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
   return (
     <div className="mt-8">
       <SectionContainer>
-        <SectionTitle title={String(serviceType) + " PreConsultation"} />
+        <SectionTitle title={`${String(serviceType)} Pre-Consultation`} />
         <ContentContainer>
-          <Card placeholder="" className="mb-8">
-            <div className="card-body">
+          <Card placeholder="" className="mb-8 shadow-lg rounded-lg">
+            <div className="card-body p-6">
               {showAlert && (
                 <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
                   <MessageAlert
                     open={true}
-                    message="Thank you for your Submission. Please proceed to signup to track your Pre-Consultation "
+                    message="Thank you for your Submission. Please proceed to signup to track your Pre-Consultation."
                     actionText="Continue"
                     onActionClick={handleAlertActionClick}
                   />
                 </div>
               )}
-              <div className="grid grid-cols-2 gap-1 items-center justify-center mb-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                 {Object.entries(mergedFormValues).map(([key, value]) => (
-                  <div key={key} className="mb-4 flex justify-center">
-                    <Typography placeholder="" className="font-bold mr-2">
+                  <div
+                    key={key}
+                    className="bg-gray-100 p-4 rounded-lg shadow-md"
+                  >
+                    <Typography
+                      placeholder=""
+                      className="font-bold text-gray-700 mb-2"
+                    >
                       {key}:
                     </Typography>
-                    <div className="flex items-center">
+                    <div className="flex flex-col space-y-2">
                       {Array.isArray(value) && value.length > 0 ? (
-                        <ul>
+                        <ul className="list-disc list-inside">
                           {value.map((file: File, index: number) => (
-                            <li key={index} className="mr-2">
-                              <FaFilePdf className="mr-2" />
+                            <li key={index} className="flex items-center">
+                              <FaFilePdf className="text-red-500 mr-2" />
                               <a
                                 href={URL.createObjectURL(file)}
                                 target="_blank"
@@ -181,25 +187,30 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
                           href={URL.createObjectURL(value)}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue-500 hover:text-blue-700"
+                          className="flex items-center text-blue-500 hover:text-blue-700"
                         >
-                          <FaFilePdf className="mr-2" />
+                          <FaFilePdf className="text-red-500 mr-2" />
                           {value.name}
                         </a>
                       ) : (
-                        <>
+                        <div className="flex items-center">
                           <MdCheckCircle className="text-green-500 mr-2" />
                           <Typography placeholder="">
                             {value?.toString()}
                           </Typography>
-                        </>
+                        </div>
                       )}
                     </div>
                   </div>
                 ))}
               </div>
-              <div className="mt-4 mb-4 flex items-center justify-center">
-                <Button placeholder="" color="green" onClick={handleSubmit}>
+              <div className="flex justify-center">
+                <Button
+                  placeholder=""
+                  color="green"
+                  onClick={handleSubmit}
+                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-6 rounded shadow-md"
+                >
                   Submit
                 </Button>
               </div>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useUser } from "../../components/auth/UserContext";
 import DashboardLayout from "./DashBoardLayout";
+import { FaCalendarAlt, FaEnvelope, FaFileAlt, FaEdit, FaTrash,FaComment,FaFilePdf} from "react-icons/fa";
 
 const enquiryRoute = import.meta.env.VITE_ENQUIRY_ROUTE;
 const appointmentRoute = import.meta.env.VITE_APPOINTMENT_ROUTE;
@@ -33,13 +34,24 @@ interface Appointment {
   email: string;
   serviceType: string;
   venue: string;
-  appointmentDate: string;
+  appointmentDate: Date;
   appointmentType: string;
 }
 
 const getUserName = (email: string) => {
   return email ? email.split("@")[0] : "User";
 };
+const submissions = [
+  {
+    id: 1,
+    name: "John",
+    surname: "Doe",
+    email: "john.doe@example.com",
+    serviceType: "Pre-Consultation",
+    documents: "Passport, Visa",
+    date: "2024-07-03",
+  },
+];
 
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);
@@ -54,19 +66,18 @@ const DashboardView = () => {
   console.log("User email:", email);
   const [enquiries, setEnquiries] = useState<Enquiry[]>([]);
   const [appointments, setAppointments] = useState<Appointment[]>([]);
-    const [selectedAppointment, setSelectedAppointment] = useState(null);
-    const formatDate = (date: Date) => {
+  const [selectedAppointment, setSelectedAppointment] = useState(null);
+  const formatDate = (date: Date) => {
+    return new Date(date).toLocaleDateString();
+  };
 
-      return new Date(date).toLocaleDateString();
-    };
+  const handleAppointmentClick = (appointment: any) => {
+    setSelectedAppointment(appointment);
+  };
 
-    const handleAppointmentClick = (appointment) => {
-      setSelectedAppointment(appointment);
-    };
-
-    const closeModal = () => {
-      setSelectedAppointment(null);
-    };
+  const closeModal = () => {
+    setSelectedAppointment(null);
+  };
 
   useEffect(() => {
     if (!email) {
@@ -124,16 +135,54 @@ const DashboardView = () => {
       });
   }, [email]);
 
-
   return (
     <DashboardLayout pageTitle="Dashboard">
       <div className="flex flex-col items-center justify-center min-h-screen py-8 bg-gray-100 dark:bg-gray-800">
-        <h1 className="text-3xl font-bold text-gray-800 dark:text-white">
+        <h5 className="text-xl font-bold text-gray-800 dark:text-white">
           Welcome to your Dashboard, {getUserName(email)}
-        </h1>
+        </h5>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 w-full max-w-6xl px-4">
-          <div className="col-span-1 bg-white dark:bg-gray-900 shadow-md rounded-lg overflow-hidden">
+        {/* Analytics Section */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 w-full max-w-6xl px-4">
+          <div className="bg-gray-100 dark:bg-gray-900 shadow-md rounded-lg overflow-hidden hover:shadow-xl transition duration-300 ease-in-out cursor-pointer">
+            <div className="flex items-center justify-center bg-blue-500 text-white rounded-t-lg h-24">
+              <FaCalendarAlt className="text-5xl" />
+            </div>
+            <div className="p-4 text-center">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                Appointments
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300">0</p>
+            </div>
+          </div>
+          <div className="bg-gray-100 dark:bg-gray-900 shadow-md rounded-lg overflow-hidden hover:shadow-xl transition duration-300 ease-in-out cursor-pointer">
+            <div className="flex items-center justify-center bg-green-500 text-white rounded-t-lg h-24">
+              <FaEnvelope className="text-5xl" />
+            </div>
+            <div className="p-4 text-center">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                Enquiries
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300">3</p>
+            </div>
+          </div>
+          <div className="bg-gray-100 dark:bg-gray-900 shadow-md rounded-lg overflow-hidden hover:shadow-xl transition duration-300 ease-in-out cursor-pointer">
+            <div className="flex items-center justify-center bg-red-500 text-white rounded-t-lg h-24">
+              <FaFileAlt className="text-5xl" />
+            </div>
+            <div className="p-4 text-center">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                Submissions
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300">3</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Appointments and Enquiries Sections */}
+        <div className="mt-10 w-full max-w-6xl px-4">
+          {/* Appointments Section */}
+          <div className="bg-white dark:bg-gray-900 shadow-md rounded-lg overflow-hidden mb-8">
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white px-6 py-4">
               Appointments
             </h2>
@@ -178,7 +227,8 @@ const DashboardView = () => {
             </div>
           </div>
 
-          <div className="col-span-1 md:col-span-2 bg-white dark:bg-gray-900 shadow-md rounded-lg overflow-hidden">
+          {/* Enquiries Section */}
+          <div className="bg-white dark:bg-gray-900 shadow-md rounded-lg overflow-hidden">
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white px-6 py-4">
               Enquiries
             </h2>
@@ -247,10 +297,97 @@ const DashboardView = () => {
               ))}
             </div>
           </div>
+
+          {/* Submissions Table */}
+          <div className="bg-white dark:bg-gray-900 shadow-md rounded-lg overflow-hidden mt-8">
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white px-6 py-4">
+              Submissions
+            </h2>
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                <thead className="bg-gray-50 dark:bg-gray-800">
+                  <tr>
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Name
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Email
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Service Type
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Date
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Actions
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700">
+                  {submissions.map((submission) => (
+                    <tr
+                      key={submission.id}
+                      className="hover:bg-gray-50 dark:hover:bg-gray-800"
+                    >
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
+                        {submission.name} {submission.surname}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                        {submission.email}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                        {submission.serviceType}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                        {formatDate(new Date(submission.date))}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                        <div className="flex items-center space-x-4">
+                          {/* Edit Icon */}
+                          <span className="cursor-pointer">
+                            <FaEdit className="text-blue-500 hover:text-blue-700" />
+                          </span>
+                          {/* Delete Icon */}
+                          <span className="cursor-pointer">
+                            <FaTrash className="text-red-500 hover:text-red-700" />
+                          </span>
+                          {/* Comments Icon */}
+                          <span className="cursor-pointer">
+                            <FaComment className="text-green-500 hover:text-green-700" />
+                          </span>
+                          {/* Documents Icon (assuming PDF icon) */}
+                          <span className="cursor-pointer">
+                            <FaFilePdf className="text-purple-500 hover:text-purple-700" />
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </DashboardLayout>
   );
 };
+
 
 export default DashboardView;

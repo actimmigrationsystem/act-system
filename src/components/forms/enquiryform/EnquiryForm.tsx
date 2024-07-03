@@ -43,7 +43,7 @@ const EnquiryForm = () => {
 
   const handleSubmit = () => {
     // console.log("Form Values sent to form manager:", formValues);
-    navigate("/enquirymanager", { state: { formValues } });
+    navigate("/preconsultation", { state: { formValues } });
     setFormSubmitted(true);
   };
 

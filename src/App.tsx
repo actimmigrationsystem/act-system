@@ -117,7 +117,7 @@ function App() {
           }
         />
         <Route
-          path="/enquirymanager"
+          path="/preconsultation"
           element={
             <>
               <ExternalSocialNav />

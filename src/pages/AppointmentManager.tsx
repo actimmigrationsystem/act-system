@@ -113,30 +113,38 @@ const handleSubmit = async () => {
   return (
     <div className="mt-8">
       <SectionContainer>
-        <SectionTitle title={String(serviceType) + " Appointment"} />
+        <SectionTitle title={`${String(serviceType)} Appointment`} />
         <ContentContainer>
-          <Card placeholder="" className="mb-8">
-            <div className="card-body">
-              <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
-                <MessageAlert
-                  open={showAlert}
-                  message="Thank you for your submission. We might require more details before your appointment.Press Continue, to proceed to SignIn or Create an account to track your Appointment"
-                  actionText="Continue"
-                  onActionClick={handleAlertActionClick}
-                />
-              </div>
-              <div className="grid grid-cols-2 gap-1 items-center justify-center mb-4">
+          <Card placeholder="" className="mb-8 shadow-lg rounded-lg">
+            <div className="card-body p-6">
+              {showAlert && (
+                <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
+                  <MessageAlert
+                    open={true}
+                    message="Thank you for your submission. We might require more details before your appointment. Press Continue to proceed to Sign In or Create an account to track your appointment."
+                    actionText="Continue"
+                    onActionClick={handleAlertActionClick}
+                  />
+                </div>
+              )}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                 {Object.entries(mergedFormValues).map(([key, value]) => (
-                  <div key={key} className="mb-4 flex justify-center">
-                    <Typography placeholder="" className="font-bold mr-2">
+                  <div
+                    key={key}
+                    className="bg-gray-100 p-4 rounded-lg shadow-md"
+                  >
+                    <Typography
+                      placeholder=""
+                      className="font-bold text-gray-700 mb-2"
+                    >
                       {key}:
                     </Typography>
-                    <div className="flex items-center">
+                    <div className="flex flex-col space-y-2">
                       {Array.isArray(value) && value.length > 0 ? (
-                        <ul>
+                        <ul className="list-disc list-inside">
                           {value.map((file: File, index: number) => (
-                            <li key={index} className="mr-2">
-                              <FaFilePdf className="mr-2" />
+                            <li key={index} className="flex items-center">
+                              <FaFilePdf className="text-red-500 mr-2" />
                               <a
                                 href={URL.createObjectURL(file)}
                                 target="_blank"
@@ -153,13 +161,13 @@ const handleSubmit = async () => {
                           href={URL.createObjectURL(value)}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue-500 hover:text-blue-700"
+                          className="flex items-center text-blue-500 hover:text-blue-700"
                         >
-                          <FaFilePdf className="mr-2" />
+                          <FaFilePdf className="text-red-500 mr-2" />
                           {value.name}
                         </a>
                       ) : (
-                        <>
+                        <div className="flex items-center">
                           <MdCheckCircle
                             className={
                               confirmedItems[key]
@@ -171,44 +179,41 @@ const handleSubmit = async () => {
                           <Typography placeholder="">
                             {value?.toString()}
                           </Typography>
-                        </>
+                        </div>
                       )}
                     </div>
                   </div>
                 ))}
               </div>
-              <div className="mt-4 mb-6 flex items-center justify-center">
-                <span className="mr-4">
-                  Please Verify and confirm the details you filled in above or
-                  return to the home page to refill
+              <div className="flex flex-col items-center justify-center mb-6 space-y-4">
+                <span className="text-center">
+                  Please verify and confirm the details you filled in above or
+                  return to the home page to refill.
                 </span>
                 <Button
                   placeholder=""
                   onClick={handleConfirmAllItems}
-                  className="mr-2"
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-md"
                 >
                   Confirm
                 </Button>
               </div>
             </div>
           </Card>
-          <div className="text-center">
-            <Typography placeholder="" color="gray">
-              Since you selected {String(serviceType)}, You will be required to
+          <div className="text-center mb-6">
+            <Typography placeholder="" className="text-gray-700">
+              Since you selected {String(serviceType)}, you will be required to
               fill in additional forms before your appointment.
             </Typography>
           </div>
-
-          <div className="mt-4 mb-4 flex items-center justify-center">
-            <span className="mr-4">Submit appointment Booking</span>
-            {/* <Button
+          <div className="flex items-center justify-center space-x-4">
+            <span className="text-gray-700">Submit Appointment Booking</span>
+            <Button
               placeholder=""
-              onClick={handleConfirmAllItems}
-              className="mr-2"
+              color="green"
+              onClick={handleSubmit}
+              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow-md"
             >
-              Confirm
-            </Button> */}
-            <Button placeholder="" color="green" onClick={handleSubmit}>
               Book Appointment
             </Button>
           </div>
