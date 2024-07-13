@@ -32,6 +32,7 @@ import AppointmentsView from "./pages/dashboard/AppointmentsView";
 import EnquiryView from "./pages/dashboard/EnquiryView";
 import ProfileView from "./pages/dashboard/ProfileView";
 import { AuthProvider } from "./components/auth/AuthProvider";
+import React from "react";
 
 
 function App() {

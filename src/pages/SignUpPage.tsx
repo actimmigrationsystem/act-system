@@ -1,3 +1,4 @@
+import React from "react";
 import Header from "../components/auth/AuthHeader";
 import Signup from "../components/auth/SignUp";
 

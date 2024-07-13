@@ -8,6 +8,7 @@ import { RiMailSendLine } from "react-icons/ri";
 import ContactInfoFields from "../formsteps/ContactInfoFields";
 import AppointmentServiceFormFields from "../formsteps/AppointmentServiceFormFields";
 import { FaArrowLeft } from "react-icons/fa";
+import React from "react";
 
 const AppointmentForm = () => {
   const [formValues, setFormValues] = useState({

@@ -8,6 +8,7 @@ import ContentContainer from "../components/ContentContainer";
 import SectionContainer from "../components/SectionContainer";
 import MessageAlert from "../components/alerts/MessageAlerts";
 import { MdCheckCircle } from "react-icons/md";
+import React from "react";
 
 const createAppointmentRoute = import.meta.env.VITE_CREATE_APPOINTMENT_ROUTE;
 interface FormValuesInterface {
