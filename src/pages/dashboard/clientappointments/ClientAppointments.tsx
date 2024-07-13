@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useUser } from "../../../components/auth/UserContext";
 import axios from "axios";
+import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 // import { useUser } from "../../components/auth/UserContext";
 import { FaCalendarAlt, FaEnvelope, FaFileAlt } from "react-icons/fa";
 import React from "react";
@@ -27,7 +28,6 @@ interface Enquiry {
   serviceType: string;
   elaborate: string;
 }
-
 interface Appointment {
   id: number;
   name: string;
@@ -36,7 +36,7 @@ interface Appointment {
   email: string;
   serviceType: string;
   venue: string;
-  appointmentDate: Date;
+  appointmentDate: string;
   appointmentType: string;
 }
 
@@ -70,10 +70,7 @@ const ClientAppointments = () => {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [selectedAppointment, setSelectedAppointment] =
     useState<Appointment | null>(null);
-
-  const formatDate = (date: Date) => {
-    return new Date(date).toLocaleDateString();
-  };
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if (!email) {
@@ -116,56 +113,43 @@ const ClientAppointments = () => {
         console.error("There was an error!", error);
       });
   }, [email]);
-  const totalSubmissions = enquiries.length + appointments.length;
-  return (
-    // <div className="mt-10 w-full max-w-6xl px-4">
-    //   {/* Appointments Section */}
-    //   <div className="bg-white dark:bg-gray-900 shadow-md rounded-lg overflow-hidden mb-8">
-    //     <h2 className="text-xl font-semibold text-gray-900 dark:text-white px-6 py-4">
-    //       Appointments
-    //     </h2>
-    //     <div className="divide-y divide-gray-200 dark:divide-gray-700 max-h-96 overflow-y-auto">
-    //       {appointments.map((appointment) => (
-    //         <div key={appointment.id} className="p-6">
-    //           <h3 className="text-lg font-medium text-gray-900 dark:text-white">
-    //             Appointment {appointment.id}
-    //           </h3>
-    //           <div className="mt-2 text-sm text-gray-600 dark:text-gray-300">
-    //             <p>
-    //               <span className="font-semibold">Date:</span>{" "}
-    //               {formatDate(appointment.appointmentDate)}
-    //             </p>
-    //             <p>
-    //               <span className="font-semibold">Venue:</span>{" "}
-    //               {appointment.venue}
-    //             </p>
-    //             <p>
-    //               <span className="font-semibold">Name:</span>{" "}
-    //               {appointment.name} {appointment.surname}
-    //             </p>
-    //             <p>
-    //               <span className="font-semibold">Service Type:</span>{" "}
-    //               {appointment.serviceType}
-    //             </p>
-    //             <p>
-    //               <span className="font-semibold">Phone:</span>{" "}
-    //               {appointment.phonenumber}
-    //             </p>
-    //             <p>
-    //               <span className="font-semibold">Email:</span>{" "}
-    //               {appointment.email}
-    //             </p>
-    //             <p>
-    //               <span className="font-semibold">Type:</span>{" "}
-    //               {appointment.appointmentType}
-    //             </p>
-    //           </div>
-    //         </div>
-    //       ))}
-    //     </div>
-    //   </div>
-    // </div>
+  const totalSubmissions = appointments.length;
+  const openModal = (appointment: any) => {
+    setSelectedAppointment(appointment);
+    setIsOpen(true);
+  };
+  const formatDate = (dateString: string): string => {
+    const date = new Date(dateString);
+    const month = date.toLocaleString("en-US", { month: "short" });
+    const day = date.getDate();
+    const year = date.getFullYear();
+    return `${month} ${day}, ${year}`;
+  };
+  const closeModal = () => {
+    setSelectedAppointment(null);
+    setIsOpen(false);
+  };
+  const useAppointmentStatus = (appointmentDate: Date) => {
+    const [status, setStatus] = useState("upcoming");
 
+    useEffect(() => {
+      const currentDate = new Date();
+      const parsedAppointmentDate = new Date(appointmentDate);
+
+      if (currentDate > parsedAppointmentDate) {
+        setStatus("expired");
+      } else if (
+        currentDate.toDateString() === parsedAppointmentDate.toDateString()
+      ) {
+        setStatus("active");
+      } else {
+        setStatus("upcoming");
+      }
+    }, [appointmentDate]);
+
+    return status;
+  };
+  return (
     <div className="mt-10 w-full max-w-auto mx-auto px-4">
       <div className="sm:px-6 w-full">
         <div className="px-4 md:px-10 py-4 md:py-7">
@@ -205,23 +189,16 @@ const ClientAppointments = () => {
                 href="javascript:void(0)"
               >
                 <div className="py-2 px-8 text-gray-600 hover:text-blue-700 hover:bg-blue-100 rounded-full ">
-                  <p>Active</p>
+                  <p>Booked</p>
                 </div>
               </a>
+
               <a
                 className="rounded-full focus:outline-none focus:ring-2 focus:bg-blue-50 focus:ring-blue-800 ml-4 sm:ml-8"
                 href="javascript:void(0)"
               >
                 <div className="py-2 px-8 text-gray-600 hover:text-blue-700 hover:bg-blue-100 rounded-full ">
-                  <p>Pending</p>
-                </div>
-              </a>
-              <a
-                className="rounded-full focus:outline-none focus:ring-2 focus:bg-blue-50 focus:ring-blue-800 ml-4 sm:ml-8"
-                href="javascript:void(0)"
-              >
-                <div className="py-2 px-8 text-gray-600 hover:text-blue-700 hover:bg-blue-100 rounded-full ">
-                  <p>InProgress</p>
+                  <p>Cancelled</p>
                 </div>
               </a>
               <a
@@ -436,21 +413,7 @@ const ClientAppointments = () => {
                     </td>
                     <td className="pl-5">
                       <div className="flex items-center">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="20"
-                          height="20"
-                          viewBox="0 0 20 20"
-                          fill="none"
-                        >
-                          <path
-                            d="M12.5 5.83339L7.08333 11.2501C6.75181 11.5816 6.56556 12.0312 6.56556 12.5001C6.56556 12.9689 6.75181 13.4185 7.08333 13.7501C7.41485 14.0816 7.86449 14.2678 8.33333 14.2678C8.80217 14.2678 9.25181 14.0816 9.58333 13.7501L15 8.33339C15.663 7.67034 16.0355 6.77107 16.0355 5.83339C16.0355 4.8957 15.663 3.99643 15 3.33339C14.337 2.67034 13.4377 2.29785 12.5 2.29785C11.5623 2.29785 10.663 2.67034 10 3.33339L4.58333 8.75005C3.58877 9.74461 3.03003 11.0935 3.03003 12.5001C3.03003 13.9066 3.58877 15.2555 4.58333 16.2501C5.57789 17.2446 6.92681 17.8034 8.33333 17.8034C9.73985 17.8034 11.0888 17.2446 12.0833 16.2501L17.5 10.8334"
-                            stroke="#52525B"
-                            stroke-width="1.25"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          ></path>
-                        </svg>
+                        <IoChatbubbleEllipsesOutline />
                         <p className="text-sm leading-none text-gray-600 ml-2">
                           04/07
                         </p>
@@ -462,7 +425,10 @@ const ClientAppointments = () => {
                       </button>
                     </td>
                     <td className="pl-4">
-                      <button className="focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none">
+                      <button
+                        onClick={() => openModal(appointment)}
+                        className="focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none"
+                      >
                         View
                       </button>
                     </td>
@@ -473,6 +439,59 @@ const ClientAppointments = () => {
           </div>
         </div>
       </div>
+      {/* Modal Component */}
+      {isOpen && selectedAppointment && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="absolute inset-0 bg-gray-900 opacity-50"></div>
+          <div className="bg-white rounded-lg p-8 max-w-lg w-full mx-auto z-50">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-lg font-semibold text-gray-800">
+                Appointment Details
+              </h2>
+              <button
+                className="text-gray-500 hover:text-gray-800 focus:outline-none"
+                onClick={closeModal}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div className="mt-4">
+              <p className="text-base font-medium leading-none text-gray-700">
+                <span className="font-semibold">Appointment Type:</span>{" "}
+                {selectedAppointment.appointmentType}
+              </p>
+              <p className="text-base font-medium leading-none text-gray-700 mt-2">
+                <span className="font-semibold">Date:</span>{" "}
+                {selectedAppointment.serviceType}
+              </p>
+              <p className="text-base font-medium leading-none text-gray-700 mt-2">
+                <span className="font-semibold">Time:</span>{" "}
+                {selectedAppointment.appointmentDate}
+              </p>
+              <p className="text-base font-medium leading-none text-gray-700 mt-2">
+                <span className="font-semibold">Location:</span>{" "}
+                {selectedAppointment.venue}
+              </p>
+              <p className="text-base font-medium leading-none text-gray-700 mt-2">
+                <span className="font-semibold">Status:</span> Status: UpComing
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
