@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
-import { UserProvider } from "./components/auth/UserContext"
+import { UserProvider } from "./components/auth/UserContext";
 import NavBar from "./components/NavBar";
 import ExternalNavbar from "./components/ExternalNavbar";
 import SocialNav from "./components/SocialNav";
@@ -32,8 +32,8 @@ import AppointmentsView from "./pages/dashboard/AppointmentsView";
 import EnquiryView from "./pages/dashboard/EnquiryView";
 import ProfileView from "./pages/dashboard/ProfileView";
 import { AuthProvider } from "./components/auth/AuthProvider";
+import EnquiryDetails from "./pages/dashboard/detailviews/EnquiryDetails";
 import React from "react";
-
 
 function App() {
   const [submittedFormData, setSubmittedFormData] = useState(null);
@@ -89,6 +89,8 @@ function App() {
             <Route path="/appointments" element={<AppointmentsView />} />
             <Route path="/enquiries" element={<EnquiryView />} />
             <Route path="/profile" element={<ProfileView />} />
+            <Route path="/profile" element={<ProfileView />} />
+            <Route path="/enquiries/:enquiryId" element={<EnquiryDetails />} />
           </Routes>
         </UserProvider>
       </AuthProvider>
