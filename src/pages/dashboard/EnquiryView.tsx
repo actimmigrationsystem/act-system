@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useUser } from "../../components/auth/UserContext";
 import DashboardLayout from "./DashBoardLayout";
-
+import React from "react";
 const enquiryRoute = import.meta.env.VITE_ENQUIRY_ROUTE;
 
 interface Enquiry {
@@ -29,34 +29,33 @@ const EnquiryView = () => {
   console.log("User email:", email);
   const [enquiries, setEnquiries] = useState<Enquiry[]>([]);
 
-useEffect(() => {
-  if (!email) {
-    console.error("Email is not defined");
-    return;
-  }
-  const url = `${enquiryRoute}/${email}`;
-  console.log("Making request to:", url);
-  axios
-    .get(url, {
-      headers: {
-        Accept: "application/json",
-      },
-    })
-    .then((response) => {
-      console.log("Full response:", response);
+  useEffect(() => {
+    if (!email) {
+      console.error("Email is not defined");
+      return;
+    }
+    const url = `${enquiryRoute}/${email}`;
+    console.log("Making request to:", url);
+    axios
+      .get(url, {
+        headers: {
+          Accept: "application/json",
+        },
+      })
+      .then((response) => {
+        console.log("Full response:", response);
 
-      if (Array.isArray(response.data)) {
-        setEnquiries(response.data);
-      } else {
-        console.error("Expected an array but received:", response.data);
-        setEnquiries([]);
-      }
-    })
-    .catch((error) => {
-      console.error("There was an error!", error);
-    });
-}, [email]);
-
+        if (Array.isArray(response.data)) {
+          setEnquiries(response.data);
+        } else {
+          console.error("Expected an array but received:", response.data);
+          setEnquiries([]);
+        }
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+  }, [email]);
 
   return (
     <DashboardLayout pageTitle="My Enquiries">
@@ -192,7 +191,7 @@ useEffect(() => {
                                   Document {index + 1}
                                 </a>
                               </div>
-                            )
+                            ),
                           )}
                       </dd>
                     </div>

@@ -121,8 +121,8 @@ const ClientEnquiries = () => {
       });
   }, [email]);
 
-  const handleClick = (enquiryId: number) => {
-    navigate(`/enquiries/${enquiryId}`);
+  const handleClick = (enquiry: Enquiry) => {
+    navigate(`/enquiries/${enquiry.id}`, { state: { enquiry } });
   };
 
   return (
@@ -135,21 +135,13 @@ const ClientEnquiries = () => {
           {enquiries.map((enquiry) => (
             <PaperBackground
               key={enquiry.id}
-              onClick={() => handleClick(enquiry.id)}
+              onClick={() => handleClick(enquiry)}
             >
               <div className="pin">
                 <FaMapPin />
               </div>{" "}
               {/* Pin element */}
               <div className="mt-2 text-sm text-gray-600 dark:text-gray-300">
-                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt className="text-sm font-medium leading-6 text-gray-900">
-                    Full Name
-                  </dt>
-                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    {enquiry.name} {enquiry.surname}
-                  </dd>
-                </div>
                 <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                   <dt className="text-sm font-medium leading-6 text-gray-900">
                     Service Type
@@ -160,77 +152,13 @@ const ClientEnquiries = () => {
                 </div>
                 <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                   <dt className="text-sm font-medium leading-6 text-gray-900">
-                    Phone
-                  </dt>
-                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    {enquiry.phonenumber}
-                  </dd>
-                </div>
-                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt className="text-sm font-medium leading-6 text-gray-900">
-                    Email
-                  </dt>
-                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    {enquiry.email}
-                  </dd>
-                </div>
-                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt className="text-sm font-medium leading-6 text-gray-900">
-                    Gender
-                  </dt>
-                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    {enquiry.gender}
-                  </dd>
-                </div>
-                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt className="text-sm font-medium leading-6 text-gray-900">
-                    DOB
-                  </dt>
-                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    {enquiry.dob}
-                  </dd>
-                </div>
-                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt className="text-sm font-medium leading-6 text-gray-900">
-                    Marital Status
-                  </dt>
-                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    {enquiry.maritalStatus}
-                  </dd>
-                </div>
-                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt className="text-sm font-medium leading-6 text-gray-900">
-                    Residential Address
-                  </dt>
-                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    {enquiry.residentialAddress}
-                  </dd>
-                </div>
-                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt className="text-sm font-medium leading-6 text-gray-900">
-                    Immigration Status
+                    Status
                   </dt>
                   <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                     {enquiry.immigrationStatus}
                   </dd>
                 </div>
-                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt className="text-sm font-medium leading-6 text-gray-900">
-                    Entry Date
-                  </dt>
-                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    {enquiry.entryDate}
-                  </dd>
-                </div>
-                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt className="text-sm font-medium leading-6 text-gray-900">
-                    Passport Number
-                  </dt>
-                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    {enquiry.passportNumber}
-                  </dd>
-                </div>
-                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                <div className="px-2 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                   <dt className="text-sm font-medium leading-6 text-gray-900">
                     Reference Number
                   </dt>

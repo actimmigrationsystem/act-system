@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
-
-const enquiryRoute = import.meta.env.VITE_ENQUIRY_ROUTE;
-
+import React from "react";
+import { useLocation, useParams } from "react-router-dom";
+import DashboardLayout from "../DashBoardLayout";
 interface Enquiry {
   id: number;
   name: string;
@@ -25,157 +22,214 @@ interface Enquiry {
 
 const EnquiryDetails = () => {
   const { enquiryId } = useParams<{ enquiryId: string }>();
-  const [enquiry, setEnquiry] = useState<Enquiry | null>(null);
-
-  useEffect(() => {
-    if (enquiryId) {
-      const url = `${enquiryRoute}/${enquiryId}`;
-      axios
-        .get(url, { headers: { Accept: "application/json" } })
-        .then((response) => {
-          setEnquiry(response.data);
-        })
-        .catch((error) => {
-          console.error("There was an error fetching data!", error);
-        });
-    }
-  }, [enquiryId]);
-
-  if (!enquiry) {
-    return <div>Loading...</div>;
-  }
+  const location = useLocation();
+  const enquiry = location.state.enquiry as Enquiry;
 
   return (
-    <div>
-      <div className="px-4 sm:px-0">
-        <h3 className="text-base font-semibold leading-7 text-gray-900">
-          Applicant Information
-        </h3>
-        <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
-          Personal details and application.
-        </p>
-      </div>
-      <div className="mt-6 border-t border-gray-100">
-        <dl className="divide-y divide-gray-100">
-          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm font-medium leading-6 text-gray-900">
-              Full name
-            </dt>
-            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              Margot Foster
-            </dd>
+    <DashboardLayout pageTitle="My Enquiries">
+      <div className="container mx-auto mt-10 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Enquiry Details */}
+        <div className="lg:col-span-2">
+          <div className="bg-white shadow-md rounded-lg p-6">
+            <div className="px-4 sm:px-0">
+              <h3 className="text-base font-semibold leading-7 text-gray-900">
+                Enquiry Information
+              </h3>
+              <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
+                Personal details and application.
+              </p>
+            </div>
+            <div className="mt-6 border-t border-gray-100">
+              <dl className="divide-y divide-gray-100">
+                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt className="text-sm font-medium leading-6 text-gray-900">
+                    Full name
+                  </dt>
+                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                    {enquiry.name} {enquiry.surname}
+                  </dd>
+                </div>
+                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt className="text-sm font-medium leading-6 text-gray-900">
+                    Application for
+                  </dt>
+                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                    {enquiry.serviceType}
+                  </dd>
+                </div>
+                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt className="text-sm font-medium leading-6 text-gray-900">
+                    Phone
+                  </dt>
+                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                    {enquiry.phonenumber}
+                  </dd>
+                </div>
+                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt className="text-sm font-medium leading-6 text-gray-900">
+                    Email
+                  </dt>
+                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                    {enquiry.email}
+                  </dd>
+                </div>
+                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt className="text-sm font-medium leading-6 text-gray-900">
+                    Gender
+                  </dt>
+                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                    {enquiry.gender}
+                  </dd>
+                </div>
+                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt className="text-sm font-medium leading-6 text-gray-900">
+                    DOB
+                  </dt>
+                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                    {enquiry.dob}
+                  </dd>
+                </div>
+                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt className="text-sm font-medium leading-6 text-gray-900">
+                    Marital Status
+                  </dt>
+                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                    {enquiry.maritalStatus}
+                  </dd>
+                </div>
+                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt className="text-sm font-medium leading-6 text-gray-900">
+                    Residential Address
+                  </dt>
+                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                    {enquiry.residentialAddress}
+                  </dd>
+                </div>
+                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt className="text-sm font-medium leading-6 text-gray-900">
+                    Immigration Status
+                  </dt>
+                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                    {enquiry.immigrationStatus}
+                  </dd>
+                </div>
+                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt className="text-sm font-medium leading-6 text-gray-900">
+                    Entry Date
+                  </dt>
+                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                    {enquiry.entryDate}
+                  </dd>
+                </div>
+                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt className="text-sm font-medium leading-6 text-gray-900">
+                    Passport Number
+                  </dt>
+                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                    {enquiry.passportNumber}
+                  </dd>
+                </div>
+                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt className="text-sm font-medium leading-6 text-gray-900">
+                    Reference Number
+                  </dt>
+                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                    {enquiry.referenceNumber}
+                  </dd>
+                </div>
+                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt className="text-sm font-medium leading-6 text-gray-900">
+                    Document Upload
+                  </dt>
+                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                    {enquiry.documentUpload}
+                  </dd>
+                </div>
+                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt className="text-sm font-medium leading-6 text-gray-900">
+                    Elaborate
+                  </dt>
+                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                    {enquiry.elaborate}
+                  </dd>
+                </div>
+              </dl>
+            </div>
           </div>
-          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm font-medium leading-6 text-gray-900">
-              Application for
-            </dt>
-            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              Backend Developer
-            </dd>
-          </div>
-          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm font-medium leading-6 text-gray-900">
-              Email address
-            </dt>
-            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              margotfoster@example.com
-            </dd>
-          </div>
-          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm font-medium leading-6 text-gray-900">
-              Salary expectation
-            </dt>
-            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              $120,000
-            </dd>
-          </div>
-          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm font-medium leading-6 text-gray-900">
-              About
-            </dt>
-            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim
-              incididunt cillum culpa consequat. Excepteur qui ipsum aliquip
-              consequat sint. Sit id mollit nulla mollit nostrud in ea officia
-              proident. Irure nostrud pariatur mollit ad adipisicing
-              reprehenderit deserunt qui eu.
-            </dd>
-          </div>
-          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm font-medium leading-6 text-gray-900">
-              Attachments
-            </dt>
-            <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-              <ul
-                role="list"
-                className="divide-y divide-gray-100 rounded-md border border-gray-200"
-              >
-                <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
-                  <div className="flex w-0 flex-1 items-center">
-                    <svg
-                      className="h-5 w-5 flex-shrink-0 text-gray-400"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                    <div className="ml-4 flex min-w-0 flex-1 gap-2">
-                      <span className="truncate font-medium">
-                        resume_back_end_developer.pdf
-                      </span>
-                      <span className="flex-shrink-0 text-gray-400">2.4mb</span>
+        </div>
+        {/* Timeline */}
+        <div className="lg:col-span-1">
+          <div className="bg-white shadow-md rounded-lg p-6">
+            <h3 className="text-base font-semibold leading-7 text-gray-900">
+              Enquiry Timeline
+            </h3>
+            <div className="mt-6 border-t border-gray-100">
+              <ul role="list" className="divide-y divide-gray-100">
+                <li className="py-4">
+                  <div className="flex space-x-3">
+                    <span className="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center text-white">
+                      O
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-medium text-gray-900">Open</p>
+                      <p className="text-sm text-gray-500">
+                        The enquiry has been received and is open for
+                        processing.
+                      </p>
                     </div>
-                  </div>
-                  <div className="ml-4 flex-shrink-0">
-                    <a
-                      href="#"
-                      className="font-medium text-indigo-600 hover:text-indigo-500"
-                    >
-                      Download
-                    </a>
                   </div>
                 </li>
-                <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
-                  <div className="flex w-0 flex-1 items-center">
-                    <svg
-                      className="h-5 w-5 flex-shrink-0 text-gray-400"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                    <div className="ml-4 flex min-w-0 flex-1 gap-2">
-                      <span className="truncate font-medium">
-                        coverletter_back_end_developer.pdf
-                      </span>
-                      <span className="flex-shrink-0 text-gray-400">4.5mb</span>
+                <li className="py-4">
+                  <div className="flex space-x-3">
+                    <span className="h-10 w-10 rounded-full bg-yellow-500 flex items-center justify-center text-white">
+                      V
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-medium text-gray-900">
+                        Viewed
+                      </p>
+                      <p className="text-sm text-gray-500">
+                        The enquiry has been viewed by the responsible team.
+                      </p>
                     </div>
                   </div>
-                  <div className="ml-4 flex-shrink-0">
-                    <a
-                      href="#"
-                      className="font-medium text-indigo-600 hover:text-indigo-500"
-                    >
-                      Download
-                    </a>
+                </li>
+                <li className="py-4">
+                  <div className="flex space-x-3">
+                    <span className="h-10 w-10 rounded-full bg-orange-500 flex items-center justify-center text-white">
+                      I
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-medium text-gray-900">
+                        In Progress
+                      </p>
+                      <p className="text-sm text-gray-500">
+                        The enquiry is currently being processed.
+                      </p>
+                    </div>
+                  </div>
+                </li>
+                <li className="py-4">
+                  <div className="flex space-x-3">
+                    <span className="h-10 w-10 rounded-full bg-green-500 flex items-center justify-center text-white">
+                      C
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-medium text-gray-900">
+                        Closed
+                      </p>
+                      <p className="text-sm text-gray-500">
+                        The enquiry has been processed and closed.
+                      </p>
+                    </div>
                   </div>
                 </li>
               </ul>
-            </dd>
+            </div>
           </div>
-        </dl>
+        </div>
       </div>
-    </div>
+    </DashboardLayout>
   );
 };
 
