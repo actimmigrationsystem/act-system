@@ -4,9 +4,7 @@ import axios from "axios";
 import { FiClock } from "react-icons/fi";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 // import { useUser } from "../../components/auth/UserContext";
-import { FaCalendarAlt, FaEnvelope, FaFileAlt } from "react-icons/fa";
 import React from "react";
-import { Link } from "react-router-dom";
 
 const enquiryRoute = import.meta.env.VITE_ENQUIRY_ROUTE;
 const appointmentRoute = import.meta.env.VITE_APPOINTMENT_ROUTE;

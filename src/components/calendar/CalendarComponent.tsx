@@ -88,7 +88,7 @@ const CalendarComponent: React.FC<CalendarComponentProps> = () => {
       calendarHTML.push(
         <div key={day} className="text-center font-semibold">
           {day}
-        </div>
+        </div>,
       );
     });
 
@@ -114,7 +114,7 @@ const CalendarComponent: React.FC<CalendarComponentProps> = () => {
           onClick={() => handleDateClick(day)}
         >
           {day}
-        </div>
+        </div>,
       );
     }
 
@@ -150,7 +150,7 @@ const CalendarComponent: React.FC<CalendarComponentProps> = () => {
     const selectedDateObj = new Date(
       state.currentYear,
       state.currentMonth,
-      day
+      day,
     );
     const options: Intl.DateTimeFormatOptions = {
       weekday: "long",
@@ -161,7 +161,7 @@ const CalendarComponent: React.FC<CalendarComponentProps> = () => {
 
     const formattedDate = selectedDateObj.toLocaleDateString(
       undefined,
-      options
+      options,
     );
     setState((prevState) => ({
       ...prevState,
@@ -191,7 +191,7 @@ const CalendarComponent: React.FC<CalendarComponentProps> = () => {
     const day = date.getDate();
     const weekdayOptions: Intl.DateTimeFormatOptions = { weekday: "long" };
     const weekday = new Intl.DateTimeFormat("en-US", weekdayOptions).format(
-      date
+      date,
     );
     const time = date.toLocaleTimeString([], {
       hour: "2-digit",
@@ -209,61 +209,60 @@ const CalendarComponent: React.FC<CalendarComponentProps> = () => {
   const { currentYear, currentMonth, showModal, selectedDate, formValues } =
     state;
 
-
-    // fetch appointments:
+  // fetch appointments:
 
   const { email } = useUser();
 
-    const [appointments, setAppointments] = useState<Appointment[]>([]);
- const [appointmentData, setAppointmentData] = useState<{
-   month: string;
-   day: string;
-   weekday: string;
-   time: string;
- }>({
-   month: "",
-   day: "",
-   weekday: "",
-   time: "",
- });
-   const formatDate = (date: Date) => {
-     return new Date(date).toLocaleDateString();
-   };
+  const [appointments, setAppointments] = useState<Appointment[]>([]);
+  const [appointmentData, setAppointmentData] = useState<{
+    month: string;
+    day: string;
+    weekday: string;
+    time: string;
+  }>({
+    month: "",
+    day: "",
+    weekday: "",
+    time: "",
+  });
+  const formatDate = (date: Date) => {
+    return new Date(date).toLocaleDateString();
+  };
 
-useEffect(() => {
-  if (!email) {
-    console.error("Email is not defined");
-    return;
-  }
-  const url = `${appointmentRoute}/${email}`;
-  axios
-    .get(url, { headers: { Accept: "application/json" } })
-    .then((response) => {
-      if (Array.isArray(response.data)) {
-        setAppointments(response.data);
-      } else {
-        console.error("Expected an array but received:", response.data);
-        setAppointments([]);
-      }
-    })
-    .catch((error) => {
-      console.error("There was an error!", error);
-    });
-}, [email]);
+  useEffect(() => {
+    if (!email) {
+      console.error("Email is not defined");
+      return;
+    }
+    const url = `${appointmentRoute}/${email}`;
+    axios
+      .get(url, { headers: { Accept: "application/json" } })
+      .then((response) => {
+        if (Array.isArray(response.data)) {
+          setAppointments(response.data);
+        } else {
+          console.error("Expected an array but received:", response.data);
+          setAppointments([]);
+        }
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+  }, [email]);
 
-const formatAppointmentDate = (appointment: Appointment) => {
-  const appointmentDate = new Date(appointment.appointmentDate);
+  const formatAppointmentDate = (appointment: Appointment) => {
+    const appointmentDate = new Date(appointment.appointmentDate);
 
-  const day = appointmentDate.getDate(); // Day of the month (1-31)
-  const month = appointmentDate.getMonth() + 1; // Month (0-11, so we add 1 to get 1-12)
-  const year = appointmentDate.getFullYear(); // Year
-  const time = appointmentDate.toLocaleTimeString(); // Time in HH:MM:SS format
+    const day = appointmentDate.getDate(); // Day of the month (1-31)
+    const month = appointmentDate.getMonth() + 1; // Month (0-11, so we add 1 to get 1-12)
+    const year = appointmentDate.getFullYear(); // Year
+    const time = appointmentDate.toLocaleTimeString(); // Time in HH:MM:SS format
 
-  return { day, month, year, time };
-};
+    return { day, month, year, time };
+  };
   return (
     <div className="w-full">
-      <div className="min-w-32 bg-white min-h-48 p-3 mb-4 font-medium mb-12">
+      <div className="min-w-32 bg-white min-h-48 p-3 font-medium mb-12">
         <div className="w-32 flex-none rounded-t lg:rounded-t-none lg:rounded-l text-center shadow-lg">
           <div className="block rounded-t overflow-hidden text-center">
             <div className="bg-blue text-white py-1">{today.month}</div>
