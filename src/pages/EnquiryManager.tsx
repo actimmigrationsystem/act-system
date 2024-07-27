@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaFilePdf } from "react-icons/fa";
@@ -109,15 +109,11 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
 
       // Make the POST request
       const url = `${createEnquiryRoute}`;
-      const response = await axios.post(
-        url,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await axios.post(url, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       console.log("Form Submitted:", response.data);
       setShowAlert(true); // Show success alert on successful submit
@@ -126,14 +122,6 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
       console.log("Error response data:", (error as any).response.data);
     }
   };
-
-
-
-
-
-
-
-
 
   const serviceType = mergedFormValues["serviceType"];
   return (

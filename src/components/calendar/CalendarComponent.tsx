@@ -13,7 +13,7 @@ interface CalendarComponentState {
   currentMonth: number;
   showModal: boolean;
   selectedDate: string;
-  formValues: FormValuesInterface; // Add formValues state
+  formValues: FormValuesInterface;
 }
 interface Appointment {
   id: number;
@@ -108,9 +108,7 @@ const CalendarComponent: React.FC<CalendarComponentProps> = () => {
       calendarHTML.push(
         <div
           key={day}
-          className={`text-center py-2 border cursor-pointer ${
-            isCurrentDate ? "bg-blue-500 text-white" : ""
-          }`}
+          className={`text-center py-2 border cursor-pointer ${isCurrentDate ? "bg-blue-500 text-white" : ""}`}
           onClick={() => handleDateClick(day)}
         >
           {day}
@@ -260,6 +258,7 @@ const CalendarComponent: React.FC<CalendarComponentProps> = () => {
 
     return { day, month, year, time };
   };
+
   return (
     <div className="w-full">
       <div className="min-w-32 bg-white min-h-48 p-3 font-medium mb-12">
@@ -280,91 +279,95 @@ const CalendarComponent: React.FC<CalendarComponentProps> = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-6 gap-2">
-        {appointments.map((appointment) => (
-          <div
-            key={appointment.id}
-            className="min-w-32 bg-white min-h-48 p-3 mb-4 font-medium mb-12"
-          >
-            <div className="w-32 flex-none rounded-t lg:rounded-t-none lg:rounded-l text-center shadow-lg">
-              <div className="block rounded-t overflow-hidden text-center">
-                <div className="bg-blue text-white py-1">
-                  {" "}
-                  {formatAppointmentDate(appointment).day}
-                </div>
-                <div className="pt-1 border-l border-r border-white bg-white">
-                  <span className="text-5xl font-bold leading-tight">
-                    {formatAppointmentDate(appointment).day}
-                  </span>
-                </div>
-                <div className="border-l border-r border-b rounded-b-lg text-center border-white bg-white -pt-2 -mb-1">
-                  <span className="text-sm">{appointment.serviceType}</span>
-                </div>
-                <div className="pb-2 border-l border-r border-b rounded-b-lg text-center border-white bg-white">
-                  <span className="text-xs leading-normal">
-                    {" "}
-                    {formatAppointmentDate(appointment).time}
-                  </span>
-                </div>
-                <div className="pb-2 border-l border-r border-b rounded-b-lg text-center border-white bg-white">
-                  <span className="text-xs leading-normal">
-                    {appointment.venue}
-                  </span>
-                </div>
-                <div className="pb-2 border-l border-r border-b rounded-b-lg text-center border-white bg-white">
-                  <span className="text-xs leading-normal">
-                    {appointment.appointmentType}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* display appointments as a map in this card .............end......................*/}
-      <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+      <div className="w-full flex">
         <div
-          className="flex items-center justify-between px-6 py-3"
-          style={{ backgroundColor: "#0e5a97" }}
+          className="w-1/4 bg-gray-100 p-4 overflow-y-auto"
+          style={{ maxHeight: "70vh" }}
         >
-          <button className="text-white" onClick={handlePrevMonth}>
-            Previous
-          </button>
-          <h2 className="text-white">{`${monthNames[currentMonth]} ${currentYear}`}</h2>
-          <button className="text-white" onClick={handleNextMonth}>
-            Next
-          </button>
-        </div>
-        {generateCalendar(currentYear, currentMonth)}
-        {/* Modal */}
-        {showModal && (
-          <div className="modal fixed inset-0 flex items-center justify-center z-50">
-            <div className="modal-overlay absolute inset-0 bg-black opacity-50" />
-            <div className="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
-              <div className="modal-content py-4 text-left px-6">
-                <div className="flex justify-between items-center pb-3">
-                  <p className="text-2xl font-bold">Selected Date</p>
-                  <button
-                    className="modal-close px-3 py-1 rounded-full hover:bg-gray-300 focus:outline-none focus:ring"
-                    onClick={handleCloseModal}
-                    style={{ color: "#0e5a97" }}
-                  >
-                    ✕
-                  </button>
+          <h5 className="mb-4">Appointments</h5>
+          {appointments.map((appointment) => (
+            <div key={appointment.id}>
+              <div className="w-32 mb-6 flex-none rounded-t lg:rounded-t-none lg:rounded-l text-center shadow-lg">
+                <div className="block rounded-t overflow-hidden text-center">
+                  <div className="center relative inline-block select-none whitespace-nowrap rounded-lg bg-blue-500 py-2 px-3.5 align-baseline font-sans text-xs font-bold uppercase leading-none text-white">
+                    <div className="mt-px">
+                      {" "}
+                      {formatAppointmentDate(appointment).day}
+                    </div>
+                  </div>
+                  <div className="pt-1 border-l border-r border-white bg-white">
+                    <span className="text-5xl font-bold leading-tight">
+                      {formatAppointmentDate(appointment).day}
+                    </span>
+                  </div>
+                  <div className="border-l border-r border-b rounded-b-lg text-center border-white bg-white -pt-2 -mb-1">
+                    <span className="text-sm">{appointment.serviceType}</span>
+                  </div>
+                  <div className="pb-2 border-l border-r border-b rounded-b-lg text-center border-white bg-white">
+                    <span className="text-xs leading-normal">
+                      {formatAppointmentDate(appointment).time}
+                    </span>
+                  </div>
+                  <div className="pb-2 border-l border-r border-b rounded-b-lg text-center border-white bg-white">
+                    <span className="text-xs leading-normal">
+                      {appointment.venue}
+                    </span>
+                  </div>
+                  <div className="pb-2 border-l border-r border-b rounded-b-lg text-center border-white bg-white">
+                    <span className="text-xs leading-normal">
+                      {appointment.appointmentType}
+                    </span>
+                  </div>
                 </div>
-                <div className="text-xl font-semibold">{selectedDate}</div>
-                <DashboardAppointmentForm
-                  selectedDate={selectedDate}
-                  closeModal={handleCloseModal}
-                  formValues={formValues}
-                  onClose={handleCloseModal}
-                  onSubmit={handleFormSubmit}
-                />
               </div>
             </div>
+          ))}
+        </div>
+
+        <div className="flex-1">
+          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div
+              className="flex items-center justify-between px-6 py-3"
+              style={{ backgroundColor: "#0e5a97" }}
+            >
+              <button className="text-white" onClick={handlePrevMonth}>
+                Previous
+              </button>
+              <h2 className="text-white">{`${monthNames[currentMonth]} ${currentYear}`}</h2>
+              <button className="text-white" onClick={handleNextMonth}>
+                Next
+              </button>
+            </div>
+            {generateCalendar(currentYear, currentMonth)}
           </div>
-        )}
+          {showModal && (
+            <div className="modal fixed inset-0 flex items-center justify-center z-50">
+              <div className="modal-overlay absolute inset-0 bg-black opacity-50" />
+              <div className="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+                <div className="modal-content py-4 text-left px-6">
+                  <div className="flex justify-between items-center pb-3">
+                    <p className="text-2xl font-bold">Selected Date</p>
+                    <button
+                      className="modal-close px-3 py-1 rounded-full hover:bg-gray-300 focus:outline-none focus:ring"
+                      onClick={handleCloseModal}
+                      style={{ color: "#0e5a97" }}
+                    >
+                      ✕
+                    </button>
+                  </div>
+                  <div className="text-xl font-semibold">{selectedDate}</div>
+                  <DashboardAppointmentForm
+                    selectedDate={selectedDate}
+                    closeModal={handleCloseModal}
+                    formValues={formValues}
+                    onClose={handleCloseModal}
+                    onSubmit={handleFormSubmit}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

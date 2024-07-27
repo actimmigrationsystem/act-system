@@ -121,7 +121,10 @@ const AnalyticsCards = () => {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 w-full max-w-6xl px-4">
       <Link to="/appointments">
         <div className="bg-gray-100 dark:bg-gray-900 shadow-md rounded-lg overflow-hidden hover:shadow-xl transition duration-300 ease-in-out cursor-pointer">
-          <div className="flex items-center justify-center bg-blue-500 text-white rounded-t-lg h-24">
+          <div
+            className="flex items-center justify-center text-white rounded-t-lg h-24"
+            style={{ backgroundColor: "#0e5a97" }}
+          >
             <FaCalendarAlt className="text-5xl" />
           </div>
           <div className="p-4 text-center">
@@ -150,7 +153,7 @@ const AnalyticsCards = () => {
         </div>
       </Link>
       <div className="bg-gray-100 dark:bg-gray-900 shadow-md rounded-lg overflow-hidden hover:shadow-xl transition duration-300 ease-in-out cursor-pointer">
-        <div className="flex items-center justify-center bg-red-500 text-white rounded-t-lg h-24">
+        <div className="flex items-center justify-center bg-orange-500 text-white rounded-t-lg h-24">
           <FaFileAlt className="text-5xl" />
         </div>
         <div className="p-4 text-center">

@@ -3,8 +3,8 @@ import { useUser } from "../../../components/auth/UserContext";
 import axios from "axios";
 import { FiClock } from "react-icons/fi";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
-// import { useUser } from "../../components/auth/UserContext";
 import React from "react";
+import styled from "styled-components";
 
 const enquiryRoute = import.meta.env.VITE_ENQUIRY_ROUTE;
 const appointmentRoute = import.meta.env.VITE_APPOINTMENT_ROUTE;
@@ -40,6 +40,16 @@ interface Appointment {
   appointmentDate: Date;
   appointmentType: string;
 }
+
+const TableCard = styled.div`
+  position: relative;
+  background: white;
+  padding: 16px;
+  border-top: 4px solid orange;
+  margin-top: 16px;
+  border-radius: 8px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+`;
 
 const getUserName = (email: string) => {
   return email ? email.split("@")[0] : "User";
@@ -119,19 +129,10 @@ const Submissions = () => {
   }, [email]);
   const totalSubmissions = enquiries.length;
   return (
-    <div className="mt-10 w-full max-w-auto mx-auto px-4">
+    <div className="mt-10 w-full max-w-auto mx-auto">
       <div className="sm:px-6 w-full">
-        <div className="px-4 md:px-10 py-4 md:py-7">
-          <div className="flex items-center justify-between">
-            <p
-              tabIndex={0}
-              className="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800"
-            >
-              Submissions
-            </p>
-          </div>
-        </div>
-        <div className="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10">
+        <div className="px-4 md:px-10 py-4 md:py-7"></div>
+        <TableCard className="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10">
           <div className="sm:flex items-center justify-between">
             <div className="flex items-center">
               <a
@@ -365,7 +366,7 @@ const Submissions = () => {
               </tbody>
             </table>
           </div>
-        </div>
+        </TableCard>
       </div>
     </div>
   );

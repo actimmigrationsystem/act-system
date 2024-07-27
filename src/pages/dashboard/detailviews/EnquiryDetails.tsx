@@ -1,6 +1,8 @@
 import React from "react";
 import { useLocation, useParams } from "react-router-dom";
 import DashboardLayout from "../DashBoardLayout";
+import styled from "styled-components";
+
 interface Enquiry {
   id: number;
   name: string;
@@ -20,6 +22,15 @@ interface Enquiry {
   elaborate: string;
 }
 
+const CardWithGreenLine = styled.div`
+  background-color: white;
+  padding: 16px;
+  border-top: 4px solid #10b981; /* Tailwind green-500 color */
+  border-radius: 8px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+`;
+
 const EnquiryDetails = () => {
   const { enquiryId } = useParams<{ enquiryId: string }>();
   const location = useLocation();
@@ -30,13 +41,13 @@ const EnquiryDetails = () => {
       <div className="container mx-auto mt-10 grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Enquiry Details */}
         <div className="lg:col-span-2">
-          <div className="bg-white shadow-md rounded-lg p-6">
+          <CardWithGreenLine>
             <div className="px-4 sm:px-0">
               <h3 className="text-base font-semibold leading-7 text-gray-900">
                 Enquiry Information
               </h3>
               <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
-                Personal details and application.
+                Enquiry details.
               </p>
             </div>
             <div className="mt-6 border-t border-gray-100">
@@ -155,11 +166,11 @@ const EnquiryDetails = () => {
                 </div>
               </dl>
             </div>
-          </div>
+          </CardWithGreenLine>
         </div>
         {/* Timeline */}
         <div className="lg:col-span-1">
-          <div className="bg-white shadow-md rounded-lg p-6">
+          <CardWithGreenLine>
             <h3 className="text-base font-semibold leading-7 text-gray-900">
               Enquiry Timeline
             </h3>
@@ -226,7 +237,7 @@ const EnquiryDetails = () => {
                 </li>
               </ul>
             </div>
-          </div>
+          </CardWithGreenLine>
         </div>
       </div>
     </DashboardLayout>

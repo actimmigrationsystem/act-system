@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { useUser } from "../../../components/auth/UserContext";
 import axios from "axios";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
-// import { useUser } from "../../components/auth/UserContext";
-import { FaCalendarAlt, FaEnvelope, FaFileAlt } from "react-icons/fa";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -28,6 +26,7 @@ interface Enquiry {
   serviceType: string;
   elaborate: string;
 }
+
 interface Appointment {
   id: number;
   name: string;
@@ -44,18 +43,6 @@ const getUserName = (email: string) => {
   return email ? email.split("@")[0] : "User";
 };
 
-const submissions = [
-  {
-    id: 1,
-    name: "John",
-    surname: "Doe",
-    email: "john.doe@example.com",
-    serviceType: "Pre-Consultation",
-    documents: "Passport, Visa",
-    date: "2024-07-03",
-  },
-];
-
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);
   const month = date.toLocaleString("en-US", { month: "short" });
@@ -71,6 +58,7 @@ const ClientAppointments = () => {
   const [selectedAppointment, setSelectedAppointment] =
     useState<Appointment | null>(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [filter, setFilter] = useState("Latest");
 
   useEffect(() => {
     if (!email) {
@@ -113,22 +101,37 @@ const ClientAppointments = () => {
         console.error("There was an error!", error);
       });
   }, [email]);
+
+  const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setFilter(event.target.value);
+  };
+
+  const sortedAppointments = [...appointments].sort((a, b) => {
+    if (filter === "Latest") {
+      return (
+        new Date(b.appointmentDate).getTime() -
+        new Date(a.appointmentDate).getTime()
+      );
+    } else {
+      return (
+        new Date(a.appointmentDate).getTime() -
+        new Date(b.appointmentDate).getTime()
+      );
+    }
+  });
+
   const totalSubmissions = appointments.length;
+
   const openModal = (appointment: any) => {
     setSelectedAppointment(appointment);
     setIsOpen(true);
   };
-  const formatDate = (dateString: string): string => {
-    const date = new Date(dateString);
-    const month = date.toLocaleString("en-US", { month: "short" });
-    const day = date.getDate();
-    const year = date.getFullYear();
-    return `${month} ${day}, ${year}`;
-  };
+
   const closeModal = () => {
     setSelectedAppointment(null);
     setIsOpen(false);
   };
+
   const useAppointmentStatus = (appointmentDate: Date) => {
     const [status, setStatus] = useState("upcoming");
 
@@ -149,26 +152,28 @@ const ClientAppointments = () => {
 
     return status;
   };
+
   return (
-    <div className="mt-10 w-full max-w-auto mx-auto px-4">
+    <div className="mt-10 w-full max-w-auto mx-auto ">
       <div className="sm:px-6 w-full">
         <div className="px-4 md:px-10 py-4 md:py-7">
           <div className="flex items-center justify-between">
-            <p
-              tabIndex={0}
-              className="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800"
-            >
-              Appointments
-            </p>
-            <div className="py-3 px-4 flex items-center text-sm font-medium leading-none text-gray-600 bg-gray-200 hover:bg-gray-300 cursor-pointer rounded">
-              <p>Sort By:</p>
+            <div className="relative inline-flex">
+              <span className="rounded-l-md inline-flex items-center px-3 bg-gray-200 text-gray-600 text-sm">
+                Filter By:
+              </span>
               <select
                 aria-label="select"
-                className="focus:text-blue-600 focus:outline-none bg-transparent ml-1"
+                className="rounded-r-md border-t border-b border-r border-gray-300 focus:text-blue-600 focus:outline-none bg-white h-full py-2 pl-2 pr-7 text-sm leading-5 text-gray-600"
+                value={filter}
+                onChange={handleFilterChange}
               >
-                <option className="text-sm text-blue-800">Latest</option>
-                <option className="text-sm text-blue-800">Oldest</option>
-                <option className="text-sm text-blue-800">Latest</option>
+                <option className="text-sm text-blue-800" value="Latest">
+                  Latest
+                </option>
+                <option className="text-sm text-blue-800" value="Oldest">
+                  Oldest
+                </option>
               </select>
             </div>
           </div>
@@ -177,7 +182,7 @@ const ClientAppointments = () => {
           <div className="sm:flex items-center justify-between">
             <div className="flex items-center">
               <a
-                className="rounded-full focus:outline-none focus:ring-2  focus:bg-blue-50 focus:ring-blue-800"
+                className="rounded-full focus:outline-none focus:ring-2 focus:bg-blue-50 focus:ring-blue-800"
                 href=" javascript:void(0)"
               >
                 <div className="py-2 px-8 bg-blue-100 text-blue-700 rounded-full">
@@ -220,7 +225,7 @@ const ClientAppointments = () => {
           <div className="mt-7 overflow-x-auto">
             <table className="w-full whitespace-nowrap">
               <tbody>
-                {appointments.map((appointment, index) => (
+                {sortedAppointments.map((appointment, index) => (
                   <tr
                     key={index}
                     className="focus:outline-none h-16 border border-gray-100 rounded"
@@ -421,7 +426,7 @@ const ClientAppointments = () => {
                     </td>
                     <td className="pl-5">
                       <button className="py-3 px-3 text-sm focus:outline-none leading-none text-red-700 bg-red-100 rounded">
-                        at {formatDate(appointment.appointmentDate)}
+                        {formatDate(appointment.appointmentDate)}
                       </button>
                     </td>
                     <td className="pl-4">
@@ -441,9 +446,9 @@ const ClientAppointments = () => {
       </div>
       {/* Modal Component */}
       {isOpen && selectedAppointment && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm">
           <div className="absolute inset-0 bg-gray-900 opacity-50"></div>
-          <div className="bg-white rounded-lg p-8 max-w-lg w-full mx-auto z-50">
+          <div className="bg-white rounded-lg p-8 max-w-lg w-full mx-auto z-50 shadow-lg transform transition-all duration-300 ease-in-out">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-semibold text-gray-800">
                 Appointment Details
@@ -468,26 +473,41 @@ const ClientAppointments = () => {
                 </svg>
               </button>
             </div>
-            <div className="mt-4">
-              <p className="text-base font-medium leading-none text-gray-700">
-                <span className="font-semibold">Appointment Type:</span>{" "}
-                {selectedAppointment.appointmentType}
-              </p>
-              <p className="text-base font-medium leading-none text-gray-700 mt-2">
-                <span className="font-semibold">Date:</span>{" "}
-                {selectedAppointment.serviceType}
-              </p>
-              <p className="text-base font-medium leading-none text-gray-700 mt-2">
-                <span className="font-semibold">Time:</span>{" "}
-                {selectedAppointment.appointmentDate}
-              </p>
-              <p className="text-base font-medium leading-none text-gray-700 mt-2">
-                <span className="font-semibold">Location:</span>{" "}
-                {selectedAppointment.venue}
-              </p>
-              <p className="text-base font-medium leading-none text-gray-700 mt-2">
-                <span className="font-semibold">Status:</span> Status: UpComing
-              </p>
+            <div className="mt-4 space-y-4">
+              <div className="flex items-center">
+                <span className="font-semibold text-gray-700">
+                  Appointment Type:
+                </span>
+                <p className="text-base font-medium leading-none text-gray-700 ml-2">
+                  {selectedAppointment.appointmentType}
+                </p>
+              </div>
+              <div className="flex items-center">
+                <span className="font-semibold text-gray-700">Date:</span>
+                <p className="text-base font-medium leading-none text-gray-700 ml-2">
+                  {formatDate(selectedAppointment.appointmentDate)}
+                </p>
+              </div>
+              <div className="flex items-center">
+                <span className="font-semibold text-gray-700">Time:</span>
+                <p className="text-base font-medium leading-none text-gray-700 ml-2">
+                  {new Date(
+                    selectedAppointment.appointmentDate,
+                  ).toLocaleTimeString()}
+                </p>
+              </div>
+              <div className="flex items-center">
+                <span className="font-semibold text-gray-700">Location:</span>
+                <p className="text-base font-medium leading-none text-gray-700 ml-2">
+                  {selectedAppointment.venue}
+                </p>
+              </div>
+              <div className="flex items-center">
+                <span className="font-semibold text-gray-700">Status:</span>
+                <p className="text-base font-medium leading-none text-gray-700 ml-2">
+                  {selectedAppointment.appointmentDate}
+                </p>
+              </div>
             </div>
           </div>
         </div>

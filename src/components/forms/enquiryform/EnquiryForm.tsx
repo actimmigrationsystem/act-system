@@ -1,4 +1,4 @@
-import { useState, useCallback, ChangeEvent } from "react";
+import React, { useState, useCallback, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import StepWizard from "react-step-wizard";
 import { Button } from "@material-tailwind/react";
@@ -64,15 +64,15 @@ const EnquiryForm = () => {
     }
   };
 
-    const handleMaritalStatusChange = (value: string | undefined) => {
-      // console.log("handleImmigrationStatusChange :", value);
-      if (value) {
-        setFormValues((prevState) => ({
-          ...prevState,
-          maritalStatus: value,
-        }));
-      }
-    };
+  const handleMaritalStatusChange = (value: string | undefined) => {
+    // console.log("handleImmigrationStatusChange :", value);
+    if (value) {
+      setFormValues((prevState) => ({
+        ...prevState,
+        maritalStatus: value,
+      }));
+    }
+  };
 
   const handleChangeTextarea = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
@@ -110,13 +110,12 @@ const EnquiryForm = () => {
     setFormValues((prevState) => ({ ...prevState, document_upload: files }));
   };
 
-const nextStep = () => {
-  // Get the current step from the URL hash
-  const currentStep = Number(location.hash.replace("#step", ""));
-  // Update the URL hash with the custom step name
-  navigate(`/enquiryform#step${currentStep + 1}`);
-};
-
+  const nextStep = () => {
+    // Get the current step from the URL hash
+    const currentStep = Number(location.hash.replace("#step", ""));
+    // Update the URL hash with the custom step name
+    navigate(`/enquiryform#step${currentStep + 1}`);
+  };
 
   return (
     <div className="mt-8">

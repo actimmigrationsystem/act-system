@@ -30,7 +30,7 @@ const formatDate = (dateString: string): string => {
 const AppointmentView = () => {
   const [value, setValue] = useState({
     startDate: new Date(),
-    endDate: new Date(), // Ensure endDate is also initialized as a Date
+    endDate: new Date(),
   });
 
   const handleValueChange = (newValue: any) => {
@@ -66,10 +66,8 @@ const AppointmentView = () => {
 
   const handleDateClick = (
     value: Date | Date[] | null,
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    // Handle date click logic here if needed
-  };
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => {};
 
   return (
     <DashboardLayout pageTitle="My Appointments">
