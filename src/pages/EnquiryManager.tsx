@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaFilePdf } from "react-icons/fa";
@@ -9,8 +9,13 @@ import SectionContainer from "../components/SectionContainer";
 import MessageAlert from "../components/alerts/MessageAlerts";
 import { MdCheckCircle } from "react-icons/md";
 
+// const createEnquiryRoute = import.meta.env.VITE_CREATE_ENQUIRY_ROUTE;
+const createEnquiryRoute = `${import.meta.env.VITE_API_HOST}${import.meta.env.VITE_CREATE_ENQUIRY_ROUTE}`;
+
+// const uploadDocumentRoute = import.meta.env.VITE_DOCUMENT_UPLOAD;
+
 interface FormValuesInterface {
-  [key: string]: string | undefined | Date | File | File[];
+  [key: string]: string | undefined | Date;
 }
 
 interface EnquiryManagerProps {
@@ -31,16 +36,12 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
     setShowAlert(false); // Hide the alert when the component mounts
   }, []);
 
-  // const handleAlertActionClick = () => {
-  //   setShowAlert(false);
-  //   navigate("/login");
-  // };
-
   const handleAlertActionClick = () => {
     setShowAlert(false);
-    navigate("/signup", { state: { prefillEmail: mergedFormValues.email } });
+    navigate("/users/sign_up", {
+      state: { prefillEmail: mergedFormValues.email },
+    });
   };
-
 
   const formatDate = (date: string | Date | File | File[]) => {
     if (date instanceof Date) {
@@ -63,95 +64,102 @@ const EnquiryManager = ({ formValues }: EnquiryManagerProps) => {
     }
   };
 
-const handleSubmit = async () => {
-  try {
-    console.log("Merged Form Values:", mergedFormValues);
-    const formData = new FormData();
-    // Append document uploads to formData
-    if (Array.isArray(mergedFormValues.documentUpload)) {
-      mergedFormValues.documentUpload.forEach((file, index) => {
-        formData.append(`enquiry[document_upload][${index}]`, file);
-      });
-    }
+  const handleSubmit = async () => {
+    try {
+      const formData = new FormData();
 
-    const enquiryInput = {
-      name: mergedFormValues.name || "",
-      surname: mergedFormValues.surname || "",
-      phonenumber: mergedFormValues.phonenumber || "",
-      email: mergedFormValues.email || "",
-      gender: mergedFormValues.gender || "",
-      dob: formatDate(mergedFormValues.dob || ""),
-      maritalStatus: mergedFormValues.maritalStatus || "",
-      residentialAddress: mergedFormValues.residentialAddress || "",
-      immigrationStatus: mergedFormValues.immigrationStatus || "",
-      entryDate: formatDate(mergedFormValues.entryDate || ""),
-      passportNumber: mergedFormValues.passportNumber || "",
-      referenceNumber: mergedFormValues.referenceNumber || "",
-      serviceType: mergedFormValues.serviceType || "",
-      elaborate: mergedFormValues.elaborate || "",
-      contact_info: {
+      // Append document uploads to formData
+      if (Array.isArray(mergedFormValues.documentUpload)) {
+        mergedFormValues.documentUpload.forEach((file, index) => {
+          formData.append(`enquiry[document_upload][${index}]`, file);
+        });
+      }
+
+      // Create the enquiryInput object
+      const enquiryInput = {
         name: mergedFormValues.name || "",
         surname: mergedFormValues.surname || "",
         phonenumber: mergedFormValues.phonenumber || "",
         email: mergedFormValues.email || "",
-      },
-    };
-    // Append enquiryInput object to formData
-    Object.entries(enquiryInput).forEach(([key, value]) => {
-      // Exclude 'document_upload' key
-      if (key !== "document_upload") {
+        gender: mergedFormValues.gender || "",
+        dob: formatDate(mergedFormValues.dob || ""),
+        maritalStatus: mergedFormValues.maritalStatus || "",
+        residentialAddress: mergedFormValues.residentialAddress || "",
+        immigrationStatus: mergedFormValues.immigrationStatus || "",
+        entryDate: formatDate(mergedFormValues.entryDate || ""),
+        passportNumber: mergedFormValues.passportNumber || "",
+        referenceNumber: mergedFormValues.referenceNumber || "",
+        serviceType: mergedFormValues.serviceType || "",
+        elaborate: mergedFormValues.elaborate || "",
+        contact_info: {
+          // contact_info object
+          name: mergedFormValues.name || "",
+          surname: mergedFormValues.surname || "",
+          phonenumber: mergedFormValues.phonenumber || "",
+          email: mergedFormValues.email || "",
+        },
+      };
+
+      // Append enquiryInput object to formData
+      Object.entries(enquiryInput).forEach(([key, value]) => {
         if (key === "contact_info") {
           formData.append(`enquiry[${key}]`, JSON.stringify(value));
         } else {
           formData.append(`enquiry[${key}]`, String(value));
         }
-      }
-    });
+      });
 
-    console.log("Enquiry Input in Manger:", enquiryInput);
-    const response = await axios.post("http://127.0.0.1:3000/enquiries", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    }); // POST request to the API endpoint
-    console.log("Form Submitted:", response.data);
-    setShowAlert(true); // Show success alert on successful submit
-  } catch (error) {
-    console.error("Error submitting form:", error);
-    console.log("Error response data:", (error as any).response.data);
-  }
-};
+      // Make the POST request
+      const url = `${createEnquiryRoute}`;
+      const response = await axios.post(url, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      console.log("Form Submitted:", response.data);
+      setShowAlert(true); // Show success alert on successful submit
+    } catch (error) {
+      console.error("Error submitting form:", error);
+     // console.log("Error response data:", (error as any).response.data);
+    }
+  };
 
   const serviceType = mergedFormValues["serviceType"];
   return (
     <div className="mt-8">
       <SectionContainer>
-        <SectionTitle title={String(serviceType) + " PreConsultation"} />
+        <SectionTitle title={`${String(serviceType)} Pre-Consultation`} />
         <ContentContainer>
-          <Card placeholder="" className="mb-8">
-            <div className="card-body">
+          <Card placeholder="" className="mb-8 shadow-lg rounded-lg" onPointerLeaveCapture={undefined}  onPointerEnterCapture={undefined}>
+            <div className="card-body p-6">
               {showAlert && (
                 <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
                   <MessageAlert
                     open={true}
-                    message="Thank you for your Submission. Please proceed to signup to track your Pre-Consultation "
+                    message="Thank you for your Submission. Please proceed to signup to track your Pre-Consultation."
                     actionText="Continue"
                     onActionClick={handleAlertActionClick}
                   />
                 </div>
               )}
-              <div className="grid grid-cols-2 gap-1 items-center justify-center mb-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                 {Object.entries(mergedFormValues).map(([key, value]) => (
-                  <div key={key} className="mb-4 flex justify-center">
-                    <Typography placeholder="" className="font-bold mr-2">
+                  <div
+                    key={key}
+                    className="bg-gray-100 p-4 rounded-lg shadow-md"
+                  >
+                    <Typography
+                      placeholder=""
+                      className="font-bold text-gray-700 mb-2"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                    >
                       {key}:
                     </Typography>
-                    <div className="flex items-center">
+                    <div className="flex flex-col space-y-2">
                       {Array.isArray(value) && value.length > 0 ? (
-                        <ul>
+                        <ul className="list-disc list-inside">
                           {value.map((file: File, index: number) => (
-                            <li key={index} className="mr-2">
-                              <FaFilePdf className="mr-2" />
+                            <li key={index} className="flex items-center">
+                              <FaFilePdf className="text-red-500 mr-2" />
                               <a
                                 href={URL.createObjectURL(file)}
                                 target="_blank"
@@ -168,25 +176,29 @@ const handleSubmit = async () => {
                           href={URL.createObjectURL(value)}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue-500 hover:text-blue-700"
+                          className="flex items-center text-blue-500 hover:text-blue-700"
                         >
-                          <FaFilePdf className="mr-2" />
+                          <FaFilePdf className="text-red-500 mr-2" />
                           {value.name}
                         </a>
                       ) : (
-                        <>
+                        <div className="flex items-center">
                           <MdCheckCircle className="text-green-500 mr-2" />
-                          <Typography placeholder="">
+                          <Typography placeholder=""  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
                             {value?.toString()}
                           </Typography>
-                        </>
+                        </div>
                       )}
                     </div>
                   </div>
                 ))}
               </div>
-              <div className="mt-4 mb-4 flex items-center justify-center">
-                <Button placeholder="" color="green" onClick={handleSubmit}>
+              <div className="flex justify-center">
+                <Button
+                  placeholder=""
+                  color="green"
+                  onClick={handleSubmit}
+                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-6 rounded shadow-md"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                >
                   Submit
                 </Button>
               </div>

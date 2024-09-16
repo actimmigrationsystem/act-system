@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Alert, Button } from "@material-tailwind/react";
 import Cookies from "js-cookie";
 
@@ -64,8 +64,7 @@ const CookieAlert: React.FC<CookieAlertProps> = ({
             variant="text"
             color="white"
             size="sm"
-            onClick={handleAccept}
-          >
+            onClick={handleAccept} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}          >
             {actionText}
           </Button>
         </div>

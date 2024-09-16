@@ -17,11 +17,11 @@ export default function Reset() {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     console.log(resetState);
-    createAccount();
+    resetPassword();
   };
 
   //handle Signup API Integration here
-  const createAccount = () => {};
+  const resetPassword = () => {};
 
   return (
    < form className="mt-8 space-y-6 max-w-md mx-auto w-1/2"

@@ -1,3 +1,4 @@
+import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -7,10 +8,16 @@ interface AppointmentDateProps {
 }
 
 const AppointmentDatePicker = ({ value, onChange }: AppointmentDateProps) => {
+  const handleDateChange = (date: Date | null) => {
+    if (date) {
+      onChange(date);
+    }
+  };
+
   return (
     <DatePicker
       selected={value}
-      onChange={onChange}
+      onChange={handleDateChange}
       popperClassName="date-picker-popper"
       popperPlacement="bottom"
       showTimeSelect

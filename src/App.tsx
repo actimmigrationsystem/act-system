@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
+import { UserProvider } from "./components/auth/UserContext"; // Import UserProvider
 import NavBar from "./components/NavBar";
 import ExternalNavbar from "./components/ExternalNavbar";
 import SocialNav from "./components/SocialNav";
@@ -20,139 +21,141 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignUpPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import ExternalSocialNav from "./components/ExternalSocialNav";
-import Dashboard from "./pages/dashboard/Dashboard";
+import DashboardView from "./pages/dashboard/DashboardView";
+
 
 function App() {
   const [submittedFormData, setSubmittedFormData] = useState(null);
+
   const handleSubmit = (formData: any) => {
-    // console.log("Form submitted with data:", formData);
     setSubmittedFormData(formData);
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <Routes>
-        <Route
-          path="/dashboard"
-          element={
-            <>
-              <ExternalSocialNav />
-              <ExternalNavbar />
-              <Dashboard />
-              <CustomFooter />
-            </>
-          }
-        />
-        <Route
-          path="/privacy-policy"
-          element={
-            <>
-              <ExternalSocialNav />
-              <ExternalNavbar />
-              <PrivacyPolicyPage />
-              <CustomFooter />
-            </>
-          }
-        />
-        <Route
-          path="/cookie-policy"
-          element={
-            <>
-              <ExternalSocialNav />
-              <ExternalNavbar />
-              <CookiePolicy />
-              <CustomFooter />
-            </>
-          }
-        />
-        <Route
-          path="/enquirymanager"
-          element={
-            <>
-              <ExternalSocialNav />
-              <ExternalNavbar />
-              <EnquiryManager
-                formValues={submittedFormData || {}}
-                onSubmit={handleSubmit}
-              />
-            </>
-          }
-        />
-        <Route
-          path="/appointmentmanager"
-          element={
-            <>
-              <ExternalSocialNav />
-              <ExternalNavbar />
-              <AppointmentManager
-                formValues={(location as any).state?.formValues || {}}
-                onSubmit={handleSubmit}
-              />
-            </>
-          }
-        />
-        <Route
-          path="/services/:serviceTitle"
-          element={
-            <>
-              <ExternalSocialNav />
-              <ExternalNavbar />
-              <ServiceDetails />
-            </>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <>
-              <ExternalSocialNav />
-              <LoginPage />
-              <CustomFooter />
-            </>
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            <>
-              <ExternalSocialNav />
-              <SignupPage />
-              <CustomFooter />
-            </>
-          }
-        />
-        <Route
-          path="/reset"
-          element={
-            <>
-              <ExternalSocialNav />
-              <ResetPasswordPage />
-              <CustomFooter />
-            </>
-          }
-        />
+    <UserProvider> {/* Add the UserProvider to wrap the entire app */}
+      <div className="flex flex-col min-h-screen">
+        <Routes>
+          <Route
+            path="/client_dashboard"
+            element={
+              <>
+                <ExternalSocialNav />
+                <DashboardView />
+                <CustomFooter />
+              </>
+            }
+          />
+          <Route
+            path="/privacy-policy"
+            element={
+              <>
+                <ExternalSocialNav />
+                <ExternalNavbar />
+                <PrivacyPolicyPage />
+                <CustomFooter />
+              </>
+            }
+          />
+          <Route
+            path="/cookie-policy"
+            element={
+              <>
+                <ExternalSocialNav />
+                <ExternalNavbar />
+                <CookiePolicy />
+                <CustomFooter />
+              </>
+            }
+          />
+          <Route
+            path="/enquirymanager"
+            element={
+              <>
+                <ExternalSocialNav />
+                <ExternalNavbar />
+                <EnquiryManager
+                  formValues={submittedFormData || {}}
+                  onSubmit={handleSubmit}
+                />
+              </>
+            }
+          />
+          <Route
+            path="/appointmentmanager"
+            element={
+              <>
+                <ExternalSocialNav />
+                <ExternalNavbar />
+                <AppointmentManager
+                  formValues={(location as any).state?.formValues || {}}
+                  onSubmit={handleSubmit}
+                />
+              </>
+            }
+          />
+          <Route
+            path="/services/:serviceTitle"
+            element={
+              <>
+                <ExternalSocialNav />
+                <ExternalNavbar />
+                <ServiceDetails />
+              </>
+            }
+          />
+          <Route
+            path="/users/sign_in"
+            element={
+              <>
+                <ExternalSocialNav />
+                <LoginPage />
+                <CustomFooter />
+              </>
+            }
+          />
+          <Route
+            path="/users/sign_up"
+            element={
+              <>
+                <ExternalSocialNav />
+                <SignupPage />
+                <CustomFooter />
+              </>
+            }
+          />
+          <Route
+            path="/reset"
+            element={
+              <>
+                <ExternalSocialNav />
+                <ResetPasswordPage />
+                <CustomFooter />
+              </>
+            }
+          />
 
-        <Route
-          path="/"
-          element={
-            <>
-              <SocialNav />
-              <NavBar />
-              <SocialSidebar />
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/services" element={<Services />} />
-                <Route path="/about" element={<AboutUs />} />
-                <Route path="/documents" element={<Documents />} />
-                <Route path="/faqs" element={<FAQs />} />
-                <Route path="/contact" element={<ContactUs />} />
-              </Routes>
-              <CustomFooter />
-            </>
-          }
-        />
-      </Routes>
-    </div>
+          <Route
+            path="*"
+            element={
+              <>
+                <SocialNav />
+                <NavBar />
+                <SocialSidebar />
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/services" element={<Services />} />
+                  <Route path="/about" element={<AboutUs />} />
+                  <Route path="/documents" element={<Documents />} />
+                  <Route path="/faqs" element={<FAQs />} />
+                  <Route path="/contact" element={<ContactUs />} />
+                </Routes>
+                <CustomFooter />
+              </>
+            }
+          />
+        </Routes>
+      </div>
+    </UserProvider>
   );
 }
 

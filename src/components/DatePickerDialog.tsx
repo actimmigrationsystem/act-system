@@ -1,5 +1,4 @@
-import { ChangeEventHandler, useRef, useState } from "react";
-
+import React, { ChangeEventHandler, useRef, useState } from "react";
 import { format, isValid, parse } from "date-fns";
 import FocusTrap from "focus-trap-react";
 import { DayPicker, SelectSingleEventHandler } from "react-day-picker";
@@ -89,11 +88,11 @@ export default function DatePickerDialog() {
             aria-label="DayPicker calendar"
           >
             <DayPicker
-              initialFocus={isPopperOpen}
               mode="single"
               defaultMonth={selected}
               selected={selected}
               onSelect={handleDaySelect}
+              {...(isPopperOpen && { initialFocus: true })}
             />
           </div>
         </FocusTrap>

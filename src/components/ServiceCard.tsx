@@ -44,13 +44,12 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       </div>
       <div className="absolute bottom-4 left-4">
         <Button
-          placeholder={"Learn More"}
+          placeholder="Learn More"
           size="sm"
           variant="text"
           style={{ backgroundColor: "#0e5a97" }}
           className="flex items-center rounded-lg hover:bg-blue-800 py-3 px-6 text-center font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-300/10 transition-all hover:shadow-lg hover:shadow-blue-400/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-          onClick={handleLearnMoreClick}
-        >
+          onClick={handleLearnMoreClick} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}        >
           <span className="mr-2">Learn More</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"

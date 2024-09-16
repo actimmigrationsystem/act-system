@@ -1,10 +1,9 @@
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 import { Link } from "react-scroll";
-import {
-  FaLinkedin, FaWhatsapp, FaFacebook,
-} from 'react-icons/fa';
-import { IoMdMail } from 'react-icons/io';
-import Logo from './Logo';
+import { FaLinkedin, FaWhatsapp, FaFacebook } from "react-icons/fa";
+import { IoMdMail } from "react-icons/io";
+import Logo from "./Logo";
 
 const FooterSlogan = styled.div`
   font-size: 12px;
