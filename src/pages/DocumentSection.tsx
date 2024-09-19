@@ -2,6 +2,7 @@ import DocumentsCarousel from "../components/DocumentsCarousel";
 import SectionTitle from "../components/SectionTitle";
 import ContentContainer from "../components/ContentContainer";
 import SectionContainer from "../components/SectionContainer";
+import React from "react";
 
 export default function DocumentSection() {
   return (

@@ -6,6 +6,7 @@ import Img6 from "../assets/services/6.png";
 import Img5 from "../assets/services/5.jpeg";
 import { FaHome } from "react-icons/fa";
 import { Tooltip } from "flowbite-react";
+import React from "react";
 
 interface Service {
   title: string;

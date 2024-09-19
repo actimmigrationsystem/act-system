@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { Card, Typography, Button } from "@material-tailwind/react";
 import { Carousel } from "react-responsive-carousel";
@@ -177,7 +177,7 @@ const DocumentsCarousel = () => {
                 <StyledCard key={index}>
                   <DocumentContainer ref={containerRef}>
                     <DocumentWrapper>
-                      <Card placeholder="Card">
+                      <Card placeholder="Card"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
                         <Document
                           file={item.pdfSrc}
                           onLoadSuccess={onDocumentLoadSuccess(index)}
@@ -197,8 +197,7 @@ const DocumentsCarousel = () => {
                           <Typography
                             variant="h4"
                             placeholder="typography"
-                            className="mb-2 mt-2 font-bold tracking-tight text-white dark:text-white text-center"
-                          >
+                            className="mb-2 mt-2 font-bold tracking-tight text-white dark:text-white text-center"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                          >
                             {item.text}
                           </Typography>
                         </div>
@@ -210,23 +209,20 @@ const DocumentsCarousel = () => {
                       type="button"
                       placeholder={"button"}
                       disabled={pageNumber[index] <= 1}
-                      onClick={() => previousPage(index)}
-                    >
+                      onClick={() => previousPage(index)}  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                    >
                       <FiArrowLeft />
                     </Button>
                     <Button
                       type="button"
                       placeholder={"button"}
                       disabled={pageNumber[index] >= numPages[index]}
-                      onClick={() => nextPage(index)}
-                    >
+                      onClick={() => nextPage(index)}  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                    >
                       <FiArrowRight />
                     </Button>
                     <Button
                       type="button"
                       placeholder={"button"}
-                      onClick={() => downloadPdf(item.pdfSrc)}
-                    >
+                      onClick={() => downloadPdf(item.pdfSrc)}  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                    >
                       Download
                     </Button>
                   </div>

@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-scroll";
  import { Button } from "@material-tailwind/react";
 
@@ -28,8 +29,7 @@ export default function StartNowSection() {
                   placeholder={"Start Now"}
                   children="Start Now"
                   style={{ backgroundColor: "#0e5a97" }}
-                  className="hover:bg-blue-900 text-white font-bold py-2 px-4 rounded cursor-pointer"
-                />
+                  className="hover:bg-blue-900 text-white font-bold py-2 px-4 rounded cursor-pointer" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                />
               </Link>
             </div>
           </div>
@@ -43,7 +43,7 @@ export default function StartNowSection() {
             }}
           />
         </div>
-        
+
 
       </div>
     </>

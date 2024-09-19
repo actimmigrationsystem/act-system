@@ -1,3 +1,5 @@
+import React from "react";
+
 const MapComponent = () => {
   return (
     <div className="w-full flex justify-center">

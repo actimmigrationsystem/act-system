@@ -1,4 +1,4 @@
-import { useState, useCallback, ChangeEvent } from "react";
+import React, { useState, useCallback, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import StepWizard from "react-step-wizard";
 import { Button } from "@material-tailwind/react";
@@ -12,7 +12,7 @@ const EnquiryForm = () => {
   const [formValues, setFormValues] = useState({
     name: "",
     surname: "",
-    _subject: "Enquiry",
+    _subject: "PreConsulation",
     phonenumber: "",
     email: "",
     gender: "",
@@ -42,7 +42,6 @@ const EnquiryForm = () => {
   };
 
   const handleSubmit = () => {
-    // Navigate to the respective page
     // console.log("Form Values sent to form manager:", formValues);
     navigate("/enquirymanager", { state: { formValues } });
     setFormSubmitted(true);
@@ -65,12 +64,15 @@ const EnquiryForm = () => {
     }
   };
 
-  const handleMaritalStatusChange = useCallback((value: string | undefined) => {
-    // console.log("Service Change Value:", value);
+  const handleMaritalStatusChange = (value: string | undefined) => {
+    // console.log("handleImmigrationStatusChange :", value);
     if (value) {
-      setFormValues((prevState) => ({ ...prevState, maritalStatus: value }));
+      setFormValues((prevState) => ({
+        ...prevState,
+        maritalStatus: value,
+      }));
     }
-  }, []);
+  };
 
   const handleChangeTextarea = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
@@ -108,13 +110,12 @@ const EnquiryForm = () => {
     setFormValues((prevState) => ({ ...prevState, document_upload: files }));
   };
 
-const nextStep = () => {
-  // Get the current step from the URL hash
-  const currentStep = Number(location.hash.replace("#step", ""));
-  // Update the URL hash with the custom step name
-  navigate(`/enquiryform#step${currentStep + 1}`);
-};
-
+  const nextStep = () => {
+    // Get the current step from the URL hash
+    const currentStep = Number(location.hash.replace("#step", ""));
+    // Update the URL hash with the custom step name
+    navigate(`/enquiryform#step${currentStep + 1}`);
+  };
 
   return (
     <div className="mt-8">
@@ -134,8 +135,7 @@ const nextStep = () => {
           <Button
             placeholder="Refresh Page"
             className="sendagain"
-            onClick={handleRefreshClick}
-          >
+            onClick={handleRefreshClick}  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}          >
             <RiMailSendLine
               className="w-4 h-4 me-2"
               style={{ marginRight: "12px" }}
@@ -289,8 +289,7 @@ const Step4 = ({
         size="lg"
         type="submit"
         style={{ backgroundColor: "#0e5a97" }}
-        onClick={handleSubmit}
-      >
+        onClick={handleSubmit}  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}      >
         Confirm Enquiry
       </Button>
     </div>

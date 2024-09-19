@@ -1,3 +1,5 @@
+import React from "react";
+
 import { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { Checkbox, Label } from "flowbite-react";
@@ -64,8 +66,7 @@ const AppointmentForm = () => {
       <Button
         placeholder="Refresh Page"
         className="sendagain"
-        onClick={handleRefreshClick}
-      >
+        onClick={handleRefreshClick}  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}      >
         <RiMailSendLine
           className="w-4 h-4 me-2"
           style={{ marginRight: "12px" }}
@@ -125,30 +126,29 @@ const AppointmentForm = () => {
     [formValues.venue]
   );
 
-    const handleAppointmentChange = useCallback(
-      (value: string | undefined) => {
-        if (value && value !== formValues.appointmentType) {
-          setFormValues((prevState) => ({
-            ...prevState,
-            appointmentType: value,
-          }));
-        }
-      },
-      [formValues.appointmentType]
-    );
+  const handleAppointmentChange = useCallback(
+    (value: string | undefined) => {
+      if (value && value !== formValues.appointmentType) {
+        setFormValues((prevState) => ({
+          ...prevState,
+          appointmentType: value,
+        }));
+      }
+    },
+    [formValues.appointmentType]
+  );
 
-        const handleServiceChange = useCallback(
-          (value: string | undefined) => {
-            if (value && value !== formValues.serviceType) {
-              setFormValues((prevState) => ({
-                ...prevState,
-                serviceType: value,
-              }));
-            }
-          },
-          [formValues.serviceType]
-        );
-
+  const handleServiceChange = useCallback(
+    (value: string | undefined) => {
+      if (value && value !== formValues.serviceType) {
+        setFormValues((prevState) => ({
+          ...prevState,
+          serviceType: value,
+        }));
+      }
+    },
+    [formValues.serviceType]
+  );
 
   const nextStep = () => {
     setCurrentStep((prevStep) => prevStep + 1);
@@ -186,8 +186,7 @@ const AppointmentForm = () => {
           style={{ backgroundColor: "#0e5a97" }}
           type="button"
           placeholder=""
-          onClick={prevStep}
-        >
+          onClick={prevStep}  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}        >
           Previous
         </Button>
       )}
@@ -205,7 +204,11 @@ const Step1 = ({
   nextStep: () => void;
 }) => (
   <>
-    <ContactInfoFields formValues={formValues} handleChange={handleChange} nextStep={nextStep} />
+    <ContactInfoFields
+      formValues={formValues}
+      handleChange={handleChange}
+      nextStep={nextStep}
+    />
   </>
 );
 const Step2 = ({
@@ -258,8 +261,7 @@ const Step2 = ({
         style={{ backgroundColor: "#0e5a97" }}
         type="button"
         placeholder=""
-        onClick={previousStep}
-      >
+        onClick={previousStep}  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}      >
         <FaArrowLeft />
       </Button>
       <Button
@@ -268,8 +270,7 @@ const Step2 = ({
         size="lg"
         type="submit"
         style={{ backgroundColor: "#0e5a97" }}
-        onClick={handleSubmit}
-      >
+        onClick={handleSubmit}  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}      >
         Book Appointment
       </Button>
     </div>

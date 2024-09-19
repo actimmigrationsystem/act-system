@@ -1,4 +1,4 @@
-import { useState, Fragment,useEffect } from "react";
+import React, { useState, Fragment,useEffect } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { Typography, Button } from "@material-tailwind/react";
@@ -24,6 +24,7 @@ const ImmigrationStatusFields: React.FC<ImmigrationStatusFieldsProps> = ({
   nextStep,
 }) => {
   const immigrationStatusOptions = [
+    "Immigration Status",
     "Recognized Refugee",
     "Asylum Seeker",
     "Permanent Resident",
@@ -52,7 +53,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   handleChange(e);
   setFilledFields({
     ...filledFields,
-    [name]: !!value.trim(), // Check if value is not empty
+    [name]: !!value.trim(),
   });
 };
 
@@ -74,8 +75,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             placeholder={"Typography"}
             variant="small"
             color="blue-gray"
-            className="mb-2 font-medium"
-          >
+            className="mb-2 font-medium"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}          >
             Your current immigration status?
           </Typography>
 
@@ -149,8 +149,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             placeholder={"Typography"}
             variant="small"
             color="blue-gray"
-            className="mb-2 font-medium"
-          >
+            className="mb-2 font-medium"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}          >
             Date of First Entry into South Africa
           </Typography>
           <div className="absolute z-20 mb-8">
@@ -167,8 +166,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           placeholder={"Typography"}
           variant="small"
           color="blue-gray"
-          className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-        >
+          className="!border-t-blue-gray-200 focus:!border-t-gray-900"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}        >
           Passport Number
         </Typography>
         <FloatingLabel
@@ -188,8 +186,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           placeholder={"Typography"}
           variant="small"
           color="blue-gray"
-          className="mb-2 font-medium"
-        >
+          className="mb-2 font-medium"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}        >
           Asylum/Refugee/Permit Reference number:
         </Typography>
         <FloatingLabel
@@ -208,8 +205,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           style={{ backgroundColor: "#0e5a97" }}
           type="button"
           placeholder=""
-          onClick={previousStep}
-        >
+          onClick={previousStep}  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}        >
           <FaArrowLeft />
         </Button>
         <Button
@@ -217,8 +213,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           type="button"
           placeholder=""
           onClick={handleContinue}
-          disabled={!Object.values(filledFields).every(Boolean)}
-        >
+          disabled={!Object.values(filledFields).every(Boolean)}  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}        >
           Continue
         </Button>
       </div>

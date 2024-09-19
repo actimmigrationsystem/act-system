@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, SetStateAction } from "react";
 import ContactBgBottomLeft from "./ContactBgBottomLeft";
 import ContactBgRight from "./ContactBgRight";
@@ -40,13 +41,11 @@ const ContactContentEnd = () => {
           <TabsHeader
             className="relative z-0 flex"
             placeholder=""
-            style={{ backgroundColor: "#0e5a97" }}
-          >
+            style={{ backgroundColor: "#0e5a97" }}  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}          >
             <Tab
               value="enquiry"
               onClick={() => handleTabChange("enquiry")}
-              placeholder="enquiry tab"
-
+              placeholder="enquiry tab"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}
 
             >
               <span
@@ -64,8 +63,7 @@ const ContactContentEnd = () => {
             <Tab
               value="appointments"
               onClick={() => handleTabChange("appointments")}
-              placeholder="appointments tab"
-            >
+              placeholder="appointments tab"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}            >
               <span
                 className="hidden md:block"
                 style={{
@@ -84,8 +82,7 @@ const ContactContentEnd = () => {
             <Tab
               value="contact"
               onClick={() => handleTabChange("contact")}
-              placeholder="contact tab"
-            >
+              placeholder="contact tab"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}            >
               <span
                 className="hidden md:block"
                 style={{ color: activeTab === "contact" ? "#2393cb" : "white" }}
@@ -100,8 +97,7 @@ const ContactContentEnd = () => {
           </TabsHeader>
           <TabsBody
             placeholder="tabs body"
-            className="!overflow-x-hidden !overflow-y-visible"
-          >
+            className="!overflow-x-hidden !overflow-y-visible"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}          >
             <TabPanel value="enquiry" className="p-0">
               <EnquiryForm />
             </TabPanel>
@@ -118,8 +114,7 @@ const ContactContentEnd = () => {
                   size="lg"
                   onClick={handleWhatsAppClick}
                   className="bg-green-500 hover:bg-green-600 text-white"
-                  placeholder="whatsapp button"
-                >
+                  placeholder="whatsapp button"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                >
                   <FaWhatsapp className="h-6 w-6 mr-2" />
                 </Button>
               </Tooltip>
@@ -128,8 +123,7 @@ const ContactContentEnd = () => {
                   size="lg"
                   onClick={handlePhoneClick}
                   className="w-full h-full bg-blue-500 hover:bg-blue-600 text-white md:w-auto"
-                  placeholder="phone button"
-                >
+                  placeholder="phone button"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                >
                   <CiPhone className="h-6 w-6 mr-2" />
                 </Button>
               </Tooltip>

@@ -7,6 +7,7 @@ import SectionContainer from "../components/SectionContainer";
 import ArticleComponent from "../components/ArticleComponent";
 import { Link } from "react-scroll";
  import { Button } from "@material-tailwind/react";
+import React from "react";
 
 const FAQsSection = () => (
   <SectionContainer>
@@ -18,10 +19,10 @@ const FAQsSection = () => (
           <Typography
             placeholder=""
             variant="h3"
-            className="flex items-center justify-center"
-          >
+            className="flex items-center justify-center" onPointerLeaveCapture={undefined}  onPointerEnterCapture={undefined}>
+
             Check out some of our FAQs
-          </Typography>
+            </Typography>
           <div className="flex items-center justify-center">
             <ArticleComponent
               paragraph2="If you have any other questions, feel free to contact us."
@@ -42,11 +43,10 @@ const FAQsSection = () => (
               style={{ display: "inline-block" }}
             >
               <Button
-                 placeholder={"Start Now"}
-                  children="Start Now"
-                style={{ backgroundColor: "#0e5a97" }}
-                className="hover:bg-blue-900 text-white font-bold py-2 px-4 rounded cursor-pointer"
-              />
+              placeholder={"Start Now"}
+              children="Start Now"
+              style={{ backgroundColor: "#0e5a97" }}
+              className="hover:bg-blue-900 text-white font-bold py-2 px-4 rounded cursor-pointer" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}              />
             </Link>
           </div>
           <div className="absolute bottom-0 right-0 z-[-1] w-full h-full">

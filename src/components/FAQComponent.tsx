@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Accordion,
   AccordionHeader,
@@ -50,21 +50,18 @@ const FAQComponent = ({ faqs }: FAQComponentProps) => {
             placeholder="Accordion"
             key={faq.id}
             open={openIndex === index}
-            icon={<Icon open={openIndex === index} />}
-          >
+            icon={<Icon open={openIndex === index} />}  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}          >
             <AccordionHeader
               placeholder="Accordion Header"
               onClick={() => handleOpen(index)}
-              className="mt-1 text-lg font-semibold text-dark dark:text-white"
-            >
+              className="mt-1 text-lg font-semibold text-dark dark:text-white"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}            >
               {faq.question}
             </AccordionHeader>
 
             <AccordionBody>
               <Typography
                 placeholder="Accordion"
-                className="mb-2 text-xl mt-6 font-bold tracking-tight text-gray-500 dark:text-white text-center"
-              >
+                className="mb-2 text-xl mt-6 font-bold tracking-tight text-gray-500 dark:text-white text-center"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}              >
                 {faq.answer}
               </Typography>
             </AccordionBody>

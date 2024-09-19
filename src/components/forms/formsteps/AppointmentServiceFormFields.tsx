@@ -1,4 +1,4 @@
-import { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import AppointmentDatePicker from "../datepickers/AppointmentDatePicker";
 import { Listbox, Transition } from "@headlessui/react";
@@ -86,8 +86,7 @@ const AppointmentServiceFormFields: React.FC<
           placeholder={"Typography"}
           variant="small"
           color="blue-gray"
-          className="mb-2 font-medium"
-        >
+          className="mb-2 font-medium"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}        >
           What service do you require?
         </Typography>
         <div className="max-w-full mb-4">
@@ -143,8 +142,7 @@ const AppointmentServiceFormFields: React.FC<
           placeholder={"Typography"}
           variant="small"
           color="blue-gray"
-          className="mb-2 font-medium"
-        >
+          className="mb-2 font-medium"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}        >
           How would you like to receive this service?
         </Typography>
         <div className="max-w-full mb-4">
@@ -205,8 +203,7 @@ const AppointmentServiceFormFields: React.FC<
               placeholder={"Typography"}
               variant="small"
               color="blue-gray"
-              className="mb-2 font-medium"
-            >
+              className="mb-2 font-medium"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}            >
               Appointment Date/Time
             </Typography>
             <AppointmentDatePicker
@@ -219,8 +216,7 @@ const AppointmentServiceFormFields: React.FC<
               placeholder={"Typography"}
               variant="small"
               color="blue-gray"
-              className="mb-2 font-medium"
-            >
+              className="mb-2 font-medium"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}            >
               Select Appointment Venue
             </Typography>
             <div className="max-w-full">

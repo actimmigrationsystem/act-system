@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import AppLogo from "../../assets/act-logo.jpeg"
+import AppLogo from "../../assets/dashboard-logo.png"
 
 interface HeaderProps {
     heading: string;
@@ -17,7 +17,7 @@ const Header = ({
   return (
     <div className="mb-10">
       <div className="flex justify-center">
-        <img alt="" className="h-20 w-40" src={AppLogo} />
+        <img alt="" className="h-40 w-40" src={AppLogo} />
       </div>
       <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
         {heading}

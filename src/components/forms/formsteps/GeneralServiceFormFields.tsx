@@ -1,4 +1,4 @@
-import { useState, Fragment, useEffect } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
@@ -22,6 +22,7 @@ const GeneralServiceFormFields: React.FC<GeneralServiceFormFieldsProps> = ({
   onFileChange,
 }) => {
   const serviceOptions = [
+    "Select Service",
     "Asylum seeker appeal/review",
     "Asylum seeker visa extension",
     "Critical skills visa application",
@@ -72,8 +73,7 @@ const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
           placeholder={"Typography"}
           variant="small"
           color="blue-gray"
-          className="mb-2 font-medium"
-        >
+          className="mb-2 font-medium"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}        >
           What service do you require?
         </Typography>
         <div className="max-w-full">
@@ -137,8 +137,7 @@ const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
           placeholder={"Typography"}
           variant="small"
           color="blue-gray"
-          className="mb-2 font-medium"
-        >
+          className="mb-2 font-medium"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}        >
           Please explain in detail what you require:
         </Typography>
         <div className="mb-2">

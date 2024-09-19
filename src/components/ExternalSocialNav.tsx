@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { FaLinkedin, FaWhatsapp, FaFacebook } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
@@ -71,4 +72,5 @@ const ExternalSocialNav = () => {
       </div>
     </div>
   );
-};export default ExternalSocialNav;
+};
+export default ExternalSocialNav;
