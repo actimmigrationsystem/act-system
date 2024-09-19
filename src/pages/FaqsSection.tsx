@@ -7,7 +7,6 @@ import SectionContainer from "../components/SectionContainer";
 import ArticleComponent from "../components/ArticleComponent";
 import { Link } from "react-scroll";
  import { Button } from "@material-tailwind/react";
-import React from "react";
 
 const FAQsSection = () => (
   <SectionContainer>

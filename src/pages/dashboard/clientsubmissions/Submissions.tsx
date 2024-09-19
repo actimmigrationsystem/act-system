@@ -3,7 +3,6 @@ import { useUser } from "../../../components/auth/UserContext";
 import axios from "axios";
 import { FiClock } from "react-icons/fi";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
-import React from "react";
 import styled from "styled-components";
 
 const enquiryRoute = import.meta.env.VITE_ENQUIRY_ROUTE;
@@ -51,35 +50,17 @@ const TableCard = styled.div`
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
 `;
 
-const getUserName = (email: string) => {
-  return email ? email.split("@")[0] : "User";
-};
+// const getUserName = (email: string) => {
+//   return email ? email.split("@")[0] : "User";
+// };
 
-const submissions = [
-  {
-    id: 1,
-    name: "John",
-    surname: "Doe",
-    email: "john.doe@example.com",
-    serviceType: "Pre-Consultation",
-    documents: "Passport, Visa",
-    date: "2024-07-03",
-  },
-];
 
-const formatDate = (dateString: string) => {
-  const date = new Date(dateString);
-  const month = date.toLocaleString("en-US", { month: "short" });
-  const day = date.getDate();
-  const year = date.getFullYear();
-  return `${month} ${day}, ${year}`;
-};
 
 const Submissions = () => {
   const { email } = useUser();
   const [enquiries, setEnquiries] = useState<Enquiry[]>([]);
-  const [appointments, setAppointments] = useState<Appointment[]>([]);
-  const [selectedAppointment, setSelectedAppointment] =
+  const [, setAppointments] = useState<Appointment[]>([]);
+  const [] =
     useState<Appointment | null>(null);
 
   const formatDate = (date: Date) => {

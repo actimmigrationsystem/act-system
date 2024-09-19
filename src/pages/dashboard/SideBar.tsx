@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { MdDashboard } from "react-icons/md";
 import { CiSettings } from "react-icons/ci";
-import { MdPayments } from "react-icons/md";
 import { GoSignOut } from "react-icons/go";
 import { SiGoogleforms } from "react-icons/si";
 import { IoDocuments } from "react-icons/io5";

@@ -1,4 +1,3 @@
-import React from 'react'
 import SectionTitle from "../components/SectionTitle";
 import MapComponent from "../components/MapComponent";
 import ContentContainer from "../components/ContentContainer";

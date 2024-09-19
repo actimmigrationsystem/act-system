@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useUser } from "../../components/auth/UserContext";
 import DashboardLayout from "./DashBoardLayout";
@@ -19,24 +19,13 @@ interface Appointment {
   appointmentType: string;
 }
 
-const formatDate = (dateString: string): string => {
-  const date = new Date(dateString);
-  const month = date.toLocaleString("en-US", { month: "short" });
-  const day = date.getDate();
-  const year = date.getFullYear();
-  return `${month} ${day}, ${year}`;
-};
 
 const AppointmentView = () => {
-  const [value, setValue] = useState({
+  const [] = useState({
     startDate: new Date(),
     endDate: new Date(),
   });
 
-  const handleValueChange = (newValue: any) => {
-    console.log("newValue:", newValue);
-    setValue(newValue);
-  };
 
   const { email } = useUser();
   const [appointments, setAppointments] = useState<Appointment[]>([]);
@@ -64,15 +53,28 @@ const AppointmentView = () => {
     fetchAppointments();
   }, [email]);
 
-  const handleDateClick = (
-    value: Date | Date[] | null,
-    event: React.MouseEvent<HTMLButtonElement>,
-  ) => {};
+  // const handleDateClick = (
+  //   value: Date | Date[] | null,
+  //   event: React.MouseEvent<HTMLButtonElement>,
+  // ) => {};
 
   return (
     <DashboardLayout pageTitle="My Appointments">
       <div className="flex w-full">
         <CalendarComponent />
+      </div>
+      <div className="appointments-list">
+        {appointments.length > 0 ? (
+          <ul>
+            {appointments.map((appointment) => (
+              <li key={appointment.id}>
+                {appointment.name} {appointment.surname} - {appointment.serviceType} on {appointment.appointmentDate}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No appointments found.</p>
+        )}
       </div>
     </DashboardLayout>
   );

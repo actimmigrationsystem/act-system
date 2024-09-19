@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import { useLocation, useParams } from "react-router-dom";
 import DashboardLayout from "../DashBoardLayout";
 import styled from "styled-components";
@@ -32,7 +32,7 @@ const CardWithGreenLine = styled.div`
 `;
 
 const EnquiryDetails = () => {
-  const { enquiryId } = useParams<{ enquiryId: string }>();
+  useParams<{ enquiryId: string }>();
   const location = useLocation();
   const enquiry = location.state.enquiry as Enquiry;
 

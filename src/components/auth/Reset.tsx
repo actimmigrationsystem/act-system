@@ -42,7 +42,7 @@ export default function Reset() {
             customClass={""}
           />
         ))}
-        <FormAction handleSubmit={handleSubmit} text="Reset" />
+        <FormAction handleSubmit={handleSubmit} text="Reset" loading={false} />
       </div>
     </form>
   );

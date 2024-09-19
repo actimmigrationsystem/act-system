@@ -8,7 +8,6 @@ import Img7 from "../assets/services/7.png";
 import SectionContainer from "../components/SectionContainer";
 import ContentContainer from "../components/ContentContainer";
 import { Link } from "react-router-dom";
-import React from "react";
 
 const serviceData = [
   {

@@ -3,7 +3,6 @@ import axios from "axios";
 import { useUser } from "../../components/auth/UserContext";
 import DashboardLayout from "./DashBoardLayout";
 import ClientEnquiries from "./clientenquiries/ClientEnquiries";
-import React from "react";
 const enquiryRoute = import.meta.env.VITE_ENQUIRY_ROUTE;
 
 interface Enquiry {
@@ -33,6 +32,7 @@ const EnquiryView = () => {
   useEffect(() => {
     if (!email) {
       console.error("Email is not defined");
+      console.error(enquiries);
       return;
     }
     const url = `${enquiryRoute}/${email}`;

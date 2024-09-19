@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, useRef, useState } from "react";
+import { ChangeEventHandler, useRef, useState } from "react";
 import { format, isValid, parse } from "date-fns";
 import FocusTrap from "focus-trap-react";
 import { DayPicker, SelectSingleEventHandler } from "react-day-picker";

@@ -1,4 +1,3 @@
-import React from "react";
 import { useState, SetStateAction } from "react";
 import ContactBgBottomLeft from "./ContactBgBottomLeft";
 import ContactBgRight from "./ContactBgRight";

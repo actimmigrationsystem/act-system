@@ -1,6 +1,5 @@
 import Submissions from "./clientsubmissions/Submissions";
 import DashboardLayout from "./DashBoardLayout";
-import React from "react";
 
 const SubmissionsView = () => {
   return (
