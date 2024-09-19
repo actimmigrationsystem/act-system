@@ -1,3 +1,4 @@
+import React from "react";
 import { Alert, Button } from "@material-tailwind/react";
 
 interface MessageAlertProps {
@@ -53,8 +54,7 @@ const MessageAlert = ({
               variant="text"
               color="white"
               size="sm"
-              onClick={handleAccept}
-            >
+              onClick={handleAccept}  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}            >
               {actionText}
             </Button>
           </div>

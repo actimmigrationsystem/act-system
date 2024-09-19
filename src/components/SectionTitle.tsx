@@ -1,3 +1,4 @@
+import React from "react";
 import { Typography } from "@material-tailwind/react";
 import styled from "styled-components";
 
@@ -26,9 +27,9 @@ const StyledUnderline = styled.div`
 const SectionTitle = ({ title, className }: SectionTitleProps) => (
   <StyledTitleContainer className={className}>
     <Typography
+
       placeholder="Typography"
-      className="mb-2 text-3xl mt-1 font-bold tracking-tight text-gray-500 dark:text-white"
-    >
+      className="mb-2 text-3xl mt-1 font-bold tracking-tight text-gray-500 dark:text-white" onPointerEnterCapture="" onPointerLeaveCapture="">
       {title}
     </Typography>
     <StyledUnderline />

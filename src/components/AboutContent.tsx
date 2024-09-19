@@ -1,4 +1,4 @@
-import { ReactNode, createElement } from "react";
+import React, { ReactNode, createElement } from "react";
 import { FaGavel, FaUserGraduate, FaRegLightbulb } from "react-icons/fa";
 import ArticleComponent from "./ArticleComponent";
 

@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+import React from "react";
 import PropTypes from "prop-types";
 import { Typography } from "@material-tailwind/react";
 
@@ -35,27 +36,25 @@ const ArticleComponent = ({
           <Typography
             variant="h2"
             className="text-2xl font-bold mb-4"
-            placeholder=""
-          >
+            placeholder=""  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}          >
             {heading}
           </Typography>
           <Typography
             placeholder=""
             variant="h3"
-            className="text-lg text-gray-600 mb-6"
-          >
+            className="text-lg text-gray-600 mb-6"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}          >
             {lead}
           </Typography>
            <Typography
             placeholder=""
-            variant="h2" className="text-2xl font-bold mb-2">{subheading}</Typography>
+            variant="h2" className="text-2xl font-bold mb-2"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>{subheading}</Typography>
            <Typography
             placeholder=""
-            variant="h5" className="text-lg text-gray-700 mb-4">{paragraph}</Typography>
+            variant="h5" className="text-lg text-gray-700 mb-4"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>{paragraph}</Typography>
           {subheading2 && (
              <Typography
-            placeholder=""
-            variant="h3" className="text-2xl font-bold mb-4">{subheading2}</Typography>
+              placeholder=""
+              variant="h3" className="text-2xl font-bold mb-4"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>{subheading2}</Typography>
           )}
           {paragraph2 && (
             <p className="text-lg text-gray-700 mb-4">{paragraph2}</p>

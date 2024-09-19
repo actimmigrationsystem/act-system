@@ -51,8 +51,7 @@ const ContactInfoFields = ({
         placeholder={"Name"}
         variant="small"
         color="blue-gray"
-        className="mb-2 font-medium"
-      >
+        className="mb-2 font-medium"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}      >
         Name
       </Typography>
       <FloatingLabel
@@ -71,8 +70,7 @@ const ContactInfoFields = ({
         placeholder={"Surname"}
         variant="small"
         color="blue-gray"
-        className="mb-2 font-medium"
-      >
+        className="mb-2 font-medium"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}      >
         Surname
       </Typography>
       <FloatingLabel
@@ -92,8 +90,7 @@ const ContactInfoFields = ({
             placeholder={"Contact Number"}
             variant="small"
             color="blue-gray"
-            className="mb-2 font-medium"
-          >
+            className="mb-2 font-medium"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}          >
             Contact number
           </Typography>
           <FloatingLabel
@@ -113,8 +110,7 @@ const ContactInfoFields = ({
             placeholder={"Email Address"}
             variant="small"
             color="blue-gray"
-            className="mb-2 font-medium"
-          >
+            className="mb-2 font-medium"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}          >
             Email Address
           </Typography>
           <FloatingLabel
@@ -137,8 +133,7 @@ const ContactInfoFields = ({
           style={{ backgroundColor: "#0e5a97" }}
           type="button"
           onClick={handleContinue}
-          disabled={!Object.values(filledFields).every(Boolean)}
-        >
+          disabled={!Object.values(filledFields).every(Boolean)}  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}        >
           Continue
         </Button>
       </div>

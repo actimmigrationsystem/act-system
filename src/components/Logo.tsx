@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import ACTLOGO from "../assets/logo.jpeg";
+import DashboardLogo from "../assets/logo.jpeg";
 
 interface LogoProps {
   color?: string;
@@ -34,7 +34,7 @@ const Logo: React.FC<LogoProps> = ({
   companyName = "ACT Immigration",
 }) => (
   <LogoContainer>
-    <LogoImg src={ACTLOGO} alt="Company Logo" />
+    <LogoImg src={DashboardLogo} alt="Company Logo" />
     <LogoTextContainer>
       <CompanyName color={color}>{companyName}</CompanyName>
       <CompanyName color={color}>& Labour Consultants</CompanyName>

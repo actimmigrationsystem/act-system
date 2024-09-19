@@ -25,8 +25,9 @@ const PersonalInfoFields: React.FC<PersonalInfoFieldsProps> = ({
   previousStep,
   nextStep,
 }) => {
-  const genderOptions = ["Female", "Male", "Other"];
+  const genderOptions = ["Select Gender", ,"Female", "Male", "Other"];
   const maritalStatusOptions = [
+    "Select Marital Status",
     "Single",
     "Married",
     "Divorced",
@@ -43,16 +44,24 @@ const PersonalInfoFields: React.FC<PersonalInfoFieldsProps> = ({
   });
 
 useEffect(() => {
-  const allFieldsFilled = Object.values(filledFields).every(Boolean);
 }, [filledFields]);
 
+
+  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target;
+  //   handleChange(e);
+  //   setFilledFields({
+  //     ...filledFields,
+  //     [name]: !!value.trim(),
+  //   });
+  // };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     handleChange(e);
     setFilledFields({
       ...filledFields,
-      [name]: !!value.trim(),
+      [name]: typeof value === "string" ? !!value.trim() : true,
     });
   };
 
@@ -73,8 +82,7 @@ useEffect(() => {
             placeholder={"Typography"}
             variant="small"
             color="blue-gray"
-            className="mb-2 font-medium"
-          >
+            className="mb-2 font-medium"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}          >
             What is your gender
           </Typography>
           <Listbox
@@ -144,8 +152,7 @@ useEffect(() => {
             placeholder={"Typography"}
             variant="small"
             color="blue-gray"
-            className="mb-2 font-medium"
-          >
+            className="mb-2 font-medium"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}          >
             Date of Birth
           </Typography>
           <div
@@ -171,8 +178,7 @@ useEffect(() => {
           placeholder={"Typography"}
           variant="small"
           color="blue-gray"
-          className="mb-2 font-medium"
-        >
+          className="mb-2 font-medium"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}        >
           Marital Status
         </Typography>
         <div className="max-w-full mb-4">
@@ -245,8 +251,7 @@ useEffect(() => {
         placeholder={"Typography"}
         variant="small"
         color="blue-gray"
-        className="mb-2 font-medium"
-      >
+        className="mb-2 font-medium"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}      >
         Residential Address
       </Typography>
       <FloatingLabel
@@ -266,8 +271,7 @@ useEffect(() => {
           style={{ backgroundColor: "#0e5a97" }}
           type="button"
           placeholder=""
-          onClick={previousStep}
-        >
+          onClick={previousStep}  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}        >
           <FaArrowLeft />
         </Button>
         <div className="flex justify-end mt-4">
@@ -277,8 +281,7 @@ useEffect(() => {
             style={{ backgroundColor: "#0e5a97" }}
             type="button"
             onClick={handleContinue}
-            disabled={!Object.values(filledFields).every(Boolean)}
-          >
+            disabled={!Object.values(filledFields).every(Boolean)}  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}          >
             Continue
           </Button>
         </div>

@@ -49,8 +49,7 @@ const EnquiryServiceFields: React.FC<EnquiryServiceFieldsProps> = ({
           placeholder={"Typography"}
           variant="small"
           color="blue-gray"
-          className="mb-2 font-medium"
-        >
+          className="mb-2 font-medium"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}        >
           What service do you require?
         </Typography>
         <div className="max-w-full">
@@ -108,8 +107,7 @@ const EnquiryServiceFields: React.FC<EnquiryServiceFieldsProps> = ({
           placeholder={"Typography"}
           variant="small"
           color="blue-gray"
-          className="mb-2 font-medium"
-        >
+          className="mb-2 font-medium"  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}        >
           Please explain in detail what you require:
         </Typography>
         <div className="mb-6">
@@ -149,8 +147,7 @@ const EnquiryServiceFields: React.FC<EnquiryServiceFieldsProps> = ({
         size="lg"
         type="submit"
         style={{ backgroundColor: "#0e5a97" }}
-        onClick={handleSubmit}
-      >
+        onClick={handleSubmit}  onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}      >
         Submit Enquiry
       </Button>
     </div>

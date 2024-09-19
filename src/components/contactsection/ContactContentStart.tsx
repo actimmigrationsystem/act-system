@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function ContactContentStart() {
   return (
     <div className="w-full px-4 lg:w-1/2 xl:w-6/12 ml-8">
