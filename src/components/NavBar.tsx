@@ -1,6 +1,7 @@
-import { Fragment } from 'react';
-import { Link as RouterLink } from "react-router-dom";
-import { Disclosure, Menu, Transition } from '@headlessui/react';
+// import { Fragment } from 'react';
+// import { Link as RouterLink } from "react-router-dom";
+import { Tooltip } from "flowbite-react";
+import { Disclosure, Menu, Transition } from '@headlessui/react';//Replace Transition Import when dashboard is ready
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { CgProfile } from 'react-icons/cg';
 import { Link } from 'react-scroll';
@@ -70,6 +71,7 @@ const NavBar = () => (
             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
               <Menu as="div" className="relative ml-3">
                 <div>
+                  <Tooltip placement="left"  content="Our Immigration Portal is launching soon">
                   <Menu.Button className="relative flex rounded-full bg-gray-600 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-200">
                     <span className="absolute -inset-1.5" />
                     <span className="sr-only">user menu</span>
@@ -78,9 +80,10 @@ const NavBar = () => (
                       style={{ color: "white" }}
                       aria-hidden="true"
                     />
-                  </Menu.Button>
+                    </Menu.Button>
+                    </Tooltip>
                 </div>
-                <Transition
+                {/* <Transition
                   as={Fragment}
                   enter="transition ease-out duration-100"
                   enterFrom="transform opacity-0 scale-95"
@@ -117,7 +120,7 @@ const NavBar = () => (
                       )}
                     </Menu.Item>
                   </Menu.Items>
-                </Transition>
+                </Transition> */}
               </Menu>
             </div>
           </div>

@@ -15,7 +15,6 @@ const Home = () => {
   useEffect(() => {
     // Check if the user has accepted cookies
     const cookiesAccepted = localStorage.getItem("cookiesAccepted");
-
     // If cookies are not accepted, show the alert
     if (!cookiesAccepted) {
       setShowAlert(true);
