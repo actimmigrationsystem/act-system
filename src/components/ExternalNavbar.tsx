@@ -1,6 +1,6 @@
 // import { Fragment } from "react";
 // import { Link as RouterLink } from "react-router-dom";
-import { Disclosure, Menu, Transition } from "@headlessui/react"; //Transition
+import { Disclosure, Menu } from "@headlessui/react"; //Transition
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { CgProfile } from "react-icons/cg";
 import { Link } from "react-router-dom";

@@ -1,7 +1,7 @@
 // import { Fragment } from 'react';
 // import { Link as RouterLink } from "react-router-dom";
 import { Tooltip } from "flowbite-react";
-import { Disclosure, Menu, Transition } from '@headlessui/react';//Replace Transition Import when dashboard is ready
+import { Disclosure, Menu } from '@headlessui/react';//Replace Transition Import when dashboard is ready
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { CgProfile } from 'react-icons/cg';
 import { Link } from 'react-scroll';
