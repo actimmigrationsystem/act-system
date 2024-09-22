@@ -107,7 +107,7 @@ const ContactContentEnd = () => {
           </div>
         </Tooltip>
 
-        <Tooltip content="Call or Send us a Whatsapp now!" placement="top" className="animate-bounce">
+        <Tooltip content="Call us or Send us a Whatsapp now!" placement="top">
           <div className="flex items-center">
             <Tab
               value="contact"
@@ -118,7 +118,7 @@ const ContactContentEnd = () => {
                 className="hidden md:block"
                 style={{ color: activeTab === "contact" ? "#2393cb" : "white" }}
               >
-                Call Us
+                Call
               </span>
               <IoCallOutline
                 className="block md:hidden h-6 w-6"
