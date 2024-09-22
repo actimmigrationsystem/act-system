@@ -10,7 +10,7 @@ const ContactUsSection = () => {
     <SectionContainer>
       <SectionTitle title="Contact Us" className="text-center text-white" />
       <ContentContainer>
-        <div className="-mx-2 sm:-mx-2 lg:-mx-2 flex flex-wrap lg:justify-between">
+        <div className="-mx-2 sm:-mx-2 lg:-mx-2 flex flex-wrap lg:justify-between mt-8 mb-18">
           <ContactContentStart />
           <ContactContentEnd />
         </div>
