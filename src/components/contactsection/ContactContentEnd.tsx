@@ -21,11 +21,13 @@ import { Tooltip } from "flowbite-react";
 const ContactContentEnd = () => {
   const [activeTab, setActiveTab] = useState("enquiry");
   const [showCallTooltip, setShowCallTooltip] = useState(false); // State to control the tooltip visibility on the "Call" tab
+  const fakeData = [showCallTooltip]; // Fake data to force re-render when the tooltip visibility changes
 
   const handleTabChange = (tab: SetStateAction<string>) => {
     setActiveTab(tab);
     if (tab === "enquiry" || tab === "appointments") {
       setShowCallTooltip(true);
+      fakeData.push(showCallTooltip); // Force re-render when the tooltip visibility changes
       setTimeout(() => setShowCallTooltip(false), 3000); // Hide tooltip after 3 seconds
     } else {
       setShowCallTooltip(false);
