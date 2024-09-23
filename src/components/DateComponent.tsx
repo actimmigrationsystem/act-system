@@ -1,4 +1,3 @@
-import React from "react";
 import { Datepicker } from "flowbite-react";
 
 const DateComponent = () => {

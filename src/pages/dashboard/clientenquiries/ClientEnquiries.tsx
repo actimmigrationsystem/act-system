@@ -87,14 +87,6 @@ const PaperBackground = styled.div`
   }
 `;
 
-const truncateText = (text: string, maxParagraphs: number) => {
-  const paragraphs = text.split("\n").filter((p) => p.trim());
-  return paragraphs.slice(0, maxParagraphs).map((p, index) => (
-    <p key={index} className="mt-1">
-      {p}
-    </p>
-  ));
-};
 
 const ClientEnquiries: React.FC = () => {
   const { email } = useUser();

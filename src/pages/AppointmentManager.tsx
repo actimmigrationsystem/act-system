@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaFilePdf } from "react-icons/fa";
@@ -39,7 +39,6 @@ const AppointmentManager = ({ formValues }: AppointmentManagerProps) => {
     setShowAlert(false);
     navigate("/users/sign_in");
   };
-
 
   const handleConfirmItem = (key: string) => {
     setConfirmedItems((prevConfirmedItems) => ({

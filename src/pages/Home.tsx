@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Element } from "react-scroll";
 import HomeCarousel from "../components/HomeCarousel";
@@ -15,7 +15,6 @@ const Home = () => {
   useEffect(() => {
     // Check if the user has accepted cookies
     const cookiesAccepted = localStorage.getItem("cookiesAccepted");
-
     // If cookies are not accepted, show the alert
     if (!cookiesAccepted) {
       setShowAlert(true);

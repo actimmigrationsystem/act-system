@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useUser } from "../../components/auth/UserContext";
 import DashboardLayout from "./DashBoardLayout";
-import React from "react";
 import AnalyticsCards from "./analytics/AnalyticsCards";
 import ClientAppointments from "./clientappointments/ClientAppointments";
 import ClientEnquiries from "./clientenquiries/ClientEnquiries";
@@ -53,13 +52,11 @@ const DashboardView = () => {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [isChatOpen, setIsChatOpen] = useState(false); // State for managing chat visibility
 
-  const formatDate = (date: Date) => {
-    return new Date(date).toLocaleDateString();
-  };
 
   useEffect(() => {
     if (!email) {
-      console.error("Email is not defined");
+      console.error(appointments);
+      console.error(enquiries);
       return;
     }
     const url = `${enquiryRoute}/${email}`;

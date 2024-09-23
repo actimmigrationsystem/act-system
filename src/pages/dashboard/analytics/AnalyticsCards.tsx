@@ -3,7 +3,6 @@ import { useUser } from "../../../components/auth/UserContext";
 import axios from "axios";
 // import { useUser } from "../../components/auth/UserContext";
 import { FaCalendarAlt, FaEnvelope, FaFileAlt } from "react-icons/fa";
-import React from "react";
 import { Link } from "react-router-dom";
 
 const enquiryRoute = import.meta.env.VITE_ENQUIRY_ROUTE;
@@ -40,40 +39,28 @@ interface Appointment {
   appointmentType: string;
 }
 
-const getUserName = (email: string) => {
-  return email ? email.split("@")[0] : "User";
-};
+// Removed unused getUserName function
 
-const submissions = [
-  {
-    id: 1,
-    name: "John",
-    surname: "Doe",
-    email: "john.doe@example.com",
-    serviceType: "Pre-Consultation",
-    documents: "Passport, Visa",
-    date: "2024-07-03",
-  },
-];
+// const submissions = [
+//   {
+//     id: 1,
+//     name: "John",
+//     surname: "Doe",
+//     email: "john.doe@example.com",
+//     serviceType: "Pre-Consultation",
+//     documents: "Passport, Visa",
+//     date: "2024-07-03",
+//   },
+// ];
 
-const formatDate = (dateString: string) => {
-  const date = new Date(dateString);
-  const month = date.toLocaleString("en-US", { month: "short" });
-  const day = date.getDate();
-  const year = date.getFullYear();
-  return `${month} ${day}, ${year}`;
-};
 
 const AnalyticsCards = () => {
   const { email } = useUser();
   const [enquiries, setEnquiries] = useState<Enquiry[]>([]);
   const [appointments, setAppointments] = useState<Appointment[]>([]);
-  const [selectedAppointment, setSelectedAppointment] =
+  const [] =
     useState<Appointment | null>(null);
 
-  const formatDate = (date: Date) => {
-    return new Date(date).toLocaleDateString();
-  };
 
   useEffect(() => {
     if (!email) {

@@ -42,6 +42,10 @@ const EnquiryServiceFields: React.FC<EnquiryServiceFieldsProps> = ({
 
   const [selectedService, setSelectedService] = useState(serviceOptions[0]);
 
+  // function handleFileChange(_files: File[]): void {
+  //   throw new Error("Function not implemented.");
+  // }
+
   return (
     <div className="mt-8">
       <div className="w-full md:w-full mb-8">

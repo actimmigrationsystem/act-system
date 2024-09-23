@@ -4,27 +4,9 @@ import axios from "axios";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import React from "react";
 
-const enquiryRoute = import.meta.env.VITE_ENQUIRY_ROUTE;
+// const enquiryRoute = import.meta.env.VITE_ENQUIRY_ROUTE;
 const appointmentRoute = import.meta.env.VITE_APPOINTMENT_ROUTE;
 
-interface Enquiry {
-  id: number;
-  name: string;
-  surname: string;
-  phonenumber: string;
-  email: string;
-  gender: string;
-  dob: string;
-  maritalStatus: string;
-  residentialAddress: string;
-  immigrationStatus: string;
-  entryDate: string;
-  passportNumber: string;
-  referenceNumber: string;
-  documentUpload: string;
-  serviceType: string;
-  elaborate: string;
-}
 
 interface Appointment {
   id: number;
@@ -38,10 +20,9 @@ interface Appointment {
   appointmentType: string;
 }
 
-const getUserName = (email: string) => {
-  return email ? email.split("@")[0] : "User";
-};
-
+// const getUserName = (email: string) => {
+//   return email ? email.split("@")[0] : "User";
+// };
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);
   const month = date.toLocaleString("en-US", { month: "short" });
@@ -52,33 +33,33 @@ const formatDate = (dateString: string) => {
 
 const ClientAppointments = () => {
   const { email } = useUser();
-  const [enquiries, setEnquiries] = useState<Enquiry[]>([]);
+  // const [enquiries, setEnquiries] = useState<Enquiry[]>([]);
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [selectedAppointment, setSelectedAppointment] =
     useState<Appointment | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [filter, setFilter] = useState("Latest");
 
-  useEffect(() => {
-    if (!email) {
-      console.error("Email is not defined");
-      return;
-    }
-    const url = `${enquiryRoute}/${email}`;
-    axios
-      .get(url, { headers: { Accept: "application/json" } })
-      .then((response) => {
-        if (Array.isArray(response.data)) {
-          setEnquiries(response.data);
-        } else {
-          console.error("Expected an array but received:", response.data);
-          setEnquiries([]);
-        }
-      })
-      .catch((error) => {
-        console.error("There was an error fetching data!", error);
-      });
-  }, [email]);
+  // useEffect(() => {
+  //     if (!email) {
+  //       console.error("Email is not defined");
+  //       return;
+  //     }
+  //     const url = `${enquiryRoute}/${email}`;
+  //     axios
+  //       .get(url, { headers: { Accept: "application/json" } })
+  //       .then((response) => {
+  //         if (Array.isArray(response.data)) {
+  //           setEnquiries(response.data);
+  //         } else {
+  //           console.error("Expected an array but received:", response.data);
+  //           setEnquiries([]);
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         console.error("There was an error fetching data!", error);
+  //       });
+  //   }, [email]);
 
   useEffect(() => {
     if (!email) {
@@ -131,26 +112,6 @@ const ClientAppointments = () => {
     setIsOpen(false);
   };
 
-  const useAppointmentStatus = (appointmentDate: Date) => {
-    const [status, setStatus] = useState("upcoming");
-
-    useEffect(() => {
-      const currentDate = new Date();
-      const parsedAppointmentDate = new Date(appointmentDate);
-
-      if (currentDate > parsedAppointmentDate) {
-        setStatus("expired");
-      } else if (
-        currentDate.toDateString() === parsedAppointmentDate.toDateString()
-      ) {
-        setStatus("active");
-      } else {
-        setStatus("upcoming");
-      }
-    }, [appointmentDate]);
-
-    return status;
-  };
 
   return (
     <div className="mt-10 w-full max-w-auto mx-auto ">

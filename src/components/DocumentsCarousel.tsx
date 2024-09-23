@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import styled from "styled-components";
 import { Card, Typography, Button } from "@material-tailwind/react";
 import { Carousel } from "react-responsive-carousel";

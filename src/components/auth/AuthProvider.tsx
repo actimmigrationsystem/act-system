@@ -16,7 +16,7 @@ const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
     const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<string>("");
 
   const [loginState, setLoginState] = useState({
     email: "",

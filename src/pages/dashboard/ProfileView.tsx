@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import styled from "styled-components";
 import DashboardLayout from "./DashBoardLayout";
 import { useUser } from "../../components/auth/UserContext";
@@ -63,12 +63,12 @@ const FriendCard = styled.div`
   margin: 8px 0;
 `;
 
-const FriendImage = styled.img`
-  height: 64px;
-  width: 64px;
-  border-radius: 50%;
-  margin: 0 auto;
-`;
+// const FriendImage = styled.img`
+//   height: 64px;
+//   width: 64px;
+//   border-radius: 50%;
+//   margin: 0 auto;
+// `;
 
 const FriendName = styled.a`
   display: block;

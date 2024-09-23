@@ -83,7 +83,7 @@ const DashboardAppointmentForm: React.FC<DashboardAppointmentFormProps> = ({
   const extractedFormValues: FormValuesInterface =
     location.state?.formValues || {};
 
-  // Merge props formValues with extractedFormValues
+// eslint-disable-next-line
   const mergedFormValues = { ...formValues, ...extractedFormValues };
 
   const formatDate = (date: Date | string): string => {
@@ -110,6 +110,7 @@ const DashboardAppointmentForm: React.FC<DashboardAppointmentFormProps> = ({
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
+    console.log(mergedFormValues);
     try {
       const appointmentInput = {
         appointment: {

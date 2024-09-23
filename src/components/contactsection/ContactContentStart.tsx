@@ -1,8 +1,7 @@
-import React from "react";
 
 export default function ContactContentStart() {
   return (
-    <div className="w-full px-4 lg:w-1/2 xl:w-6/12 ml-8">
+    <div className="w-full px-4 lg:w-1/2 xl:w-6/12 ml-8 mb-12">
       <div className="mb-12 max-w-[570px] lg:mb-0">
         <h2 className="mb-6 text-8xl font-bold uppercase text-gray-700 sm:text-[40px] lg:text-[36px] xl:text-[40px]">
           We would love to hear from you

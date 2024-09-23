@@ -11,16 +11,15 @@ import { MdEditNote } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
 import { Button } from "flowbite-react";
 import { FaHome } from "react-icons/fa";
-import React from "react";
 
 const CookiePolicy = () => {
   const isDesktopOrLaptop = useMediaQuery({
     query: "(min-device-width: 1224px)",
   });
   const navigate = useNavigate();
-    const returnToHome = () => {
-      navigate("/");
-    };
+  const returnToHome = () => {
+    navigate("/");
+  };
 
   return (
     <SectionContainer>
